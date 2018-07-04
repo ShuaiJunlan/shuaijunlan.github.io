@@ -343,7 +343,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/07/04/test/">
+    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/03/25/How-to-understand-the-DeadLock/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuai Junlan">
@@ -362,7 +362,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/04/test/" itemprop="url">test</a></h2>
+                <a class="post-title-link" href="/2018/03/25/How-to-understand-the-DeadLock/" itemprop="url">How-to-understand-the-DeadLock</a></h2>
         
 
         <div class="post-meta">
@@ -374,7 +374,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T10:29:07+08:00">2018-07-04</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-25T13:23:26+08:00">2018-03-25</time>
             
 
             
@@ -413,7 +413,14 @@
       
         
           
-            
+            <h2 id="如何理解如下代码会造成DeadLock"><a href="#如何理解如下代码会造成DeadLock" class="headerlink" title="如何理解如下代码会造成DeadLock"></a>如何理解如下代码会造成DeadLock</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.ArrayBlockingQueue;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ThreadPoolExecutor;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Junlan Shuai[shuaijunlan@gmail.com].</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> Created on 10:36 2018/4/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeadLock</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Friend</span></span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> String name;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Friend</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.name = name;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">bow</span><span class="params">(Friend friend)</span></span>&#123;</span><br><span class="line">            System.out.format(<span class="string">"%s:%s"</span> + <span class="string">" has bowed to me!%n"</span>, <span class="keyword">this</span>.name, friend.getName());</span><br><span class="line">            friend.bowBack(<span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">bowBack</span><span class="params">(Friend friend)</span></span>&#123;</span><br><span class="line">            System.out.format(<span class="string">"%s:%s"</span> + <span class="string">" has bowed back to me!%n"</span>, <span class="keyword">this</span>.name, friend.getName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> Friend friendA = <span class="keyword">new</span> Friend(<span class="string">"Shuai"</span>);</span><br><span class="line">        <span class="keyword">final</span> Friend friendB = <span class="keyword">new</span> Friend(<span class="string">"Junlan"</span>);</span><br><span class="line">        ThreadPoolExecutor threadPoolExecutor = <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">2</span>,</span><br><span class="line">                <span class="number">2</span>, <span class="number">1000L</span>, TimeUnit.MILLISECONDS, <span class="keyword">new</span> ArrayBlockingQueue&lt;&gt;(<span class="number">2</span>));</span><br><span class="line">        <span class="comment">/// Why not using this way to create ThreadPool?</span></span><br><span class="line">        <span class="comment">// ExecutorService fixedThreadPool = Executors.newFixedThreadPool(2);</span></span><br><span class="line">        threadPoolExecutor.execute(() -&gt; friendA.bow(friendB));</span><br><span class="line">        threadPoolExecutor.execute(() -&gt; friendB.bow(friendA));</span><br><span class="line">        threadPoolExecutor.shutdown();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Shuai:Junlan has bowed to me!</span><br><span class="line">Junlan:Shuai has bowed to me!</span><br></pre></td></tr></table></figure>
+<p><strong>Conclusion</strong></p>
+<ul>
+<li>类的实例对类中所有的synchronized方法都持有锁；（表述不够官方）</li>
+</ul>
+
           
         
       
@@ -470,7 +477,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/07/04/user-thread-and-daemon-thread/">
+    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/03/22/Distributed-Systems-Technologies/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuai Junlan">
@@ -489,7 +496,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/04/user-thread-and-daemon-thread/" itemprop="url">用户线程和守护线程</a></h2>
+                <a class="post-title-link" href="/2018/03/22/Distributed-Systems-Technologies/" itemprop="url">Distributed-Systems-Technologies</a></h2>
         
 
         <div class="post-meta">
@@ -501,7 +508,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T09:44:27+08:00">2018-07-04</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-22T10:42:49+08:00">2018-03-22</time>
             
 
             
@@ -539,264 +546,18 @@
 
       
         
-          
-            
-          
-        
-      
-    </div>
-
-    
-      
-
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/06/26/netty-thread-model/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuai Junlan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="只争朝夕">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/26/netty-thread-model/" itemprop="url">netty-thread-model</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-26T10:07:15+08:00">2018-06-26</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-
-    
-      
-
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/05/19/http/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuai Junlan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="只争朝夕">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/19/http/" itemprop="url">HTTP详解</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-19T13:31:08+08:00">2018-05-19</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>The Hypertext Transfer Protocol (HTTP) is an application-level protocol that uses TCP as an underlying transport and typically runs on port 80. HTTP is a stateless protocol i.e. server maintains no information about past client requests. </p>
+          <h3 id="1-分布式系统中基本概念及常用技术介绍"><a href="#1-分布式系统中基本概念及常用技术介绍" class="headerlink" title="1.分布式系统中基本概念及常用技术介绍"></a>1.分布式系统中基本概念及常用技术介绍</h3><h4 id="网络I-O模型"><a href="#网络I-O模型" class="headerlink" title="网络I/O模型"></a>网络I/O模型</h4><h5 id="1-同步和异步"><a href="#1-同步和异步" class="headerlink" title="1.同步和异步"></a>1.同步和异步</h5><ul>
+<li>同步：</li>
+<li>异步：</li>
+</ul>
+<h5 id="2-阻塞和非阻塞"><a href="#2-阻塞和非阻塞" class="headerlink" title="2.阻塞和非阻塞"></a>2.阻塞和非阻塞</h5><ul>
+<li>阻塞：</li>
+<li>非阻塞:</li>
+</ul>
+<h5 id="3-UNIX网络I-O模型"><a href="#3-UNIX网络I-O模型" class="headerlink" title="3.UNIX网络I/O模型"></a>3.UNIX网络I/O模型</h5><h4 id="远程过程调用（RPC）"><a href="#远程过程调用（RPC）" class="headerlink" title="远程过程调用（RPC）"></a>远程过程调用（RPC）</h4>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/05/19/http/" rel="contents">
+            <a class="btn" href="/2018/03/22/Distributed-Systems-Technologies/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -856,7 +617,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/05/10/netty-introduction/">
+    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2017/11/03/Basing-on-Spring-SpringMVC-MyBatis-Druid-Shrio-developing-web-system/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuai Junlan">
@@ -875,7 +636,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/10/netty-introduction/" itemprop="url">Netty 入门</a></h2>
+                <a class="post-title-link" href="/2017/11/03/Basing-on-Spring-SpringMVC-MyBatis-Druid-Shrio-developing-web-system/" itemprop="url">Basing on Spring SpringMVC MyBatis Druid Shrio developing web system</a></h2>
         
 
         <div class="post-meta">
@@ -887,7 +648,311 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-10T21:58:26+08:00">2018-05-10</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-03T11:46:39+08:00">2017-11-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/WebSystem/" itemprop="url" rel="index"><span itemprop="name">WebSystem</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>源码下载地址：<a href="https://github.com/shuaijunlan/Autumn-Framework" target="_blank" rel="noopener">https://github.com/shuaijunlan/Autumn-Framework</a></p>
+<p>在线Demo：<a href="http://autumn.shuaijunlan.cn" target="_blank" rel="noopener">http://autumn.shuaijunlan.cn</a></p>
+<h4 id="项目介绍"><a href="#项目介绍" class="headerlink" title="项目介绍"></a>项目介绍</h4><p><code>Autumn-Framework</code>旨在提供通用的web系统解决方案，目前由作者本人一个人维护，更新速度缓慢，但是会持续更新，此项目适合初学者学习使用，也欢迎您加入我一起维护整个项目。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/03/Basing-on-Spring-SpringMVC-MyBatis-Druid-Shrio-developing-web-system/" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2017/07/26/analyse-the-source-code-of-Timer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuai Junlan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="只争朝夕">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/26/analyse-the-source-code-of-Timer/" itemprop="url">analyse the source code of Timer</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-26T10:58:57+08:00">2017-07-26</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="Timer-Class-Introduction"><a href="#Timer-Class-Introduction" class="headerlink" title="Timer Class Introduction"></a>Timer Class Introduction</h2><blockquote>
+<p>在JDK库中Timer类主要负责计划任务的功能，也就是在指定的时间开始执行某任务。</p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/26/analyse-the-source-code-of-Timer/" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2017/06/26/MyBatis开发（一）：为什么使用MyBatis？/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuai Junlan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="只争朝夕">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/26/MyBatis开发（一）：为什么使用MyBatis？/" itemprop="url">MyBatis开发（一）：为什么使用MyBatis？</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-26T10:07:15+08:00">2017-06-26</time>
             
 
             
@@ -925,13 +990,12 @@
 
       
         
-          <blockquote>
-<p>Netty is a NIO client server framework which enables quick and easy development of network applications such as protocol servers and clients. It greatly simplifies and streamlines network programming such as TCP and UDP socket server. </p>
+          <h3 id="一、MyBatis框架简介"><a href="#一、MyBatis框架简介" class="headerlink" title="一、MyBatis框架简介"></a>一、MyBatis框架简介</h3><blockquote>
+<p>MyBatis 是支持定制化 SQL、存储过程以及高级映射的优秀的持久层框架。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以对配置和原生Map使用简单的 XML 或注解，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。</p>
 </blockquote>
-<p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/1526016569.png?raw=true" alt=""></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/05/10/netty-introduction/" rel="contents">
+            <a class="btn" href="/2017/06/26/MyBatis开发（一）：为什么使用MyBatis？/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1023,7 +1087,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

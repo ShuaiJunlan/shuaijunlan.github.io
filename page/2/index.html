@@ -343,7 +343,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/07/04/Java中常量池详解/">
+    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/05/10/netty-introduction/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuai Junlan">
@@ -362,7 +362,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/04/Java中常量池详解/" itemprop="url">Java中常量池详解</a></h2>
+                <a class="post-title-link" href="/2018/05/10/netty-introduction/" itemprop="url">Netty 入门</a></h2>
         
 
         <div class="post-meta">
@@ -374,7 +374,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T10:56:09+08:00">2018-07-04</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-10T21:58:26+08:00">2018-05-10</time>
             
 
             
@@ -413,24 +413,12 @@
       
         
           <blockquote>
-<p>阅读这篇文章之前先来理解几个基本的概念</p>
+<p>Netty is a NIO client server framework which enables quick and easy development of network applications such as protocol servers and clients. It greatly simplifies and streamlines network programming such as TCP and UDP socket server. </p>
 </blockquote>
-<ul>
-<li>什么是常量</li>
-<li>equals()方法和==的区别</li>
-<li>引用和对象的区别</li>
-</ul>
-<h3 id="1-String常量池"><a href="#1-String常量池" class="headerlink" title="1. String常量池"></a>1. String常量池</h3><h4 id="1-1-创建String对象的两种方式"><a href="#1-1-创建String对象的两种方式" class="headerlink" title="1.1 创建String对象的两种方式"></a>1.1 创建String对象的两种方式</h4><ul>
-<li>通过new来创建String创对象，例如：String a = new String(“a”);</li>
-<li><p>直接将字符串常量赋值给一个对象引用，例如：String b = “b”;</p>
-<blockquote>
-<p>这两种不同的创建方法是有差别的，第一种方式是直接在Java heap内存空间创建一个新的对象，并且引用变量a指向这个对象，第二种方式是引用变量b指向常量池中的字符串。</p>
-</blockquote>
-</li>
-</ul>
+<p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/1526016569.png?raw=true" alt=""></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/04/Java中常量池详解/" rel="contents">
+            <a class="btn" href="/2018/05/10/netty-introduction/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -490,7 +478,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/07/04/Autopacking and Autounpacking/">
+    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/04/19/Java-NIO-and-BIO/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuai Junlan">
@@ -509,7 +497,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/04/Autopacking and Autounpacking/" itemprop="url">Autoboxing and Autounboxing</a></h2>
+                <a class="post-title-link" href="/2018/04/19/Java-NIO-and-BIO/" itemprop="url">Java NIO and BIO</a></h2>
         
 
         <div class="post-meta">
@@ -521,7 +509,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T10:56:09+08:00">2018-07-04</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-19T18:43:24+08:00">2018-04-19</time>
             
 
             
@@ -559,54 +547,11 @@
 
       
         
-          <h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><ul>
-<li>首先我们要知道Java中有哪些基本数据类型以及它们各自的封装类:package java.lang;</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">基本数据类型</th>
-<th style="text-align:center">封装类</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">byte</td>
-<td style="text-align:center">Byte</td>
-</tr>
-<tr>
-<td style="text-align:center">boolean</td>
-<td style="text-align:center">Boolean</td>
-</tr>
-<tr>
-<td style="text-align:center">char</td>
-<td style="text-align:center">Character</td>
-</tr>
-<tr>
-<td style="text-align:center">short</td>
-<td style="text-align:center">Short</td>
-</tr>
-<tr>
-<td style="text-align:center">int</td>
-<td style="text-align:center">Integer</td>
-</tr>
-<tr>
-<td style="text-align:center">long</td>
-<td style="text-align:center">Long</td>
-</tr>
-<tr>
-<td style="text-align:center">float</td>
-<td style="text-align:center">Float</td>
-</tr>
-<tr>
-<td style="text-align:center">double</td>
-<td style="text-align:center">Double</td>
-</tr>
-</tbody>
-</table>
+          <p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/1526020447.png?raw=true" alt=""></p>
+<p>我们都知NIO是非阻塞IO，BIO是阻塞IO，那到底什么是阻塞，什么是非阻塞呢，它们与同步/异步又有什么区别呢？先来了解一下阻塞/非阻塞，同步/异步的概念。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/04/Autopacking and Autounpacking/" rel="contents">
+            <a class="btn" href="/2018/04/19/Java-NIO-and-BIO/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -666,7 +611,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/07/04/Collections.sort()分析/">
+    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/04/12/LruCache-On-Map-And-LinkedList/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuai Junlan">
@@ -685,7 +630,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/04/Collections.sort()分析/" itemprop="url">Collections.sort()源码分析（基于jdk1.8）</a></h2>
+                <a class="post-title-link" href="/2018/04/12/LruCache-On-Map-And-LinkedList/" itemprop="url">基于HashMap和双向链表实现LRUCache</a></h2>
         
 
         <div class="post-meta">
@@ -697,7 +642,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T10:56:09+08:00">2018-07-04</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-12T13:23:18+08:00">2018-04-12</time>
             
 
             
@@ -736,11 +681,11 @@
       
         
           <blockquote>
-<p>Collections类中定义了一系列的静态方法，其中就包括sort方法(下面为该方法的源码),从这个方法的源码中可以看出，它调用的是list.sort()方法，在该方法中先将list转换成数组，然后调用Arrays.sort()方法。在Arrays.sort()方法中，有一个条件判断（LegacyMergeSort.userRequested），当此条件为true时，调用legacyMergeSort(a, c);若为false则调用TimSort.sort(a, 0, a.length, c, null, 0, 0);通过legacyMergeSort(a, c);源码就可以看出此方法实现的是归并排序，</p>
+<p>使用HashMap和双向链表实现LRUCache，HashMap用来定位节点是否已经存在，时间复杂度为O(1)，双向链表用来用来实现LRU规则，移动节点的时间复杂度也是O(1)，代码如下：</p>
 </blockquote>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/04/Collections.sort()分析/" rel="contents">
+            <a class="btn" href="/2018/04/12/LruCache-On-Map-And-LinkedList/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -800,7 +745,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/07/04/CentOS7中配置KVM教程/">
+    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/04/01/Java-Class-and-Object-Initializing-Process/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuai Junlan">
@@ -819,7 +764,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/04/CentOS7中配置KVM教程/" itemprop="url">CentOS7中配置KVM教程</a></h2>
+                <a class="post-title-link" href="/2018/04/01/Java-Class-and-Object-Initializing-Process/" itemprop="url">Java类与对象初始化过程</a></h2>
         
 
         <div class="post-meta">
@@ -831,7 +776,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T10:56:09+08:00">2018-07-04</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-01T18:58:32+08:00">2018-04-01</time>
             
 
             
@@ -869,18 +814,10 @@
 
       
         
-          <blockquote>
-<p>基本环境：CentOS7.0</p>
-</blockquote>
-<ol>
-<li><a href="">[root@localhost /]# </a>egrep ‘(vmx|svm)’ /proc/cpuinfo  <blockquote>
-<p>和 Xen 不同，KVM 需要有 CPU 的支持（Intel VT 或 AMD SVM），在安装 KVM 之前检查一下 CPU 是否提供了虚拟技术的支持,可以通过下面命令查询是否支持，如果输出有相关的vmx或者svm，表明CPU支持，否则就不支持。</p>
-</blockquote>
-</li>
-</ol>
+          <h2 id="看看如下代码，输出结果是啥？"><a href="#看看如下代码，输出结果是啥？" class="headerlink" title="看看如下代码，输出结果是啥？"></a>看看如下代码，输出结果是啥？</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Junlan Shuai[shuaijunlan@gmail.com].</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> Created on 18:59 2018/4/1.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Test t1 = <span class="keyword">new</span> Test(<span class="string">"t1"</span>);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Test t2 = <span class="keyword">new</span> Test(<span class="string">"t2"</span>);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> i = print(<span class="string">"i"</span>);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> n = <span class="number">99</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> j = print(<span class="string">"j"</span>);</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        print(<span class="string">"静态块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Test</span><span class="params">(String string)</span></span>&#123;</span><br><span class="line">        System.out.println((++k) + <span class="string">":"</span> + string + <span class="string">" i="</span> + i + <span class="string">" n="</span> + n);</span><br><span class="line">        ++i;</span><br><span class="line">        ++n;</span><br><span class="line">    &#125;</span><br><span class="line">    &#123;</span><br><span class="line">        print(<span class="string">"构造块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">print</span><span class="params">(String string)</span></span>&#123;</span><br><span class="line">        System.out.println((++k) + <span class="string">":"</span> + string + <span class="string">" i="</span> + i + <span class="string">" n="</span> + n);</span><br><span class="line">        ++n;</span><br><span class="line">        <span class="keyword">return</span> ++i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Test test = <span class="keyword">new</span> Test(<span class="string">"init"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/04/CentOS7中配置KVM教程/" rel="contents">
+            <a class="btn" href="/2018/04/01/Java-Class-and-Object-Initializing-Process/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -940,7 +877,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/07/04/CentOS7设置免密登陆/">
+    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/03/31/Distributed-Lock-Based-On-Zookeeper/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuai Junlan">
@@ -959,7 +896,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/04/CentOS7设置免密登陆/" itemprop="url">CentOS7设置免密登陆</a></h2>
+                <a class="post-title-link" href="/2018/03/31/Distributed-Lock-Based-On-Zookeeper/" itemprop="url">Distributed-Lock-Based-On-Zookeeper</a></h2>
         
 
         <div class="post-meta">
@@ -971,7 +908,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T10:56:09+08:00">2018-07-04</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T16:53:40+08:00">2018-03-31</time>
             
 
             
@@ -1009,27 +946,10 @@
 
       
         
-          <ul>
-<li><p>基本环境</p>
-<ul>
-<li>master(centOS7-4:192.168.1.75)</li>
-<li>slave1(CentOS7-1:192.168.1.21)</li>
-<li>slave2(CentOS7-2:192.168.1.129)</li>
-</ul>
-</li>
-<li><p>前提条件</p>
-<blockquote>
-<p>要保证这三台机器之间可以互相ping通</p>
-</blockquote>
-</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/04/CentOS7设置免密登陆/" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <h2 id="基于Zookeeper实现分布式锁"><a href="#基于Zookeeper实现分布式锁" class="headerlink" title="基于Zookeeper实现分布式锁"></a>基于Zookeeper实现分布式锁</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.google.common.base.Strings;</span><br><span class="line"><span class="keyword">import</span> com.google.common.util.concurrent.ThreadFactoryBuilder;</span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Junlan Shuai[shuaijunlan@gmail.com].</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> Created on 15:37 2018/3/31.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DistributedLockBasedOnZookeeper</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String hostPort = <span class="string">"host:port"</span>;</span><br><span class="line">    <span class="keyword">private</span> String lockNameSpace = <span class="string">"/myLock"</span>;</span><br><span class="line">    <span class="keyword">private</span> String nodeString = lockNameSpace + <span class="string">"/test1"</span>;</span><br><span class="line">    <span class="keyword">private</span> ZooKeeper zk;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="title">DistributedLockBasedOnZookeeper</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            zk = <span class="keyword">new</span> ZooKeeper(hostPort, <span class="number">6000</span>, event -&gt; &#123;</span><br><span class="line">                System.out.println(<span class="string">"Receive event "</span> + event);</span><br><span class="line">                <span class="keyword">if</span> (Watcher.Event.KeeperState.SyncConnected == event.getState())&#123;</span><br><span class="line">                    System.out.println(<span class="string">"Connection is established..."</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureRootPath</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (zk.exists(lockNameSpace, <span class="keyword">true</span>) == <span class="keyword">null</span>)&#123;</span><br><span class="line">                zk.create(lockNameSpace, <span class="string">""</span>.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (KeeperException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">watchNode</span><span class="params">(String nodeString, <span class="keyword">final</span> Thread thread)</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            zk.exists(nodeString, event -&gt; &#123;</span><br><span class="line">                System.out.println(<span class="string">"=="</span> + event.toString());</span><br><span class="line">                <span class="keyword">if</span> (event.getType() == Watcher.Event.EventType.NodeDeleted)&#123;</span><br><span class="line">                    System.out.println(<span class="string">"There is a Thread released lock....."</span>);</span><br><span class="line">                    thread.interrupt();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    zk.exists(nodeString, <span class="keyword">true</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (KeeperException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (KeeperException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * get Lock</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">getLock</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        String path = <span class="keyword">null</span>;</span><br><span class="line">        ensureRootPath();</span><br><span class="line">        watchNode(nodeString, Thread.currentThread());</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                path = zk.create(nodeString, <span class="string">""</span>.getBytes(),ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (KeeperException e) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">"getting Lock but can not get"</span>);</span><br><span class="line">                Thread.sleep(<span class="number">5000</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (!Strings.nullToEmpty(path).trim().isEmpty())&#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">" get Lock..."</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * release Lock</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unlock</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            zk.delete(nodeString, -<span class="number">1</span>);</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">" release Lock..."</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (KeeperException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ThreadFactory threadFactory = <span class="keyword">new</span> ThreadFactoryBuilder().setNameFormat(<span class="string">"demo-pool-%d"</span>).build();</span><br><span class="line">        ExecutorService service = <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">10</span>, <span class="number">10</span>, <span class="number">1000L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                <span class="keyword">new</span> ArrayBlockingQueue&lt;&gt;(<span class="number">1024</span>), threadFactory, <span class="keyword">new</span> ThreadPoolExecutor.AbortPolicy());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)&#123;</span><br><span class="line">            service.execute(() -&gt; &#123;</span><br><span class="line">                DistributedLockBasedOnZookeeper lockBasedOnZookeeper = <span class="keyword">new</span> DistributedLockBasedOnZookeeper();</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    lockBasedOnZookeeper.getLock();</span><br><span class="line">                    Thread.sleep(<span class="number">3000</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                lockBasedOnZookeeper.unlock();</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        service.shutdown();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
         
       
     </div>
@@ -1117,7 +1037,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

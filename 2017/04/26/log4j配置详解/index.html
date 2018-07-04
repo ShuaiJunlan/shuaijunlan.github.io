@@ -99,25 +99,27 @@
 
 
 
-  <meta name="description" content="前言： 首先我们要知道Java中有哪些基本数据类型以及它们各自的封装类:package java.lang;     基本数据类型 封装类     byte Byte   boolean Boolean   char Character   short Short   int Integer   long Long   float Float   double Double">
-<meta name="keywords" content="java">
+  <meta name="description" content="先来看个采用log4j输出日志的例子  添加依赖包    12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.slf4j&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;slf4j-log4j12&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;1.7.7&amp;lt;/version&amp;gt;&amp;lt;/depe">
+<meta name="keywords" content="log4j">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Autoboxing and Autounboxing">
-<meta property="og:url" content="http://www.blog.shuaijunlan.cn/2018/07/04/Autopacking and Autounpacking/index.html">
+<meta property="og:title" content="log4j初级配置教程">
+<meta property="og:url" content="http://www.blog.shuaijunlan.cn/2017/04/26/log4j配置详解/index.html">
 <meta property="og:site_name" content="只争朝夕">
-<meta property="og:description" content="前言： 首先我们要知道Java中有哪些基本数据类型以及它们各自的封装类:package java.lang;     基本数据类型 封装类     byte Byte   boolean Boolean   char Character   short Short   int Integer   long Long   float Float   double Double">
+<meta property="og:description" content="先来看个采用log4j输出日志的例子  添加依赖包    12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.slf4j&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;slf4j-log4j12&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;1.7.7&amp;lt;/version&amp;gt;&amp;lt;/depe">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-04T02:56:09.105Z">
+<meta property="og:image" content="http://learningnotes-1251679769.costj.myqcloud.com/javabasis/1.png">
+<meta property="og:updated_time" content="2018-07-04T03:21:32.952Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Autoboxing and Autounboxing">
-<meta name="twitter:description" content="前言： 首先我们要知道Java中有哪些基本数据类型以及它们各自的封装类:package java.lang;     基本数据类型 封装类     byte Byte   boolean Boolean   char Character   short Short   int Integer   long Long   float Float   double Double">
+<meta name="twitter:title" content="log4j初级配置教程">
+<meta name="twitter:description" content="先来看个采用log4j输出日志的例子  添加依赖包    12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.slf4j&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;slf4j-log4j12&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;1.7.7&amp;lt;/version&amp;gt;&amp;lt;/depe">
+<meta name="twitter:image" content="http://learningnotes-1251679769.costj.myqcloud.com/javabasis/1.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://www.blog.shuaijunlan.cn/2018/07/04/Autopacking and Autounpacking/"/>
+  <link rel="canonical" href="http://www.blog.shuaijunlan.cn/2017/04/26/log4j配置详解/"/>
 
 
 
@@ -127,7 +129,7 @@
   };
 </script>
 
-  <title>Autoboxing and Autounboxing | 只争朝夕</title>
+  <title>log4j初级配置教程 | 只争朝夕</title>
   
 
 
@@ -344,7 +346,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/07/04/Autopacking and Autounpacking/">
+    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2017/04/26/log4j配置详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuai Junlan">
@@ -361,7 +363,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Autoboxing and Autounboxing</h2>
+          <h2 class="post-title" itemprop="name headline">log4j初级配置教程</h2>
         
 
         <div class="post-meta">
@@ -373,7 +375,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T10:56:09+08:00">2018-07-04</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-26T10:07:15+08:00">2017-04-26</time>
             
 
             
@@ -391,8 +393,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/07/04/Autopacking and Autounpacking/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/07/04/Autopacking and Autounpacking/" itemprop="commentsCount"></span>
+                <a href="/2017/04/26/log4j配置详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2017/04/26/log4j配置详解/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -428,96 +430,76 @@
       
 
       
-        <h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><ul>
-<li>首先我们要知道Java中有哪些基本数据类型以及它们各自的封装类:package java.lang;</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">基本数据类型</th>
-<th style="text-align:center">封装类</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">byte</td>
-<td style="text-align:center">Byte</td>
-</tr>
-<tr>
-<td style="text-align:center">boolean</td>
-<td style="text-align:center">Boolean</td>
-</tr>
-<tr>
-<td style="text-align:center">char</td>
-<td style="text-align:center">Character</td>
-</tr>
-<tr>
-<td style="text-align:center">short</td>
-<td style="text-align:center">Short</td>
-</tr>
-<tr>
-<td style="text-align:center">int</td>
-<td style="text-align:center">Integer</td>
-</tr>
-<tr>
-<td style="text-align:center">long</td>
-<td style="text-align:center">Long</td>
-</tr>
-<tr>
-<td style="text-align:center">float</td>
-<td style="text-align:center">Float</td>
-</tr>
-<tr>
-<td style="text-align:center">double</td>
-<td style="text-align:center">Double</td>
-</tr>
-</tbody>
-</table>
-<a id="more"></a>
-<h3 id="一、什么是Autoboxing"><a href="#一、什么是Autoboxing" class="headerlink" title="一、什么是Autoboxing"></a>一、什么是Autoboxing</h3><blockquote>
-<p>java中Autoboxing是指将基本数据类型自动转换成封装类类型。比如说：</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    Integer b = a;</span><br><span class="line">    System.out.println(b);</span><br><span class="line"></span><br><span class="line">    Character d = <span class="string">'c'</span>;</span><br><span class="line">    System.out.println(d);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <ul>
+<li><p>先来看个采用log4j输出日志的例子</p>
 <blockquote>
-<ul>
-<li>函数参数为封装类类型时，调用时传递基本数据类型，会发生Autoboxing。</li>
-<li>将基本数据类型变量赋值给封装类类型时，会发生Autoboxing。</li>
-</ul>
+<p>添加依赖包</p>
 </blockquote>
-<h3 id="二、什么是Autounboxing"><a href="#二、什么是Autounboxing" class="headerlink" title="二、什么是Autounboxing"></a>二、什么是Autounboxing</h3><blockquote>
-<p>java中Autounboxing是指将封装类类型自动转换成基本数据类型。比如说：</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Integer a = <span class="keyword">new</span> Integer(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">int</span> b = a;</span><br><span class="line">    System.out.println(b);</span><br><span class="line"></span><br><span class="line">    Character c = <span class="string">'c'</span>;</span><br><span class="line">    <span class="keyword">char</span> d = c;</span><br><span class="line">    System.out.println(d);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+  <a id="more"></a>
 <blockquote>
-<ul>
-<li>函数参数为基本数据类型，调用时传递封装类类型，会发生Autounboxing。</li>
-<li>将封装类类型变量赋值给基本数据类型，或者直接用封装类类型进行基本运算，会发生Autounboxing。</li>
-</ul>
+<p>添加配置文件log4j.properties放在/resources目录下面</p>
 </blockquote>
-<h3 id="三、以int类型为例，讲解Autoboxing和Autounboxing实现原理"><a href="#三、以int类型为例，讲解Autoboxing和Autounboxing实现原理" class="headerlink" title="三、以int类型为例，讲解Autoboxing和Autounboxing实现原理"></a>三、以int类型为例，讲解Autoboxing和Autounboxing实现原理</h3><blockquote>
-<p>先来看一段代码反汇编的结果</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">### 设置###</span><br><span class="line">log4j.rootLogger = DEBUG,error,debug,stdout</span><br><span class="line">#log4j.rootLogger = INFO,stdout</span><br><span class="line"></span><br><span class="line">### 输出信息到控制台 ###</span><br><span class="line">log4j.appender.stdout = org.apache.log4j.ConsoleAppender</span><br><span class="line">#log4j.appender.stdout.Threshold = ERROR</span><br><span class="line">log4j.appender.stdout.Target = System.out</span><br><span class="line">log4j.appender.stdout.layout = org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.stdout.layout.ConversionPattern = [%-5p] %d&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; method:%l%n%m%n</span><br><span class="line"></span><br><span class="line">### 输出DEBUG 级别以上的日志到=E://logs/debug.log ###</span><br><span class="line">log4j.appender.debug = org.apache.log4j.DailyRollingFileAppender</span><br><span class="line">log4j.appender.debug.File = E://logs/debug.log</span><br><span class="line">log4j.appender.debug.Append = true</span><br><span class="line">##Threshold是个全局的过滤器，它将把低于所设置的level的信息过滤不显示出来。</span><br><span class="line">log4j.appender.debug.Threshold = DEBUG</span><br><span class="line">log4j.appender.debug.layout = org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.debug.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n</span><br><span class="line"></span><br><span class="line">### 输出ERROR 级别以上的日志到=E://logs/error.log ###</span><br><span class="line">log4j.appender.error = org.apache.log4j.DailyRollingFileAppender</span><br><span class="line">log4j.appender.error.File =E://logs/error.log</span><br><span class="line">log4j.appender.error.Append = true</span><br><span class="line">log4j.appender.error.Threshold = ERROR</span><br><span class="line">log4j.appender.error.layout = org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.error.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>java代码</p>
 </blockquote>
-<ul>
-<li><p>java代码</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sh.$<span class="number">16</span>.$<span class="number">12</span>.$<span class="number">22</span>;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Mr SJL on 2016/12/22.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> Junlan Shuai</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App1</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Integer integer = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">int</span> i = integer;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sh.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Mr SJL on 2016/11/26.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> Junlan Shuai</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 记录debug级别的信息</span></span><br><span class="line">        log.debug(<span class="string">"This is debug message."</span>);</span><br><span class="line">        <span class="comment">// 记录info级别的信息</span></span><br><span class="line">        log.info(<span class="string">"This is info message."</span>);</span><br><span class="line">        <span class="comment">// 记录error级别的信息</span></span><br><span class="line">        log.error(<span class="string">"This is error message."</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>控制台输出结果<br>  <img src="http://learningnotes-1251679769.costj.myqcloud.com/javabasis/1.png" alt="image" title="结果"></p>
+</blockquote>
 </li>
-<li><p>反汇编结果</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">sh</span>.$16.$12.$22.<span class="title">App1</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> com.sh.$<span class="number">16</span>.$<span class="number">12</span>.$<span class="number">22</span>.App1();</span><br><span class="line">    Code:</span><br><span class="line">       <span class="number">0</span>: aload_0</span><br><span class="line">       1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V</span><br><span class="line">       <span class="number">4</span>: <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(java.lang.String[])</span></span>;</span><br><span class="line">    Code:</span><br><span class="line">       <span class="number">0</span>: bipush        <span class="number">10</span></span><br><span class="line">       2: invokestatic  #2                  // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;</span><br><span class="line">       <span class="number">5</span>: astore_1</span><br><span class="line">       <span class="number">6</span>: aload_1</span><br><span class="line">       7: invokevirtual #3                  // Method java/lang/Integer.intValue:()I</span><br><span class="line">      <span class="number">10</span>: istore_2</span><br><span class="line">      <span class="number">11</span>: <span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>log4j主要组件</p>
+<blockquote>
+<p>Log4j有三个主要的组件：Loggers(记录器)，Appenders  (输出源)和Layouts(布局)。这里可简单理解为日志类别，日志要输出的地方和日志以何种形式输出。综合使用这三个组件可以轻松地记录信息的类型和级别，并可以在运行时控制日志输出的样式和位置。</p>
+</blockquote>
+<ul>
+<li><p>Loggers</p>
+<blockquote>
+<p>Loggers组件在此系统中被分为五个级别：DEBUG、INFO、WARN、ERROR和FATAL。这五个级别是有顺序的，DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL，分别用来指定这条日志信息的重要程度，明白这一点很重要，Log4j有一个规则：只输出级别不低于设定级别的日志信息，假设Loggers级别设定为INFO，则INFO、WARN、ERROR和FATAL级别的日志信息都会输出，而级别比INFO低的DEBUG则不会输出。</p>
+</blockquote>
+</li>
+<li><p>Appenders</p>
+<blockquote>
+<p>禁用和使用日志请求只是Log4j的基本功能，Log4j日志系统还提供许多强大的功能，比如允许把日志输出到不同的地方，如控制台（Console）、文件（Files）等，可以根据天数或者文件大小产生新的文件，可以以流的形式发送到其它地方等等。</p>
+<p>常使用的类如下：</p>
+<p>org.apache.log4j.ConsoleAppender（控制台）<br><br>  org.apache.log4j.FileAppender（文件）<br><br>  org.apache.log4j.DailyRollingFileAppender（每天产生一个日志文件）<br><br>  org.apache.log4j.RollingFileAppender（文件大小到达指定尺寸的时候产生一个新的文件）<br><br>  org.apache.log4j.WriterAppender（将日志信息以流格式发送到任意指定的地方） <br></p>
+</blockquote>
+</li>
+<li><p>Layouts</p>
+<blockquote>
+<p>有时用户希望根据自己的喜好格式化自己的日志输出，Log4j可以在Appenders的后面附加Layouts来完成这个功能。 Layouts提供四种日志输出样式，如根据HTML样式、自由指定样式、包含日志级别与信息的样式和包含日志时间、线程、类别等信息的样式。</p>
+<p>常使用的类如下：</p>
+<p>org.apache.log4j.HTMLLayout（以HTML表格形式布局）<br><br>  org.apache.log4j.PatternLayout（可以灵活地指定布局模式）<br><br>  org.apache.log4j.SimpleLayout（包含日志信息的级别和信息字符串）<br><br>  org.apache.log4j.TTCCLayout（包含日志产生的时间、线程、类别等信息）<br></p>
+</blockquote>
 </li>
 </ul>
+</li>
+<li><p>log4j.properties配置文件详解</p>
 <blockquote>
-<p>从以上java代码可以看出，“Integer integer = 10;”此句发生了Autoboxing。<br><br>从汇编结果可以看出，实际在编译的时候发生了，Integer a = Integer.valueOf(10);调用了Integer类的valueOf方法。</p>
+<p>在实际应用中，要使Log4j在系统中运行须事先设定配置文件。配置文件事实上也就是对Logger、Appender及Layout进行相应设定。Log4j支持两种配置文件格式，一种是XML格式的文件，一种是properties属性文件。下面以properties属性文件为例介绍 log4j.properties的配置。</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Returns an &#123;<span class="doctag">@code</span> Integer&#125; instance representing the specified</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@code</span> int&#125; value.  If a new &#123;<span class="doctag">@code</span> Integer&#125; instance is not</span></span><br><span class="line"><span class="comment"> * required, this method should generally be used in preference to</span></span><br><span class="line"><span class="comment"> * the constructor &#123;<span class="doctag">@link</span> #Integer(int)&#125;, as this method is likely</span></span><br><span class="line"><span class="comment"> * to yield significantly better space and time performance by</span></span><br><span class="line"><span class="comment"> * caching frequently requested values.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * This method will always cache values in the range -128 to 127,</span></span><br><span class="line"><span class="comment"> * inclusive, and may cache other values outside of this range.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  i an &#123;<span class="doctag">@code</span> int&#125; value.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> an &#123;<span class="doctag">@code</span> Integer&#125; instance representing &#123;<span class="doctag">@code</span> i&#125;.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span>  1.5</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Integer <span class="title">valueOf</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.high)</span><br><span class="line">        <span class="keyword">return</span> IntegerCache.cache[i + (-IntegerCache.low)];</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Integer(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>配置根Logger</p>
 <blockquote>
-<p>从以上java代码可以看出，“int i = integer;”此句发生了Autounboxing。<br><br>从汇编结果可以看出，实际在编译的时候发生了，int i = integer.intValue();调用了Integer类的intValue方法。</p>
+<p>log4j.rootLogger = [ level ] , appenderName1, appenderName2, …<br><br>  log4j.additivity.org.apache=false：表示Logger不会在父Logger的appender里输出，默认为true。<br><br>  level ：设定日志记录的最低级别，可设的值有OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL或者自定义的级别，Log4j建议只使用中间四个级别。通过在这里设定级别，您可以控制应用程序中相应级别的日志信息的开关，比如在这里设定了INFO级别，则应用程序中所有DEBUG级别的日志信息将不会被打印出来。<br><br>  appenderName：就是指定日志信息要输出到哪里。可以同时指定多个输出目的地，用逗号隔开。<br><br>  例如：log4j.rootLogger＝INFO,A1,B2,C3 <br></p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Returns the value of this &#123;<span class="doctag">@code</span> Integer&#125; as an</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@code</span> int&#125;.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">intValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h3><blockquote>
-<p>其他基本数据类型的Autoboxing and Autounboxing也满足此。</p>
-</blockquote>
-<hr>
-<h4 id="思考："><a href="#思考：" class="headerlink" title="思考："></a>思考：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sh.$<span class="number">16</span>.$<span class="number">12</span>.$<span class="number">24</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Mr SJL on 2016/12/24.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> Junlan Shuai</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App2</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">int</span> b = <span class="number">10</span>;</span><br><span class="line">        Integer c = <span class="keyword">new</span> Integer(<span class="number">10</span>);</span><br><span class="line">        Integer d = Integer.valueOf(<span class="number">10</span>);</span><br><span class="line">        Integer e = <span class="number">2000</span>;</span><br><span class="line">        Integer f = <span class="number">2000</span>;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"a=b:"</span> +(a==b));</span><br><span class="line">        System.out.println(<span class="string">"a=c:"</span> +(a==c));</span><br><span class="line">        System.out.println(<span class="string">"a=d:"</span> +(a==d));</span><br><span class="line">        System.out.println(<span class="string">"c=d:"</span> +(c==d));</span><br><span class="line">        System.out.println(<span class="string">"e=f:"</span> +(e==f));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行结果：</span></span><br><span class="line">a=b:<span class="keyword">true</span></span><br><span class="line">a=c:<span class="keyword">true</span></span><br><span class="line">a=d:<span class="keyword">true</span></span><br><span class="line">c=d:<span class="keyword">false</span></span><br><span class="line">e=f:<span class="keyword">false</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置控制台输出</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">### 输出信息到控制台 ###</span><br><span class="line">log4j.appender.stdout = org.apache.log4j.ConsoleAppender</span><br><span class="line">### 输出ERROR级别以上的日志到控制台 ###</span><br><span class="line">log4j.appender.stdout.Threshold = ERROR</span><br><span class="line">log4j.appender.stdout.Target = System.out</span><br><span class="line">log4j.appender.stdout.layout = org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.stdout.layout.ConversionPattern = [%-5p] %d&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; method:%l%n%m%n</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置日志文件输出</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">### 输出DEBUG 级别以上的日志到=E://logs/debug.log ###</span><br><span class="line">log4j.appender.debug = org.apache.log4j.DailyRollingFileAppender</span><br><span class="line">log4j.appender.debug.File = E://logs/debug.log</span><br><span class="line">log4j.appender.debug.Append = true</span><br><span class="line">##Threshold是个全局的过滤器，它将把低于所设置的level的信息过滤不显示出来。</span><br><span class="line">log4j.appender.debug.Threshold = DEBUG</span><br><span class="line">log4j.appender.debug.layout = org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.debug.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>REFERENCES</p>
+<ol>
+<li><a href="http://www.open-open.com/lib/view/open1393488356958.html" target="\_blank">Log4j.properties配置详解</a></li>
+<li><a href="http://www.codeceo.com/article/log4j-usage.html" target="\_blank">最详细的Log4j使用教程</a></li>
+</ol>
+</li>
+</ul>
 
       
     </div>
@@ -542,7 +524,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag"># java</a>
+            <a href="/tags/log4j/" rel="tag"># log4j</a>
           
         </div>
       
@@ -555,7 +537,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/04/Collections.sort()分析/" rel="next" title="Collections.sort()源码分析（基于jdk1.8）">
+              <a href="/2017/02/26/Collections.sort()分析/" rel="next" title="Collections.sort()源码分析（基于jdk1.8）">
                 <i class="fa fa-chevron-left"></i> Collections.sort()源码分析（基于jdk1.8）
               </a>
             
@@ -565,8 +547,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/04/Java中常量池详解/" rel="prev" title="Java中常量池详解">
-                Java中常量池详解 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/26/创建线程的三种方式/" rel="prev" title="Java创建线程的三种方式(Thread/Runnable/Callable)">
+                Java创建线程的三种方式(Thread/Runnable/Callable) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -623,17 +605,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -648,7 +621,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -771,22 +744,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言："><span class="nav-number">1.</span> <span class="nav-text">前言：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一、什么是Autoboxing"><span class="nav-number">2.</span> <span class="nav-text">一、什么是Autoboxing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、什么是Autounboxing"><span class="nav-number">3.</span> <span class="nav-text">二、什么是Autounboxing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、以int类型为例，讲解Autoboxing和Autounboxing实现原理"><span class="nav-number">4.</span> <span class="nav-text">三、以int类型为例，讲解Autoboxing和Autounboxing实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、总结"><span class="nav-number">5.</span> <span class="nav-text">四、总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#思考："><span class="nav-number">5.1.</span> <span class="nav-text">思考：</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -995,7 +952,7 @@
       <script type="text/javascript">
       function renderGitment(){
         var gitment = new Gitmint({
-            id: '1530672969105',
+            id: '1493172435000',
             owner: 'shuaijunlan',
             repo: 'shuaijunlan.github.io',
             
