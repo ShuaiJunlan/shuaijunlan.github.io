@@ -99,27 +99,25 @@
 
 
 
-  <meta name="description" content="基本环境：CentOS7.0   [root@localhost /]# egrep ‘(vmx|svm)’ /proc/cpuinfo   和 Xen 不同，KVM 需要有 CPU 的支持（Intel VT 或 AMD SVM），在安装 KVM 之前检查一下 CPU 是否提供了虚拟技术的支持,可以通过下面命令查询是否支持，如果输出有相关的vmx或者svm，表明CPU支持，否则就不支持。">
-<meta name="keywords" content="KVM,CentOS">
+  <meta name="description" content="阅读这篇文章之前先来理解几个基本的概念   什么是常量 equals()方法和==的区别 引用和对象的区别  1. String常量池1.1 创建String对象的两种方式 通过new来创建String创对象，例如：String a = new String(“a”); 直接将字符串常量赋值给一个对象引用，例如：String b = “b”;  这两种不同的创建方法是有差别的，第一种方式是直接在">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CentOS7中配置KVM教程">
-<meta property="og:url" content="http://www.blog.shuaijunlan.cn/2016/12/20/CentOS7中配置KVM教程/index.html">
+<meta property="og:title" content="Java中常量池详解">
+<meta property="og:url" content="http://www.blog.shuaijunlan.cn/2016/07/26/Java中常量池详解/index.html">
 <meta property="og:site_name" content="只争朝夕">
-<meta property="og:description" content="基本环境：CentOS7.0   [root@localhost /]# egrep ‘(vmx|svm)’ /proc/cpuinfo   和 Xen 不同，KVM 需要有 CPU 的支持（Intel VT 或 AMD SVM），在安装 KVM 之前检查一下 CPU 是否提供了虚拟技术的支持,可以通过下面命令查询是否支持，如果输出有相关的vmx或者svm，表明CPU支持，否则就不支持。">
+<meta property="og:description" content="阅读这篇文章之前先来理解几个基本的概念   什么是常量 equals()方法和==的区别 引用和对象的区别  1. String常量池1.1 创建String对象的两种方式 通过new来创建String创对象，例如：String a = new String(“a”); 直接将字符串常量赋值给一个对象引用，例如：String b = “b”;  这两种不同的创建方法是有差别的，第一种方式是直接在">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://learningnotes-1251679769.costj.myqcloud.com/virtual/6.png">
-<meta property="og:updated_time" content="2018-07-04T03:24:43.353Z">
+<meta property="og:updated_time" content="2018-07-04T03:26:17.625Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CentOS7中配置KVM教程">
-<meta name="twitter:description" content="基本环境：CentOS7.0   [root@localhost /]# egrep ‘(vmx|svm)’ /proc/cpuinfo   和 Xen 不同，KVM 需要有 CPU 的支持（Intel VT 或 AMD SVM），在安装 KVM 之前检查一下 CPU 是否提供了虚拟技术的支持,可以通过下面命令查询是否支持，如果输出有相关的vmx或者svm，表明CPU支持，否则就不支持。">
-<meta name="twitter:image" content="http://learningnotes-1251679769.costj.myqcloud.com/virtual/6.png">
+<meta name="twitter:title" content="Java中常量池详解">
+<meta name="twitter:description" content="阅读这篇文章之前先来理解几个基本的概念   什么是常量 equals()方法和==的区别 引用和对象的区别  1. String常量池1.1 创建String对象的两种方式 通过new来创建String创对象，例如：String a = new String(“a”); 直接将字符串常量赋值给一个对象引用，例如：String b = “b”;  这两种不同的创建方法是有差别的，第一种方式是直接在">
 
 
 
 
 
 
-  <link rel="canonical" href="http://www.blog.shuaijunlan.cn/2016/12/20/CentOS7中配置KVM教程/"/>
+  <link rel="canonical" href="http://www.blog.shuaijunlan.cn/2016/07/26/Java中常量池详解/"/>
 
 
 
@@ -129,7 +127,7 @@
   };
 </script>
 
-  <title>CentOS7中配置KVM教程 | 只争朝夕</title>
+  <title>Java中常量池详解 | 只争朝夕</title>
   
 
 
@@ -346,7 +344,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2016/12/20/CentOS7中配置KVM教程/">
+    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2016/07/26/Java中常量池详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuai Junlan">
@@ -363,7 +361,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">CentOS7中配置KVM教程</h2>
+          <h2 class="post-title" itemprop="name headline">Java中常量池详解</h2>
         
 
         <div class="post-meta">
@@ -375,7 +373,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-20T10:07:15+08:00">2016-12-20</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-26T10:07:15+08:00">2016-07-26</time>
             
 
             
@@ -393,8 +391,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/12/20/CentOS7中配置KVM教程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2016/12/20/CentOS7中配置KVM教程/" itemprop="commentsCount"></span>
+                <a href="/2016/07/26/Java中常量池详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2016/07/26/Java中常量池详解/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -431,157 +429,40 @@
 
       
         <blockquote>
-<p>基本环境：CentOS7.0</p>
+<p>阅读这篇文章之前先来理解几个基本的概念</p>
 </blockquote>
-<ol>
-<li><a href="">[root@localhost /]# </a>egrep ‘(vmx|svm)’ /proc/cpuinfo  <blockquote>
-<p>和 Xen 不同，KVM 需要有 CPU 的支持（Intel VT 或 AMD SVM），在安装 KVM 之前检查一下 CPU 是否提供了虚拟技术的支持,可以通过下面命令查询是否支持，如果输出有相关的vmx或者svm，表明CPU支持，否则就不支持。</p>
+<ul>
+<li>什么是常量</li>
+<li>equals()方法和==的区别</li>
+<li>引用和对象的区别</li>
+</ul>
+<h3 id="1-String常量池"><a href="#1-String常量池" class="headerlink" title="1. String常量池"></a>1. String常量池</h3><h4 id="1-1-创建String对象的两种方式"><a href="#1-1-创建String对象的两种方式" class="headerlink" title="1.1 创建String对象的两种方式"></a>1.1 创建String对象的两种方式</h4><ul>
+<li>通过new来创建String创对象，例如：String a = new String(“a”);</li>
+<li><p>直接将字符串常量赋值给一个对象引用，例如：String b = “b”;</p>
+<blockquote>
+<p>这两种不同的创建方法是有差别的，第一种方式是直接在Java heap内存空间创建一个新的对象，并且引用变量a指向这个对象，第二种方式是引用变量b指向常量池中的字符串。</p>
 </blockquote>
 </li>
-</ol>
+</ul>
 <a id="more"></a>
-<ol>
-<li><p><a href="">[root@localhost /]# </a>yum install qemu-kvm qemu-img virt-manager libvirt libvirt-python python-virtinst libvirt-client virt-install virt-viewer</p>
+<h4 id="1-2-先来看一个Demo"><a href="#1-2-先来看一个Demo" class="headerlink" title="1.2 先来看一个Demo"></a>1.2 先来看一个Demo</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sh.oc.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</span><br><span class="line"><span class="keyword">import</span> org.junit.runners.BlockJUnit4ClassRunner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Mr SJL on 2016/12/16.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> Junlan Shuai</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RunWith</span>(BlockJUnit4ClassRunner.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test1</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        String a = <span class="string">"helloWorld"</span>;</span><br><span class="line">        String b = <span class="string">"helloWorld"</span>;</span><br><span class="line">        String c = <span class="keyword">new</span> String(<span class="string">"helloWorld"</span>);</span><br><span class="line">        String d = <span class="string">"hello"</span>;</span><br><span class="line">        String e = <span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br><span class="line">        String temp = <span class="string">"World"</span>;</span><br><span class="line">        String f = <span class="string">"hello"</span> + temp;</span><br><span class="line">        String g = <span class="string">"hello"</span> + <span class="string">"World"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"(1) a=b:"</span> + (a == b));</span><br><span class="line">        System.out.println(<span class="string">"(2) b=c:"</span> + (b == c));</span><br><span class="line">        System.out.println(<span class="string">"(3) a=d:"</span> + (a == (d + <span class="string">"World"</span>)));</span><br><span class="line">        System.out.println(<span class="string">"(4) a=e:"</span> + (a == (e + <span class="string">"World"</span>)));</span><br><span class="line">        System.out.println(<span class="string">"(5) c=d:"</span> + (c == (d + <span class="string">"World"</span>)));</span><br><span class="line">        System.out.println(<span class="string">"(6) c=e:"</span> + (c == (e + <span class="string">"World"</span>)));</span><br><span class="line">        System.out.println(<span class="string">"(7) a=g:"</span> + (a == g));</span><br><span class="line">        System.out.println(<span class="string">"(8) a=f:"</span> + (a == f));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>kvm相关安装包及其作用（按需选择安装）</p>
-<ul>
-<li>qemu-kvm：qemu模拟器,主要的KVM程序包</li>
-<li>qemu-img：qemu磁盘image管理器</li>
-<li>virt-install：基于libvirt服务的虚拟机创建命令，用来创建虚拟机的命令行工具</li>
-<li>libvirt：提供libvirtd daemon来管理虚拟机和控制hypervisor</li>
-<li>libvirt-client：提供客户端API用来访问server和提供管理虚拟机命令行工具的virsh实体</li>
-<li>python-virtinst：创建虚拟机所需要的命令行工具和程序库</li>
-<li>virt-manager：GUI虚拟机管理工具</li>
-<li>virt-top：虚拟机统计命令</li>
-<li>virt-viewer：GUI连接程序，连接到已配置好的虚拟机</li>
-<li>bridge-utils：创建和管理桥接设备的工具</li>
-</ul>
+<p>结果输出：</p>
 </blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">1</span>) a=b:<span class="keyword">true</span></span><br><span class="line">(<span class="number">2</span>) b=c:<span class="keyword">false</span></span><br><span class="line">(<span class="number">3</span>) a=d:<span class="keyword">false</span></span><br><span class="line">(<span class="number">4</span>) a=e:<span class="keyword">false</span></span><br><span class="line">(<span class="number">5</span>) c=d:<span class="keyword">false</span></span><br><span class="line">(<span class="number">6</span>) c=e:<span class="keyword">false</span></span><br><span class="line">(<span class="number">7</span>) a=g:<span class="keyword">true</span></span><br><span class="line">(<span class="number">8</span>) a=f:<span class="keyword">false</span></span><br><span class="line"></span><br><span class="line">Process finished with exit code <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-3-总结："><a href="#1-3-总结：" class="headerlink" title="1.3 总结："></a>1.3 总结：</h4><ul>
+<li>对于第(1)个结果，直接将相同的字符串常量赋值给字符串引用变量（后称‘变量’）a，b，在编译的时候该字符串直接保存在常量池中，同时变量a，b同时指向这个字符串常量，所以a==b返回true；</li>
+<li><p>第(2)个结果，对于变量c，是通过new一个对象（该对象保存在java heap中），然后变量c指向这个对象。故变量b和c指向的是不同的内存空间，b==c返回false；</p>
 </li>
-<li><p>验证是否安装成功</p>
-<ul>
-<li><p>验证内核模块是否加载</p>
-<blockquote>
-<p><a href="">[root@localhost /]# </a>lsmod | grep kvm</p>
-</blockquote>
+<li><p>第(3)个结果，对于加法运算d + “World”在执行的时候，首先是通过创建一个StringBuilder对象，然后调用该对象的append()方法，最后调用该对象的toString()方法。也就是相当于执行了new StringBuilder().append(d).append(“Word”).toString()。由StringBuilder源码可知，最后结果返回一个String对象(存放在java heap中)。故变量a和d指向不同的内存地址空间，虽然value是一样的，最终返回false。对于第(4)个结果，原理和(3)一样。</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Create a copy, don't share the array</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(value, <span class="number">0</span>, count);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>启动服务(同时设置了开机自启)</p>
-<blockquote>
-<p><a href="">[root@localhost /]# </a>systemctl start libvirtd.service</p>
-</blockquote>
+<li><p>对于第(5)和(6)个结果，因为变量c指向的是在java heap中的一个String对象，并且加法运算(d + “World”)，返回的也是一个String对象，但是它们指向的地址空间不同，故返回false。</p>
 </li>
-<li><p>重启服务</p>
-<blockquote>
-<p><a href="">[root@localhost /]# </a>systemctl restart libvirtd.service</p>
-</blockquote>
-</li>
-<li><p>设置可用</p>
-<blockquote>
-<p><a href="">[root@localhost /]# </a>systemctl enable libvirtd.service</p>
-</blockquote>
-</li>
-<li><p>查看服务基本信息</p>
-<blockquote>
-<p><a href="">[root@localhost /]# </a>systemctl status libvirtd.service</p>
-</blockquote>
-<p><img src="http://learningnotes-1251679769.costj.myqcloud.com/virtual/6.png" alt="image" title="图片"></p>
-</li>
+<li>对于第(7)和(8)的结果，原理和前面相同。</li>
 </ul>
-</li>
-<li><p>配置虚拟机网络</p>
-<blockquote>
-<p>见<a href="http://www.blog.shuaijunlan.cn/2016/12/07/libvirt%20kvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" target="\_blank">《libvirt kvm虚拟机网络配置》</a>一文</p>
-</blockquote>
-</li>
-<li><p>在CentOS上安装vnc服务，通过vnc客户端远程连接CentOS，通过图形化界面在宿主机上安装客户机，安装教程见《使用VNC工具初级教程》一文</p>
-</li>
-<li><p>最后安装客户机</p>
-<blockquote>
-<ul>
-<li><p>下载虚拟机要安装的ISO系统镜像文件，之后需创建存储池，指定在宿主机上虚拟机磁盘的存储位置，创建存储目录：(目录随便设定，按照自己的需求设定)</p>
-<ul>
-<li><a href="">[root@localhost /]# </a>mkdir -p /home/kvm1</li>
-</ul>
-</li>
-<li><p>定义一个储存池和绑定目录：</p>
-<ul>
-<li><a href="">[root@localhost /]# </a>virsh pool-define-as vmspool –type dir –target /home/kvm1</li>
-</ul>
-</li>
-<li><p>建立并激活存储池：</p>
-<ul>
-<li><a href="">[root@localhost /]# </a>virsh pool-build vmspool</li>
-<li><a href="">[root@localhost /]# </a>virsh pool-start vmspool</li>
-</ul>
-</li>
-<li><p>virsh-install:</p>
-<ul>
-<li>1、输入虚拟机名称</li>
-<li>2、分配多少内存</li>
-<li>3、处理器的个数</li>
-<li>4、此步可以直接输入iso的位置或是url</li>
-<li>5、虚拟机类型KVM</li>
-<li>6、定义虚拟机磁盘映像的位置</li>
-<li>7、磁盘的大小</li>
-<li>6、指定哪个桥或者可以指定多个桥</li>
-<li>7、额外的控制台和KS文件</li>
-<li>8、连接到系统参数</li>
-<li>参数说明注意每行都要空格</li>
-<li>-n 虚拟机名称</li>
-<li>-r 分配虚拟机内存大小</li>
-<li>–vcpus 分配虚拟cpu个数</li>
-<li>-c 镜像文件位置</li>
-<li>–vnc –vncport=5901 –vnclisten=0.0.0.0 启动图形安装界面</li>
-<li>–virt-type 虚拟机模式</li>
-<li>-f 虚拟机系统文件存储目录</li>
-<li>-s 分配磁盘大小（GB）</li>
-<li>-w 联网方式（birdge bridge:br0/nat bridge:virbr0）</li>
-<li>–os-type=’windows’ –os-variant=win2k3 安装windows最好加上这个否则会报错</li>
-<li>virt-install工具安装虚拟机后，在目录/etc/libvirt/qemu/下生成xml配置文件</li>
-<li>-s 用来指定虚拟磁盘的大小单位为GB</li>
-<li>-m 指定虚拟网卡的硬件地址默认virt-install自动产生</li>
-<li>-p 以半虚拟化方式建立虚拟机</li>
-<li>-l 指定安装来源</li>
-<li>-x EXTRA, –extra-args=EXTRA当执行从”–location”选项指定位置的客户机安装时，附加内核命令行参数到安装程序。</li>
-<li>-v, –hvm 设置全虚拟化<br><br><br><br></li>
-</ul>
-</li>
-<li><p>创建第一个guest：</p>
-<ul>
-<li><a href="">[root@localhost /]# </a>virt-install –name=CentOS7-1 –ram=4096 –vcpus=1 –cdrom=/home/kvm1/CentOS-7-x86_64-Minimal-1511.iso –virt-type=kvm –disk  path=/home/kvm1/centos7-1.img,device=disk,format=qcow2,bus=virtio,cache=writeback,size=250 –graphics vnc,listen=0.0.0.0,port=5920,password=123456 –network bridge:br0 –accelerate –force –autostart</li>
-</ul>
-</li>
-<li><p>创建第二个guest：</p>
-<ul>
-<li><a href="">[root@localhost /]# </a>virt-install –name=CentOS7-2 –ram=7168 –vcpus=2,maxvcpus=4 –cdrom=/home/kvm1/CentOS-7-x86_64-Minimal-1511.iso –virt-type=kvm –disk  path=/home/kvm1/centos7-2.img,device=disk,format=qcow2,bus=virtio,cache=writeback,size=400 –graphics vnc,listen=0.0.0.0,port=5921,password=123456 –network bridge:br0 –accelerate –force –autostart</li>
-</ul>
-</li>
-<li><p>创建第三个guest：</p>
-<ul>
-<li><a href="">[root@localhost /]# </a>virt-install –name=CentOS7-3 –ram=7168 –vcpus=6,maxvcpus=9 –cpuset=6,7,8,9,10,11 –cdrom=/home/kvm1/CentOS-7-x86_64-Minimal-1511.iso –virt-type=kvm –disk  path=/home/kvm1/centos7-3.img,device=disk,format=qcow2,bus=virtio,cache=writeback,size=400 –graphics vnc,listen=0.0.0.0,port=5922,password=123456 –network bridge:br0 –accelerate –force –autostart</li>
-</ul>
-</li>
-<li><p>创建第四个guest：</p>
-<ul>
-<li><a href="">[root@localhost /]# </a>virt-install –name=CentOS7-4 –ram=7168 –vcpus=6,maxvcpus=9 –cpuset=12,13,14,15,16,17 –cdrom=/home/kvm1/CentOS-7-x86_64-Minimal-1511.iso –virt-type=kvm –disk  path=/home/kvm1/centos7-4.img,device=disk,format=qcow2,bus=virtio,cache=writeback,size=400 –graphics vnc,listen=0.0.0.0,port=5923,password=123456 –network bridge:br0 –accelerate –force –autostart</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-</li>
-</ol>
-<h4 id="持续更新中……"><a href="#持续更新中……" class="headerlink" title="持续更新中……"></a>持续更新中……</h4><hr>
-<ul>
-<li><p>REFERENCES</p>
-<ol>
-<li><a href="http://blog.csdn.net/chdhust/article/details/7931717" target="\_blank">KVM虚拟机创建功能详细讲解</a></li>
-<li><a href="http://blog.csdn.net/zhaihaifei/article/details/51163750" target="\_blank">绑定KVM虚拟机的vcpu与物理CPU</a></li>
-<li><a href="https://www.teakki.com/p/57dbd24a1b9882de17e7fd37" target="\_blank">基于Linux命令行KVM虚拟机的安装配置与基本使用</a></li>
-<li><a href="http://kulezhaizhuren.lofter.com/post/1cca7553_7e20b47" target="\_blank">CENTOS7 安装KVM笔记之安装</a></li>
-<li><a href="https://www.52os.net/articles/linux-kvm-install-virtual-machines.html" target="\_blank">linux下配置和安装KVM虚拟机</a></li>
-</ol>
-</li>
-</ul>
+<hr>
+<p>持续更新中。。。。。。</p>
 
       
     </div>
@@ -606,9 +487,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/KVM/" rel="tag"># KVM</a>
-          
-            <a href="/tags/CentOS/" rel="tag"># CentOS</a>
+            <a href="/tags/java/" rel="tag"># java</a>
           
         </div>
       
@@ -621,8 +500,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/26/Spring中Bean的生命周期/" rel="next" title="Spring中Bean的初始化与销毁（基于Spring4.x）">
-                <i class="fa fa-chevron-left"></i> Spring中Bean的初始化与销毁（基于Spring4.x）
+              <a href="/2016/06/26/java中“...”含义/" rel="next" title="java中“...”的含义">
+                <i class="fa fa-chevron-left"></i> java中“...”的含义
               </a>
             
           </div>
@@ -631,8 +510,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/12/26/CentOS7设置免密登陆/" rel="prev" title="CentOS7设置免密登陆">
-                CentOS7设置免密登陆 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/09/26/Autopacking and Autounpacking/" rel="prev" title="Autoboxing and Autounboxing">
+                Autoboxing and Autounboxing <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -847,7 +726,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#持续更新中……"><span class="nav-number">1.</span> <span class="nav-text">持续更新中……</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-String常量池"><span class="nav-number">1.</span> <span class="nav-text">1. String常量池</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-创建String对象的两种方式"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 创建String对象的两种方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-先来看一个Demo"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 先来看一个Demo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-总结："><span class="nav-number">1.3.</span> <span class="nav-text">1.3 总结：</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1061,7 +940,7 @@
       <script type="text/javascript">
       function renderGitment(){
         var gitment = new Gitmint({
-            id: '1482199635000',
+            id: '1469498835000',
             owner: 'shuaijunlan',
             repo: 'shuaijunlan.github.io',
             
