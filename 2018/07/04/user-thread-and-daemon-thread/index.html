@@ -108,17 +108,20 @@
 
 
 
-  <meta name="description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
+  <meta name="description" content="在Java当中有两种线程，一种是User Thread，另一种是Daemon Thread。一般来说User Thread具有较高的优先级，它主要运行在前台，然而，Daemon Thread具有较低的优先级，主要运行在后台。">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="用户线程和守护线程">
+<meta property="og:title" content="User Thread和Daemon Thread">
 <meta property="og:url" content="http://www.blog.shuaijunlan.cn/2018/07/04/user-thread-and-daemon-thread/index.html">
 <meta property="og:site_name" content="只争朝夕">
-<meta property="og:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
+<meta property="og:description" content="在Java当中有两种线程，一种是User Thread，另一种是Daemon Thread。一般来说User Thread具有较高的优先级，它主要运行在前台，然而，Daemon Thread具有较低的优先级，主要运行在后台。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-04T02:56:09.121Z">
+<meta property="og:image" content="https://javaconceptoftheday.com/wp-content/uploads/2015/06/UserVsDaemon.png?x70034">
+<meta property="og:updated_time" content="2018-07-06T02:42:41.214Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="用户线程和守护线程">
-<meta name="twitter:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
+<meta name="twitter:title" content="User Thread和Daemon Thread">
+<meta name="twitter:description" content="在Java当中有两种线程，一种是User Thread，另一种是Daemon Thread。一般来说User Thread具有较高的优先级，它主要运行在前台，然而，Daemon Thread具有较低的优先级，主要运行在后台。">
+<meta name="twitter:image" content="https://javaconceptoftheday.com/wp-content/uploads/2015/06/UserVsDaemon.png?x70034">
 
 
 
@@ -135,7 +138,7 @@
   };
 </script>
 
-  <title>用户线程和守护线程 | 只争朝夕</title>
+  <title>User Thread和Daemon Thread | 只争朝夕</title>
   
 
 
@@ -354,7 +357,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">用户线程和守护线程
+          <h2 class="post-title" itemprop="name headline">User Thread和Daemon Thread
               
             
           </h2>
@@ -379,12 +382,24 @@
                 
               
 
-              <time title="创建时间：2018-07-04 09:44:27 / 修改时间：10:56:09" itemprop="dateCreated datePublished" datetime="2018-07-04T09:44:27+08:00">2018-07-04</time>
+              <time title="创建时间：2018-07-04 09:44:27" itemprop="dateCreated datePublished" datetime="2018-07-04T09:44:27+08:00">2018-07-04</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-06 10:42:41" itemprop="dateModified" datetime="2018-07-06T10:42:41+08:00">2018-07-06</time>
               
             
           </span>
@@ -435,7 +450,81 @@
       
 
       
-        
+        <blockquote>
+<p>在Java当中有两种线程，一种是<code>User Thread</code>，另一种是<code>Daemon Thread</code>。一般来说<code>User Thread</code>具有较高的优先级，它主要运行在前台，然而，<code>Daemon Thread</code>具有较低的优先级，主要运行在后台。</p>
+</blockquote>
+<a id="more"></a>
+<h4 id="User-Thread"><a href="#User-Thread" class="headerlink" title="User Thread"></a>User Thread</h4><p>User Thread通常由应用或者用户创建的，JVM Instance等待所有的User Thread执行完成Tasks，直到所有的User Thread执行完成JVM才会退出。</p>
+<h4 id="Daemon-Thread"><a href="#Daemon-Thread" class="headerlink" title="Daemon Thread"></a>Daemon Thread</h4><p>Daemon Thread通常由JVM创建， 这些线程在后台运行，运行一些后台任务（包括，垃圾回收、内务任务等）。JVM 不会等待所有的Daemon Thrad执行完Tasks，只要所有的User Thread执行完Tasks，JVM就会退出。</p>
+<h4 id="User-Thread-VS-Daemon-Thread-In-Java"><a href="#User-Thread-VS-Daemon-Thread-In-Java" class="headerlink" title="User Thread VS Daemon Thread In Java"></a>User Thread VS Daemon Thread In Java</h4><table>
+<thead>
+<tr>
+<th><strong>User Threads</strong></th>
+<th style="text-align:left"><strong>Daemon Threads</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JVM waits for user threads to finish their work. It will not exit until all user threads finish their work.</td>
+<td style="text-align:left">JVM will not wait for daemon threads to finish their work. It will exit as soon as all user threads finish their work.</td>
+</tr>
+<tr>
+<td>User threads are foreground threads.</td>
+<td style="text-align:left">Daemon threads are background threads.</td>
+</tr>
+<tr>
+<td>User threads are high priority threads.</td>
+<td style="text-align:left">Daemon threads are low priority threads.</td>
+</tr>
+<tr>
+<td>User threads are created by the application.</td>
+<td style="text-align:left">Daemon threads, in most of time, are created by the JVM.</td>
+</tr>
+<tr>
+<td>User threads are mainly designed to do some specific task.</td>
+<td style="text-align:left">Daemon threads are designed to support the user threads.</td>
+</tr>
+<tr>
+<td>JVM will not force the user threads to terminate. It will wait for user threads to terminate themselves.</td>
+<td style="text-align:left">JVM will force the daemon threads to terminate if all user threads have finished their work.</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://javaconceptoftheday.com/wp-content/uploads/2015/06/UserVsDaemon.png?x70034" alt="user threads vs daemon threads"></p>
+<h4 id="Some-Things-To-Remember-about-user-threads-and-daemon-threads-In-Java"><a href="#Some-Things-To-Remember-about-user-threads-and-daemon-threads-In-Java" class="headerlink" title="Some Things-To-Remember about user threads and daemon threads In Java :"></a>Some Things-To-Remember about user threads and daemon threads In Java :</h4><ul>
+<li>You can convert user thread into daemon thread explicitly by calling setDaemon() method of the thread.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadsInJava</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Main Thread</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        UserThread userThread = <span class="keyword">new</span> UserThread();   <span class="comment">//Creating the UserThread</span></span><br><span class="line">        userThread.setDaemon(<span class="keyword">true</span>);        <span class="comment">//Changing the thread as Daemon</span></span><br><span class="line">        userThread.start();               <span class="comment">//Starting the thread</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">            System.out.println(<span class="string">"This is an user thread...."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>You can’t set a daemon property after starting the thread. If you try to set the daemon property when the thread is active, It will throw a IllegalThreadStateException at run time.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">            System.out.println(<span class="string">"This is an user thread...."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadsInJava</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        UserThread userThread = <span class="keyword">new</span> UserThread();   <span class="comment">//Creating the UserThread</span></span><br><span class="line"></span><br><span class="line">        userThread.start();               <span class="comment">//Starting the thread</span></span><br><span class="line"></span><br><span class="line">        userThread.setDaemon(<span class="keyword">true</span>);        <span class="comment">//This statement will throw IllegalThreadStateException</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>You can check whether the thread is user thread or a daemon thread by using isDaemon() method of Thread class. This method returns “true” for a daemon thread and “false” for a user thread.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">            System.out.println(<span class="string">"This is an user thread...."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadsInJava</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        UserThread userThread = <span class="keyword">new</span> UserThread();   <span class="comment">//Creating the UserThread</span></span><br><span class="line"></span><br><span class="line">        System.out.println(userThread.isDaemon());    <span class="comment">//Output : false</span></span><br><span class="line"></span><br><span class="line">        userThread.setDaemon(<span class="keyword">true</span>);         <span class="comment">//changing the thread as Daemon</span></span><br><span class="line"></span><br><span class="line">        userThread.start();                 <span class="comment">//Starting the thread</span></span><br><span class="line"></span><br><span class="line">        System.out.println(userThread.isDaemon());      <span class="comment">//Output : true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Daemon property of a thread is inherited from it’s parent thread. i.e The thread created by user thread will be user thread and the thread created by daemon thread will be a daemon thread.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Thread1</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Thread t = <span class="keyword">new</span> Thread();      <span class="comment">//Creating a child thread</span></span><br><span class="line"></span><br><span class="line">        System.out.println(t.isDaemon());   <span class="comment">//Checking the Daemon property of a child thread</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadsInJava</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Thread1 t1 = <span class="keyword">new</span> Thread1();   <span class="comment">//Creating the Thread1</span></span><br><span class="line"></span><br><span class="line">        t1.start();                 <span class="comment">//Starting the thread</span></span><br><span class="line"></span><br><span class="line">        Thread1 t2 = <span class="keyword">new</span> Thread1();   <span class="comment">//Creating the Thread1</span></span><br><span class="line"></span><br><span class="line">        t2.setDaemon(<span class="keyword">true</span>);         <span class="comment">//changing the thread as Daemon</span></span><br><span class="line"></span><br><span class="line">        t2.start();          <span class="comment">//Starting the thread</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>The main thread or primary thread created by JVM is an user thread.</strong></p>
+</li>
+<li><p><strong>Demonstration of User thread and daemon thread  :</strong>  In the below program, The task of daemon thread will not be completed. Program terminates as soon as user thread finishes it’s task. It will not wait for daemon thread to finish it’s task.</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Junlan Shuai[shuaijunlan@gmail.com].</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> Created on 10:32 AM 2018/07/06.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"This is a user thread....."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DaemonThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DaemonThread</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        setDaemon(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">            System.out.println(<span class="string">"This is daemon thread....."</span> + i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadsInJava</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        DaemonThread daemon = <span class="keyword">new</span> DaemonThread();   <span class="comment">//Creating the DaemonThread</span></span><br><span class="line"></span><br><span class="line">        daemon.start();                 <span class="comment">//Starting the daemon thread</span></span><br><span class="line"></span><br><span class="line">        UserThread userThread = <span class="keyword">new</span> UserThread();   <span class="comment">//Creating the UserThread</span></span><br><span class="line"></span><br><span class="line">        userThread.start();          <span class="comment">//Starting the user thread</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h4><p>1) User threads are created by the <strong>application</strong> (user) to perform some specific task. Where as daemon threads are mostly created by the <strong>JVM</strong> to perform some background tasks like garbage collection.</p>
+<p>2) JVM will wait for user threads to finish their tasks. JVM will not exit until all user threads finish their tasks. On the other side, JVM will not wait for daemon threads to finish their tasks. It will exit as soon as all user threads finish their tasks.</p>
+<p>3) User threads are <strong>high priority</strong> threads, They are designed mainly to execute some important task in an application. Where as daemon threads are <strong>less priority</strong> threads. They are designed to serve the user threads.</p>
+<p>4) User threads are <strong>foreground threads</strong>. They always run in foreground and perform some specific task assigned to them. Where as daemon threads are <strong>background threads</strong>. They always run in background and act in a supporting role to user threads.</p>
+<p>5) JVM will not force the user threads to terminate. It will wait for user threads to terminate themselves. On the other hand, JVM will force the daemon threads to terminate if all the user threads have finished their task.</p>
+<p>6) User threads are chosen to do the core work of an application. The application is very much dependent on the user threads for it’s smooth execution. Where as daemon threads are chosen to do some supporting tasks. The application is less dependent on the daemon threads for it’s smooth running.</p>
+<h4 id="REFERENCES"><a href="#REFERENCES" class="headerlink" title="REFERENCES"></a>REFERENCES</h4><ul>
+<li><a href="https://javaconceptoftheday.com/types-threads-java/" target="_blank" rel="noopener">Types Of Threads In Java</a></li>
+<li><a href="https://javaconceptoftheday.com/difference-between-used-threads-vs-daemon-threads-in-java/" target="_blank" rel="noopener">Difference Between User Threads Vs Daemon Threads In Java</a></li>
+</ul>
+
       
     </div>
 
@@ -452,6 +541,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
       
 
       
@@ -526,8 +621,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -665,6 +769,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#User-Thread"><span class="nav-number">1.</span> <span class="nav-text">User Thread</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Daemon-Thread"><span class="nav-number">2.</span> <span class="nav-text">Daemon Thread</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#User-Thread-VS-Daemon-Thread-In-Java"><span class="nav-number">3.</span> <span class="nav-text">User Thread VS Daemon Thread In Java</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Some-Things-To-Remember-about-user-threads-and-daemon-threads-In-Java"><span class="nav-number">4.</span> <span class="nav-text">Some Things-To-Remember about user threads and daemon threads In Java :</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Conclusion"><span class="nav-number">5.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#REFERENCES"><span class="nav-number">6.</span> <span class="nav-text">REFERENCES</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
