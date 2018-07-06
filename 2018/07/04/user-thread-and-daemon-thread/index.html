@@ -108,19 +108,19 @@
 
 
 
-  <meta name="description" content="在Java当中有两种线程，一种是User Thread，另一种是Daemon Thread。一般来说User Thread具有较高的优先级，它主要运行在前台，然而，Daemon Thread具有较低的优先级，主要运行在后台。">
+  <meta name="description" content="在Java当中有两种线程，一种是User Thread，另一种是Daemon Thread。一般来说User Thread具有较高的优先级，它主要运行在前台，然而，Daemon Thread具有较低的优先级，主要运行在后台。  User ThreadUser Thread通常由应用或者用户创建的，JVM Instance等待所有的User Thread执行完成Tasks，直到所有的User Th">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="User Thread和Daemon Thread">
 <meta property="og:url" content="http://www.blog.shuaijunlan.cn/2018/07/04/user-thread-and-daemon-thread/index.html">
 <meta property="og:site_name" content="只争朝夕">
-<meta property="og:description" content="在Java当中有两种线程，一种是User Thread，另一种是Daemon Thread。一般来说User Thread具有较高的优先级，它主要运行在前台，然而，Daemon Thread具有较低的优先级，主要运行在后台。">
+<meta property="og:description" content="在Java当中有两种线程，一种是User Thread，另一种是Daemon Thread。一般来说User Thread具有较高的优先级，它主要运行在前台，然而，Daemon Thread具有较低的优先级，主要运行在后台。  User ThreadUser Thread通常由应用或者用户创建的，JVM Instance等待所有的User Thread执行完成Tasks，直到所有的User Th">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://javaconceptoftheday.com/wp-content/uploads/2015/06/UserVsDaemon.png?x70034">
-<meta property="og:updated_time" content="2018-07-06T02:42:41.214Z">
+<meta property="og:updated_time" content="2018-07-06T03:00:03.873Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="User Thread和Daemon Thread">
-<meta name="twitter:description" content="在Java当中有两种线程，一种是User Thread，另一种是Daemon Thread。一般来说User Thread具有较高的优先级，它主要运行在前台，然而，Daemon Thread具有较低的优先级，主要运行在后台。">
+<meta name="twitter:description" content="在Java当中有两种线程，一种是User Thread，另一种是Daemon Thread。一般来说User Thread具有较高的优先级，它主要运行在前台，然而，Daemon Thread具有较低的优先级，主要运行在后台。  User ThreadUser Thread通常由应用或者用户创建的，JVM Instance等待所有的User Thread执行完成Tasks，直到所有的User Th">
 <meta name="twitter:image" content="https://javaconceptoftheday.com/wp-content/uploads/2015/06/UserVsDaemon.png?x70034">
 
 
@@ -399,7 +399,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-06 10:42:41" itemprop="dateModified" datetime="2018-07-06T10:42:41+08:00">2018-07-06</time>
+                <time title="修改时间：2018-07-06 11:00:03" itemprop="dateModified" datetime="2018-07-06T11:00:03+08:00">2018-07-06</time>
               
             
           </span>
@@ -453,9 +453,9 @@
         <blockquote>
 <p>在Java当中有两种线程，一种是<code>User Thread</code>，另一种是<code>Daemon Thread</code>。一般来说<code>User Thread</code>具有较高的优先级，它主要运行在前台，然而，<code>Daemon Thread</code>具有较低的优先级，主要运行在后台。</p>
 </blockquote>
-<a id="more"></a>
 <h4 id="User-Thread"><a href="#User-Thread" class="headerlink" title="User Thread"></a>User Thread</h4><p>User Thread通常由应用或者用户创建的，JVM Instance等待所有的User Thread执行完成Tasks，直到所有的User Thread执行完成JVM才会退出。</p>
 <h4 id="Daemon-Thread"><a href="#Daemon-Thread" class="headerlink" title="Daemon Thread"></a>Daemon Thread</h4><p>Daemon Thread通常由JVM创建， 这些线程在后台运行，运行一些后台任务（包括，垃圾回收、内务任务等）。JVM 不会等待所有的Daemon Thrad执行完Tasks，只要所有的User Thread执行完Tasks，JVM就会退出。</p>
+<a id="more"></a>
 <h4 id="User-Thread-VS-Daemon-Thread-In-Java"><a href="#User-Thread-VS-Daemon-Thread-In-Java" class="headerlink" title="User Thread VS Daemon Thread In Java"></a>User Thread VS Daemon Thread In Java</h4><table>
 <thead>
 <tr>
