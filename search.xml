@@ -9,9 +9,12 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[netty-thread-model]]></title>
+    <title><![CDATA[Netty线程模型分析]]></title>
     <url>%2F2018%2F06%2F26%2Fnetty-thread-model%2F</url>
     <content type="text"></content>
+      <tags>
+        <tag>Netty</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[HTTP详解]]></title>
