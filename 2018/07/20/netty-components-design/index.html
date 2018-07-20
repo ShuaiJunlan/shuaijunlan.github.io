@@ -118,7 +118,8 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-07-20 20-39-27.png">
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-07-20 21-01-11.png">
-<meta property="og:updated_time" content="2018-07-20T13:20:51.838Z">
+<meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-07-20 21-52-02.png">
+<meta property="og:updated_time" content="2018-07-20T13:53:47.279Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Netty组件设计介绍">
 <meta name="twitter:description" content="下面将介绍Netty中所包含的各种组件，主要包括：Channel、EventLoop、ChannelFuture、ChannelHandler和ChannelPipeline等。 Channel、EventLoop和ChannelFuture">
@@ -383,7 +384,7 @@
                 
               
 
-              <time title="创建时间：2018-07-20 19:48:01 / 修改时间：21:20:51" itemprop="dateCreated datePublished" datetime="2018-07-20T19:48:01+08:00">2018-07-20</time>
+              <time title="创建时间：2018-07-20 19:48:01 / 修改时间：21:53:47" itemprop="dateCreated datePublished" datetime="2018-07-20T19:48:01+08:00">2018-07-20</time>
             
 
             
@@ -456,8 +457,31 @@
 <li>一个ChannelIninializer的实现被注册到ServerBootstrap中或这Client的BootStrap中；</li>
 <li>当 ChannelInitializer.initChannel() 方法被调用时，ChannelInitializer将在 ChannelPipeline 中安装一组自定义的 ChannelHandler ；</li>
 <li>ChannelInitializer将它自己从 ChannelPipeline 中移除；</li>
-<li>如图所示，当事件的运动方向是从客户端到服务器，我们称之为出站，反之称之为入站。</li>
+<li>从一个客户端应用程序角度来看，当事件的运动方向是从客户端到服务器，我们称之为出站，反之则称之为入站；</li>
+<li>数据出站运动，数据讲从ChannelOutboundHandler链的尾端开始流动，直到它到达链的头部为止，此时数据到达了网络传输层，通常情况下会触发一个写操作。</li>
 </ul>
+<h3 id="BootStrap和ServerBootstrap"><a href="#BootStrap和ServerBootstrap" class="headerlink" title="BootStrap和ServerBootstrap"></a>BootStrap和ServerBootstrap</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">类别</th>
+<th style="text-align:center">Bootstrap</th>
+<th style="text-align:center">ServerBootstrap</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">网络编程中的作用</td>
+<td style="text-align:center">连接到远程主机和端口</td>
+<td style="text-align:center">绑定到一个本地端口</td>
+</tr>
+<tr>
+<td style="text-align:center">EventLoopGroup的数目</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://shuaijunlan.github.io/images/Screenshot from 2018-07-20 21-52-02.png" alt=""></p>
 
       
     </div>
@@ -713,7 +737,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Channel、EventLoop和ChannelFuture"><span class="nav-number">1.</span> <span class="nav-text">Channel、EventLoop和ChannelFuture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ChannelHandler和ChannelPipeline"><span class="nav-number">2.</span> <span class="nav-text">ChannelHandler和ChannelPipeline</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Channel、EventLoop和ChannelFuture"><span class="nav-number">1.</span> <span class="nav-text">Channel、EventLoop和ChannelFuture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ChannelHandler和ChannelPipeline"><span class="nav-number">2.</span> <span class="nav-text">ChannelHandler和ChannelPipeline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BootStrap和ServerBootstrap"><span class="nav-number">3.</span> <span class="nav-text">BootStrap和ServerBootstrap</span></a></li></ol></div>
             
 
           </div>
