@@ -337,6 +337,155 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/07/20/netty-components-design/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuai Junlan">
+      <meta itemprop="description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="只争朝夕(帅俊岚)">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/20/netty-components-design/" itemprop="url">
+                  Netty组件设计
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-20 19:48:01 / 修改时间：20:48:30" itemprop="dateCreated datePublished" datetime="2018-07-20T19:48:01+08:00">2018-07-20</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>下面将介绍Netty中所包含的各种组件，主要包括：Channel、EventLoop、ChannelFuture、ChannelHandler和ChannelPipeline等。</p>
+<h3 id="Channel、EventLoop和ChannelFuture"><a href="#Channel、EventLoop和ChannelFuture" class="headerlink" title="Channel、EventLoop和ChannelFuture"></a>Channel、EventLoop和ChannelFuture</h3><p><img src="/home/junlan/workspace/shuaijunlan.github.io/source/images/Screenshot from 2018-07-20 20-39-27.png" alt="Channel-EventLoop-ChannelFuture"></p>
+<ul>
+<li>一个EventLoopGroup可以包含一个或者多个EventLoop；</li>
+<li>一个EventLoop在它的生命周期内只和一个Thread绑定；</li>
+<li>所有由EventLoop处理的I/O事件都将在它专有的Thread上被处理；</li>
+<li>一个Channel在它的生命周期内只能注册于一个EventLoop；</li>
+<li>一个EventLoop可能被分配给多个Channel；</li>
+<li>在Netty中所有的I/O操作都是异步的，因此可以通过ChannelFuture来获取响应结果；</li>
+</ul>
+<h3 id="ChannelHandler和ChannelPipeline"><a href="#ChannelHandler和ChannelPipeline" class="headerlink" title="ChannelHandler和ChannelPipeline"></a>ChannelHandler和ChannelPipeline</h3>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/07/04/user-thread-and-daemon-thread/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -948,163 +1097,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/04/19/Java-NIO-and-BIO/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuai Junlan">
-      <meta itemprop="description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="只争朝夕(帅俊岚)">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/19/Java-NIO-and-BIO/" itemprop="url">
-                  Java NIO and BIO
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-04-19 18:43:24" itemprop="dateCreated datePublished" datetime="2018-04-19T18:43:24+08:00">2018-04-19</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-04 10:56:09" itemprop="dateModified" datetime="2018-07-04T10:56:09+08:00">2018-07-04</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/1526020447.png?raw=true" alt=""></p>
-<p>我们都知NIO是非阻塞IO，BIO是阻塞IO，那到底什么是阻塞，什么是非阻塞呢，它们与同步/异步又有什么区别呢？先来了解一下阻塞/非阻塞，同步/异步的概念。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/19/Java-NIO-and-BIO/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1152,7 +1144,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1808,6 +1800,21 @@
   
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
 
