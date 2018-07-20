@@ -108,20 +108,20 @@
 
 
 
-  <meta name="description" content="下面将介绍Netty中所包含的各种组件，主要包括：Channel、EventLoop、ChannelFuture、ChannelHandler和ChannelPipeline等。 Channel、EventLoop和ChannelFuture  一个EventLoopGroup可以包含一个或者多个EventLoop； 一个EventLoop在它的生命周期内只和一个Thread绑定； 所有由Even">
+  <meta name="description" content="下面将介绍Netty中所包含的各种组件，主要包括：Channel、EventLoop、ChannelFuture、ChannelHandler和ChannelPipeline等。 Channel、EventLoop和ChannelFuture">
 <meta name="keywords" content="Netty">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Netty组件设计介绍">
 <meta property="og:url" content="http://www.blog.shuaijunlan.cn/2018/07/20/netty-components-design/index.html">
 <meta property="og:site_name" content="只争朝夕(帅俊岚)">
-<meta property="og:description" content="下面将介绍Netty中所包含的各种组件，主要包括：Channel、EventLoop、ChannelFuture、ChannelHandler和ChannelPipeline等。 Channel、EventLoop和ChannelFuture  一个EventLoopGroup可以包含一个或者多个EventLoop； 一个EventLoop在它的生命周期内只和一个Thread绑定； 所有由Even">
+<meta property="og:description" content="下面将介绍Netty中所包含的各种组件，主要包括：Channel、EventLoop、ChannelFuture、ChannelHandler和ChannelPipeline等。 Channel、EventLoop和ChannelFuture">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-07-20 20-39-27.png">
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-07-20 21-01-11.png">
-<meta property="og:updated_time" content="2018-07-20T13:18:34.756Z">
+<meta property="og:updated_time" content="2018-07-20T13:20:51.838Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Netty组件设计介绍">
-<meta name="twitter:description" content="下面将介绍Netty中所包含的各种组件，主要包括：Channel、EventLoop、ChannelFuture、ChannelHandler和ChannelPipeline等。 Channel、EventLoop和ChannelFuture  一个EventLoopGroup可以包含一个或者多个EventLoop； 一个EventLoop在它的生命周期内只和一个Thread绑定； 所有由Even">
+<meta name="twitter:description" content="下面将介绍Netty中所包含的各种组件，主要包括：Channel、EventLoop、ChannelFuture、ChannelHandler和ChannelPipeline等。 Channel、EventLoop和ChannelFuture">
 <meta name="twitter:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-07-20 20-39-27.png">
 
 
@@ -383,7 +383,7 @@
                 
               
 
-              <time title="创建时间：2018-07-20 19:48:01 / 修改时间：21:18:34" itemprop="dateCreated datePublished" datetime="2018-07-20T19:48:01+08:00">2018-07-20</time>
+              <time title="创建时间：2018-07-20 19:48:01 / 修改时间：21:20:51" itemprop="dateCreated datePublished" datetime="2018-07-20T19:48:01+08:00">2018-07-20</time>
             
 
             
@@ -441,6 +441,7 @@
       
         <p>下面将介绍Netty中所包含的各种组件，主要包括：Channel、EventLoop、ChannelFuture、ChannelHandler和ChannelPipeline等。</p>
 <h3 id="Channel、EventLoop和ChannelFuture"><a href="#Channel、EventLoop和ChannelFuture" class="headerlink" title="Channel、EventLoop和ChannelFuture"></a>Channel、EventLoop和ChannelFuture</h3><p><img src="https://shuaijunlan.github.io/images/Screenshot from 2018-07-20 20-39-27.png" alt="Channel-EventLoop-ChannelFuture"></p>
+<a id="more"></a>
 <ul>
 <li>一个EventLoopGroup可以包含一个或者多个EventLoop；</li>
 <li>一个EventLoop在它的生命周期内只和一个Thread绑定；</li>
@@ -454,8 +455,8 @@
 <li>ChannelPipeline提供了ChannelHandler链的容器，并定义了同于在该链上传播入站的出站的事件流的API；</li>
 <li>一个ChannelIninializer的实现被注册到ServerBootstrap中或这Client的BootStrap中；</li>
 <li>当 ChannelInitializer.initChannel() 方法被调用时，ChannelInitializer将在 ChannelPipeline 中安装一组自定义的 ChannelHandler ；</li>
-<li>ChannelInitializer将它自己从 ChannelPipeline 中移除。</li>
-<li>如图所示，当事件的运动方向是从客户端到服务器，我们称之为出站，反之称之为入站；</li>
+<li>ChannelInitializer将它自己从 ChannelPipeline 中移除；</li>
+<li>如图所示，当事件的运动方向是从客户端到服务器，我们称之为出站，反之称之为入站。</li>
 </ul>
 
       
