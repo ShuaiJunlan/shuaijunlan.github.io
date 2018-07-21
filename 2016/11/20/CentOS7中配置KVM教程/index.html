@@ -117,7 +117,7 @@
 <meta property="og:description" content="基本环境：CentOS7.0   [root@localhost /]# egrep ‘(vmx|svm)’ /proc/cpuinfo   和 Xen 不同，KVM 需要有 CPU 的支持（Intel VT 或 AMD SVM），在安装 KVM 之前检查一下 CPU 是否提供了虚拟技术的支持,可以通过下面命令查询是否支持，如果输出有相关的vmx或者svm，表明CPU支持，否则就不支持。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://learningnotes-1251679769.costj.myqcloud.com/virtual/6.png">
-<meta property="og:updated_time" content="2018-07-04T03:26:35.297Z">
+<meta property="og:updated_time" content="2018-07-21T09:18:49.051Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS7中配置KVM教程">
 <meta name="twitter:description" content="基本环境：CentOS7.0   [root@localhost /]# egrep ‘(vmx|svm)’ /proc/cpuinfo   和 Xen 不同，KVM 需要有 CPU 的支持（Intel VT 或 AMD SVM），在安装 KVM 之前检查一下 CPU 是否提供了虚拟技术的支持,可以通过下面命令查询是否支持，如果输出有相关的vmx或者svm，表明CPU支持，否则就不支持。">
@@ -399,7 +399,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-04 11:26:35" itemprop="dateModified" datetime="2018-07-04T11:26:35+08:00">2018-07-04</time>
+                <time title="修改时间：2018-07-21 17:18:49" itemprop="dateModified" datetime="2018-07-21T17:18:49+08:00">2018-07-21</time>
               
             
           </span>
@@ -504,7 +504,7 @@
 <blockquote>
 <p><a href="">[root@localhost /]# </a>systemctl status libvirtd.service</p>
 </blockquote>
-<p><img src="http://learningnotes-1251679769.costj.myqcloud.com/virtual/6.png" alt="image" title="图片"></p>
+<p><img src="http://learningnotes-1251679769.costj.myqcloud.com/virtual/6.png" alt=""></p>
 </li>
 </ul>
 </li>
@@ -1428,102 +1428,6 @@
   
 
   
-  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
-  
-  <script>
-    (function () {
-
-      firebase.initializeApp({
-        apiKey: 'AIzaSyB439W16FEfm4B6rzVzdnjR3ncScD196Jw',
-        projectId: 'junlanblog'
-      })
-
-      function getCount(doc, increaseCount) {
-        //increaseCount will be false when not in article page
-
-        return doc.get().then(function (d) {
-          var count
-          if (!d.exists) { //has no data, initialize count
-            if (increaseCount) {
-              doc.set({
-                count: 1
-              })
-              count = 1
-            }
-            else {
-              count = 0
-            }
-          }
-          else { //has data
-            count = d.data().count
-            if (increaseCount) {
-              if (!(window.localStorage && window.localStorage.getItem(title))) { //if first view this article
-                doc.set({ //increase count
-                  count: count + 1
-                })
-                count++
-              }
-            }
-          }
-          if (window.localStorage && increaseCount) { //mark as visited
-            localStorage.setItem(title, true)
-          }
-
-          return count
-        })
-      }
-
-      function appendCountTo(el) {
-        return function (count) {
-          $(el).append(
-            $('<span>').addClass('post-visitors-count').append(
-              $('<span>').addClass('post-meta-divider').text('|')
-            ).append(
-              $('<span>').addClass('post-meta-item-icon').append(
-                $('<i>').addClass('fa fa-users')
-              )
-              ).append($('<span>').text('阅读次数 ' + count))
-          )
-        }
-      }
-
-      var db = firebase.firestore()
-      var articles = db.collection('articles')
-
-      //https://hexo.io/zh-tw/docs/variables.html
-      var isPost = 'CentOS7中配置KVM教程'.length > 0
-      var isArchive = '' === 'true'
-      var isCategory = ''.length > 0
-      var isTag = ''.length > 0
-
-      if (isPost) { //is article page
-        var title = 'CentOS7中配置KVM教程'
-        var doc = articles.doc(title)
-
-        getCount(doc, true).then(appendCountTo($('.post-meta')))
-      }
-      else if (!isArchive && !isCategory && !isTag) { //is index page
-        var titles = [] //array to titles
-
-        var postsstr = '' //if you have a better way to get titles of posts, please change it
-        eval(postsstr)
-
-        var promises = titles.map(function (title) {
-          return articles.doc(title)
-        }).map(function (doc) {
-          return getCount(doc)
-        })
-        Promise.all(promises).then(function (counts) {
-          var metas = $('.post-meta')
-          counts.forEach(function (val, idx) {
-            appendCountTo(metas[idx])(val)
-          })
-        })
-      }
-    })()
-  </script>
-
 
   
 <script>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Netty内置传输方式介绍]]></title>
+    <title><![CDATA[Netty内置传输方式]]></title>
     <url>%2F2018%2F07%2F21%2Fnetty-transport-methods%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[名称 包名 描述 NIO io.netty.channel.socket.io 使用java.nio.channels包作为基础，基于选择器的方式 Epoll io.netty.channel.epoll 由JNI驱动的epoll()和非阻塞IO，这种传输只有Linux才支持，比NIO传输速度更快，而且是完全非阻塞的 OIO io.netty.channel.socket.oio 使用java.net包作为基础 Local io.netty.channel.local 可以在VM内部通过管道进行通信的本地传输 Embedded io.netty.channel.socket.embedded Embedded 传输，允许使用 ChannelHandler 而又不需要一个真正的基于网络的传输，测试ChannelHandler实现的时候非常有用 基于NIO的传输]]></content>
       <tags>
         <tag>Netty</tag>
       </tags>
@@ -109,7 +109,7 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[MyBatis开发（一）：为什么使用MyBatis？]]></title>
+    <title><![CDATA[MyBatis实战（一)]]></title>
     <url>%2F2017%2F06%2F26%2FMyBatis%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8MyBatis%EF%BC%9F%2F</url>
     <content type="text"><![CDATA[一、MyBatis框架简介 MyBatis 是支持定制化 SQL、存储过程以及高级映射的优秀的持久层框架。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以对配置和原生Map使用简单的 XML 或注解，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。 二、使用MyBatis框架与原生开发方式对比 数据库连接配置： 使用MyBatis框架： 1234567891011&lt;environments default="development"&gt; &lt;environment id="development"&gt; &lt;transactionManager type="JDBC"/&gt; &lt;dataSource type="POOLED"&gt; &lt;property name="driver" value="com.mysql.jdbc.Driver"/&gt; &lt;property name="url" value="jdbc:mysql://115.28.61.171:3306/xx"/&gt; &lt;property name="username" value="root"/&gt; &lt;property name="password" value="********"/&gt; &lt;/dataSource&gt; &lt;/environment&gt; &lt;/environments&gt; 使用JDBC： 1234567891011121314151617public Connection conn = null; public String url="jdbc:mysql://134.78.21.143:3306/xx"; public String password="********"; public String dbName="root"; public String driverName="com.mysql.jdbc.Driver"; public Connection getConnection()throws ClassNotFoundException,SQLException &#123; try &#123; Class.forName(driverName);//指定连接类型 conn = DriverManager.getConnection(url, dbName, password);//获取连接 &#125;catch (SQLException e) &#123; e.printStackTrace(); &#125; return conn; &#125; 查询数据库 使用MyBatis框架： 1234567891011&lt;mapper namespace="com.mb.interfaces.IWcUserOperation"&gt; &lt;resultMap type="WcUser" id="resultListUser"&gt; &lt;id column="id" property="id"/&gt; &lt;result column="openid" property="openid"/&gt; &lt;result column="nickname" property="nickname"/&gt; &lt;result column="province" property="province"/&gt; &lt;/resultMap&gt; &lt;select id="selectUserById" parameterType="int" resultType="WcUser"&gt; select * from WXUSER where id= #&#123;id&#125; &lt;/select&gt; &lt;/mapper&gt; 12IWcUserOperation userOperation = session.getMapper(IWcUserOperation.class); WcUser wcUser = userOperation.selectUserById(15); 使用JDBC： 123456789101112131415161718192021222324252627282930public void getArticle(Connection conn, ArtisvrInitPara yjsvrInitPara, JSONObject jo) &#123; String sql = "select * from "+yjsvrInitPara.getTabname()+" where "+yjsvrInitPara.getExp(); try &#123; st= conn.createStatement(); rs= st.executeQuery(sql); System.out.println(rs); while(rs.next()) &#123; Article ar= new Article(); ar.setId( rs.getInt("id")); ar.setClasses( rs.getString("classes")); ar.setContent( rs.getString("content")); ar.setClirate( rs.getInt("clirate")); ar.setTitle( rs.getString("title")); ar.setFbtime( rs.getString("fbtime")); list.add(ar); &#125; &#125; catch (SQLException e) &#123; e.printStackTrace(); &#125; JSONArray ja=JSONArray.fromObject(list); jo.put("ret", ja); ms.close(rs, st, conn); &#125; 三、总结 使用Mybatis框架可以直接将数据表中每个字段映射到实体类的属性，简化了使用JDBC带来的复杂度。 附录：（完整Demo）（暂时没有时间整理Demo，后期提供） 持续更新中。。。。。。]]></content>
       <tags>

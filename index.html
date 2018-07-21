@@ -357,7 +357,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2018/07/21/netty-transport-methods/" itemprop="url">
-                  Netty内置传输方式介绍
+                  Netty内置传输方式
                 </a>
               
             
@@ -383,7 +383,7 @@
                 
               
 
-              <time title="创建时间：2018-07-21 16:19:51 / 修改时间：16:35:02" itemprop="dateCreated datePublished" datetime="2018-07-21T16:19:51+08:00">2018-07-21</time>
+              <time title="创建时间：2018-07-21 16:19:51 / 修改时间：17:18:49" itemprop="dateCreated datePublished" datetime="2018-07-21T16:19:51+08:00">2018-07-21</time>
             
 
             
@@ -422,9 +422,49 @@
 
       
         
-          
-            
-          
+          <table>
+<thead>
+<tr>
+<th>名称</th>
+<th>包名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NIO</td>
+<td>io.netty.channel.socket.io</td>
+<td>使用java.nio.channels包作为基础，基于选择器的方式</td>
+</tr>
+<tr>
+<td>Epoll</td>
+<td>io.netty.channel.epoll</td>
+<td>由JNI驱动的epoll()和非阻塞IO，这种传输只有Linux才支持，比NIO传输速度更快，而且是完全非阻塞的</td>
+</tr>
+<tr>
+<td>OIO</td>
+<td>io.netty.channel.socket.oio</td>
+<td>使用java.net包作为基础</td>
+</tr>
+<tr>
+<td>Local</td>
+<td>io.netty.channel.local</td>
+<td>可以在VM内部通过管道进行通信的本地传输</td>
+</tr>
+<tr>
+<td>Embedded</td>
+<td>io.netty.channel.socket.embedded</td>
+<td>Embedded 传输，允许使用 ChannelHandler 而又不需要一个真正的基于网络的传输，测试ChannelHandler实现的时候非常有用</td>
+</tr>
+</tbody>
+</table>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/21/netty-transport-methods/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1786,102 +1826,6 @@
   
 
   
-  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
-  
-  <script>
-    (function () {
-
-      firebase.initializeApp({
-        apiKey: 'AIzaSyB439W16FEfm4B6rzVzdnjR3ncScD196Jw',
-        projectId: 'junlanblog'
-      })
-
-      function getCount(doc, increaseCount) {
-        //increaseCount will be false when not in article page
-
-        return doc.get().then(function (d) {
-          var count
-          if (!d.exists) { //has no data, initialize count
-            if (increaseCount) {
-              doc.set({
-                count: 1
-              })
-              count = 1
-            }
-            else {
-              count = 0
-            }
-          }
-          else { //has data
-            count = d.data().count
-            if (increaseCount) {
-              if (!(window.localStorage && window.localStorage.getItem(title))) { //if first view this article
-                doc.set({ //increase count
-                  count: count + 1
-                })
-                count++
-              }
-            }
-          }
-          if (window.localStorage && increaseCount) { //mark as visited
-            localStorage.setItem(title, true)
-          }
-
-          return count
-        })
-      }
-
-      function appendCountTo(el) {
-        return function (count) {
-          $(el).append(
-            $('<span>').addClass('post-visitors-count').append(
-              $('<span>').addClass('post-meta-divider').text('|')
-            ).append(
-              $('<span>').addClass('post-meta-item-icon').append(
-                $('<i>').addClass('fa fa-users')
-              )
-              ).append($('<span>').text('阅读次数 ' + count))
-          )
-        }
-      }
-
-      var db = firebase.firestore()
-      var articles = db.collection('articles')
-
-      //https://hexo.io/zh-tw/docs/variables.html
-      var isPost = ''.length > 0
-      var isArchive = '' === 'true'
-      var isCategory = ''.length > 0
-      var isTag = ''.length > 0
-
-      if (isPost) { //is article page
-        var title = ''
-        var doc = articles.doc(title)
-
-        getCount(doc, true).then(appendCountTo($('.post-meta')))
-      }
-      else if (!isArchive && !isCategory && !isTag) { //is index page
-        var titles = [] //array to titles
-
-        var postsstr = 'titles.push("Netty内置传输方式介绍");titles.push("Netty组件介绍");titles.push("User Thread and Daemon Thread in Java");titles.push("Netty线程模型分析");titles.push("HTTP详解");' //if you have a better way to get titles of posts, please change it
-        eval(postsstr)
-
-        var promises = titles.map(function (title) {
-          return articles.doc(title)
-        }).map(function (doc) {
-          return getCount(doc)
-        })
-        Promise.all(promises).then(function (counts) {
-          var metas = $('.post-meta')
-          counts.forEach(function (val, idx) {
-            appendCountTo(metas[idx])(val)
-          })
-        })
-      }
-    })()
-  </script>
-
 
   
 <script>
