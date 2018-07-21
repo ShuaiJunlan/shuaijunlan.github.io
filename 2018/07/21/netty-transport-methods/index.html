@@ -108,19 +108,20 @@
 
 
 
-  <meta name="description" content="名称 包名 描述     NIO io.netty.channel.socket.io 使用java.nio.channels包作为基础，基于选择器的方式   Epoll io.netty.channel.epoll 由JNI驱动的epoll()和非阻塞IO，这种传输只有Linux才支持，比NIO传输速度更快，而且是完全非阻塞的   OIO io.netty.channel.socket.o">
+  <meta name="description" content="Netty中内置的传输方式主要包括：NIO、Epoll、OIO、Local和Embedded等方式，总结如下：    名称 包名 描述     NIO io.netty.channel.socket.io 使用java.nio.channels包作为基础，基于选择器的方式   Epoll io.netty.channel.epoll 由JNI驱动的epoll()和非阻塞IO，这种传输只有Linux">
 <meta name="keywords" content="Netty">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Netty内置传输方式">
 <meta property="og:url" content="http://www.blog.shuaijunlan.cn/2018/07/21/netty-transport-methods/index.html">
 <meta property="og:site_name" content="只争朝夕(帅俊岚)">
-<meta property="og:description" content="名称 包名 描述     NIO io.netty.channel.socket.io 使用java.nio.channels包作为基础，基于选择器的方式   Epoll io.netty.channel.epoll 由JNI驱动的epoll()和非阻塞IO，这种传输只有Linux才支持，比NIO传输速度更快，而且是完全非阻塞的   OIO io.netty.channel.socket.o">
+<meta property="og:description" content="Netty中内置的传输方式主要包括：NIO、Epoll、OIO、Local和Embedded等方式，总结如下：    名称 包名 描述     NIO io.netty.channel.socket.io 使用java.nio.channels包作为基础，基于选择器的方式   Epoll io.netty.channel.epoll 由JNI驱动的epoll()和非阻塞IO，这种传输只有Linux">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-07-21 17-33-12.png">
-<meta property="og:updated_time" content="2018-07-21T09:41:48.604Z">
+<meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-07-21 19-41-49.png">
+<meta property="og:updated_time" content="2018-07-21T11:43:24.798Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Netty内置传输方式">
-<meta name="twitter:description" content="名称 包名 描述     NIO io.netty.channel.socket.io 使用java.nio.channels包作为基础，基于选择器的方式   Epoll io.netty.channel.epoll 由JNI驱动的epoll()和非阻塞IO，这种传输只有Linux才支持，比NIO传输速度更快，而且是完全非阻塞的   OIO io.netty.channel.socket.o">
+<meta name="twitter:description" content="Netty中内置的传输方式主要包括：NIO、Epoll、OIO、Local和Embedded等方式，总结如下：    名称 包名 描述     NIO io.netty.channel.socket.io 使用java.nio.channels包作为基础，基于选择器的方式   Epoll io.netty.channel.epoll 由JNI驱动的epoll()和非阻塞IO，这种传输只有Linux">
 <meta name="twitter:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-07-21 17-33-12.png">
 
 
@@ -382,7 +383,7 @@
                 
               
 
-              <time title="创建时间：2018-07-21 16:19:51 / 修改时间：17:41:48" itemprop="dateCreated datePublished" datetime="2018-07-21T16:19:51+08:00">2018-07-21</time>
+              <time title="创建时间：2018-07-21 16:19:51 / 修改时间：19:43:24" itemprop="dateCreated datePublished" datetime="2018-07-21T16:19:51+08:00">2018-07-21</time>
             
 
             
@@ -438,7 +439,8 @@
       
 
       
-        <table>
+        <p>Netty中内置的传输方式主要包括：NIO、Epoll、OIO、Local和Embedded等方式，总结如下：</p>
+<table>
 <thead>
 <tr>
 <th>名称</th>
@@ -476,6 +478,9 @@
 </table>
 <a id="more"></a>
 <h3 id="基于NIO的传输"><a href="#基于NIO的传输" class="headerlink" title="基于NIO的传输"></a>基于NIO的传输</h3><p><img src="https://shuaijunlan.github.io/images/Screenshot from 2018-07-21 17-33-12.png" alt=""></p>
+<h3 id="Epoll—基于Linux的本地非阻塞传输"><a href="#Epoll—基于Linux的本地非阻塞传输" class="headerlink" title="Epoll—基于Linux的本地非阻塞传输"></a>Epoll—基于Linux的本地非阻塞传输</h3><p>在Linux内核版2.5.44之后就引入了epoll，提供了比旧的POSIX select和poll系统调用更好的性能。如何应用程序运行在Linux系统智商，则可以利用基于Epoll的方式传输，只需要在代码中将<code>NioEventLoopGroup</code>替换为<code>EpollEventLoopGroup</code>，并且将<code>NioServerSocketChannel.class</code>替换为<code>EpollServerSocketChannel.class</code>。或者用如下方式判断系统是否支持Epoll：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">EventLoopGroup workGroup = Epoll.isAvailable() ? <span class="keyword">new</span> EpollEventLoopGroup(<span class="number">4</span>) : <span class="keyword">new</span> NioEventLoopGroup(<span class="number">4</span>);</span><br><span class="line">Bootstrap bootstrap = <span class="keyword">new</span> Bootstrap();</span><br><span class="line">bootstrap.group(workGroup)</span><br><span class="line">        .channel(Epoll.isAvailable() ? EpollSocketChannel.class : NioSocketChannel.class)</span><br><span class="line">        .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, <span class="number">3000</span>)</span><br><span class="line">        .handler(<span class="keyword">new</span> ChannelInitializer&lt;SocketChannel&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">initChannel</span><span class="params">(SocketChannel ch)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                <span class="comment">// Using Java Object serializable, you can also use other serializable frameworks like thrift, Protobuf and so on.</span></span><br><span class="line">                ch.pipeline()</span><br><span class="line">                        .addLast(<span class="keyword">new</span> ObjectDecoder(<span class="number">1024</span>*<span class="number">1024</span>,</span><br><span class="line">                                ClassResolvers.weakCachingConcurrentResolver(<span class="keyword">this</span>.getClass().getClassLoader())) )</span><br><span class="line">                        .addLast(<span class="keyword">new</span> ObjectEncoder())</span><br><span class="line">                        .addLast(<span class="keyword">new</span> SimpleChannelInboundHandler&lt;Object&gt;() &#123;</span><br><span class="line">                            <span class="meta">@Override</span></span><br><span class="line">                            <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">channelRead0</span><span class="params">(ChannelHandlerContext ctx, Object msg)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                                System.out.println(<span class="string">"Receive msg: "</span> + msg);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"><span class="comment">// Connect to the server sync</span></span><br><span class="line">channel = bootstrap.connect(host, port).sync().channel();</span><br></pre></td></tr></table></figure>
+<h3 id="OIO—阻塞I-O"><a href="#OIO—阻塞I-O" class="headerlink" title="OIO—阻塞I/O"></a>OIO—阻塞I/O</h3><p><img src="https://shuaijunlan.github.io/images/Screenshot from 2018-07-21 19-41-49.png" alt=""></p>
 
       
     </div>
@@ -731,7 +736,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于NIO的传输"><span class="nav-number">1.</span> <span class="nav-text">基于NIO的传输</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于NIO的传输"><span class="nav-number">1.</span> <span class="nav-text">基于NIO的传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Epoll—基于Linux的本地非阻塞传输"><span class="nav-number">2.</span> <span class="nav-text">Epoll—基于Linux的本地非阻塞传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OIO—阻塞I-O"><span class="nav-number">3.</span> <span class="nav-text">OIO—阻塞I/O</span></a></li></ol></div>
             
 
           </div>
