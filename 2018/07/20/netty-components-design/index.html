@@ -119,7 +119,7 @@
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-07-20 20-39-27.png">
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-07-20 21-01-11.png">
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-07-20 21-52-02.png">
-<meta property="og:updated_time" content="2018-07-21T08:14:11.543Z">
+<meta property="og:updated_time" content="2018-07-21T08:17:53.053Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Netty组件介绍">
 <meta name="twitter:description" content="下面将介绍Netty中所包含的各种组件，主要包括：Channel、EventLoop、ChannelFuture、ChannelHandler和ChannelPipeline等。 Channel、EventLoop和ChannelFuture">
@@ -401,7 +401,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-21 16:14:11" itemprop="dateModified" datetime="2018-07-21T16:14:11+08:00">2018-07-21</time>
+                <time title="修改时间：2018-07-21 16:17:53" itemprop="dateModified" datetime="2018-07-21T16:17:53+08:00">2018-07-21</time>
               
             
           </span>
@@ -496,9 +496,9 @@
 <p><img src="https://shuaijunlan.github.io/images/Screenshot from 2018-07-20 21-52-02.png" alt=""></p>
 <p>上图中，客户端创建了一个EventLoopGroup，服务器端使用了两个EventLoopGroup，其中一个EventLoopGroup用来接收客户端发来的请求，另一个EventLoop用来处理连接任务。</p>
 <h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p><strong>服务器端</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">EventLoopGroup bossGroup = new EpollEventLoopGroup(1);</span><br><span class="line">EventLoopGroup workerGroup = new EpollEventLoopGroup(4);</span><br><span class="line">try &#123;</span><br><span class="line">    ServerBootstrap b = new ServerBootstrap();</span><br><span class="line">    b.group(bossGroup, workerGroup)</span><br><span class="line">            .channel(EpollServerSocketChannel.class)</span><br><span class="line">            //保持长连接状态</span><br><span class="line">            .childOption(ChannelOption.SO_KEEPALIVE, true)</span><br><span class="line">            .childOption(ChannelOption.TCP_NODELAY, true)</span><br><span class="line">            .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)</span><br><span class="line">            .childHandler(new HttpSnoopServerInitializer());</span><br><span class="line"></span><br><span class="line">    ChannelFuture ch = b.bind(PORT).sync();</span><br><span class="line">    if (ch.isSuccess())&#123;</span><br><span class="line">        logger.info(&quot;Http server start on port :&#123;&#125;&quot;, PORT );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ch.channel().closeFuture().sync();</span><br><span class="line">&#125; finally &#123;</span><br><span class="line">    bossGroup.shutdownGracefully();</span><br><span class="line">    workerGroup.shutdownGracefully();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">EventLoopGroup bossGroup = <span class="keyword">new</span> EpollEventLoopGroup(<span class="number">1</span>);</span><br><span class="line">EventLoopGroup workerGroup = <span class="keyword">new</span> EpollEventLoopGroup(<span class="number">4</span>);</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    ServerBootstrap b = <span class="keyword">new</span> ServerBootstrap();</span><br><span class="line">    b.group(bossGroup, workerGroup)</span><br><span class="line">            .channel(EpollServerSocketChannel.class)</span><br><span class="line">            <span class="comment">//保持长连接状态</span></span><br><span class="line">            .childOption(ChannelOption.SO_KEEPALIVE, <span class="keyword">true</span>)</span><br><span class="line">            .childOption(ChannelOption.TCP_NODELAY, <span class="keyword">true</span>)</span><br><span class="line">            .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)</span><br><span class="line">            .childHandler(<span class="keyword">new</span> HttpSnoopServerInitializer());</span><br><span class="line"></span><br><span class="line">    ChannelFuture ch = b.bind(PORT).sync();</span><br><span class="line">    <span class="keyword">if</span> (ch.isSuccess())&#123;</span><br><span class="line">        logger.info(<span class="string">"Http server start on port :&#123;&#125;"</span>, PORT );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ch.channel().closeFuture().sync();</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    bossGroup.shutdownGracefully();</span><br><span class="line">    workerGroup.shutdownGracefully();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>客户端</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">EventLoopGroup eventLoopGroup = new EpollEventLoopGroup(8);</span><br><span class="line">Bootstrap bootstrap = new Bootstrap()</span><br><span class="line">        .group(eventLoopGroup)</span><br><span class="line">        .option(ChannelOption.SO_KEEPALIVE, true)</span><br><span class="line">        .option(ChannelOption.TCP_NODELAY, true)</span><br><span class="line">        .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)</span><br><span class="line">        .channel(EpollSocketChannel.class)</span><br><span class="line">        .handler(new RpcClientInitializer());</span><br><span class="line">Channel channel = bootstrap.connect(&quot;127.0.0.1&quot;, port).sync().channel();</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">EventLoopGroup eventLoopGroup = <span class="keyword">new</span> EpollEventLoopGroup(<span class="number">8</span>);</span><br><span class="line">Bootstrap bootstrap = <span class="keyword">new</span> Bootstrap()</span><br><span class="line">        .group(eventLoopGroup)</span><br><span class="line">        .option(ChannelOption.SO_KEEPALIVE, <span class="keyword">true</span>)</span><br><span class="line">        .option(ChannelOption.TCP_NODELAY, <span class="keyword">true</span>)</span><br><span class="line">        .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)</span><br><span class="line">        .channel(EpollSocketChannel.class)</span><br><span class="line">        .handler(<span class="keyword">new</span> RpcClientInitializer());</span><br><span class="line">Channel channel = bootstrap.connect(<span class="string">"127.0.0.1"</span>, port).sync().channel();</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -541,10 +541,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/21/Untitled/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -625,7 +621,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
