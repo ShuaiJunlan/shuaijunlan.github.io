@@ -117,7 +117,7 @@
 <meta property="og:description" content="ByteBuf工作原理ByteBuf维护了两个不同的索引：一个用于读取，一个用于写入。当从ByteBuf读取数据时，它的readerINdex将会递增已被读取的字节数。同样的，当你写入ByteBuf的时候，它的writerIndex也会被递增。  上图中表示的是一个读索引和写索引都设置为0的16字节ByteBuf，若果试图访问超出writerIndex范围的数据将会触发一个IndexOutOfBo">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-07-24 16-02-04.png">
-<meta property="og:updated_time" content="2018-07-24T08:31:20.202Z">
+<meta property="og:updated_time" content="2018-07-25T08:13:17.300Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Netty数据容器---ByteBuf">
 <meta name="twitter:description" content="ByteBuf工作原理ByteBuf维护了两个不同的索引：一个用于读取，一个用于写入。当从ByteBuf读取数据时，它的readerINdex将会递增已被读取的字节数。同样的，当你写入ByteBuf的时候，它的writerIndex也会被递增。  上图中表示的是一个读索引和写索引都设置为0的16字节ByteBuf，若果试图访问超出writerIndex范围的数据将会触发一个IndexOutOfBo">
@@ -382,12 +382,24 @@
                 
               
 
-              <time title="创建时间：2018-07-24 15:38:09 / 修改时间：16:31:20" itemprop="dateCreated datePublished" datetime="2018-07-24T15:38:09+08:00">2018-07-24</time>
+              <time title="创建时间：2018-07-24 15:38:09" itemprop="dateCreated datePublished" datetime="2018-07-24T15:38:09+08:00">2018-07-24</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-25 16:13:17" itemprop="dateModified" datetime="2018-07-25T16:13:17+08:00">2018-07-25</time>
               
             
           </span>
@@ -446,7 +458,7 @@
 <h4 id="直接缓冲区"><a href="#直接缓冲区" class="headerlink" title="直接缓冲区"></a>直接缓冲区</h4><p>直接缓冲区是通过本地方法调用来分配堆外内存，这样可以避免在每次调用本地I/O操作之前（或者之后）将缓冲区的内容复制到一个中间缓冲区（或者从中间缓冲区把内容复制到缓冲区）。</p>
 <p>直接缓冲区的主要缺点是：相对于基于堆的缓冲区，它们的分配和释放都较为昂贵。因为数据不在堆上，所以在操作数据之前不得不进行一次数据复制。</p>
 <h4 id="复合缓冲区"><a href="#复合缓冲区" class="headerlink" title="复合缓冲区"></a>复合缓冲区</h4><p>复合缓冲区主要是为多个ByteBuf提供一个聚合视图，这是一个JDK的ByteBuffer实现完全缺失的特性。</p>
-
+<h3 id="操作ByteBuf字节"><a href="#操作ByteBuf字节" class="headerlink" title="操作ByteBuf字节"></a>操作ByteBuf字节</h3>
       
     </div>
 
@@ -488,6 +500,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/25/spring-cloud-microservice-demo/" rel="prev" title="基于Spring Cloud微服务架构完整示例">
+                基于Spring Cloud微服务架构完整示例 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -568,7 +584,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -628,7 +644,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -701,7 +721,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ByteBuf工作原理"><span class="nav-number">1.</span> <span class="nav-text">ByteBuf工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ByteBuf的使用模式"><span class="nav-number">2.</span> <span class="nav-text">ByteBuf的使用模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#堆缓冲区"><span class="nav-number">2.1.</span> <span class="nav-text">堆缓冲区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#直接缓冲区"><span class="nav-number">2.2.</span> <span class="nav-text">直接缓冲区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复合缓冲区"><span class="nav-number">2.3.</span> <span class="nav-text">复合缓冲区</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ByteBuf工作原理"><span class="nav-number">1.</span> <span class="nav-text">ByteBuf工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ByteBuf的使用模式"><span class="nav-number">2.</span> <span class="nav-text">ByteBuf的使用模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#堆缓冲区"><span class="nav-number">2.1.</span> <span class="nav-text">堆缓冲区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#直接缓冲区"><span class="nav-number">2.2.</span> <span class="nav-text">直接缓冲区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复合缓冲区"><span class="nav-number">2.3.</span> <span class="nav-text">复合缓冲区</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作ByteBuf字节"><span class="nav-number">3.</span> <span class="nav-text">操作ByteBuf字节</span></a></li></ol></div>
             
 
           </div>
