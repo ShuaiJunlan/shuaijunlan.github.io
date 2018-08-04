@@ -108,27 +108,25 @@
 
 
 
-  <meta name="description" content="基本环境：CentOS7.0   [root@localhost /]# egrep ‘(vmx|svm)’ /proc/cpuinfo   和 Xen 不同，KVM 需要有 CPU 的支持（Intel VT 或 AMD SVM），在安装 KVM 之前检查一下 CPU 是否提供了虚拟技术的支持,可以通过下面命令查询是否支持，如果输出有相关的vmx或者svm，表明CPU支持，否则就不支持。">
-<meta name="keywords" content="KVM,CentOS">
+  <meta name="description" content="​        SPI的全名为Service Provider Interface，在java.util.ServiceLoader的文档:https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html中有比较详细的介绍。究其思想，其实和Callback差不多。Callback的思想是我们在调用API的时候，我们可以写">
+<meta name="keywords" content="java,SPI">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CentOS7中配置KVM教程">
-<meta property="og:url" content="http://www.blog.shuaijunlan.cn/2016/11/20/CentOS7中配置KVM教程/index.html">
+<meta property="og:title" content="深入理解Java SPI机制">
+<meta property="og:url" content="http://www.blog.shuaijunlan.cn/2018/08/04/java-spi-introduction/index.html">
 <meta property="og:site_name" content="只争朝夕(帅俊岚)">
-<meta property="og:description" content="基本环境：CentOS7.0   [root@localhost /]# egrep ‘(vmx|svm)’ /proc/cpuinfo   和 Xen 不同，KVM 需要有 CPU 的支持（Intel VT 或 AMD SVM），在安装 KVM 之前检查一下 CPU 是否提供了虚拟技术的支持,可以通过下面命令查询是否支持，如果输出有相关的vmx或者svm，表明CPU支持，否则就不支持。">
+<meta property="og:description" content="​        SPI的全名为Service Provider Interface，在java.util.ServiceLoader的文档:https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html中有比较详细的介绍。究其思想，其实和Callback差不多。Callback的思想是我们在调用API的时候，我们可以写">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://learningnotes-1251679769.costj.myqcloud.com/virtual/6.png">
-<meta property="og:updated_time" content="2018-07-21T09:18:49.051Z">
+<meta property="og:updated_time" content="2018-08-04T12:38:32.278Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CentOS7中配置KVM教程">
-<meta name="twitter:description" content="基本环境：CentOS7.0   [root@localhost /]# egrep ‘(vmx|svm)’ /proc/cpuinfo   和 Xen 不同，KVM 需要有 CPU 的支持（Intel VT 或 AMD SVM），在安装 KVM 之前检查一下 CPU 是否提供了虚拟技术的支持,可以通过下面命令查询是否支持，如果输出有相关的vmx或者svm，表明CPU支持，否则就不支持。">
-<meta name="twitter:image" content="http://learningnotes-1251679769.costj.myqcloud.com/virtual/6.png">
+<meta name="twitter:title" content="深入理解Java SPI机制">
+<meta name="twitter:description" content="​        SPI的全名为Service Provider Interface，在java.util.ServiceLoader的文档:https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html中有比较详细的介绍。究其思想，其实和Callback差不多。Callback的思想是我们在调用API的时候，我们可以写">
 
 
 
 
 
 
-  <link rel="canonical" href="http://www.blog.shuaijunlan.cn/2016/11/20/CentOS7中配置KVM教程/"/>
+  <link rel="canonical" href="http://www.blog.shuaijunlan.cn/2018/08/04/java-spi-introduction/"/>
 
 
 
@@ -138,7 +136,7 @@
   };
 </script>
 
-  <title>CentOS7中配置KVM教程 | 只争朝夕(帅俊岚)</title>
+  <title>深入理解Java SPI机制 | 只争朝夕(帅俊岚)</title>
   
 
 
@@ -340,7 +338,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2016/11/20/CentOS7中配置KVM教程/">
+    <link itemprop="mainEntityOfPage" href="http://www.blog.shuaijunlan.cn/2018/08/04/java-spi-introduction/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuai Junlan">
@@ -357,7 +355,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">CentOS7中配置KVM教程
+          <h2 class="post-title" itemprop="name headline">深入理解Java SPI机制
               
             
           </h2>
@@ -382,24 +380,12 @@
                 
               
 
-              <time title="创建时间：2016-11-20 10:07:15" itemprop="dateCreated datePublished" datetime="2016-11-20T10:07:15+08:00">2016-11-20</time>
+              <time title="创建时间：2018-08-04 18:38:48 / 修改时间：20:38:32" itemprop="dateCreated datePublished" datetime="2018-08-04T18:38:48+08:00">2018-08-04</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-21 17:18:49" itemprop="dateModified" datetime="2018-07-21T17:18:49+08:00">2018-07-21</time>
               
             
           </span>
@@ -413,8 +399,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/11/20/CentOS7中配置KVM教程/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count gitment-comments-count" data-xid="/2016/11/20/CentOS7中配置KVM教程/" itemprop="commentsCount"></span>
+                <a href="/2018/08/04/java-spi-introduction/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count gitment-comments-count" data-xid="/2018/08/04/java-spi-introduction/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -450,158 +436,39 @@
       
 
       
-        <blockquote>
-<p>基本环境：CentOS7.0</p>
-</blockquote>
-<ol>
-<li><a href="">[root@localhost /]# </a>egrep ‘(vmx|svm)’ /proc/cpuinfo  <blockquote>
-<p>和 Xen 不同，KVM 需要有 CPU 的支持（Intel VT 或 AMD SVM），在安装 KVM 之前检查一下 CPU 是否提供了虚拟技术的支持,可以通过下面命令查询是否支持，如果输出有相关的vmx或者svm，表明CPU支持，否则就不支持。</p>
-</blockquote>
-</li>
-</ol>
+        <p>​        SPI的全名为Service Provider Interface，在java.util.ServiceLoader的<a href="https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html" target="_blank" rel="noopener">文档:https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html</a>中有比较详细的介绍。究其思想，其实和<code>Callback</code>差不多。<code>Callback</code>的思想是我们在调用API的时候，我们可以写入一段逻辑代码传到API里面，API内部在合适的时候会调用它，从而实现某种程度上的“定制”。</p>
+<p>典型的是<code>Collections.sort(List&lt;T&gt; list,Comparator&lt;? super T&gt; c)</code>这个方法，它的第二个参数是一个实现Comparator接口的实例。我们可以根据自己的排序规则写一个类，实现此接口，传入此方法，那么这个方法就会根据我们的规则对list进行排序。</p>
+<h4 id="Java-SPI的具体约定如下"><a href="#Java-SPI的具体约定如下" class="headerlink" title="Java SPI的具体约定如下"></a>Java SPI的具体约定如下</h4><p>当服务的提供者，提供了服务接口的一种实现之后，在jar包的META-INF/services/目录里同时创建一个以服务接口命名的文件。该文件里就是实现该服务接口的具体实现类。而当外部程序装配这个模块的时候，就能通过该jar包META-INF/services/里的配置文件找到具体的实现类名，并装载实例化，完成模块的注入。 </p>
+<p>基于这样一个约定就能很好的找到服务接口的实现类，而不需要再代码里制定。</p>
+<p>JDK提供服务实现查找的一个工具类：<strong>java.util.ServiceLoader</strong></p>
 <a id="more"></a>
-<ol>
-<li><p><a href="">[root@localhost /]# </a>yum install qemu-kvm qemu-img virt-manager libvirt libvirt-python python-virtinst libvirt-client virt-install virt-viewer</p>
-<blockquote>
-<p>kvm相关安装包及其作用（按需选择安装）</p>
-<ul>
-<li>qemu-kvm：qemu模拟器,主要的KVM程序包</li>
-<li>qemu-img：qemu磁盘image管理器</li>
-<li>virt-install：基于libvirt服务的虚拟机创建命令，用来创建虚拟机的命令行工具</li>
-<li>libvirt：提供libvirtd daemon来管理虚拟机和控制hypervisor</li>
-<li>libvirt-client：提供客户端API用来访问server和提供管理虚拟机命令行工具的virsh实体</li>
-<li>python-virtinst：创建虚拟机所需要的命令行工具和程序库</li>
-<li>virt-manager：GUI虚拟机管理工具</li>
-<li>virt-top：虚拟机统计命令</li>
-<li>virt-viewer：GUI连接程序，连接到已配置好的虚拟机</li>
-<li>bridge-utils：创建和管理桥接设备的工具</li>
-</ul>
-</blockquote>
-</li>
-<li><p>验证是否安装成功</p>
-<ul>
-<li><p>验证内核模块是否加载</p>
-<blockquote>
-<p><a href="">[root@localhost /]# </a>lsmod | grep kvm</p>
-</blockquote>
-</li>
-<li><p>启动服务(同时设置了开机自启)</p>
-<blockquote>
-<p><a href="">[root@localhost /]# </a>systemctl start libvirtd.service</p>
-</blockquote>
-</li>
-<li><p>重启服务</p>
-<blockquote>
-<p><a href="">[root@localhost /]# </a>systemctl restart libvirtd.service</p>
-</blockquote>
-</li>
-<li><p>设置可用</p>
-<blockquote>
-<p><a href="">[root@localhost /]# </a>systemctl enable libvirtd.service</p>
-</blockquote>
-</li>
-<li><p>查看服务基本信息</p>
-<blockquote>
-<p><a href="">[root@localhost /]# </a>systemctl status libvirtd.service</p>
-</blockquote>
-<p><img src="http://learningnotes-1251679769.costj.myqcloud.com/virtual/6.png" alt=""></p>
-</li>
-</ul>
-</li>
-<li><p>配置虚拟机网络</p>
-<blockquote>
-<p>见<a href="http://www.blog.shuaijunlan.cn/2016/12/07/libvirt%20kvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" target="\_blank">《libvirt kvm虚拟机网络配置》</a>一文</p>
-</blockquote>
-</li>
-<li><p>在CentOS上安装vnc服务，通过vnc客户端远程连接CentOS，通过图形化界面在宿主机上安装客户机，安装教程见《使用VNC工具初级教程》一文</p>
-</li>
-<li><p>最后安装客户机</p>
-<blockquote>
-<ul>
-<li><p>下载虚拟机要安装的ISO系统镜像文件，之后需创建存储池，指定在宿主机上虚拟机磁盘的存储位置，创建存储目录：(目录随便设定，按照自己的需求设定)</p>
-<ul>
-<li><a href="">[root@localhost /]# </a>mkdir -p /home/kvm1</li>
-</ul>
-</li>
-<li><p>定义一个储存池和绑定目录：</p>
-<ul>
-<li><a href="">[root@localhost /]# </a>virsh pool-define-as vmspool –type dir –target /home/kvm1</li>
-</ul>
-</li>
-<li><p>建立并激活存储池：</p>
-<ul>
-<li><a href="">[root@localhost /]# </a>virsh pool-build vmspool</li>
-<li><a href="">[root@localhost /]# </a>virsh pool-start vmspool</li>
-</ul>
-</li>
-<li><p>virsh-install:</p>
-<ul>
-<li>1、输入虚拟机名称</li>
-<li>2、分配多少内存</li>
-<li>3、处理器的个数</li>
-<li>4、此步可以直接输入iso的位置或是url</li>
-<li>5、虚拟机类型KVM</li>
-<li>6、定义虚拟机磁盘映像的位置</li>
-<li>7、磁盘的大小</li>
-<li>6、指定哪个桥或者可以指定多个桥</li>
-<li>7、额外的控制台和KS文件</li>
-<li>8、连接到系统参数</li>
-<li>参数说明注意每行都要空格</li>
-<li>-n 虚拟机名称</li>
-<li>-r 分配虚拟机内存大小</li>
-<li>–vcpus 分配虚拟cpu个数</li>
-<li>-c 镜像文件位置</li>
-<li>–vnc –vncport=5901 –vnclisten=0.0.0.0 启动图形安装界面</li>
-<li>–virt-type 虚拟机模式</li>
-<li>-f 虚拟机系统文件存储目录</li>
-<li>-s 分配磁盘大小（GB）</li>
-<li>-w 联网方式（birdge bridge:br0/nat bridge:virbr0）</li>
-<li>–os-type=’windows’ –os-variant=win2k3 安装windows最好加上这个否则会报错</li>
-<li>virt-install工具安装虚拟机后，在目录/etc/libvirt/qemu/下生成xml配置文件</li>
-<li>-s 用来指定虚拟磁盘的大小单位为GB</li>
-<li>-m 指定虚拟网卡的硬件地址默认virt-install自动产生</li>
-<li>-p 以半虚拟化方式建立虚拟机</li>
-<li>-l 指定安装来源</li>
-<li>-x EXTRA, –extra-args=EXTRA当执行从”–location”选项指定位置的客户机安装时，附加内核命令行参数到安装程序。</li>
-<li>-v, –hvm 设置全虚拟化<br><br><br><br></li>
-</ul>
-</li>
-<li><p>创建第一个guest：</p>
-<ul>
-<li><a href="">[root@localhost /]# </a>virt-install –name=CentOS7-1 –ram=4096 –vcpus=1 –cdrom=/home/kvm1/CentOS-7-x86_64-Minimal-1511.iso –virt-type=kvm –disk  path=/home/kvm1/centos7-1.img,device=disk,format=qcow2,bus=virtio,cache=writeback,size=250 –graphics vnc,listen=0.0.0.0,port=5920,password=123456 –network bridge:br0 –accelerate –force –autostart</li>
-</ul>
-</li>
-<li><p>创建第二个guest：</p>
-<ul>
-<li><a href="">[root@localhost /]# </a>virt-install –name=CentOS7-2 –ram=7168 –vcpus=2,maxvcpus=4 –cdrom=/home/kvm1/CentOS-7-x86_64-Minimal-1511.iso –virt-type=kvm –disk  path=/home/kvm1/centos7-2.img,device=disk,format=qcow2,bus=virtio,cache=writeback,size=400 –graphics vnc,listen=0.0.0.0,port=5921,password=123456 –network bridge:br0 –accelerate –force –autostart</li>
-</ul>
-</li>
-<li><p>创建第三个guest：</p>
-<ul>
-<li><a href="">[root@localhost /]# </a>virt-install –name=CentOS7-3 –ram=7168 –vcpus=6,maxvcpus=9 –cpuset=6,7,8,9,10,11 –cdrom=/home/kvm1/CentOS-7-x86_64-Minimal-1511.iso –virt-type=kvm –disk  path=/home/kvm1/centos7-3.img,device=disk,format=qcow2,bus=virtio,cache=writeback,size=400 –graphics vnc,listen=0.0.0.0,port=5922,password=123456 –network bridge:br0 –accelerate –force –autostart</li>
-</ul>
-</li>
-<li><p>创建第四个guest：</p>
-<ul>
-<li><a href="">[root@localhost /]# </a>virt-install –name=CentOS7-4 –ram=7168 –vcpus=6,maxvcpus=9 –cpuset=12,13,14,15,16,17 –cdrom=/home/kvm1/CentOS-7-x86_64-Minimal-1511.iso –virt-type=kvm –disk  path=/home/kvm1/centos7-4.img,device=disk,format=qcow2,bus=virtio,cache=writeback,size=400 –graphics vnc,listen=0.0.0.0,port=5923,password=123456 –network bridge:br0 –accelerate –force –autostart</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-</li>
-</ol>
-<h4 id="持续更新中……"><a href="#持续更新中……" class="headerlink" title="持续更新中……"></a>持续更新中……</h4><hr>
-<ul>
-<li><p>REFERENCES</p>
-<ol>
-<li><a href="http://blog.csdn.net/chdhust/article/details/7931717" target="\_blank">KVM虚拟机创建功能详细讲解</a></li>
-<li><a href="http://blog.csdn.net/zhaihaifei/article/details/51163750" target="\_blank">绑定KVM虚拟机的vcpu与物理CPU</a></li>
-<li><a href="https://www.teakki.com/p/57dbd24a1b9882de17e7fd37" target="\_blank">基于Linux命令行KVM虚拟机的安装配置与基本使用</a></li>
-<li><a href="http://kulezhaizhuren.lofter.com/post/1cca7553_7e20b47" target="\_blank">CENTOS7 安装KVM笔记之安装</a></li>
-<li><a href="https://www.52os.net/articles/linux-kvm-install-virtual-machines.html" target="\_blank">linux下配置和安装KVM虚拟机</a></li>
-</ol>
-</li>
-</ul>
+<h4 id="实现一个Java-SPI示例"><a href="#实现一个Java-SPI示例" class="headerlink" title="实现一个Java SPI示例"></a>实现一个Java SPI示例</h4><p>假设我们有一个日志服务<code>ILogService</code>，其只定义了一个<code>warn</code>方法用于输出日志信息，我们希望把它作为SPI，然后具体的实现由对应的服务提供者去实现。ILogService的定义如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.shuaijunlan.spi;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Junlan Shuai[shuaijunlan@gmail.com].</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> Created on 7:13 PM 2018/08/04.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ILogService</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">warn</span><span class="params">(String msg)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后基于这个服务接口实现了两个类，分别是<code>ConsoleLogServiceImpl</code>、<code>FileLogServiceImpl</code>，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.shuaijunlan.spi.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.shuaijunlan.spi.ILogService;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Junlan Shuai[shuaijunlan@gmail.com].</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> Created on 7:14 PM 2018/08/04.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConsoleLogServiceImpl</span> <span class="keyword">implements</span> <span class="title">ILogService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">warn</span><span class="params">(String msg)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Console log:"</span>+ msg + <span class="string">"!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">========================================================================================</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> cn.shuaijunlan.spi.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.shuaijunlan.spi.ILogService;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Junlan Shuai[shuaijunlan@gmail.com].</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> Created on 7:15 PM 2018/08/04.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileLogServiceImpl</span> <span class="keyword">implements</span> <span class="title">ILogService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">warn</span><span class="params">(String msg)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"File log:"</span> + msg +<span class="string">"!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根据SPI的规范我们的服务实现类必须有一个无参构造方法。我们的SPI服务提供者需要将其在<code>classpath</code>下的<code>META-INF/services</code>目录下以服务接口全路径名命名的文件中写对应的实现类的全路径名称，每一行代表一个实现，如果需要注释信息可以使用<strong>#</strong>进行注释，根据官方的要求，这个文件的编码格式必须是UTF-8。我们示例中的ILogService的全路径名是<code>cn.shuaijunlan.spi.ILogService</code>，所以我们需要在类路径下的<code>META-INF/services</code>目录下创建一个名称为<code>cn.shuaijunlan.spi.ILogService</code>文件。在本示例中我们一个提供了两个实现，所以该文件的内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Console log &amp; File log</span><br><span class="line"></span><br><span class="line">cn.shuaijunlan.spi.impl.ConsoleLogServiceImpl</span><br><span class="line">cn.shuaijunlan.spi.impl.FileLogServiceImpl</span><br></pre></td></tr></table></figure>
+<p>ServiceLoader是实现了java.util.Iterator接口的，而且是基于我们所使用的服务的实现，所以可以通过ServiceLoader的实例来遍历其中的服务实现者，从而调用对应的服务提供者。测试函数如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.shuaijunlan.spi;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.ServiceLoader;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Junlan Shuai[shuaijunlan@gmail.com].</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> Created on 7:28 PM 2018/08/04.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ServiceLoader&lt;ILogService&gt; services = ServiceLoader.load(ILogService.class);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Iterator&lt;ILogService&gt; iterator = services.iterator();</span><br><span class="line">        <span class="keyword">while</span> (iterator.hasNext())&#123;</span><br><span class="line">            iterator.next().warn(<span class="string">"Hello SPI"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>控制台输出结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Console log:Hello SPI!</span><br><span class="line">File log:Hello SPI!</span><br></pre></td></tr></table></figure>
+<p>基于SPI规范，我们最终实现了想要的结果。</p>
+<h4 id="ServiceLoader源码分析"><a href="#ServiceLoader源码分析" class="headerlink" title="ServiceLoader源码分析"></a>ServiceLoader源码分析</h4><p>在调用<code>ServiceLoader.load(ILogService.class);</code>时，代码进入：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;S&gt; <span class="function">ServiceLoader&lt;S&gt; <span class="title">load</span><span class="params">(Class&lt;S&gt; service)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//获取当前线程上下文类加载器</span></span><br><span class="line">    ClassLoader cl = Thread.currentThread().getContextClassLoader();</span><br><span class="line">    <span class="keyword">return</span> ServiceLoader.load(service, cl);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行之后，程序进入<code>ServiceLoader.load(service, cl);</code>方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;S&gt; <span class="function">ServiceLoader&lt;S&gt; <span class="title">load</span><span class="params">(Class&lt;S&gt; service,</span></span></span><br><span class="line"><span class="function"><span class="params">                                        ClassLoader loader)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ServiceLoader&lt;&gt;(service, loader);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>返回一个ServiceLoader的实例</p>
+<p>在调用<code>services.iterator();</code>方法时，返回一个Iterator容器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Iterator&lt;S&gt; <span class="title">iterator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Iterator&lt;S&gt;() &#123;</span><br><span class="line"></span><br><span class="line">        Iterator&lt;Map.Entry&lt;String,S&gt;&gt; knownProviders</span><br><span class="line">            = providers.entrySet().iterator();</span><br><span class="line">        <span class="comment">//第一次执行hasNext方法时，knownProviders的size为0，会继续执行lookupIterator.hasNext()，最后进入到hasNextService方法中</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (knownProviders.hasNext())</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">return</span> lookupIterator.hasNext();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> S <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (knownProviders.hasNext())</span><br><span class="line">                <span class="keyword">return</span> knownProviders.next().getValue();</span><br><span class="line">            <span class="keyword">return</span> lookupIterator.next();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们来看hasNextService方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">hasNextService</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (nextName != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (configs == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//获取借口的全名</span></span><br><span class="line">            String fullName = PREFIX + service.getName();</span><br><span class="line">            <span class="keyword">if</span> (loader == <span class="keyword">null</span>)</span><br><span class="line">                configs = ClassLoader.getSystemResources(fullName);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                configs = loader.getResources(fullName);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException x) &#123;</span><br><span class="line">            fail(service, <span class="string">"Error locating configuration files"</span>, x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> ((pending == <span class="keyword">null</span>) || !pending.hasNext()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!configs.hasMoreElements()) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//获取所有实现类的全名，具体的解析函数查看parse函数</span></span><br><span class="line">        pending = parse(service, configs.nextElement());</span><br><span class="line">    &#125;</span><br><span class="line">    nextName = pending.next();</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当调用<code>iterator.next()</code>方法时，会进入到：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> S <span class="title">nextService</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!hasNextService())</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line">    String cn = nextName;</span><br><span class="line">    nextName = <span class="keyword">null</span>;</span><br><span class="line">    Class&lt;?&gt; c = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//生成名称为cn的Class对象，不进行初始化</span></span><br><span class="line">        c = Class.forName(cn, <span class="keyword">false</span>, loader);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ClassNotFoundException x) &#123;</span><br><span class="line">        <span class="comment">//没找到类则会抛出异常</span></span><br><span class="line">        fail(service,</span><br><span class="line">             <span class="string">"Provider "</span> + cn + <span class="string">" not found"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!service.isAssignableFrom(c)) &#123;</span><br><span class="line">        fail(service,</span><br><span class="line">             <span class="string">"Provider "</span> + cn  + <span class="string">" not a subtype"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        S p = service.cast(c.newInstance());</span><br><span class="line">        providers.put(cn, p);</span><br><span class="line">        <span class="comment">//返回实例</span></span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Throwable x) &#123;</span><br><span class="line">        fail(service,</span><br><span class="line">             <span class="string">"Provider "</span> + cn + <span class="string">" could not be instantiated"</span>,</span><br><span class="line">             x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> Error();          <span class="comment">// This cannot happen</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 在上述分析中我们可以看到ServiceLoader不是一实例化以后立马就去读配置文件中的服务实现者，并且进行对应的实例化工作的，而是会等到需要通过其Iterator实现获取对应的服务提供者时才会加载对应的配置文件进行解析，具体来说是在调用Iterator的hasNext方法时会去加载配置文件进行解析，在调用next方法时会将对应的服务提供者进行实例化并进行缓存。所有的配置文件只加载一次，服务提供者也只实例化一次，如需要重新加载配置文件可调用ServiceLoader的reload方法。</p>
+<h4 id="框架案例"><a href="#框架案例" class="headerlink" title="框架案例"></a>框架案例</h4><p><strong>1.common-logging</strong></p>
+<p>apache最早提供的日志的门面接口。只有接口，没有实现。具体方案由各提供商实现，发现日志提供商是通过扫描 META-INF/services/org.apache.commons.logging.LogFactory配置文件，通过读取该文件的内容找到日志提供商实现类。只要我们的日志实现里包含了这个文件，并在文件里指定 LogFactory工厂接口的实现类即可。</p>
+<p><strong>2.jdbc</strong></p>
+<p>jdbc4.0以前，开发人员还需要基于Class.forName(“xxx”)的方式来装载驱动，jdbc4也基于spi的机制来发现驱动提供商了，可以通过META-INF/services/java.sql.Driver文件里指定实现类的方式来暴露驱动提供者。</p>
 
       
     </div>
@@ -622,9 +489,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/KVM/" rel="tag"># KVM</a>
+            <a href="/tags/java/" rel="tag"># java</a>
           
-            <a href="/tags/CentOS/" rel="tag"># CentOS</a>
+            <a href="/tags/SPI/" rel="tag"># SPI</a>
           
         </div>
       
@@ -637,8 +504,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/16/libvirt kvm虚拟机网络配置/" rel="next" title="配置KVM虚拟机网络的两种方式（Bridge模式和NAT模式）">
-                <i class="fa fa-chevron-left"></i> 配置KVM虚拟机网络的两种方式（Bridge模式和NAT模式）
+              <a href="/2018/08/04/dubbo-consumer-calling-process-source-code-analysis/" rel="next" title="dubbo-consumer-calling-process-source-code-analysis">
+                <i class="fa fa-chevron-left"></i> dubbo-consumer-calling-process-source-code-analysis
               </a>
             
           </div>
@@ -646,10 +513,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/26/CentOS7设置免密登陆/" rel="prev" title="CentOS7设置免密登陆">
-                CentOS7设置免密登陆 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -869,7 +732,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#持续更新中……"><span class="nav-number">1.</span> <span class="nav-text">持续更新中……</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Java-SPI的具体约定如下"><span class="nav-number">1.</span> <span class="nav-text">Java SPI的具体约定如下</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现一个Java-SPI示例"><span class="nav-number">2.</span> <span class="nav-text">实现一个Java SPI示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ServiceLoader源码分析"><span class="nav-number">3.</span> <span class="nav-text">ServiceLoader源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#框架案例"><span class="nav-number">4.</span> <span class="nav-text">框架案例</span></a></li></ol></div>
             
 
           </div>
@@ -1078,7 +941,7 @@
       <script type="text/javascript">
       function renderGitment(){
         var gitment = new Gitmint({
-            id: '1479607635000',
+            id: '1533379128000',
             owner: 'shuaijunlan',
             repo: 'shuaijunlan.github.io',
             
