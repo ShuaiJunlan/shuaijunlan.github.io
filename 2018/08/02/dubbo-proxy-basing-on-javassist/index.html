@@ -109,16 +109,16 @@
 
 
   <meta name="description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
-<meta name="keywords" content="dubbo">
+<meta name="keywords" content="dubbo,javassist">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTTP详解">
-<meta property="og:url" content="https://shuaijunlan.github.io/2018/08/02/dubbo-proxy-interfaces/index.html">
+<meta property="og:title" content="Dubbo基于Javassist实现动态代理分析">
+<meta property="og:url" content="https://shuaijunlan.github.io/2018/08/02/dubbo-proxy-basing-on-javassist/index.html">
 <meta property="og:site_name" content="只争朝夕(帅俊岚)">
 <meta property="og:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-05T05:09:24.626Z">
+<meta property="og:updated_time" content="2018-08-06T09:15:57.573Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HTTP详解">
+<meta name="twitter:title" content="Dubbo基于Javassist实现动态代理分析">
 <meta name="twitter:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <link rel="canonical" href="https://shuaijunlan.github.io/2018/08/02/dubbo-proxy-interfaces/"/>
+  <link rel="canonical" href="https://shuaijunlan.github.io/2018/08/02/dubbo-proxy-basing-on-javassist/"/>
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>HTTP详解 | 只争朝夕(帅俊岚)</title>
+  <title>Dubbo基于Javassist实现动态代理分析 | 只争朝夕(帅俊岚)</title>
   
 
 
@@ -338,7 +338,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2018/08/02/dubbo-proxy-interfaces/">
+    <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2018/08/02/dubbo-proxy-basing-on-javassist/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuai Junlan">
@@ -355,7 +355,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">HTTP详解
+          <h2 class="post-title" itemprop="name headline">Dubbo基于Javassist实现动态代理分析
               
             
           </h2>
@@ -397,7 +397,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-05 13:09:24" itemprop="dateModified" datetime="2018-08-05T13:09:24+08:00">2018-08-05</time>
+                <time title="修改时间：2018-08-06 17:15:57" itemprop="dateModified" datetime="2018-08-06T17:15:57+08:00">2018-08-06</time>
               
             
           </span>
@@ -411,10 +411,10 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/08/02/dubbo-proxy-interfaces/#comments" itemprop="discussionUrl">
+                <a href="/2018/08/02/dubbo-proxy-basing-on-javassist/#comments" itemprop="discussionUrl">
                 
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/08/02/dubbo-proxy-interfaces/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/08/02/dubbo-proxy-basing-on-javassist/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -472,6 +472,8 @@
           
             <a href="/tags/dubbo/" rel="tag"># dubbo</a>
           
+            <a href="/tags/javassist/" rel="tag"># javassist</a>
+          
         </div>
       
 
@@ -483,8 +485,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/01/dubbo-remote-netty4-source-code/" rel="next" title="HTTP详解">
-                <i class="fa fa-chevron-left"></i> HTTP详解
+              <a href="/2018/07/25/spring-cloud-microservice-demo/" rel="next" title="基于Spring Cloud搭建微服务架构完整示例">
+                <i class="fa fa-chevron-left"></i> 基于Spring Cloud搭建微服务架构完整示例
               </a>
             
           </div>
@@ -493,8 +495,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/04/dubbo-consumer-calling-process-source-code-analysis/" rel="prev" title="Dubbo消费端调用过程源码分析">
-                Dubbo消费端调用过程源码分析 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/08/04/dubbo-consumer-calling-process-source-code-analysis/" rel="prev" title="Dubbo消费者调用过程源码分析">
+                Dubbo消费者调用过程源码分析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -570,7 +572,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -638,7 +640,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">19</span>
+                      
+                    
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -876,9 +880,9 @@
   
     <script type="text/javascript">
       var disqus_config = function () {
-        this.page.url = 'https://shuaijunlan.github.io/2018/08/02/dubbo-proxy-interfaces/';
-        this.page.identifier = '2018/08/02/dubbo-proxy-interfaces/';
-        this.page.title = 'HTTP详解';
+        this.page.url = 'https://shuaijunlan.github.io/2018/08/02/dubbo-proxy-basing-on-javassist/';
+        this.page.identifier = '2018/08/02/dubbo-proxy-basing-on-javassist/';
+        this.page.title = 'Dubbo基于Javassist实现动态代理分析';
         };
       function loadComments () {
         var d = document, s = d.createElement('script');

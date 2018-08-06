@@ -10,7 +10,7 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Dubbo消费端调用过程源码分析]]></title>
+    <title><![CDATA[Dubbo消费者调用过程源码分析]]></title>
     <url>%2F2018%2F08%2F04%2Fdubbo-consumer-calling-process-source-code-analysis%2F</url>
     <content type="text"></content>
       <tags>
@@ -18,19 +18,12 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[HTTP详解]]></title>
-    <url>%2F2018%2F08%2F02%2Fdubbo-proxy-interfaces%2F</url>
+    <title><![CDATA[Dubbo基于Javassist实现动态代理分析]]></title>
+    <url>%2F2018%2F08%2F02%2Fdubbo-proxy-basing-on-javassist%2F</url>
     <content type="text"></content>
       <tags>
         <tag>dubbo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[HTTP详解]]></title>
-    <url>%2F2018%2F08%2F01%2Fdubbo-remote-netty4-source-code%2F</url>
-    <content type="text"><![CDATA[调用过程NettyServerHandler -&gt; AllChannelHandler]]></content>
-      <tags>
-        <tag>dubbo</tag>
+        <tag>javassist</tag>
       </tags>
   </entry>
   <entry>
