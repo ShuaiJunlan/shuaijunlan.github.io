@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[深入理解Dubbo SPI机制]]></title>
+    <title><![CDATA[Dubbo SPI机制源码分析]]></title>
     <url>%2F2018%2F08%2F09%2Fdubbo-spi-analysis%2F</url>
     <content type="text"></content>
       <tags>
