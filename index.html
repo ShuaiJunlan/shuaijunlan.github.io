@@ -383,12 +383,24 @@
                 
               
 
-              <time title="创建时间：2018-08-09 15:03:57 / 修改时间：15:19:31" itemprop="dateCreated datePublished" datetime="2018-08-09T15:03:57+08:00">2018-08-09</time>
+              <time title="创建时间：2018-08-09 15:03:57" itemprop="dateCreated datePublished" datetime="2018-08-09T15:03:57+08:00">2018-08-09</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-10 14:37:41" itemprop="dateModified" datetime="2018-08-10T14:37:41+08:00">2018-08-10</time>
               
             
           </span>
@@ -488,7 +500,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2018/08/04/java-spi-introduction/">
+    <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2018/08/05/dubbo-consumer-calling-process-source-code-analysis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuai Junlan">
@@ -507,8 +519,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/04/java-spi-introduction/" itemprop="url">
-                  深入理解Java SPI机制
+                <a class="post-title-link" href="/2018/08/05/dubbo-consumer-calling-process-source-code-analysis/" itemprop="url">
+                  Dubbo消费者调用过程源码分析
                 </a>
               
             
@@ -534,7 +546,7 @@
                 
               
 
-              <time title="创建时间：2018-08-04 18:38:48" itemprop="dateCreated datePublished" datetime="2018-08-04T18:38:48+08:00">2018-08-04</time>
+              <time title="创建时间：2018-08-05 14:11:36" itemprop="dateCreated datePublished" datetime="2018-08-05T14:11:36+08:00">2018-08-05</time>
             
 
             
@@ -551,7 +563,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-05 13:09:04" itemprop="dateModified" datetime="2018-08-05T13:09:04+08:00">2018-08-05</time>
+                <time title="修改时间：2018-08-10 14:37:41" itemprop="dateModified" datetime="2018-08-10T14:37:41+08:00">2018-08-10</time>
               
             
           </span>
@@ -565,10 +577,10 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/08/04/java-spi-introduction/#comments" itemprop="discussionUrl">
+                <a href="/2018/08/05/dubbo-consumer-calling-process-source-code-analysis/#comments" itemprop="discussionUrl">
                 
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/08/04/java-spi-introduction/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/08/05/dubbo-consumer-calling-process-source-code-analysis/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -597,14 +609,16 @@
 
       
         
-          <p>​        SPI的全名为Service Provider Interface，在java.util.ServiceLoader的<a href="https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html" target="_blank" rel="noopener">文档:https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html</a>中有比较详细的介绍。究其思想，其实和<code>Callback</code>差不多。<code>Callback</code>的思想是我们在调用API的时候，我们可以写入一段逻辑代码传到API里面，API内部在合适的时候会调用它，从而实现某种程度上的“定制”。</p>
-<p>典型的是<code>Collections.sort(List&lt;T&gt; list,Comparator&lt;? super T&gt; c)</code>这个方法，它的第二个参数是一个实现Comparator接口的实例。我们可以根据自己的排序规则写一个类，实现此接口，传入此方法，那么这个方法就会根据我们的规则对list进行排序。</p>
-<h4 id="Java-SPI的具体约定如下"><a href="#Java-SPI的具体约定如下" class="headerlink" title="Java SPI的具体约定如下"></a>Java SPI的具体约定如下</h4><p>当服务的提供者，提供了服务接口的一种实现之后，在jar包的META-INF/services/目录里同时创建一个以服务接口命名的文件。该文件里就是实现该服务接口的具体实现类。而当外部程序装配这个模块的时候，就能通过该jar包META-INF/services/里的配置文件找到具体的实现类名，并装载实例化，完成模块的注入。 </p>
-<p>基于这样一个约定就能很好的找到服务接口的实现类，而不需要再代码里制定。</p>
-<p>JDK提供服务实现查找的一个工具类：<strong>java.util.ServiceLoader</strong></p>
+          <p>在分析Dubbo RPC服务调用过程之前，我们先写一个基于Dubbo实现的<a href="https://github.com/shuaijunlan/Spring-Learning/tree/master/dubbo" target="_blank" rel="noopener"><strong>Consumer-Provider的Demo</strong></a>，通过这个Demo来分析具体的RPC调用栈。</p>
+<p>先定义一个接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Junlan Shuai[shuaijunlan@gmail.com].</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> Created on 11:02 AM 2018/07/19.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ITestService</span> </span>&#123;</span><br><span class="line">    <span class="function">String <span class="title">sayHello</span><span class="params">(String msg)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们基于zookeeper注册中心，服务端配置如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dubbo:application</span> <span class="attr">name</span>=<span class="string">"dubbo-server"</span> <span class="attr">owner</span>=<span class="string">"Junlan"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">address</span>=<span class="string">"zookeeper://127.0.0.1:2181"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--protocal configuration--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:protocol</span> <span class="attr">name</span>=<span class="string">"dubbo"</span> <span class="attr">port</span>=<span class="string">"20881"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:provider</span> <span class="attr">server</span>=<span class="string">"netty"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--service configuration--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:service</span> <span class="attr">interface</span>=<span class="string">"cn.shuaijunlan.dubbo.learning.service.ITestService"</span> <span class="attr">ref</span>=<span class="string">"testService"</span> <span class="attr">protocol</span>=<span class="string">"dubbo"</span> <span class="attr">loadbalance</span>=<span class="string">"roundrobin"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"cn.shuaijunlan.dubbo.learning.service.impl.TestServiceImpl"</span> <span class="attr">name</span>=<span class="string">"testService"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>客户端配置如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dubbo:application</span> <span class="attr">name</span>=<span class="string">"dubbo-client"</span> <span class="attr">owner</span>=<span class="string">"Junlan"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:consumer</span> <span class="attr">client</span>=<span class="string">"netty"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">address</span>=<span class="string">"zookeeper://127.0.0.1:2181"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">interface</span>=<span class="string">"cn.shuaijunlan.dubbo.learning.service.ITestService"</span> <span class="attr">id</span>=<span class="string">"testService"</span> <span class="attr">check</span>=<span class="string">"false"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/08/04/java-spi-introduction/" rel="contents">
+            <a class="btn" href="/2018/08/05/dubbo-consumer-calling-process-source-code-analysis/" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -660,7 +674,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2018/08/04/dubbo-consumer-calling-process-source-code-analysis/">
+    <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2018/08/03/java-spi-introduction/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuai Junlan">
@@ -679,8 +693,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/04/dubbo-consumer-calling-process-source-code-analysis/" itemprop="url">
-                  Dubbo消费者调用过程源码分析
+                <a class="post-title-link" href="/2018/08/03/java-spi-introduction/" itemprop="url">
+                  深入理解Java SPI机制
                 </a>
               
             
@@ -706,7 +720,7 @@
                 
               
 
-              <time title="创建时间：2018-08-04 14:11:36" itemprop="dateCreated datePublished" datetime="2018-08-04T14:11:36+08:00">2018-08-04</time>
+              <time title="创建时间：2018-08-03 18:38:48" itemprop="dateCreated datePublished" datetime="2018-08-03T18:38:48+08:00">2018-08-03</time>
             
 
             
@@ -723,7 +737,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-09 15:01:20" itemprop="dateModified" datetime="2018-08-09T15:01:20+08:00">2018-08-09</time>
+                <time title="修改时间：2018-08-10 14:37:41" itemprop="dateModified" datetime="2018-08-10T14:37:41+08:00">2018-08-10</time>
               
             
           </span>
@@ -737,10 +751,10 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/08/04/dubbo-consumer-calling-process-source-code-analysis/#comments" itemprop="discussionUrl">
+                <a href="/2018/08/03/java-spi-introduction/#comments" itemprop="discussionUrl">
                 
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/08/04/dubbo-consumer-calling-process-source-code-analysis/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/08/03/java-spi-introduction/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -769,16 +783,14 @@
 
       
         
-          <p>在分析Dubbo RPC服务调用过程之前，我们先写一个基于Dubbo实现的<a href="https://github.com/shuaijunlan/Spring-Learning/tree/master/dubbo" target="_blank" rel="noopener"><strong>Consumer-Provider的Demo</strong></a>，通过这个Demo来分析具体的RPC调用栈。</p>
-<p>先定义一个接口：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Junlan Shuai[shuaijunlan@gmail.com].</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> Created on 11:02 AM 2018/07/19.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ITestService</span> </span>&#123;</span><br><span class="line">    <span class="function">String <span class="title">sayHello</span><span class="params">(String msg)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们基于zookeeper注册中心，服务端配置如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dubbo:application</span> <span class="attr">name</span>=<span class="string">"dubbo-server"</span> <span class="attr">owner</span>=<span class="string">"Junlan"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">address</span>=<span class="string">"zookeeper://127.0.0.1:2181"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--protocal configuration--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:protocol</span> <span class="attr">name</span>=<span class="string">"dubbo"</span> <span class="attr">port</span>=<span class="string">"20881"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:provider</span> <span class="attr">server</span>=<span class="string">"netty"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--service configuration--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:service</span> <span class="attr">interface</span>=<span class="string">"cn.shuaijunlan.dubbo.learning.service.ITestService"</span> <span class="attr">ref</span>=<span class="string">"testService"</span> <span class="attr">protocol</span>=<span class="string">"dubbo"</span> <span class="attr">loadbalance</span>=<span class="string">"roundrobin"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"cn.shuaijunlan.dubbo.learning.service.impl.TestServiceImpl"</span> <span class="attr">name</span>=<span class="string">"testService"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>客户端配置如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dubbo:application</span> <span class="attr">name</span>=<span class="string">"dubbo-client"</span> <span class="attr">owner</span>=<span class="string">"Junlan"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:consumer</span> <span class="attr">client</span>=<span class="string">"netty"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">address</span>=<span class="string">"zookeeper://127.0.0.1:2181"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">interface</span>=<span class="string">"cn.shuaijunlan.dubbo.learning.service.ITestService"</span> <span class="attr">id</span>=<span class="string">"testService"</span> <span class="attr">check</span>=<span class="string">"false"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+          <p>​        SPI的全名为Service Provider Interface，在java.util.ServiceLoader的<a href="https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html" target="_blank" rel="noopener">文档:https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html</a>中有比较详细的介绍。究其思想，其实和<code>Callback</code>差不多。<code>Callback</code>的思想是我们在调用API的时候，我们可以写入一段逻辑代码传到API里面，API内部在合适的时候会调用它，从而实现某种程度上的“定制”。</p>
+<p>典型的是<code>Collections.sort(List&lt;T&gt; list,Comparator&lt;? super T&gt; c)</code>这个方法，它的第二个参数是一个实现Comparator接口的实例。我们可以根据自己的排序规则写一个类，实现此接口，传入此方法，那么这个方法就会根据我们的规则对list进行排序。</p>
+<h4 id="Java-SPI的具体约定如下"><a href="#Java-SPI的具体约定如下" class="headerlink" title="Java SPI的具体约定如下"></a>Java SPI的具体约定如下</h4><p>当服务的提供者，提供了服务接口的一种实现之后，在jar包的META-INF/services/目录里同时创建一个以服务接口命名的文件。该文件里就是实现该服务接口的具体实现类。而当外部程序装配这个模块的时候，就能通过该jar包META-INF/services/里的配置文件找到具体的实现类名，并装载实例化，完成模块的注入。 </p>
+<p>基于这样一个约定就能很好的找到服务接口的实现类，而不需要再代码里制定。</p>
+<p>JDK提供服务实现查找的一个工具类：<strong>java.util.ServiceLoader</strong></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/08/04/dubbo-consumer-calling-process-source-code-analysis/" rel="contents">
+            <a class="btn" href="/2018/08/03/java-spi-introduction/" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
