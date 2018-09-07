@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="SPI的全名为Service Provider Interface，在java.util.ServiceLoader的[文档:https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html](https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader">
+  <meta name="description" content="SPI的全名为Service Provider Interface，在java.util.ServiceLoader的文档:https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html中有比较详细的介绍。究其思想，其实和Callback差不多。Callback的思想是我们在调用API的时候，我们可以写入一段逻辑代码传">
 <meta name="keywords" content="java,SPI">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入理解Java SPI机制">
 <meta property="og:url" content="https://shuaijunlan.github.io/2018/08/03/java-spi-introduction/index.html">
 <meta property="og:site_name" content="只争朝夕(帅俊岚)">
-<meta property="og:description" content="SPI的全名为Service Provider Interface，在java.util.ServiceLoader的[文档:https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html](https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader">
+<meta property="og:description" content="SPI的全名为Service Provider Interface，在java.util.ServiceLoader的文档:https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html中有比较详细的介绍。究其思想，其实和Callback差不多。Callback的思想是我们在调用API的时候，我们可以写入一段逻辑代码传">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-07T07:52:57.283Z">
+<meta property="og:updated_time" content="2018-09-07T08:26:12.012Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解Java SPI机制">
-<meta name="twitter:description" content="SPI的全名为Service Provider Interface，在java.util.ServiceLoader的[文档:https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html](https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader">
+<meta name="twitter:description" content="SPI的全名为Service Provider Interface，在java.util.ServiceLoader的文档:https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html中有比较详细的介绍。究其思想，其实和Callback差不多。Callback的思想是我们在调用API的时候，我们可以写入一段逻辑代码传">
 
 
 
@@ -397,7 +397,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-07 15:52:57" itemprop="dateModified" datetime="2018-09-07T15:52:57+08:00">2018-09-07</time>
+                <time title="修改时间：2018-09-07 16:26:12" itemprop="dateModified" datetime="2018-09-07T16:26:12+08:00">2018-09-07</time>
               
             
           </span>
@@ -450,8 +450,8 @@
       
 
       
-        <pre><code>SPI的全名为Service Provider Interface，在java.util.ServiceLoader的[文档:https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html](https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html)中有比较详细的介绍。究其思想，其实和`Callback`差不多。`Callback`的思想是我们在调用API的时候，我们可以写入一段逻辑代码传到API里面，API内部在合适的时候会调用它，从而实现某种程度上的“定制”。
-</code></pre><p>典型的是<code>Collections.sort(List&lt;T&gt; list,Comparator&lt;? super T&gt; c)</code>这个方法，它的第二个参数是一个实现Comparator接口的实例。我们可以根据自己的排序规则写一个类，实现此接口，传入此方法，那么这个方法就会根据我们的规则对list进行排序。</p>
+        <p> SPI的全名为Service Provider Interface，在java.util.ServiceLoader的<a href="https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html" target="_blank" rel="noopener">文档:https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html</a>中有比较详细的介绍。究其思想，其实和<code>Callback</code>差不多。<code>Callback</code>的思想是我们在调用API的时候，我们可以写入一段逻辑代码传到API里面，API内部在合适的时候会调用它，从而实现某种程度上的“定制”。</p>
+<p>典型的是<code>Collections.sort(List&lt;T&gt; list,Comparator&lt;? super T&gt; c)</code>这个方法，它的第二个参数是一个实现Comparator接口的实例。我们可以根据自己的排序规则写一个类，实现此接口，传入此方法，那么这个方法就会根据我们的规则对list进行排序。</p>
 <h4 id="Java-SPI的具体约定如下"><a href="#Java-SPI的具体约定如下" class="headerlink" title="Java SPI的具体约定如下"></a>Java SPI的具体约定如下</h4><p>当服务的提供者，提供了服务接口的一种实现之后，在jar包的META-INF/services/目录里同时创建一个以服务接口命名的文件。该文件里就是实现该服务接口的具体实现类。而当外部程序装配这个模块的时候，就能通过该jar包META-INF/services/里的配置文件找到具体的实现类名，并装载实例化，完成模块的注入。 </p>
 <p>基于这样一个约定就能很好的找到服务接口的实现类，而不需要再代码里制定。</p>
 <p>JDK提供服务实现查找的一个工具类：<strong>java.util.ServiceLoader</strong></p>
