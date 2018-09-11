@@ -108,27 +108,27 @@
 
 
 
-  <meta name="description" content="基本环境：CentOS7.0   [root@localhost /]# egrep ‘(vmx|svm)’ /proc/cpuinfo   和 Xen 不同，KVM 需要有 CPU 的支持（Intel VT 或 AMD SVM），在安装 KVM 之前检查一下 CPU 是否提供了虚拟技术的支持,可以通过下面命令查询是否支持，如果输出有相关的vmx或者svm，表明CPU支持，否则就不支持。">
-<meta name="keywords" content="KVM,CentOS">
+  <meta name="description" content="Dubbo服务端在启动服务时会经历怎样的调用过程？在收到消费者发送的请求后会经历怎样的调用过程？这篇文章主要针对以上两个调用过程并结合Dubbo源码进行分析。 我们采用的是Consumer-Provider的Demo提供的示例，并按照《Dubbo消费者调用过程源码分析》中的分析思，下面将对两种过程进行进一步分析。">
+<meta name="keywords" content="dubbo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CentOS7中配置KVM教程">
-<meta property="og:url" content="https://shuaijunlan.github.io/2016/11/20/CentOS7中配置KVM教程/index.html">
+<meta property="og:title" content="Dubbp服务提供者调用过程源码分析">
+<meta property="og:url" content="https://shuaijunlan.github.io/2018/09/09/dubbo-provider-calling-process-source-code-analysis/index.html">
 <meta property="og:site_name" content="只争朝夕(帅俊岚)">
-<meta property="og:description" content="基本环境：CentOS7.0   [root@localhost /]# egrep ‘(vmx|svm)’ /proc/cpuinfo   和 Xen 不同，KVM 需要有 CPU 的支持（Intel VT 或 AMD SVM），在安装 KVM 之前检查一下 CPU 是否提供了虚拟技术的支持,可以通过下面命令查询是否支持，如果输出有相关的vmx或者svm，表明CPU支持，否则就不支持。">
+<meta property="og:description" content="Dubbo服务端在启动服务时会经历怎样的调用过程？在收到消费者发送的请求后会经历怎样的调用过程？这篇文章主要针对以上两个调用过程并结合Dubbo源码进行分析。 我们采用的是Consumer-Provider的Demo提供的示例，并按照《Dubbo消费者调用过程源码分析》中的分析思，下面将对两种过程进行进一步分析。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://learningnotes-1251679769.costj.myqcloud.com/virtual/6.png">
-<meta property="og:updated_time" content="2018-08-05T05:09:04.065Z">
+<meta property="og:image" content="http://dubbo.apache.org/docs/en-us/dev/sources/images/dubbo-export.jpg">
+<meta property="og:updated_time" content="2018-09-11T03:38:11.058Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CentOS7中配置KVM教程">
-<meta name="twitter:description" content="基本环境：CentOS7.0   [root@localhost /]# egrep ‘(vmx|svm)’ /proc/cpuinfo   和 Xen 不同，KVM 需要有 CPU 的支持（Intel VT 或 AMD SVM），在安装 KVM 之前检查一下 CPU 是否提供了虚拟技术的支持,可以通过下面命令查询是否支持，如果输出有相关的vmx或者svm，表明CPU支持，否则就不支持。">
-<meta name="twitter:image" content="http://learningnotes-1251679769.costj.myqcloud.com/virtual/6.png">
+<meta name="twitter:title" content="Dubbp服务提供者调用过程源码分析">
+<meta name="twitter:description" content="Dubbo服务端在启动服务时会经历怎样的调用过程？在收到消费者发送的请求后会经历怎样的调用过程？这篇文章主要针对以上两个调用过程并结合Dubbo源码进行分析。 我们采用的是Consumer-Provider的Demo提供的示例，并按照《Dubbo消费者调用过程源码分析》中的分析思，下面将对两种过程进行进一步分析。">
+<meta name="twitter:image" content="http://dubbo.apache.org/docs/en-us/dev/sources/images/dubbo-export.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="https://shuaijunlan.github.io/2016/11/20/CentOS7中配置KVM教程/"/>
+  <link rel="canonical" href="https://shuaijunlan.github.io/2018/09/09/dubbo-provider-calling-process-source-code-analysis/"/>
 
 
 
@@ -138,7 +138,7 @@
   };
 </script>
 
-  <title>CentOS7中配置KVM教程 | 只争朝夕(帅俊岚)</title>
+  <title>Dubbp服务提供者调用过程源码分析 | 只争朝夕(帅俊岚)</title>
   
 
 
@@ -340,7 +340,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2016/11/20/CentOS7中配置KVM教程/">
+    <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2018/09/09/dubbo-provider-calling-process-source-code-analysis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuai Junlan">
@@ -357,7 +357,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">CentOS7中配置KVM教程
+          <h2 class="post-title" itemprop="name headline">Dubbp服务提供者调用过程源码分析
               
             
           </h2>
@@ -382,7 +382,7 @@
                 
               
 
-              <time title="创建时间：2016-11-20 10:07:15" itemprop="dateCreated datePublished" datetime="2016-11-20T10:07:15+08:00">2016-11-20</time>
+              <time title="创建时间：2018-09-09 20:24:34" itemprop="dateCreated datePublished" datetime="2018-09-09T20:24:34+08:00">2018-09-09</time>
             
 
             
@@ -399,7 +399,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-05 13:09:04" itemprop="dateModified" datetime="2018-08-05T13:09:04+08:00">2018-08-05</time>
+                <time title="修改时间：2018-09-11 11:38:11" itemprop="dateModified" datetime="2018-09-11T11:38:11+08:00">2018-09-11</time>
               
             
           </span>
@@ -413,10 +413,10 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/11/20/CentOS7中配置KVM教程/#comments" itemprop="discussionUrl">
+                <a href="/2018/09/09/dubbo-provider-calling-process-source-code-analysis/#comments" itemprop="discussionUrl">
                 
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/11/20/CentOS7中配置KVM教程/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/09/09/dubbo-provider-calling-process-source-code-analysis/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -452,158 +452,18 @@
       
 
       
-        <blockquote>
-<p>基本环境：CentOS7.0</p>
-</blockquote>
-<ol>
-<li><a href="">[root@localhost /]# </a>egrep ‘(vmx|svm)’ /proc/cpuinfo  <blockquote>
-<p>和 Xen 不同，KVM 需要有 CPU 的支持（Intel VT 或 AMD SVM），在安装 KVM 之前检查一下 CPU 是否提供了虚拟技术的支持,可以通过下面命令查询是否支持，如果输出有相关的vmx或者svm，表明CPU支持，否则就不支持。</p>
-</blockquote>
-</li>
-</ol>
+        <p>Dubbo服务端在启动服务时会经历怎样的调用过程？在收到消费者发送的请求后会经历怎样的调用过程？这篇文章主要针对以上两个调用过程并结合Dubbo源码进行分析。</p>
+<p>我们采用的是<a href="https://github.com/shuaijunlan/Spring-Learning/tree/master/dubbo" target="_blank" rel="noopener"><strong>Consumer-Provider的Demo</strong></a>提供的示例，并按照<a href="https://shuaijunlan.github.io/2018/08/05/dubbo-consumer-calling-process-source-code-analysis/">《Dubbo消费者调用过程源码分析》</a>中的分析思，下面将对两种过程进行进一步分析。</p>
+<p><img src="http://dubbo.apache.org/docs/en-us/dev/sources/images/dubbo-export.jpg" alt=""></p>
 <a id="more"></a>
-<ol>
-<li><p><a href="">[root@localhost /]# </a>yum install qemu-kvm qemu-img virt-manager libvirt libvirt-python python-virtinst libvirt-client virt-install virt-viewer</p>
-<blockquote>
-<p>kvm相关安装包及其作用（按需选择安装）</p>
-<ul>
-<li>qemu-kvm：qemu模拟器,主要的KVM程序包</li>
-<li>qemu-img：qemu磁盘image管理器</li>
-<li>virt-install：基于libvirt服务的虚拟机创建命令，用来创建虚拟机的命令行工具</li>
-<li>libvirt：提供libvirtd daemon来管理虚拟机和控制hypervisor</li>
-<li>libvirt-client：提供客户端API用来访问server和提供管理虚拟机命令行工具的virsh实体</li>
-<li>python-virtinst：创建虚拟机所需要的命令行工具和程序库</li>
-<li>virt-manager：GUI虚拟机管理工具</li>
-<li>virt-top：虚拟机统计命令</li>
-<li>virt-viewer：GUI连接程序，连接到已配置好的虚拟机</li>
-<li>bridge-utils：创建和管理桥接设备的工具</li>
-</ul>
-</blockquote>
-</li>
-<li><p>验证是否安装成功</p>
-<ul>
-<li><p>验证内核模块是否加载</p>
-<blockquote>
-<p><a href="">[root@localhost /]# </a>lsmod | grep kvm</p>
-</blockquote>
-</li>
-<li><p>启动服务(同时设置了开机自启)</p>
-<blockquote>
-<p><a href="">[root@localhost /]# </a>systemctl start libvirtd.service</p>
-</blockquote>
-</li>
-<li><p>重启服务</p>
-<blockquote>
-<p><a href="">[root@localhost /]# </a>systemctl restart libvirtd.service</p>
-</blockquote>
-</li>
-<li><p>设置可用</p>
-<blockquote>
-<p><a href="">[root@localhost /]# </a>systemctl enable libvirtd.service</p>
-</blockquote>
-</li>
-<li><p>查看服务基本信息</p>
-<blockquote>
-<p><a href="">[root@localhost /]# </a>systemctl status libvirtd.service</p>
-</blockquote>
-<p><img src="http://learningnotes-1251679769.costj.myqcloud.com/virtual/6.png" alt=""></p>
-</li>
-</ul>
-</li>
-<li><p>配置虚拟机网络</p>
-<blockquote>
-<p>见<a href="http://www.blog.shuaijunlan.cn/2016/12/07/libvirt%20kvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" target="\_blank">《libvirt kvm虚拟机网络配置》</a>一文</p>
-</blockquote>
-</li>
-<li><p>在CentOS上安装vnc服务，通过vnc客户端远程连接CentOS，通过图形化界面在宿主机上安装客户机，安装教程见《使用VNC工具初级教程》一文</p>
-</li>
-<li><p>最后安装客户机</p>
-<blockquote>
-<ul>
-<li><p>下载虚拟机要安装的ISO系统镜像文件，之后需创建存储池，指定在宿主机上虚拟机磁盘的存储位置，创建存储目录：(目录随便设定，按照自己的需求设定)</p>
-<ul>
-<li><a href="">[root@localhost /]# </a>mkdir -p /home/kvm1</li>
-</ul>
-</li>
-<li><p>定义一个储存池和绑定目录：</p>
-<ul>
-<li><a href="">[root@localhost /]# </a>virsh pool-define-as vmspool –type dir –target /home/kvm1</li>
-</ul>
-</li>
-<li><p>建立并激活存储池：</p>
-<ul>
-<li><a href="">[root@localhost /]# </a>virsh pool-build vmspool</li>
-<li><a href="">[root@localhost /]# </a>virsh pool-start vmspool</li>
-</ul>
-</li>
-<li><p>virsh-install:</p>
-<ul>
-<li>1、输入虚拟机名称</li>
-<li>2、分配多少内存</li>
-<li>3、处理器的个数</li>
-<li>4、此步可以直接输入iso的位置或是url</li>
-<li>5、虚拟机类型KVM</li>
-<li>6、定义虚拟机磁盘映像的位置</li>
-<li>7、磁盘的大小</li>
-<li>6、指定哪个桥或者可以指定多个桥</li>
-<li>7、额外的控制台和KS文件</li>
-<li>8、连接到系统参数</li>
-<li>参数说明注意每行都要空格</li>
-<li>-n 虚拟机名称</li>
-<li>-r 分配虚拟机内存大小</li>
-<li>–vcpus 分配虚拟cpu个数</li>
-<li>-c 镜像文件位置</li>
-<li>–vnc –vncport=5901 –vnclisten=0.0.0.0 启动图形安装界面</li>
-<li>–virt-type 虚拟机模式</li>
-<li>-f 虚拟机系统文件存储目录</li>
-<li>-s 分配磁盘大小（GB）</li>
-<li>-w 联网方式（birdge bridge:br0/nat bridge:virbr0）</li>
-<li>–os-type=’windows’ –os-variant=win2k3 安装windows最好加上这个否则会报错</li>
-<li>virt-install工具安装虚拟机后，在目录/etc/libvirt/qemu/下生成xml配置文件</li>
-<li>-s 用来指定虚拟磁盘的大小单位为GB</li>
-<li>-m 指定虚拟网卡的硬件地址默认virt-install自动产生</li>
-<li>-p 以半虚拟化方式建立虚拟机</li>
-<li>-l 指定安装来源</li>
-<li>-x EXTRA, –extra-args=EXTRA当执行从”–location”选项指定位置的客户机安装时，附加内核命令行参数到安装程序。</li>
-<li>-v, –hvm 设置全虚拟化<br><br><br><br></li>
-</ul>
-</li>
-<li><p>创建第一个guest：</p>
-<ul>
-<li><a href="">[root@localhost /]# </a>virt-install –name=CentOS7-1 –ram=4096 –vcpus=1 –cdrom=/home/kvm1/CentOS-7-x86_64-Minimal-1511.iso –virt-type=kvm –disk  path=/home/kvm1/centos7-1.img,device=disk,format=qcow2,bus=virtio,cache=writeback,size=250 –graphics vnc,listen=0.0.0.0,port=5920,password=123456 –network bridge:br0 –accelerate –force –autostart</li>
-</ul>
-</li>
-<li><p>创建第二个guest：</p>
-<ul>
-<li><a href="">[root@localhost /]# </a>virt-install –name=CentOS7-2 –ram=7168 –vcpus=2,maxvcpus=4 –cdrom=/home/kvm1/CentOS-7-x86_64-Minimal-1511.iso –virt-type=kvm –disk  path=/home/kvm1/centos7-2.img,device=disk,format=qcow2,bus=virtio,cache=writeback,size=400 –graphics vnc,listen=0.0.0.0,port=5921,password=123456 –network bridge:br0 –accelerate –force –autostart</li>
-</ul>
-</li>
-<li><p>创建第三个guest：</p>
-<ul>
-<li><a href="">[root@localhost /]# </a>virt-install –name=CentOS7-3 –ram=7168 –vcpus=6,maxvcpus=9 –cpuset=6,7,8,9,10,11 –cdrom=/home/kvm1/CentOS-7-x86_64-Minimal-1511.iso –virt-type=kvm –disk  path=/home/kvm1/centos7-3.img,device=disk,format=qcow2,bus=virtio,cache=writeback,size=400 –graphics vnc,listen=0.0.0.0,port=5922,password=123456 –network bridge:br0 –accelerate –force –autostart</li>
-</ul>
-</li>
-<li><p>创建第四个guest：</p>
-<ul>
-<li><a href="">[root@localhost /]# </a>virt-install –name=CentOS7-4 –ram=7168 –vcpus=6,maxvcpus=9 –cpuset=12,13,14,15,16,17 –cdrom=/home/kvm1/CentOS-7-x86_64-Minimal-1511.iso –virt-type=kvm –disk  path=/home/kvm1/centos7-4.img,device=disk,format=qcow2,bus=virtio,cache=writeback,size=400 –graphics vnc,listen=0.0.0.0,port=5923,password=123456 –network bridge:br0 –accelerate –force –autostart</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-</li>
-</ol>
-<h4 id="持续更新中……"><a href="#持续更新中……" class="headerlink" title="持续更新中……"></a>持续更新中……</h4><hr>
-<ul>
-<li><p>REFERENCES</p>
-<ol>
-<li><a href="http://blog.csdn.net/chdhust/article/details/7931717" target="\_blank">KVM虚拟机创建功能详细讲解</a></li>
-<li><a href="http://blog.csdn.net/zhaihaifei/article/details/51163750" target="\_blank">绑定KVM虚拟机的vcpu与物理CPU</a></li>
-<li><a href="https://www.teakki.com/p/57dbd24a1b9882de17e7fd37" target="\_blank">基于Linux命令行KVM虚拟机的安装配置与基本使用</a></li>
-<li><a href="http://kulezhaizhuren.lofter.com/post/1cca7553_7e20b47" target="\_blank">CENTOS7 安装KVM笔记之安装</a></li>
-<li><a href="https://www.52os.net/articles/linux-kvm-install-virtual-machines.html" target="\_blank">linux下配置和安装KVM虚拟机</a></li>
-</ol>
-</li>
-</ul>
+<h3 id="Dubbo服务发布过程"><a href="#Dubbo服务发布过程" class="headerlink" title="Dubbo服务发布过程"></a>Dubbo服务发布过程</h3><p>首先来看一下服务发布过程调用栈，我们将围绕这个调用栈一步步进行分析：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&quot;main@1&quot; prio=5 tid=0x1 nid=NA runnable</span><br><span class="line">  java.lang.Thread.State: RUNNABLE</span><br><span class="line">	  at org.apache.dubbo.remoting.transport.netty4.NettyServer.doOpen(NettyServer.java:97)</span><br><span class="line">	  at org.apache.dubbo.remoting.transport.AbstractServer.&lt;init&gt;(AbstractServer.java:63)</span><br><span class="line">	  at org.apache.dubbo.remoting.transport.netty4.NettyServer.&lt;init&gt;(NettyServer.java:65)</span><br><span class="line">	  at org.apache.dubbo.remoting.transport.netty4.NettyTransporter.bind(NettyTransporter.java:32)</span><br><span class="line">	  at org.apache.dubbo.remoting.Transporter$Adaptive.bind(Transporter$Adaptive.java:-1)</span><br><span class="line">	  at org.apache.dubbo.remoting.Transporters.bind(Transporters.java:56)</span><br><span class="line">	  at org.apache.dubbo.remoting.exchange.support.header.HeaderExchanger.bind(HeaderExchanger.java:44)</span><br><span class="line">	  at org.apache.dubbo.remoting.exchange.Exchangers.bind(Exchangers.java:70)</span><br><span class="line">	  at org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol.createServer(DubboProtocol.java:306)</span><br><span class="line">	  at org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol.openServer(DubboProtocol.java:283)</span><br><span class="line">	  - locked &lt;0x9ee&gt; (a org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol)</span><br><span class="line">	  at org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol.export(DubboProtocol.java:267)</span><br><span class="line">	  at org.apache.dubbo.rpc.protocol.ProtocolListenerWrapper.export(ProtocolListenerWrapper.java:57)</span><br><span class="line">	  at org.apache.dubbo.qos.protocol.QosProtocolWrapper.export(QosProtocolWrapper.java:63)</span><br><span class="line">	  at org.apache.dubbo.rpc.protocol.ProtocolFilterWrapper.export(ProtocolFilterWrapper.java:100)</span><br><span class="line">	  at org.apache.dubbo.rpc.Protocol$Adaptive.export(Protocol$Adaptive.java:-1)</span><br><span class="line">	  at org.apache.dubbo.registry.integration.RegistryProtocol.doLocalExport(RegistryProtocol.java:170)</span><br><span class="line">	  - locked &lt;0x9e2&gt; (a java.util.concurrent.ConcurrentHashMap)</span><br><span class="line">	  at org.apache.dubbo.registry.integration.RegistryProtocol.export(RegistryProtocol.java:133)</span><br><span class="line">	  at org.apache.dubbo.rpc.protocol.ProtocolListenerWrapper.export(ProtocolListenerWrapper.java:55)</span><br><span class="line">	  at org.apache.dubbo.qos.protocol.QosProtocolWrapper.export(QosProtocolWrapper.java:61)</span><br><span class="line">	  at org.apache.dubbo.rpc.protocol.ProtocolFilterWrapper.export(ProtocolFilterWrapper.java:98)</span><br><span class="line">	  at org.apache.dubbo.rpc.Protocol$Adaptive.export(Protocol$Adaptive.java:-1)</span><br><span class="line">	  at org.apache.dubbo.config.ServiceConfig.doExportUrlsFor1Protocol(ServiceConfig.java:513)</span><br><span class="line">	  at org.apache.dubbo.config.ServiceConfig.doExportUrls(ServiceConfig.java:358)</span><br><span class="line">	  at org.apache.dubbo.config.ServiceConfig.doExport(ServiceConfig.java:317)</span><br><span class="line">	  - locked &lt;0x848&gt; (a org.apache.dubbo.config.spring.ServiceBean)</span><br><span class="line">	  at org.apache.dubbo.config.ServiceConfig.export(ServiceConfig.java:216)</span><br><span class="line">	  at org.apache.dubbo.config.spring.ServiceBean.onApplicationEvent(ServiceBean.java:123)</span><br><span class="line">	  at org.apache.dubbo.config.spring.ServiceBean.onApplicationEvent(ServiceBean.java:49)</span><br><span class="line">	  at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172)</span><br><span class="line">	  at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165)</span><br><span class="line">	  at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139)</span><br><span class="line">	  at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:393)</span><br><span class="line">	  at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:347)</span><br><span class="line">	  at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:883)</span><br><span class="line">	  at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546)</span><br><span class="line">	  - locked &lt;0xab7&gt; (a java.lang.Object)</span><br><span class="line">	  at org.springframework.context.support.ClassPathXmlApplicationContext.&lt;init&gt;(ClassPathXmlApplicationContext.java:139)</span><br><span class="line">	  at org.springframework.context.support.ClassPathXmlApplicationContext.&lt;init&gt;(ClassPathXmlApplicationContext.java:83)</span><br><span class="line">	  at cn.shuaijunlan.dubbo.learning.main.Main.main(Main.java:13)</span><br></pre></td></tr></table></figure>
+<p>服务注册调用栈：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&quot;main@1&quot; prio=5 tid=0x1 nid=NA runnable</span><br><span class="line">  java.lang.Thread.State: RUNNABLE</span><br><span class="line">	  at org.apache.dubbo.registry.zookeeper.ZookeeperRegistry.doRegister(ZookeeperRegistry.java:114)</span><br><span class="line">	  at org.apache.dubbo.registry.support.FailbackRegistry.register(FailbackRegistry.java:137)</span><br><span class="line">	  at org.apache.dubbo.registry.integration.RegistryProtocol.register(RegistryProtocol.java:127)</span><br><span class="line">	  at org.apache.dubbo.registry.integration.RegistryProtocol.export(RegistryProtocol.java:147)</span><br><span class="line">	  at org.apache.dubbo.rpc.protocol.ProtocolListenerWrapper.export(ProtocolListenerWrapper.java:55)</span><br><span class="line">	  at org.apache.dubbo.qos.protocol.QosProtocolWrapper.export(QosProtocolWrapper.java:61)</span><br><span class="line">	  at org.apache.dubbo.rpc.protocol.ProtocolFilterWrapper.export(ProtocolFilterWrapper.java:98)</span><br><span class="line">	  at org.apache.dubbo.rpc.Protocol$Adaptive.export(Protocol$Adaptive.java:-1)</span><br><span class="line">	  at org.apache.dubbo.config.ServiceConfig.doExportUrlsFor1Protocol(ServiceConfig.java:513)</span><br><span class="line">	  at org.apache.dubbo.config.ServiceConfig.doExportUrls(ServiceConfig.java:358)</span><br><span class="line">	  at org.apache.dubbo.config.ServiceConfig.doExport(ServiceConfig.java:317)</span><br><span class="line">	  - locked &lt;0x9bb&gt; (a org.apache.dubbo.config.spring.ServiceBean)</span><br><span class="line">	  at org.apache.dubbo.config.ServiceConfig.export(ServiceConfig.java:216)</span><br><span class="line">	  at org.apache.dubbo.config.spring.ServiceBean.onApplicationEvent(ServiceBean.java:123)</span><br><span class="line">	  at org.apache.dubbo.config.spring.ServiceBean.onApplicationEvent(ServiceBean.java:49)</span><br><span class="line">	  at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172)</span><br><span class="line">	  at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165)</span><br><span class="line">	  at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139)</span><br><span class="line">	  at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:393)</span><br><span class="line">	  at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:347)</span><br><span class="line">	  at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:883)</span><br><span class="line">	  at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546)</span><br><span class="line">	  - locked &lt;0xb7a&gt; (a java.lang.Object)</span><br><span class="line">	  at org.springframework.context.support.ClassPathXmlApplicationContext.&lt;init&gt;(ClassPathXmlApplicationContext.java:139)</span><br><span class="line">	  at org.springframework.context.support.ClassPathXmlApplicationContext.&lt;init&gt;(ClassPathXmlApplicationContext.java:83)</span><br><span class="line">	  at cn.shuaijunlan.dubbo.learning.main.Main.main(Main.java:13)</span><br></pre></td></tr></table></figure>
+<p>调用栈</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&quot;NettyServerWorker-5-1@3006&quot; daemon prio=5 tid=0x18 nid=NA runnable</span><br><span class="line">  java.lang.Thread.State: RUNNABLE</span><br><span class="line">	  at org.apache.dubbo.remoting.transport.dispatcher.all.AllChannelHandler.received(AllChannelHandler.java:61)</span><br><span class="line">	  at org.apache.dubbo.remoting.exchange.support.header.HeartbeatHandler.received(HeartbeatHandler.java:88)</span><br><span class="line">	  at org.apache.dubbo.remoting.transport.MultiMessageHandler.received(MultiMessageHandler.java:43)</span><br><span class="line">	  at org.apache.dubbo.remoting.transport.AbstractPeer.received(AbstractPeer.java:147)</span><br><span class="line">	  at org.apache.dubbo.remoting.transport.netty4.NettyServerHandler.channelRead(NettyServerHandler.java:87)</span><br><span class="line">	  at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:362)</span><br><span class="line">	  at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:348)</span><br><span class="line">	  at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:340)</span><br><span class="line">	  at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:310)</span><br><span class="line">	  at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:284)</span><br><span class="line">	  at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:362)</span><br><span class="line">	  at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:348)</span><br><span class="line">	  at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:340)</span><br><span class="line">	  at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1434)</span><br><span class="line">	  at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:362)</span><br><span class="line">	  at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:348)</span><br><span class="line">	  at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:965)</span><br><span class="line">	  at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)</span><br><span class="line">	  at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:647)</span><br><span class="line">	  at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:582)</span><br><span class="line">	  at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:499)</span><br><span class="line">	  at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:461)</span><br><span class="line">	  at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:884)</span><br><span class="line">	  at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)</span><br><span class="line">	  at java.lang.Thread.run(Thread.java:748)</span><br></pre></td></tr></table></figure>
+<p>调用栈</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&quot;DubboServerHandler-211.69.197.55:20881-thread-2@3218&quot; daemon prio=5 tid=0x1a nid=NA runnable</span><br><span class="line">  java.lang.Thread.State: RUNNABLE</span><br><span class="line">	  at org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol$1.reply(DubboProtocol.java:83)</span><br><span class="line">	  at org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.handleRequest(HeaderExchangeHandler.java:99)</span><br><span class="line">	  at org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.received(HeaderExchangeHandler.java:196)</span><br><span class="line">	  at org.apache.dubbo.remoting.transport.DecodeHandler.received(DecodeHandler.java:51)</span><br><span class="line">	  at org.apache.dubbo.remoting.transport.dispatcher.ChannelEventRunnable.run(ChannelEventRunnable.java:57)</span><br><span class="line">	  at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)</span><br><span class="line">	  at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)</span><br><span class="line">	  at java.lang.Thread.run(Thread.java:748)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -624,9 +484,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/KVM/" rel="tag"># KVM</a>
-          
-            <a href="/tags/CentOS/" rel="tag"># CentOS</a>
+            <a href="/tags/dubbo/" rel="tag"># dubbo</a>
           
         </div>
       
@@ -639,8 +497,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/16/libvirt kvm虚拟机网络配置/" rel="next" title="配置KVM虚拟机网络的两种方式（Bridge模式和NAT模式）">
-                <i class="fa fa-chevron-left"></i> 配置KVM虚拟机网络的两种方式（Bridge模式和NAT模式）
+              <a href="/2018/09/06/netty-future-and-promise/" rel="next" title="Netty中Future与Promise的实现分析">
+                <i class="fa fa-chevron-left"></i> Netty中Future与Promise的实现分析
               </a>
             
           </div>
@@ -649,8 +507,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/11/26/CentOS7设置免密登陆/" rel="prev" title="CentOS7设置免密登陆">
-                CentOS7设置免密登陆 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/10/dubbo-loadbalance-strategy/" rel="prev" title="Dubbo负载均衡策略分析">
+                Dubbo负载均衡策略分析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -878,7 +736,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#持续更新中……"><span class="nav-number">1.</span> <span class="nav-text">持续更新中……</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dubbo服务发布过程"><span class="nav-number">1.</span> <span class="nav-text">Dubbo服务发布过程</span></a></li></ol></div>
             
 
           </div>
@@ -1059,9 +917,9 @@
   
     <script type="text/javascript">
       var disqus_config = function () {
-        this.page.url = 'https://shuaijunlan.github.io/2016/11/20/CentOS7中配置KVM教程/';
-        this.page.identifier = '2016/11/20/CentOS7中配置KVM教程/';
-        this.page.title = 'CentOS7中配置KVM教程';
+        this.page.url = 'https://shuaijunlan.github.io/2018/09/09/dubbo-provider-calling-process-source-code-analysis/';
+        this.page.identifier = '2018/09/09/dubbo-provider-calling-process-source-code-analysis/';
+        this.page.title = 'Dubbp服务提供者调用过程源码分析';
         };
       function loadComments () {
         var d = document, s = d.createElement('script');
