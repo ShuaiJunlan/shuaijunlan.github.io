@@ -337,6 +337,176 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2018/08/09/dubbo-spi-analysis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuai Junlan">
+      <meta itemprop="description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="只争朝夕(帅俊岚)">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/09/dubbo-spi-analysis/" itemprop="url">
+                  Dubbo SPI机制源码分析
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-09 15:03:57" itemprop="dateCreated datePublished" datetime="2018-08-09T15:03:57+08:00">2018-08-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-11 20:45:41" itemprop="dateModified" datetime="2018-08-11T20:45:41+08:00">2018-08-11</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/09/dubbo-spi-analysis/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/08/09/dubbo-spi-analysis/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Dubbo是微内核架构，还是开闭原则的应用，把核心流程架构固定，但是流程的各个节点对重新改进是开放的。具体的实现机制就是SPI(Service Provider Interface)机制，Dubbo基于Java SPI机制（不了解Java SPI机制的可以参考这篇文章<a href="https://shuaijunlan.github.io/2018/08/03/java-spi-introduction/">《深入理解Java SPI机制》</a>），在其基础上做了改进和扩展。</p>
+<p>根据SPI规范，接口由框架定义，具体实现可以由不同的厂商提供，在Dubbo jar包可以发现在<code>/META-INF/dubbo/internal</code>目录下有许多接口命名的文件，文件里面的内容就是文件名代表的接口的各种实现类，这就是Dubbo SPI机制的配置基础，以<code>org.apache.dubbo.rpc.Protocol</code>文件为例，内容如下（dubbo-2.7.0-SNAPSHOT 版本）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">filter=org.apache.dubbo.rpc.protocol.ProtocolFilterWrapper</span><br><span class="line">listener=org.apache.dubbo.rpc.protocol.ProtocolListenerWrapper</span><br><span class="line">mock=org.apache.dubbo.rpc.support.MockProtocol</span><br><span class="line">dubbo=org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol</span><br><span class="line">injvm=org.apache.dubbo.rpc.protocol.injvm.InjvmProtocol</span><br><span class="line">rmi=org.apache.dubbo.rpc.protocol.rmi.RmiProtocol</span><br><span class="line">hessian=org.apache.dubbo.rpc.protocol.hessian.HessianProtocol</span><br><span class="line">http=org.apache.dubbo.rpc.protocol.http.HttpProtocol</span><br><span class="line"></span><br><span class="line">org.apache.dubbo.rpc.protocol.webservice.WebServiceProtocol</span><br><span class="line">thrift=org.apache.dubbo.rpc.protocol.thrift.ThriftProtocol</span><br><span class="line">memcached=org.apache.dubbo.rpc.protocol.memcached.MemcachedProtocol</span><br><span class="line">redis=org.apache.dubbo.rpc.protocol.redis.RedisProtocol</span><br><span class="line">rest=org.apache.dubbo.rpc.protocol.rest.RestProtocol</span><br><span class="line">registry=org.apache.dubbo.registry.integration.RegistryProtocol</span><br><span class="line">qos=org.apache.dubbo.qos.protocol.QosProtocolWrapper</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/09/dubbo-spi-analysis/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2018/08/05/dubbo-consumer-calling-process-source-code-analysis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -995,181 +1165,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2018/07/24/netty-bytebuf-data-container/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuai Junlan">
-      <meta itemprop="description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="只争朝夕(帅俊岚)">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/24/netty-bytebuf-data-container/" itemprop="url">
-                  Netty数据容器---ByteBuf
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-24 15:38:09" itemprop="dateCreated datePublished" datetime="2018-07-24T15:38:09+08:00">2018-07-24</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-10 14:37:41" itemprop="dateModified" datetime="2018-08-10T14:37:41+08:00">2018-08-10</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/07/24/netty-bytebuf-data-container/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/07/24/netty-bytebuf-data-container/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="ByteBuf工作原理"><a href="#ByteBuf工作原理" class="headerlink" title="ByteBuf工作原理"></a>ByteBuf工作原理</h3><p>ByteBuf维护了两个不同的索引：一个用于读取，一个用于写入。当从ByteBuf读取数据时，它的readerINdex将会递增已被读取的字节数。同样的，当你写入ByteBuf的时候，它的writerIndex也会被递增。</p>
-<p><img src="https://shuaijunlan.github.io/images/Screenshot from 2018-07-24 16-02-04.png" alt=""></p>
-<p>上图中表示的是一个读索引和写索引都设置为0的16字节ByteBuf，若果试图访问超出writerIndex范围的数据将会触发一个IndexOutOfBoundsException异常。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/24/netty-bytebuf-data-container/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1212,7 +1212,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
