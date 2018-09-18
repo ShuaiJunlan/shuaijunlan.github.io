@@ -116,12 +116,12 @@
 <meta property="og:site_name" content="只争朝夕(帅俊岚)">
 <meta property="og:description" content="Dubbo提供了四种负载均衡策略：Random LoadBalance（加权随机负载均衡）、RoundRobin LoadBalance（加权轮询负载均衡）、LeastActive LoadBalance（最少活跃数负载均衡）、ConsistentHash LoadBalance（一致性hash负载均衡），下面将分别分析这四种负载均衡策略的源码。 Random LoadBalance先来看一下Ra">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-09-18 11-16-13.png">
-<meta property="og:updated_time" content="2018-09-18T03:30:53.176Z">
+<meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-09-18 11-16-13.png?raw=true">
+<meta property="og:updated_time" content="2018-09-18T03:33:32.053Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dubbo负载均衡策略分析">
 <meta name="twitter:description" content="Dubbo提供了四种负载均衡策略：Random LoadBalance（加权随机负载均衡）、RoundRobin LoadBalance（加权轮询负载均衡）、LeastActive LoadBalance（最少活跃数负载均衡）、ConsistentHash LoadBalance（一致性hash负载均衡），下面将分别分析这四种负载均衡策略的源码。 Random LoadBalance先来看一下Ra">
-<meta name="twitter:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-09-18 11-16-13.png">
+<meta name="twitter:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-09-18 11-16-13.png?raw=true">
 
 
 
@@ -399,7 +399,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-18 11:30:53" itemprop="dateModified" datetime="2018-09-18T11:30:53+08:00">2018-09-18</time>
+                <time title="修改时间：2018-09-18 11:33:32" itemprop="dateModified" datetime="2018-09-18T11:33:32+08:00">2018-09-18</time>
               
             
           </span>
@@ -458,7 +458,7 @@
 <p>随机加权轮询算法还是比较容易理解的，下面继续分析RoundRobin LoadBalance。</p>
 <a id="more"></a>
 <h4 id="RoundRobin-LoadBalance"><a href="#RoundRobin-LoadBalance" class="headerlink" title="RoundRobin LoadBalance"></a>RoundRobin LoadBalance</h4><p>在理解加权轮询算法源码之前，我们先通过一个简单的示例来表达加权轮询算法的工作原理，如下图所示</p>
-<p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-09-18 11-16-13.png" alt="Screenshot from 2018-09-18 11-16-13"></p>
+<p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-09-18 11-16-13.png?raw=true" alt="Screenshot from 2018-09-18 11-16-13"></p>
 <ul>
 <li>假设某个服务有五个提供者，分别为A、B、C、D、E，他们的weight分别为5/3/6/1/4；</li>
 <li>因此他们的weight总和sumWeight为19，maxWeight为6，minWeight为1；</li>
