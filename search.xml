@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Dubbo优雅停机机制分析]]></title>
+    <title><![CDATA[Dubbo Gracefully Shutdown机制分析]]></title>
     <url>%2F2018%2F09%2F22%2Fdubbo-gracefully-shutdown%2F</url>
     <content type="text"></content>
       <tags>
