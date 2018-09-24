@@ -423,15 +423,16 @@
           
             
               <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2016/11/16/libvirt kvm虚拟机网络配置/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/11/16/libvirt kvm虚拟机网络配置/" itemprop="commentsCount"></span>
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/11/16/libvirt kvm虚拟机网络配置/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/11/16/libvirt kvm虚拟机网络配置/" itemprop="commentCount"></span>
                 </a>
-              
+              </span>
             
           
 
@@ -613,7 +614,12 @@
 
   
     <div class="comments" id="comments">
-      <div id="SOHUCS"></div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     </div>
 
   
@@ -970,27 +976,33 @@
 
   
 
-
-
   
-
-
-
+    <script id="dsq-count-scr" src="https://shuaijunlan.disqus.com/count.js" async></script>
+  
 
   
     <script type="text/javascript">
-    (function(){
-      var appid = 'cys1ORYHW';
-      var conf = 'bb700905990ab5e0c25092ea23094789';
-      var width = window.innerWidth || document.documentElement.clientWidth;
-      if (width < 960) {
-      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
-        window.changyan.api.config({appid:appid,conf:conf})});
+      var disqus_config = function () {
+        this.page.url = 'https://shuaijunlan.github.io/2016/11/16/libvirt kvm虚拟机网络配置/';
+        this.page.identifier = '2016/11/16/libvirt kvm虚拟机网络配置/';
+        this.page.title = '配置KVM虚拟机网络的两种方式（Bridge模式和NAT模式）';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://shuaijunlan.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
       }
-    })();
+      
+        loadComments();
+      
     </script>
-    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
   
+
+
+
+
+
 
 
 
