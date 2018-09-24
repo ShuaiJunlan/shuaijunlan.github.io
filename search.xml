@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Dubbo服务端接收请求及响应请求原理分析]]></title>
     <url>%2F2018%2F09%2F24%2Fdubbo-provider-request-and-response-analysis%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[之前一篇文章《Dubbo服务提供者发布及注册过程源码分析》已经介绍了Dubbo服务端的服务注册及发布过程，这篇文章将会介绍Dubbo服务端是如何接受请求以及响应请求的。 本文还是以Consumer-Provider的Demo为例，分析接收请求及响应请求的具体流程，在Dubbo服务端发布服务之后，它将会监听一个端口等待接收客户端的请求，当接收到请求后，会经过入站处理器进行处理，我们知道在发布服务的时候设置了NettyServerHandler入站处理器，接收到请求之后，会经过NettyServerHandler#channelRead()方法来获取请求的消息，我们来看一下它的实现： 12345678910@Overridepublic void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception &#123; //以ctx.channel()为key，以NettyChannel为value，存储在ConcurrentHashMap中 NettyChannel channel = NettyChannel.getOrAddChannel(ctx.channel(), url, handler); try &#123; handler.received(channel, msg); &#125; finally &#123; NettyChannel.removeChannelIfDisconnected(ctx.channel()); &#125;&#125;]]></content>
       <tags>
         <tag>dubbo</tag>
       </tags>

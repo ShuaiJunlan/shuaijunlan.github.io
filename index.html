@@ -390,7 +390,7 @@
                 
               
 
-              <time title="创建时间：2018-09-24 10:57:36 / 修改时间：11:03:30" itemprop="dateCreated datePublished" datetime="2018-09-24T10:57:36+08:00">2018-09-24</time>
+              <time title="创建时间：2018-09-24 10:57:36 / 修改时间：17:41:36" itemprop="dateCreated datePublished" datetime="2018-09-24T10:57:36+08:00">2018-09-24</time>
             
 
             
@@ -441,9 +441,16 @@
 
       
         
-          
-            
-          
+          <p>之前一篇文章<a href="https://shuaijunlan.github.io/2018/09/09/dubbo-provider-calling-process-source-code-analysis/">《Dubbo服务提供者发布及注册过程源码分析》</a>已经介绍了Dubbo服务端的服务注册及发布过程，这篇文章将会介绍Dubbo服务端是如何接受请求以及响应请求的。</p>
+<p>本文还是以<a href="https://github.com/shuaijunlan/Spring-Learning/tree/master/dubbo" target="_blank" rel="noopener"><strong>Consumer-Provider的Demo</strong></a>为例，分析接收请求及响应请求的具体流程，在Dubbo服务端发布服务之后，它将会监听一个端口等待接收客户端的请求，当接收到请求后，会经过入站处理器进行处理，我们知道在发布服务的时候设置了<code>NettyServerHandler</code>入站处理器，接收到请求之后，会经过<code>NettyServerHandler#channelRead()</code>方法来获取请求的消息，我们来看一下它的实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">channelRead</span><span class="params">(ChannelHandlerContext ctx, Object msg)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">//以ctx.channel()为key，以NettyChannel为value，存储在ConcurrentHashMap中</span></span><br><span class="line">    NettyChannel channel = NettyChannel.getOrAddChannel(ctx.channel(), url, handler);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        handler.received(channel, msg);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        NettyChannel.removeChannelIfDisconnected(ctx.channel());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/24/dubbo-provider-request-and-response-analysis/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
