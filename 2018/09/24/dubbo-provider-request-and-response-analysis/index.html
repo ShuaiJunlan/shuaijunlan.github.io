@@ -115,29 +115,25 @@
 
 
 
-  <meta name="description" content="下面将介绍Netty中所包含的各种组件，主要包括：Channel、EventLoop、ChannelFuture、ChannelHandler和ChannelPipeline等。 Channel、EventLoop和ChannelFuture">
-<meta name="keywords" content="Netty">
+  <meta name="description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
+<meta name="keywords" content="dubbo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Netty组件介绍">
-<meta property="og:url" content="https://shuaijunlan.github.io/2018/07/20/netty-components-design/index.html">
+<meta property="og:title" content="Dubbo服务端接收请求及响应请求原理分析">
+<meta property="og:url" content="https://shuaijunlan.github.io/2018/09/24/dubbo-provider-request-and-response-analysis/index.html">
 <meta property="og:site_name" content="只争朝夕(帅俊岚)">
-<meta property="og:description" content="下面将介绍Netty中所包含的各种组件，主要包括：Channel、EventLoop、ChannelFuture、ChannelHandler和ChannelPipeline等。 Channel、EventLoop和ChannelFuture">
+<meta property="og:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-07-20 20-39-27.png">
-<meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-07-20 21-01-11.png">
-<meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-07-20 21-52-02.png">
-<meta property="og:updated_time" content="2018-09-23T11:58:29.565Z">
+<meta property="og:updated_time" content="2018-09-24T03:03:30.147Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Netty组件介绍">
-<meta name="twitter:description" content="下面将介绍Netty中所包含的各种组件，主要包括：Channel、EventLoop、ChannelFuture、ChannelHandler和ChannelPipeline等。 Channel、EventLoop和ChannelFuture">
-<meta name="twitter:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-07-20 20-39-27.png">
+<meta name="twitter:title" content="Dubbo服务端接收请求及响应请求原理分析">
+<meta name="twitter:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
 
 
 
 
 
 
-  <link rel="canonical" href="https://shuaijunlan.github.io/2018/07/20/netty-components-design/"/>
+  <link rel="canonical" href="https://shuaijunlan.github.io/2018/09/24/dubbo-provider-request-and-response-analysis/"/>
 
 
 
@@ -147,7 +143,7 @@
   };
 </script>
 
-  <title>Netty组件介绍 | 只争朝夕(帅俊岚)</title>
+  <title>Dubbo服务端接收请求及响应请求原理分析 | 只争朝夕(帅俊岚)</title>
   
 
 
@@ -349,7 +345,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2018/07/20/netty-components-design/">
+    <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2018/09/24/dubbo-provider-request-and-response-analysis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuai Junlan">
@@ -366,7 +362,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Netty组件介绍
+          <h2 class="post-title" itemprop="name headline">Dubbo服务端接收请求及响应请求原理分析
               
             
           </h2>
@@ -391,24 +387,12 @@
                 
               
 
-              <time title="创建时间：2018-07-20 19:48:01" itemprop="dateCreated datePublished" datetime="2018-07-20T19:48:01+08:00">2018-07-20</time>
+              <time title="创建时间：2018-09-24 10:57:36 / 修改时间：11:03:30" itemprop="dateCreated datePublished" datetime="2018-09-24T10:57:36+08:00">2018-09-24</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-09-23 19:58:29" itemprop="dateModified" datetime="2018-09-23T19:58:29+08:00">2018-09-23</time>
               
             
           </span>
@@ -422,10 +406,10 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/07/20/netty-components-design/#comments" itemprop="discussionUrl">
+                <a href="/2018/09/24/dubbo-provider-request-and-response-analysis/#comments" itemprop="discussionUrl">
                 
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/07/20/netty-components-design/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/09/24/dubbo-provider-request-and-response-analysis/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -461,54 +445,7 @@
       
 
       
-        <p>下面将介绍Netty中所包含的各种组件，主要包括：Channel、EventLoop、ChannelFuture、ChannelHandler和ChannelPipeline等。</p>
-<h3 id="Channel、EventLoop和ChannelFuture"><a href="#Channel、EventLoop和ChannelFuture" class="headerlink" title="Channel、EventLoop和ChannelFuture"></a>Channel、EventLoop和ChannelFuture</h3><p><img src="https://shuaijunlan.github.io/images/Screenshot from 2018-07-20 20-39-27.png" alt="Channel-EventLoop-ChannelFuture"></p>
-<a id="more"></a>
-<ul>
-<li>一个EventLoopGroup可以包含一个或者多个EventLoop；</li>
-<li>一个EventLoop在它的生命周期内只和一个Thread绑定；</li>
-<li>所有由EventLoop处理的I/O事件都将在它专有的Thread上被处理；</li>
-<li>一个Channel在它的生命周期内只能注册于一个EventLoop；</li>
-<li>一个EventLoop可能被分配给多个Channel；</li>
-<li>在Netty中所有的I/O操作都是异步的，因此可以通过ChannelFuture来获取响应结果；</li>
-</ul>
-<h3 id="ChannelHandler和ChannelPipeline"><a href="#ChannelHandler和ChannelPipeline" class="headerlink" title="ChannelHandler和ChannelPipeline"></a>ChannelHandler和ChannelPipeline</h3><p><img src="https://shuaijunlan.github.io/images/Screenshot from 2018-07-20 21-01-11.png" alt=""></p>
-<ul>
-<li>ChannelPipeline提供了ChannelHandler链的容器，并定义了同于在该链上传播入站的出站的事件流的API；</li>
-<li>一个ChannelIninializer的实现被注册到ServerBootstrap中或这Client的BootStrap中；</li>
-<li>当 ChannelInitializer.initChannel() 方法被调用时，ChannelInitializer将在 ChannelPipeline 中安装一组自定义的 ChannelHandler ；</li>
-<li>ChannelInitializer将它自己从 ChannelPipeline 中移除；</li>
-<li>从一个客户端应用程序角度来看，当事件的运动方向是从客户端到服务器，我们称之为出站，反之则称之为入站；</li>
-<li>数据出站运动，数据讲从ChannelOutboundHandler链的尾端开始流动，直到它到达链的头部为止，此时数据到达了网络传输层，通常情况下会触发一个写操作。</li>
-</ul>
-<h3 id="BootStrap和ServerBootstrap"><a href="#BootStrap和ServerBootstrap" class="headerlink" title="BootStrap和ServerBootstrap"></a>BootStrap和ServerBootstrap</h3><table>
-<thead>
-<tr>
-<th style="text-align:center">类别</th>
-<th style="text-align:center">Bootstrap</th>
-<th style="text-align:center">ServerBootstrap</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">网络编程中的作用</td>
-<td style="text-align:center">连接到远程主机和端口</td>
-<td style="text-align:center">绑定到一个本地端口</td>
-</tr>
-<tr>
-<td style="text-align:center">EventLoopGroup的数目</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">2（也可以1个）</td>
-</tr>
-</tbody>
-</table>
-<p><img src="https://shuaijunlan.github.io/images/Screenshot from 2018-07-20 21-52-02.png" alt=""></p>
-<p>上图中，客户端创建了一个EventLoopGroup，服务器端使用了两个EventLoopGroup，其中一个EventLoopGroup用来接收客户端发来的请求，另一个EventLoop用来处理连接任务。</p>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p><strong>服务器端</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">EventLoopGroup bossGroup = <span class="keyword">new</span> EpollEventLoopGroup(<span class="number">1</span>);</span><br><span class="line">EventLoopGroup workerGroup = <span class="keyword">new</span> EpollEventLoopGroup(<span class="number">4</span>);</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    ServerBootstrap b = <span class="keyword">new</span> ServerBootstrap();</span><br><span class="line">    b.group(bossGroup, workerGroup)</span><br><span class="line">            .channel(EpollServerSocketChannel.class)</span><br><span class="line">            <span class="comment">//保持长连接状态</span></span><br><span class="line">            .childOption(ChannelOption.SO_KEEPALIVE, <span class="keyword">true</span>)</span><br><span class="line">            .childOption(ChannelOption.TCP_NODELAY, <span class="keyword">true</span>)</span><br><span class="line">            .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)</span><br><span class="line">            .childHandler(<span class="keyword">new</span> HttpSnoopServerInitializer());</span><br><span class="line"></span><br><span class="line">    ChannelFuture ch = b.bind(PORT).sync();</span><br><span class="line">    <span class="keyword">if</span> (ch.isSuccess())&#123;</span><br><span class="line">        logger.info(<span class="string">"Http server start on port :&#123;&#125;"</span>, PORT );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ch.channel().closeFuture().sync();</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    bossGroup.shutdownGracefully();</span><br><span class="line">    workerGroup.shutdownGracefully();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>客户端</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">EventLoopGroup eventLoopGroup = <span class="keyword">new</span> EpollEventLoopGroup(<span class="number">8</span>);</span><br><span class="line">Bootstrap bootstrap = <span class="keyword">new</span> Bootstrap()</span><br><span class="line">        .group(eventLoopGroup)</span><br><span class="line">        .option(ChannelOption.SO_KEEPALIVE, <span class="keyword">true</span>)</span><br><span class="line">        .option(ChannelOption.TCP_NODELAY, <span class="keyword">true</span>)</span><br><span class="line">        .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)</span><br><span class="line">        .channel(EpollSocketChannel.class)</span><br><span class="line">        .handler(<span class="keyword">new</span> RpcClientInitializer());</span><br><span class="line">Channel channel = bootstrap.connect(<span class="string">"127.0.0.1"</span>, port).sync().channel();</span><br></pre></td></tr></table></figure>
-
+        
       
     </div>
 
@@ -532,7 +469,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Netty/" rel="tag"># Netty</a>
+            <a href="/tags/dubbo/" rel="tag"># dubbo</a>
           
         </div>
       
@@ -545,8 +482,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/04/user-thread-and-daemon-thread/" rel="next" title="User Thread and Daemon Thread in Java">
-                <i class="fa fa-chevron-left"></i> User Thread and Daemon Thread in Java
+              <a href="/2018/09/22/dubbo-gracefully-shutdown/" rel="next" title="Dubbo Gracefully Shutdown机制分析">
+                <i class="fa fa-chevron-left"></i> Dubbo Gracefully Shutdown机制分析
               </a>
             
           </div>
@@ -554,10 +491,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/22/netty-transport-methods/" rel="prev" title="Netty内置传输方式">
-                Netty内置传输方式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -612,17 +545,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -756,22 +680,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Channel、EventLoop和ChannelFuture"><span class="nav-number">1.</span> <span class="nav-text">Channel、EventLoop和ChannelFuture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ChannelHandler和ChannelPipeline"><span class="nav-number">2.</span> <span class="nav-text">ChannelHandler和ChannelPipeline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BootStrap和ServerBootstrap"><span class="nav-number">3.</span> <span class="nav-text">BootStrap和ServerBootstrap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">4.</span> <span class="nav-text">示例</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -950,9 +858,9 @@
   
     <script type="text/javascript">
       var disqus_config = function () {
-        this.page.url = 'https://shuaijunlan.github.io/2018/07/20/netty-components-design/';
-        this.page.identifier = '2018/07/20/netty-components-design/';
-        this.page.title = 'Netty组件介绍';
+        this.page.url = 'https://shuaijunlan.github.io/2018/09/24/dubbo-provider-request-and-response-analysis/';
+        this.page.identifier = '2018/09/24/dubbo-provider-request-and-response-analysis/';
+        this.page.title = 'Dubbo服务端接收请求及响应请求原理分析';
         };
       function loadComments () {
         var d = document, s = d.createElement('script');

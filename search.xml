@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Dubbo服务端接收请求及响应请求原理分析]]></title>
+    <url>%2F2018%2F09%2F24%2Fdubbo-provider-request-and-response-analysis%2F</url>
+    <content type="text"></content>
+      <tags>
+        <tag>dubbo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Dubbo Gracefully Shutdown机制分析]]></title>
     <url>%2F2018%2F09%2F22%2Fdubbo-gracefully-shutdown%2F</url>
     <content type="text"></content>
