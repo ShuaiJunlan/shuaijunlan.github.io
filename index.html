@@ -344,6 +344,168 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2018/10/11/java-thread-pool/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuai Junlan">
+      <meta itemprop="description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="只争朝夕(帅俊岚)">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/11/java-thread-pool/" itemprop="url">
+                  Java线程池分析
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-11 09:03:18 / 修改时间：22:28:57" itemprop="dateCreated datePublished" datetime="2018-10-11T09:03:18+08:00">2018-10-11</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/11/java-thread-pool/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/11/java-thread-pool/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Executors类分析"><a href="#Executors类分析" class="headerlink" title="Executors类分析"></a>Executors类分析</h3><h3 id="基于ThreadPoolExecutor构造线程池"><a href="#基于ThreadPoolExecutor构造线程池" class="headerlink" title="基于ThreadPoolExecutor构造线程池"></a>基于ThreadPoolExecutor构造线程池</h3><p>我们来看一下ThreadPoolExecutor类的构造函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                          <span class="keyword">int</span> maximumPoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                          <span class="keyword">long</span> keepAliveTime,</span></span></span><br><span class="line"><span class="function"><span class="params">                          TimeUnit unit,</span></span></span><br><span class="line"><span class="function"><span class="params">                          BlockingQueue&lt;Runnable&gt; workQueue,</span></span></span><br><span class="line"><span class="function"><span class="params">                          ThreadFactory threadFactory,</span></span></span><br><span class="line"><span class="function"><span class="params">                          RejectedExecutionHandler handler)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//先判断参数是否合法</span></span><br><span class="line">    <span class="keyword">if</span> (corePoolSize &lt; <span class="number">0</span> ||</span><br><span class="line">        maximumPoolSize &lt;= <span class="number">0</span> ||</span><br><span class="line">        maximumPoolSize &lt; corePoolSize ||</span><br><span class="line">        keepAliveTime &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">    <span class="keyword">if</span> (workQueue == <span class="keyword">null</span> || threadFactory == <span class="keyword">null</span> || handler == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">    <span class="keyword">this</span>.acc = System.getSecurityManager() == <span class="keyword">null</span> ?</span><br><span class="line">        <span class="keyword">null</span> :</span><br><span class="line">    	AccessController.getContext();</span><br><span class="line">    <span class="comment">//核心线程数量</span></span><br><span class="line">    <span class="keyword">this</span>.corePoolSize = corePoolSize;</span><br><span class="line">    <span class="comment">//最大线程数量</span></span><br><span class="line">    <span class="keyword">this</span>.maximumPoolSize = maximumPoolSize;</span><br><span class="line">    <span class="comment">//工作队列</span></span><br><span class="line">    <span class="keyword">this</span>.workQueue = workQueue;</span><br><span class="line">    <span class="comment">//保活时间，unit为时间单位，转换为秒</span></span><br><span class="line">    <span class="keyword">this</span>.keepAliveTime = unit.toNanos(keepAliveTime);、</span><br><span class="line">    <span class="comment">//线程工厂</span></span><br><span class="line">    <span class="keyword">this</span>.threadFactory = threadFactory;</span><br><span class="line">    <span class="comment">//拒绝策略</span></span><br><span class="line">    <span class="keyword">this</span>.handler = handler;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="提交任务"><a href="#提交任务" class="headerlink" title="提交任务"></a>提交任务</h4><p>提交任务的过程主要分为三步：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Proceed in 3 steps:</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 1. If fewer than corePoolSize threads are running, try to</span></span><br><span class="line"><span class="comment">* start a new thread with the given command as its first</span></span><br><span class="line"><span class="comment">* task.  The call to addWorker atomically checks runState and</span></span><br><span class="line"><span class="comment">* workerCount, and so prevents false alarms that would add</span></span><br><span class="line"><span class="comment">* threads when it shouldn't, by returning false.</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 2. If a task can be successfully queued, then we still need</span></span><br><span class="line"><span class="comment">* to double-check whether we should have added a thread</span></span><br><span class="line"><span class="comment">* (because existing ones died since last checking) or that</span></span><br><span class="line"><span class="comment">* the pool shut down since entry into this method. So we</span></span><br><span class="line"><span class="comment">* recheck state and if necessary roll back the enqueuing if</span></span><br><span class="line"><span class="comment">* stopped, or start a new thread if there are none.</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 3. If we cannot queue task, then we try to add a new</span></span><br><span class="line"><span class="comment">* thread.  If it fails, we know we are shut down or saturated</span></span><br><span class="line"><span class="comment">* and so reject the task.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">int</span> c = ctl.get();</span><br><span class="line"><span class="keyword">if</span> (workerCountOf(c) &lt; corePoolSize) &#123;</span><br><span class="line">    <span class="keyword">if</span> (addWorker(command, <span class="keyword">true</span>))</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    c = ctl.get();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (isRunning(c) &amp;&amp; workQueue.offer(command)) &#123;</span><br><span class="line">    <span class="keyword">int</span> recheck = ctl.get();</span><br><span class="line">    <span class="keyword">if</span> (! isRunning(recheck) &amp;&amp; remove(command))</span><br><span class="line">        reject(command);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (workerCountOf(recheck) == <span class="number">0</span>)</span><br><span class="line">        addWorker(<span class="keyword">null</span>, <span class="keyword">false</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (!addWorker(command, <span class="keyword">false</span>))</span><br><span class="line">    reject(command);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>1.如果运行的线程数小于<code>corePoolSize</code>，则会调用<code>runWorker()</code>，检查<code>runState</code>和<code>workerCount</code>，并且创建一个新的线程，把任务给它当做第一个任务来执行，然后就返回。</li>
+<li>2.如果任务成功的加入队列，然后我们仍然需要去双重检查是否我们应该添加一个thread（因为在之前一次检查之后可能会有thread终止），或者线程池停止了自从进入这个函数。因此我们需要重复检查检查状态，并且在线程池停止的情况下回滚入队操作，或者开启一个新的线程如果这没有线程。</li>
+<li>3.如果任务不能加入队列，则尝试创建一个新的线程。如果创建失败，我们知道线程池停止或者队列饱和，因此会拒绝这个任务。</li>
+</ul>
+<h4 id="五种运行状态"><a href="#五种运行状态" class="headerlink" title="五种运行状态"></a>五种运行状态</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// runState is stored in the high-order bits</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> RUNNING    = -<span class="number">1</span> &lt;&lt; COUNT_BITS; <span class="comment">//接收新的任务并且处理队列中的任务</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SHUTDOWN   =  <span class="number">0</span> &lt;&lt; COUNT_BITS; <span class="comment">//不接受新的任务，但是会继续处理队列中的任务</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> STOP       =  <span class="number">1</span> &lt;&lt; COUNT_BITS; <span class="comment">//不接受新的任务，也不处理队列中的任务，并且打断中正在处理的任务</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TIDYING    =  <span class="number">2</span> &lt;&lt; COUNT_BITS; <span class="comment">//所有烦人任务都终止，workerCount为零，线程状态过渡到TIDYING，将会执行terminated()方法</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TERMINATED =  <span class="number">3</span> &lt;&lt; COUNT_BITS; <span class="comment">//terminated()函数执行完成</span></span><br></pre></td></tr></table></figure>
+<h3 id="饱和策略分析"><a href="#饱和策略分析" class="headerlink" title="饱和策略分析"></a>饱和策略分析</h3><p>​                                                                                                                                                                                                                                                                                                                                                                    </p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2018/09/24/dubbo-provider-request-and-response-analysis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1005,176 +1167,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2018/09/09/dubbo-provider-calling-process-source-code-analysis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuai Junlan">
-      <meta itemprop="description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="只争朝夕(帅俊岚)">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/09/dubbo-provider-calling-process-source-code-analysis/" itemprop="url">
-                  Dubbo服务提供者发布及注册过程源码分析
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-09-09 20:24:34" itemprop="dateCreated datePublished" datetime="2018-09-09T20:24:34+08:00">2018-09-09</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-09-24 19:13:22" itemprop="dateModified" datetime="2018-09-24T19:13:22+08:00">2018-09-24</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/09/09/dubbo-provider-calling-process-source-code-analysis/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/09/09/dubbo-provider-calling-process-source-code-analysis/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Dubbo服务端在启动服务时会经历怎样的调用过程？在收到消费者发送的请求后会经历怎样的调用过程？这篇文章主要针对以上两个调用过程并结合Dubbo源码进行分析。</p>
-<p>我们采用的是<a href="https://github.com/shuaijunlan/Spring-Learning/tree/master/dubbo" target="_blank" rel="noopener"><strong>Consumer-Provider的Demo</strong></a>提供的示例，并按照<a href="https://shuaijunlan.github.io/2018/08/05/dubbo-consumer-calling-process-source-code-analysis/">《Dubbo消费者调用过程源码分析》</a>中的分析思路，下面将对两种过程进行进一步分析，先来看一张服务发布过程的时序图(图片太大建议在新的窗口打开查看)，对服务发布与注册有个大致的了解：</p>
-<p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/dubbo-provider.png?raw=true" alt=""></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/09/dubbo-provider-calling-process-source-code-analysis/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1222,7 +1214,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1294,9 +1286,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

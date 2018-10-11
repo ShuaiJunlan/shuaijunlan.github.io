@@ -115,27 +115,25 @@
 
 
 
-  <meta name="description" content="先来看个采用log4j输出日志的例子  添加依赖包    12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.slf4j&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;slf4j-log4j12&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;1.7.7&amp;lt;/version&amp;gt;&amp;lt;/depe">
-<meta name="keywords" content="log4j">
+  <meta name="description" content="Executors类分析基于ThreadPoolExecutor构造线程池我们来看一下ThreadPoolExecutor类的构造函数 12345678910111213141516171819202122232425262728293031public ThreadPoolExecutor(int corePoolSize,                          int maximu">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="log4j初级配置教程">
-<meta property="og:url" content="https://shuaijunlan.github.io/2017/04/26/log4j配置详解/index.html">
+<meta property="og:title" content="Java线程池分析">
+<meta property="og:url" content="https://shuaijunlan.github.io/2018/10/11/java-thread-pool/index.html">
 <meta property="og:site_name" content="只争朝夕(帅俊岚)">
-<meta property="og:description" content="先来看个采用log4j输出日志的例子  添加依赖包    12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.slf4j&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;slf4j-log4j12&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;1.7.7&amp;lt;/version&amp;gt;&amp;lt;/depe">
+<meta property="og:description" content="Executors类分析基于ThreadPoolExecutor构造线程池我们来看一下ThreadPoolExecutor类的构造函数 12345678910111213141516171819202122232425262728293031public ThreadPoolExecutor(int corePoolSize,                          int maximu">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://learningnotes-1251679769.costj.myqcloud.com/javabasis/1.png">
-<meta property="og:updated_time" content="2018-08-05T05:09:04.174Z">
+<meta property="og:updated_time" content="2018-10-11T14:28:57.586Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="log4j初级配置教程">
-<meta name="twitter:description" content="先来看个采用log4j输出日志的例子  添加依赖包    12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.slf4j&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;slf4j-log4j12&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;1.7.7&amp;lt;/version&amp;gt;&amp;lt;/depe">
-<meta name="twitter:image" content="http://learningnotes-1251679769.costj.myqcloud.com/javabasis/1.png">
+<meta name="twitter:title" content="Java线程池分析">
+<meta name="twitter:description" content="Executors类分析基于ThreadPoolExecutor构造线程池我们来看一下ThreadPoolExecutor类的构造函数 12345678910111213141516171819202122232425262728293031public ThreadPoolExecutor(int corePoolSize,                          int maximu">
 
 
 
 
 
 
-  <link rel="canonical" href="https://shuaijunlan.github.io/2017/04/26/log4j配置详解/"/>
+  <link rel="canonical" href="https://shuaijunlan.github.io/2018/10/11/java-thread-pool/"/>
 
 
 
@@ -145,7 +143,7 @@
   };
 </script>
 
-  <title>log4j初级配置教程 | 只争朝夕(帅俊岚)</title>
+  <title>Java线程池分析 | 只争朝夕(帅俊岚)</title>
   
 
 
@@ -347,7 +345,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2017/04/26/log4j配置详解/">
+    <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2018/10/11/java-thread-pool/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuai Junlan">
@@ -364,7 +362,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">log4j初级配置教程
+          <h2 class="post-title" itemprop="name headline">Java线程池分析
               
             
           </h2>
@@ -389,24 +387,12 @@
                 
               
 
-              <time title="创建时间：2017-04-26 10:07:15" itemprop="dateCreated datePublished" datetime="2017-04-26T10:07:15+08:00">2017-04-26</time>
+              <time title="创建时间：2018-10-11 09:03:18 / 修改时间：22:28:57" itemprop="dateCreated datePublished" datetime="2018-10-11T09:03:18+08:00">2018-10-11</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-05 13:09:04" itemprop="dateModified" datetime="2018-08-05T13:09:04+08:00">2018-08-05</time>
               
             
           </span>
@@ -420,10 +406,10 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/26/log4j配置详解/#comments" itemprop="discussionUrl">
+                <a href="/2018/10/11/java-thread-pool/#comments" itemprop="discussionUrl">
                 
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/26/log4j配置详解/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/10/11/java-thread-pool/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -459,76 +445,17 @@
       
 
       
-        <ul>
-<li><p>先来看个采用log4j输出日志的例子</p>
-<blockquote>
-<p>添加依赖包</p>
-</blockquote>
-  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-  <a id="more"></a>
-<blockquote>
-<p>添加配置文件log4j.properties放在/resources目录下面</p>
-</blockquote>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">### 设置###</span><br><span class="line">log4j.rootLogger = DEBUG,error,debug,stdout</span><br><span class="line">#log4j.rootLogger = INFO,stdout</span><br><span class="line"></span><br><span class="line">### 输出信息到控制台 ###</span><br><span class="line">log4j.appender.stdout = org.apache.log4j.ConsoleAppender</span><br><span class="line">#log4j.appender.stdout.Threshold = ERROR</span><br><span class="line">log4j.appender.stdout.Target = System.out</span><br><span class="line">log4j.appender.stdout.layout = org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.stdout.layout.ConversionPattern = [%-5p] %d&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; method:%l%n%m%n</span><br><span class="line"></span><br><span class="line">### 输出DEBUG 级别以上的日志到=E://logs/debug.log ###</span><br><span class="line">log4j.appender.debug = org.apache.log4j.DailyRollingFileAppender</span><br><span class="line">log4j.appender.debug.File = E://logs/debug.log</span><br><span class="line">log4j.appender.debug.Append = true</span><br><span class="line">##Threshold是个全局的过滤器，它将把低于所设置的level的信息过滤不显示出来。</span><br><span class="line">log4j.appender.debug.Threshold = DEBUG</span><br><span class="line">log4j.appender.debug.layout = org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.debug.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n</span><br><span class="line"></span><br><span class="line">### 输出ERROR 级别以上的日志到=E://logs/error.log ###</span><br><span class="line">log4j.appender.error = org.apache.log4j.DailyRollingFileAppender</span><br><span class="line">log4j.appender.error.File =E://logs/error.log</span><br><span class="line">log4j.appender.error.Append = true</span><br><span class="line">log4j.appender.error.Threshold = ERROR</span><br><span class="line">log4j.appender.error.layout = org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.error.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>java代码</p>
-</blockquote>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sh.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Mr SJL on 2016/11/26.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> Junlan Shuai</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 记录debug级别的信息</span></span><br><span class="line">        log.debug(<span class="string">"This is debug message."</span>);</span><br><span class="line">        <span class="comment">// 记录info级别的信息</span></span><br><span class="line">        log.info(<span class="string">"This is info message."</span>);</span><br><span class="line">        <span class="comment">// 记录error级别的信息</span></span><br><span class="line">        log.error(<span class="string">"This is error message."</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>控制台输出结果<br>  <img src="http://learningnotes-1251679769.costj.myqcloud.com/javabasis/1.png" alt="image" title="结果"></p>
-</blockquote>
-</li>
-<li><p>log4j主要组件</p>
-<blockquote>
-<p>Log4j有三个主要的组件：Loggers(记录器)，Appenders  (输出源)和Layouts(布局)。这里可简单理解为日志类别，日志要输出的地方和日志以何种形式输出。综合使用这三个组件可以轻松地记录信息的类型和级别，并可以在运行时控制日志输出的样式和位置。</p>
-</blockquote>
+        <h3 id="Executors类分析"><a href="#Executors类分析" class="headerlink" title="Executors类分析"></a>Executors类分析</h3><h3 id="基于ThreadPoolExecutor构造线程池"><a href="#基于ThreadPoolExecutor构造线程池" class="headerlink" title="基于ThreadPoolExecutor构造线程池"></a>基于ThreadPoolExecutor构造线程池</h3><p>我们来看一下ThreadPoolExecutor类的构造函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                          <span class="keyword">int</span> maximumPoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                          <span class="keyword">long</span> keepAliveTime,</span></span></span><br><span class="line"><span class="function"><span class="params">                          TimeUnit unit,</span></span></span><br><span class="line"><span class="function"><span class="params">                          BlockingQueue&lt;Runnable&gt; workQueue,</span></span></span><br><span class="line"><span class="function"><span class="params">                          ThreadFactory threadFactory,</span></span></span><br><span class="line"><span class="function"><span class="params">                          RejectedExecutionHandler handler)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//先判断参数是否合法</span></span><br><span class="line">    <span class="keyword">if</span> (corePoolSize &lt; <span class="number">0</span> ||</span><br><span class="line">        maximumPoolSize &lt;= <span class="number">0</span> ||</span><br><span class="line">        maximumPoolSize &lt; corePoolSize ||</span><br><span class="line">        keepAliveTime &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">    <span class="keyword">if</span> (workQueue == <span class="keyword">null</span> || threadFactory == <span class="keyword">null</span> || handler == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">    <span class="keyword">this</span>.acc = System.getSecurityManager() == <span class="keyword">null</span> ?</span><br><span class="line">        <span class="keyword">null</span> :</span><br><span class="line">    	AccessController.getContext();</span><br><span class="line">    <span class="comment">//核心线程数量</span></span><br><span class="line">    <span class="keyword">this</span>.corePoolSize = corePoolSize;</span><br><span class="line">    <span class="comment">//最大线程数量</span></span><br><span class="line">    <span class="keyword">this</span>.maximumPoolSize = maximumPoolSize;</span><br><span class="line">    <span class="comment">//工作队列</span></span><br><span class="line">    <span class="keyword">this</span>.workQueue = workQueue;</span><br><span class="line">    <span class="comment">//保活时间，unit为时间单位，转换为秒</span></span><br><span class="line">    <span class="keyword">this</span>.keepAliveTime = unit.toNanos(keepAliveTime);、</span><br><span class="line">    <span class="comment">//线程工厂</span></span><br><span class="line">    <span class="keyword">this</span>.threadFactory = threadFactory;</span><br><span class="line">    <span class="comment">//拒绝策略</span></span><br><span class="line">    <span class="keyword">this</span>.handler = handler;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="提交任务"><a href="#提交任务" class="headerlink" title="提交任务"></a>提交任务</h4><p>提交任务的过程主要分为三步：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Proceed in 3 steps:</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 1. If fewer than corePoolSize threads are running, try to</span></span><br><span class="line"><span class="comment">* start a new thread with the given command as its first</span></span><br><span class="line"><span class="comment">* task.  The call to addWorker atomically checks runState and</span></span><br><span class="line"><span class="comment">* workerCount, and so prevents false alarms that would add</span></span><br><span class="line"><span class="comment">* threads when it shouldn't, by returning false.</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 2. If a task can be successfully queued, then we still need</span></span><br><span class="line"><span class="comment">* to double-check whether we should have added a thread</span></span><br><span class="line"><span class="comment">* (because existing ones died since last checking) or that</span></span><br><span class="line"><span class="comment">* the pool shut down since entry into this method. So we</span></span><br><span class="line"><span class="comment">* recheck state and if necessary roll back the enqueuing if</span></span><br><span class="line"><span class="comment">* stopped, or start a new thread if there are none.</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 3. If we cannot queue task, then we try to add a new</span></span><br><span class="line"><span class="comment">* thread.  If it fails, we know we are shut down or saturated</span></span><br><span class="line"><span class="comment">* and so reject the task.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">int</span> c = ctl.get();</span><br><span class="line"><span class="keyword">if</span> (workerCountOf(c) &lt; corePoolSize) &#123;</span><br><span class="line">    <span class="keyword">if</span> (addWorker(command, <span class="keyword">true</span>))</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    c = ctl.get();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (isRunning(c) &amp;&amp; workQueue.offer(command)) &#123;</span><br><span class="line">    <span class="keyword">int</span> recheck = ctl.get();</span><br><span class="line">    <span class="keyword">if</span> (! isRunning(recheck) &amp;&amp; remove(command))</span><br><span class="line">        reject(command);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (workerCountOf(recheck) == <span class="number">0</span>)</span><br><span class="line">        addWorker(<span class="keyword">null</span>, <span class="keyword">false</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (!addWorker(command, <span class="keyword">false</span>))</span><br><span class="line">    reject(command);</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>Loggers</p>
-<blockquote>
-<p>Loggers组件在此系统中被分为五个级别：DEBUG、INFO、WARN、ERROR和FATAL。这五个级别是有顺序的，DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL，分别用来指定这条日志信息的重要程度，明白这一点很重要，Log4j有一个规则：只输出级别不低于设定级别的日志信息，假设Loggers级别设定为INFO，则INFO、WARN、ERROR和FATAL级别的日志信息都会输出，而级别比INFO低的DEBUG则不会输出。</p>
-</blockquote>
-</li>
-<li><p>Appenders</p>
-<blockquote>
-<p>禁用和使用日志请求只是Log4j的基本功能，Log4j日志系统还提供许多强大的功能，比如允许把日志输出到不同的地方，如控制台（Console）、文件（Files）等，可以根据天数或者文件大小产生新的文件，可以以流的形式发送到其它地方等等。</p>
-<p>常使用的类如下：</p>
-<p>org.apache.log4j.ConsoleAppender（控制台）<br><br>  org.apache.log4j.FileAppender（文件）<br><br>  org.apache.log4j.DailyRollingFileAppender（每天产生一个日志文件）<br><br>  org.apache.log4j.RollingFileAppender（文件大小到达指定尺寸的时候产生一个新的文件）<br><br>  org.apache.log4j.WriterAppender（将日志信息以流格式发送到任意指定的地方） <br></p>
-</blockquote>
-</li>
-<li><p>Layouts</p>
-<blockquote>
-<p>有时用户希望根据自己的喜好格式化自己的日志输出，Log4j可以在Appenders的后面附加Layouts来完成这个功能。 Layouts提供四种日志输出样式，如根据HTML样式、自由指定样式、包含日志级别与信息的样式和包含日志时间、线程、类别等信息的样式。</p>
-<p>常使用的类如下：</p>
-<p>org.apache.log4j.HTMLLayout（以HTML表格形式布局）<br><br>  org.apache.log4j.PatternLayout（可以灵活地指定布局模式）<br><br>  org.apache.log4j.SimpleLayout（包含日志信息的级别和信息字符串）<br><br>  org.apache.log4j.TTCCLayout（包含日志产生的时间、线程、类别等信息）<br></p>
-</blockquote>
-</li>
+<li>1.如果运行的线程数小于<code>corePoolSize</code>，则会调用<code>runWorker()</code>，检查<code>runState</code>和<code>workerCount</code>，并且创建一个新的线程，把任务给它当做第一个任务来执行，然后就返回。</li>
+<li>2.如果任务成功的加入队列，然后我们仍然需要去双重检查是否我们应该添加一个thread（因为在之前一次检查之后可能会有thread终止），或者线程池停止了自从进入这个函数。因此我们需要重复检查检查状态，并且在线程池停止的情况下回滚入队操作，或者开启一个新的线程如果这没有线程。</li>
+<li>3.如果任务不能加入队列，则尝试创建一个新的线程。如果创建失败，我们知道线程池停止或者队列饱和，因此会拒绝这个任务。</li>
 </ul>
-</li>
-<li><p>log4j.properties配置文件详解</p>
-<blockquote>
-<p>在实际应用中，要使Log4j在系统中运行须事先设定配置文件。配置文件事实上也就是对Logger、Appender及Layout进行相应设定。Log4j支持两种配置文件格式，一种是XML格式的文件，一种是properties属性文件。下面以properties属性文件为例介绍 log4j.properties的配置。</p>
-</blockquote>
-<ul>
-<li><p>配置根Logger</p>
-<blockquote>
-<p>log4j.rootLogger = [ level ] , appenderName1, appenderName2, …<br><br>  log4j.additivity.org.apache=false：表示Logger不会在父Logger的appender里输出，默认为true。<br><br>  level ：设定日志记录的最低级别，可设的值有OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL或者自定义的级别，Log4j建议只使用中间四个级别。通过在这里设定级别，您可以控制应用程序中相应级别的日志信息的开关，比如在这里设定了INFO级别，则应用程序中所有DEBUG级别的日志信息将不会被打印出来。<br><br>  appenderName：就是指定日志信息要输出到哪里。可以同时指定多个输出目的地，用逗号隔开。<br><br>  例如：log4j.rootLogger＝INFO,A1,B2,C3 <br></p>
-</blockquote>
-</li>
-<li><p>配置控制台输出</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">### 输出信息到控制台 ###</span><br><span class="line">log4j.appender.stdout = org.apache.log4j.ConsoleAppender</span><br><span class="line">### 输出ERROR级别以上的日志到控制台 ###</span><br><span class="line">log4j.appender.stdout.Threshold = ERROR</span><br><span class="line">log4j.appender.stdout.Target = System.out</span><br><span class="line">log4j.appender.stdout.layout = org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.stdout.layout.ConversionPattern = [%-5p] %d&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; method:%l%n%m%n</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置日志文件输出</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">### 输出DEBUG 级别以上的日志到=E://logs/debug.log ###</span><br><span class="line">log4j.appender.debug = org.apache.log4j.DailyRollingFileAppender</span><br><span class="line">log4j.appender.debug.File = E://logs/debug.log</span><br><span class="line">log4j.appender.debug.Append = true</span><br><span class="line">##Threshold是个全局的过滤器，它将把低于所设置的level的信息过滤不显示出来。</span><br><span class="line">log4j.appender.debug.Threshold = DEBUG</span><br><span class="line">log4j.appender.debug.layout = org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.debug.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>REFERENCES</p>
-<ol>
-<li><a href="http://www.open-open.com/lib/view/open1393488356958.html" target="\_blank">Log4j.properties配置详解</a></li>
-<li><a href="http://www.codeceo.com/article/log4j-usage.html" target="\_blank">最详细的Log4j使用教程</a></li>
-</ol>
-</li>
-</ul>
+<h4 id="五种运行状态"><a href="#五种运行状态" class="headerlink" title="五种运行状态"></a>五种运行状态</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// runState is stored in the high-order bits</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> RUNNING    = -<span class="number">1</span> &lt;&lt; COUNT_BITS; <span class="comment">//接收新的任务并且处理队列中的任务</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SHUTDOWN   =  <span class="number">0</span> &lt;&lt; COUNT_BITS; <span class="comment">//不接受新的任务，但是会继续处理队列中的任务</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> STOP       =  <span class="number">1</span> &lt;&lt; COUNT_BITS; <span class="comment">//不接受新的任务，也不处理队列中的任务，并且打断中正在处理的任务</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TIDYING    =  <span class="number">2</span> &lt;&lt; COUNT_BITS; <span class="comment">//所有烦人任务都终止，workerCount为零，线程状态过渡到TIDYING，将会执行terminated()方法</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TERMINATED =  <span class="number">3</span> &lt;&lt; COUNT_BITS; <span class="comment">//terminated()函数执行完成</span></span><br></pre></td></tr></table></figure>
+<h3 id="饱和策略分析"><a href="#饱和策略分析" class="headerlink" title="饱和策略分析"></a>饱和策略分析</h3><p>​                                                                                                                                                                                                                                                                                                                                                                    </p>
 
       
     </div>
@@ -549,7 +476,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/log4j/" rel="tag"># log4j</a>
+            <a href="/tags/java/" rel="tag"># java</a>
           
         </div>
       
@@ -562,8 +489,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/26/Collections.sort()分析/" rel="next" title="Collections.sort()源码分析（基于jdk1.8）">
-                <i class="fa fa-chevron-left"></i> Collections.sort()源码分析（基于jdk1.8）
+              <a href="/2018/09/24/dubbo-provider-request-and-response-analysis/" rel="next" title="Dubbo服务端接收请求及响应请求原理分析">
+                <i class="fa fa-chevron-left"></i> Dubbo服务端接收请求及响应请求原理分析
               </a>
             
           </div>
@@ -571,10 +498,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/26/创建线程的三种方式/" rel="prev" title="Java创建线程的三种方式(Thread/Runnable/Callable)">
-                Java创建线程的三种方式(Thread/Runnable/Callable) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -629,8 +552,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -762,6 +694,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Executors类分析"><span class="nav-number">1.</span> <span class="nav-text">Executors类分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于ThreadPoolExecutor构造线程池"><span class="nav-number">2.</span> <span class="nav-text">基于ThreadPoolExecutor构造线程池</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#提交任务"><span class="nav-number">2.1.</span> <span class="nav-text">提交任务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五种运行状态"><span class="nav-number">2.2.</span> <span class="nav-text">五种运行状态</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#饱和策略分析"><span class="nav-number">3.</span> <span class="nav-text">饱和策略分析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -940,9 +888,9 @@
   
     <script type="text/javascript">
       var disqus_config = function () {
-        this.page.url = 'https://shuaijunlan.github.io/2017/04/26/log4j配置详解/';
-        this.page.identifier = '2017/04/26/log4j配置详解/';
-        this.page.title = 'log4j初级配置教程';
+        this.page.url = 'https://shuaijunlan.github.io/2018/10/11/java-thread-pool/';
+        this.page.identifier = '2018/10/11/java-thread-pool/';
+        this.page.title = 'Java线程池分析';
         };
       function loadComments () {
         var d = document, s = d.createElement('script');
