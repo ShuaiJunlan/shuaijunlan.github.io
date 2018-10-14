@@ -124,7 +124,7 @@
 <meta property="og:description" content="基于ThreadPoolExecutor构造线程池我们来看一下ThreadPoolExecutor类的构造函数，一共需要传入7个参数，下面的注释中有详细的解释： 12345678910111213141516171819202122232425262728293031public ThreadPoolExecutor(int corePoolSize,">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/RejectedExecutionHandler.png?raw=true">
-<meta property="og:updated_time" content="2018-10-13T03:37:47.144Z">
+<meta property="og:updated_time" content="2018-10-14T02:41:07.085Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java线程池分析">
 <meta name="twitter:description" content="基于ThreadPoolExecutor构造线程池我们来看一下ThreadPoolExecutor类的构造函数，一共需要传入7个参数，下面的注释中有详细的解释： 12345678910111213141516171819202122232425262728293031public ThreadPoolExecutor(int corePoolSize,">
@@ -406,7 +406,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-13 11:37:47" itemprop="dateModified" datetime="2018-10-13T11:37:47+08:00">2018-10-13</time>
+                <time title="修改时间：2018-10-14 10:41:07" itemprop="dateModified" datetime="2018-10-14T10:41:07+08:00">2018-10-14</time>
               
             
           </span>
@@ -557,7 +557,13 @@
 </tr>
 </tbody>
 </table>
-<h3 id=""><a href="#" class="headerlink" title=" "></a> </h3>
+<h3 id="关闭线程池"><a href="#关闭线程池" class="headerlink" title="关闭线程池"></a>关闭线程池</h3><p>通过源码可以看到，停止线程池执行主要是两个方法，第一个是<code>shutdown()</code>，第二个是<code>shutdownNow()</code>方法，他们的主要区别是：</p>
+<ul>
+<li>调用shutdown()方法，将会把线程池的状态标记为<code>SHUTDOWN</code>，通过前面的状态分析，我们知道这个状态下线程池将不会接收任何新的任务，并且会继续执行队列里的任务，直到所有任务执行完成，终                                                                                                                                                                                                         止线程池；</li>
+<li>调用shutdownNow()方法，将会把线程池的状态标记为<code>STOP</code>，此时线程池也不会接收任何新的任务，并且立即停止正在执行任务的线程，将队列里的任务返回给调用者；</li>
+</ul>
+<p>我们可以看到，使用shutdownNow()强行关闭的速度更快，但风险也更大，因为任务很可能执行一半就被停止了；而使用shutdown()正常关闭虽然速度慢，但却更安全，因为会一直等到队列中的任务全部执行完成后才关闭。</p>
+
       
     </div>
 
@@ -805,7 +811,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于ThreadPoolExecutor构造线程池"><span class="nav-number">1.</span> <span class="nav-text">基于ThreadPoolExecutor构造线程池</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#提交任务"><span class="nav-number">1.1.</span> <span class="nav-text">提交任务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五种运行状态"><span class="nav-number">1.2.</span> <span class="nav-text">五种运行状态</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#饱和策略分析"><span class="nav-number">2.</span> <span class="nav-text">饱和策略分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AbortPolicy"><span class="nav-number">2.1.</span> <span class="nav-text">AbortPolicy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CallerRunsPolicy"><span class="nav-number">2.2.</span> <span class="nav-text">CallerRunsPolicy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DiscardPolicy"><span class="nav-number">2.3.</span> <span class="nav-text">DiscardPolicy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DiscardOldestPolicy"><span class="nav-number">2.4.</span> <span class="nav-text">DiscardOldestPolicy</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义线程工厂"><span class="nav-number">3.</span> <span class="nav-text">自定义线程工厂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Executors类分析"><span class="nav-number">4.</span> <span class="nav-text">Executors类分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">5.</span> <span class="nav-text"> </span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于ThreadPoolExecutor构造线程池"><span class="nav-number">1.</span> <span class="nav-text">基于ThreadPoolExecutor构造线程池</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#提交任务"><span class="nav-number">1.1.</span> <span class="nav-text">提交任务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五种运行状态"><span class="nav-number">1.2.</span> <span class="nav-text">五种运行状态</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#饱和策略分析"><span class="nav-number">2.</span> <span class="nav-text">饱和策略分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AbortPolicy"><span class="nav-number">2.1.</span> <span class="nav-text">AbortPolicy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CallerRunsPolicy"><span class="nav-number">2.2.</span> <span class="nav-text">CallerRunsPolicy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DiscardPolicy"><span class="nav-number">2.3.</span> <span class="nav-text">DiscardPolicy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DiscardOldestPolicy"><span class="nav-number">2.4.</span> <span class="nav-text">DiscardOldestPolicy</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义线程工厂"><span class="nav-number">3.</span> <span class="nav-text">自定义线程工厂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Executors类分析"><span class="nav-number">4.</span> <span class="nav-text">Executors类分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭线程池"><span class="nav-number">5.</span> <span class="nav-text">关闭线程池</span></a></li></ol></div>
             
 
           </div>
