@@ -344,6 +344,178 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2018/09/18/dubbo-cluster-fault-tolerance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuai Junlan">
+      <meta itemprop="description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="只争朝夕(帅俊岚)">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/18/dubbo-cluster-fault-tolerance/" itemprop="url">
+                  Dubbo集群容错机制
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-09-18 15:34:45" itemprop="dateCreated datePublished" datetime="2018-09-18T15:34:45+08:00">2018-09-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-09-23 17:06:46" itemprop="dateModified" datetime="2018-09-23T17:06:46+08:00">2018-09-23</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/18/dubbo-cluster-fault-tolerance/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/09/18/dubbo-cluster-fault-tolerance/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在之前一篇文章<a href="https://shuaijunlan.github.io/2018/08/05/dubbo-consumer-calling-process-source-code-analysis/">《Dubbo消费者调用过程源码分析》</a>讲到，在创建代理的时候会生成调用对象invoker，这个时候就会绑定集群策略，我们来看生成invoker的代码，在类<code>ReferenceConfig#createProxy(Map&lt;String, String&gt; map)</code>方法中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//直接在配置文件中配置url，实现直接通信（如果既配置了直连地址又配置了注册中心的地址，则自动忽略注册中心的地址）</span></span><br><span class="line"><span class="keyword">if</span> (url != <span class="keyword">null</span> &amp;&amp; url.length() &gt; <span class="number">0</span>) &#123; <span class="comment">// user specified URL, could be peer-to-peer address, or register center's address.</span></span><br><span class="line">    String[] us = Constants.SEMICOLON_SPLIT_PATTERN.split(url);</span><br><span class="line">    <span class="keyword">if</span> (us != <span class="keyword">null</span> &amp;&amp; us.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (String u : us) &#123;</span><br><span class="line">            URL url = URL.valueOf(u);</span><br><span class="line">            <span class="keyword">if</span> (url.getPath() == <span class="keyword">null</span> || url.getPath().length() == <span class="number">0</span>) &#123;</span><br><span class="line">                url = url.setPath(interfaceName);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (Constants.REGISTRY_PROTOCOL.equals(url.getProtocol())) &#123;</span><br><span class="line">                urls.add(url.addParameterAndEncoded(Constants.REFER_KEY, StringUtils.toQueryString(map)));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                urls.add(ClusterUtils.mergeUrl(url, map));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123; <span class="comment">// assemble URL from register center's configuration</span></span><br><span class="line">    <span class="comment">//获取配置注册中心的url（可以有多个注册中心的url）</span></span><br><span class="line">    List&lt;URL&gt; us = loadRegistries(<span class="keyword">false</span>);</span><br><span class="line">    <span class="keyword">if</span> (us != <span class="keyword">null</span> &amp;&amp; !us.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">for</span> (URL u : us) &#123;</span><br><span class="line">            URL monitorUrl = loadMonitor(u);</span><br><span class="line">            <span class="keyword">if</span> (monitorUrl != <span class="keyword">null</span>) &#123;</span><br><span class="line">                map.put(Constants.MONITOR_KEY, URL.encode(monitorUrl.toFullString()));</span><br><span class="line">            &#125;</span><br><span class="line">            urls.add(u.addParameterAndEncoded(Constants.REFER_KEY, StringUtils.toQueryString(map)));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果urls为空，则抛出异常</span></span><br><span class="line">    <span class="keyword">if</span> (urls.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"No such any registry to reference "</span> + interfaceName + <span class="string">" on the consumer "</span> + NetUtils.getLocalHost() + <span class="string">" use dubbo version "</span> + Version.getVersion() + <span class="string">", please config &lt;dubbo:registry address=\"...\" /&gt; to your spring config."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//当urls的长度为一时，可能为服务的直连地址也可能为注册中心的地址</span></span><br><span class="line"><span class="keyword">if</span> (urls.size() == <span class="number">1</span>) &#123;</span><br><span class="line">    invoker = refprotocol.refer(interfaceClass, urls.get(<span class="number">0</span>));</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;<span class="comment">//有多个直连地址，或者多个注册中心的地址</span></span><br><span class="line">    List&lt;Invoker&lt;?&gt;&gt; invokers = <span class="keyword">new</span> ArrayList&lt;Invoker&lt;?&gt;&gt;();</span><br><span class="line">    URL registryURL = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">for</span> (URL url : urls) &#123;</span><br><span class="line">        <span class="comment">//获取每个url对应的invoker</span></span><br><span class="line">        invokers.add(refprotocol.refer(interfaceClass, url));</span><br><span class="line">        <span class="keyword">if</span> (Constants.REGISTRY_PROTOCOL.equals(url.getProtocol())) &#123;</span><br><span class="line">            <span class="comment">//获取最后一个注册中心的地址</span></span><br><span class="line">            registryURL = url; <span class="comment">// use last registry url</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (registryURL != <span class="keyword">null</span>) &#123; <span class="comment">// registry url is available</span></span><br><span class="line">        <span class="comment">// use AvailableCluster only when register's cluster is available</span></span><br><span class="line">        <span class="comment">//当有注册中心的地址时，第一层使用AvailableCluster集群策略，第二层使用默认的集群策略</span></span><br><span class="line">        URL u = registryURL.addParameter(Constants.CLUSTER_KEY, AvailableCluster.NAME);</span><br><span class="line">        invoker = cluster.join(<span class="keyword">new</span> StaticDirectory(u, invokers));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// not a registry url</span></span><br><span class="line">        <span class="comment">//如果没有注册中心地址，则使用默认的集群策略</span></span><br><span class="line">        invoker = cluster.join(<span class="keyword">new</span> StaticDirectory(invokers));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们总结出三种生成集群策略的入口，<strong>当urls的长度为1时，此时该url可能为注册中心的地址也可能是服务的直连地址，则进一步执行<code>invoker = refprotocol.refer(interfaceClass, urls.get(0));</code>；当urls的长度不为1时，此时可能为多个注册中心的地址或者多个服务直连地址，当为多个注册中心的地址时，会执行：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">URL u = registryURL.addParameter(Constants.CLUSTER_KEY, AvailableCluster.NAME);</span><br><span class="line">invoker = cluster.join(<span class="keyword">new</span> StaticDirectory(u, invokers));</span><br></pre></td></tr></table></figure>
+<p><strong>当为多个直连地址时，则执行：<code>invoker = cluster.join(new StaticDirectory(invokers));</code></strong>，下面将对这三种方式进行详细的分析。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/18/dubbo-cluster-fault-tolerance/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2018/09/10/dubbo-loadbalance-strategy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1022,181 +1194,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2018/08/09/dubbo-spi-analysis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuai Junlan">
-      <meta itemprop="description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="只争朝夕(帅俊岚)">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/09/dubbo-spi-analysis/" itemprop="url">
-                  Dubbo SPI机制源码分析
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-09 15:03:57" itemprop="dateCreated datePublished" datetime="2018-08-09T15:03:57+08:00">2018-08-09</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-09-17 20:16:46" itemprop="dateModified" datetime="2018-09-17T20:16:46+08:00">2018-09-17</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/08/09/dubbo-spi-analysis/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/08/09/dubbo-spi-analysis/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Dubbo是微内核架构，还是开闭原则的应用，把核心流程架构固定，但是流程的各个节点对重新改进是开放的。具体的实现机制就是SPI(Service Provider Interface)机制，Dubbo基于Java SPI机制（不了解Java SPI机制的可以参考这篇文章<a href="https://shuaijunlan.github.io/2018/08/03/java-spi-introduction/">《深入理解Java SPI机制》</a>），在其基础上做了改进和扩展。</p>
-<p>根据SPI规范，接口由框架定义，具体实现可以由不同的厂商提供，在Dubbo jar包可以发现在<code>/META-INF/dubbo/internal</code>目录下有许多接口命名的文件，文件里面的内容就是文件名代表的接口的各种实现类，这就是Dubbo SPI机制的配置基础，以<code>org.apache.dubbo.rpc.Protocol</code>文件为例，内容如下（dubbo-2.7.0-SNAPSHOT 版本）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">filter=org.apache.dubbo.rpc.protocol.ProtocolFilterWrapper</span><br><span class="line">listener=org.apache.dubbo.rpc.protocol.ProtocolListenerWrapper</span><br><span class="line">mock=org.apache.dubbo.rpc.support.MockProtocol</span><br><span class="line">dubbo=org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol</span><br><span class="line">injvm=org.apache.dubbo.rpc.protocol.injvm.InjvmProtocol</span><br><span class="line">rmi=org.apache.dubbo.rpc.protocol.rmi.RmiProtocol</span><br><span class="line">hessian=org.apache.dubbo.rpc.protocol.hessian.HessianProtocol</span><br><span class="line">http=org.apache.dubbo.rpc.protocol.http.HttpProtocol</span><br><span class="line"></span><br><span class="line">org.apache.dubbo.rpc.protocol.webservice.WebServiceProtocol</span><br><span class="line">thrift=org.apache.dubbo.rpc.protocol.thrift.ThriftProtocol</span><br><span class="line">memcached=org.apache.dubbo.rpc.protocol.memcached.MemcachedProtocol</span><br><span class="line">redis=org.apache.dubbo.rpc.protocol.redis.RedisProtocol</span><br><span class="line">rest=org.apache.dubbo.rpc.protocol.rest.RestProtocol</span><br><span class="line">registry=org.apache.dubbo.registry.integration.RegistryProtocol</span><br><span class="line">qos=org.apache.dubbo.qos.protocol.QosProtocolWrapper</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/09/dubbo-spi-analysis/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1239,7 +1241,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
