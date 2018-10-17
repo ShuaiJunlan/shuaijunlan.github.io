@@ -121,11 +121,11 @@
 <meta property="og:url" content="https://shuaijunlan.github.io/2018/10/17/dubbo-router-analysis/index.html">
 <meta property="og:site_name" content="只争朝夕(帅俊岚)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-10-17 16-41-11.png">
-<meta property="og:updated_time" content="2018-10-17T08:46:42.239Z">
+<meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-10-17 16-41-11.png?raw=true">
+<meta property="og:updated_time" content="2018-10-17T08:51:33.656Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dubbo路由机制分析">
-<meta name="twitter:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-10-17 16-41-11.png">
+<meta name="twitter:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-10-17 16-41-11.png?raw=true">
 
 
 
@@ -386,7 +386,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 10:03:57 / 修改时间：16:46:42" itemprop="dateCreated datePublished" datetime="2018-10-17T10:03:57+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 10:03:57 / 修改时间：16:51:33" itemprop="dateCreated datePublished" datetime="2018-10-17T10:03:57+08:00">2018-10-17</time>
             
 
             
@@ -444,7 +444,7 @@
       
 
       
-        <p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-10-17 16-41-11.png" alt=""></p>
+        <p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-10-17 16-41-11.png?raw=true" alt=""></p>
 <a id="more"></a>
 <p>这篇文章主要讲Dubbo的路由特性，当Consumer发起一个请求，Dubbo依据配置的路由规则，计算出那些提供者可以提供这次的请求服务，所以路由机制会在<code>集群容错策略</code>和<code>负载均衡策略</code>之前被执行，下面我们来开始分析源码。</p>
 <p>执行路由机制的入口是在AbstractClusterInvoker类的invoke方法，其中调用了list()方法，然后会执行AbstractDirectory的list()方法：</p>
