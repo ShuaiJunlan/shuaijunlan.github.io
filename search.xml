@@ -11,7 +11,7 @@
   <entry>
     <title><![CDATA[深入研究Java阻塞队列实现]]></title>
     <url>%2F2018%2F10%2F15%2Fjava-blocking-queue%2F</url>
-    <content type="text"><![CDATA[]]></content>
+    <content type="text"><![CDATA[阻塞队列是一个非常常见的数据结构，比如在线程池中用于存放任务，下面我们将围绕阻塞队列的实现对其源码进行剖析，主要讲解ArrayBlockingQueue、PriorityBlockingQueue、SynchronousQueue和LinkedBlockingQueue四大阻塞队列的实现。]]></content>
       <tags>
         <tag>java</tag>
       </tags>
