@@ -122,7 +122,7 @@
 <meta property="og:site_name" content="只争朝夕(帅俊岚)">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-10-17 16-41-11.png?raw=true">
-<meta property="og:updated_time" content="2018-10-17T08:51:33.656Z">
+<meta property="og:updated_time" content="2018-10-22T08:22:59.877Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dubbo路由机制分析">
 <meta name="twitter:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-10-17 16-41-11.png?raw=true">
@@ -386,12 +386,24 @@
                 
               
 
-              <time title="创建时间：2018-10-17 10:03:57 / 修改时间：16:51:33" itemprop="dateCreated datePublished" datetime="2018-10-17T10:03:57+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 10:03:57" itemprop="dateCreated datePublished" datetime="2018-10-17T10:03:57+08:00">2018-10-17</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-22 16:22:59" itemprop="dateModified" datetime="2018-10-22T16:22:59+08:00">2018-10-22</time>
               
             
           </span>
@@ -467,8 +479,11 @@
 <li>RegisterDirectory#toRouters()</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> urls</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> null : no routers ,do nothing</span></span><br><span class="line"><span class="comment">     * else :routers list</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> List&lt;Router&gt; <span class="title">toRouters</span><span class="params">(List&lt;URL&gt; urls)</span> </span>&#123;</span><br><span class="line">    List&lt;Router&gt; routers = <span class="keyword">new</span> ArrayList&lt;Router&gt;();</span><br><span class="line">    <span class="keyword">if</span> (urls == <span class="keyword">null</span> || urls.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">return</span> routers;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (urls != <span class="keyword">null</span> &amp;&amp; !urls.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">for</span> (URL url : urls) &#123;</span><br><span class="line">            <span class="keyword">if</span> (Constants.EMPTY_PROTOCOL.equals(url.getProtocol())) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            String routerType = url.getParameter(Constants.ROUTER_KEY);</span><br><span class="line">            <span class="keyword">if</span> (routerType != <span class="keyword">null</span> &amp;&amp; routerType.length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                url = url.setProtocol(routerType);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Router router = routerFactory.getRouter(url);</span><br><span class="line">                <span class="keyword">if</span> (!routers.contains(router)) &#123;</span><br><span class="line">                    routers.add(router);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">                logger.error(<span class="string">"convert router url to router error, url: "</span> + url, t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> routers;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<p>下面将分别分析四种路由的具体实现和配置方法：</p>
+<h4 id="ConditionRouterFactory"><a href="#ConditionRouterFactory" class="headerlink" title="ConditionRouterFactory"></a>ConditionRouterFactory</h4><p>创建一个<code>ConditionRouter</code>实例，</p>
+<h4 id="ScriptRouterFactory"><a href="#ScriptRouterFactory" class="headerlink" title="ScriptRouterFactory"></a>ScriptRouterFactory</h4><p>创建一个<code>ScriptRouter</code>实例，</p>
+<h4 id="TagRouterFactory"><a href="#TagRouterFactory" class="headerlink" title="TagRouterFactory"></a>TagRouterFactory</h4><p>创建一个<code>TagRouter</code>实例，</p>
+<h4 id="FileRouterFactory"><a href="#FileRouterFactory" class="headerlink" title="FileRouterFactory"></a>FileRouterFactory</h4>
       
     </div>
 
@@ -564,8 +579,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -697,6 +721,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#ConditionRouterFactory"><span class="nav-number">1.</span> <span class="nav-text">ConditionRouterFactory</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ScriptRouterFactory"><span class="nav-number">2.</span> <span class="nav-text">ScriptRouterFactory</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TagRouterFactory"><span class="nav-number">3.</span> <span class="nav-text">TagRouterFactory</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FileRouterFactory"><span class="nav-number">4.</span> <span class="nav-text">FileRouterFactory</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
