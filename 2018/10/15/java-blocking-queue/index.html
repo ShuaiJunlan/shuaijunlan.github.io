@@ -122,8 +122,7 @@
 <meta property="og:site_name" content="只争朝夕(帅俊岚)">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/BlockingQueue.png?raw=true">
-<meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/0.png?raw=true">
-<meta property="og:updated_time" content="2018-11-08T07:45:08.029Z">
+<meta property="og:updated_time" content="2018-11-08T08:03:10.350Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入研究Java阻塞队列实现">
 <meta name="twitter:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/BlockingQueue.png?raw=true">
@@ -404,7 +403,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-08 15:45:08" itemprop="dateModified" datetime="2018-11-08T15:45:08+08:00">2018-11-08</time>
+                <time title="修改时间：2018-11-08 16:03:10" itemprop="dateModified" datetime="2018-11-08T16:03:10+08:00">2018-11-08</time>
               
             
           </span>
@@ -470,9 +469,6 @@
 <li>LinkedBlockingQueue#dequeue()的优化</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> E <span class="title">dequeue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// assert takeLock.isHeldByCurrentThread();</span></span><br><span class="line">    <span class="comment">// assert head.item == null;</span></span><br><span class="line">    Node&lt;E&gt; h = head;</span><br><span class="line">    Node&lt;E&gt; first = h.next;</span><br><span class="line">    h.next = h; <span class="comment">// help GC</span></span><br><span class="line">    head = first;</span><br><span class="line">    E x = first.item;</span><br><span class="line">    first.item = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p><strong>欢迎关注技术公众号：ITechHub</strong></p>
-<p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/0.png?raw=true" alt=""></p>
 
       
     </div>
@@ -497,7 +493,7 @@
     <a href="https://shuaijunlan.github.io/2018/10/15/java-blocking-queue/" title="深入研究Java阻塞队列实现">https://shuaijunlan.github.io/2018/10/15/java-blocking-queue/</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>转载请注明出处，欢迎关注公众号：ITechHub： <img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/0.png?raw=true" alt=""></li>
+    <strong>版权声明： </strong>转载请注明出处，欢迎关注公众号：ITechHub <img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/0.png?raw=true" alt=""></li>
 </ul>
 
       </div>
