@@ -124,7 +124,8 @@
 <meta property="og:description" content="在之前一篇文章《Dubbo消费者调用过程源码分析》讲到，在创建代理的时候会生成调用对象invoker，这个时候就会绑定集群策略，我们来看生成invoker的代码，在类ReferenceConfig#createProxy(Map&amp;lt;String, String&amp;gt; map)方法中： 123456789101112131415161718192021222324252627282930313">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Cluster.png?raw=true">
-<meta property="og:updated_time" content="2018-09-23T09:06:46.877Z">
+<meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/0.png?raw=true">
+<meta property="og:updated_time" content="2018-11-08T07:38:53.779Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dubbo集群容错机制">
 <meta name="twitter:description" content="在之前一篇文章《Dubbo消费者调用过程源码分析》讲到，在创建代理的时候会生成调用对象invoker，这个时候就会绑定集群策略，我们来看生成invoker的代码，在类ReferenceConfig#createProxy(Map&amp;lt;String, String&amp;gt; map)方法中： 123456789101112131415161718192021222324252627282930313">
@@ -406,7 +407,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-23 17:06:46" itemprop="dateModified" datetime="2018-09-23T17:06:46+08:00">2018-09-23</time>
+                <time title="修改时间：2018-11-08 15:38:53" itemprop="dateModified" datetime="2018-11-08T15:38:53+08:00">2018-11-08</time>
               
             
           </span>
@@ -482,6 +483,9 @@
 <p>这个策略通常用于通知所有提供者更新缓存或日志等本地资源信息。</p>
 <h4 id="AvailableCluster"><a href="#AvailableCluster" class="headerlink" title="AvailableCluster"></a>AvailableCluster</h4><p>Available集群容错机制，主要逻辑是，简单的调用第一个可到达的服务，如果都不可达，则抛出异常：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">Invoker&lt;T&gt; <span class="title">join</span><span class="params">(Directory&lt;T&gt; directory)</span> <span class="keyword">throws</span> RpcException </span>&#123;</span><br><span class="line">	<span class="comment">//没有通过继承AbstractClusterInvoker抽象类，而是直接实现它，也没有使用负载均衡策略，而是简单的选择一个可达的服务</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> AbstractClusterInvoker&lt;T&gt;(directory) &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Result <span class="title">doInvoke</span><span class="params">(Invocation invocation, List&lt;Invoker&lt;T&gt;&gt; invokers, LoadBalance loadbalance)</span> <span class="keyword">throws</span> RpcException </span>&#123;</span><br><span class="line">            <span class="keyword">for</span> (Invoker&lt;T&gt; invoker : invokers) &#123;</span><br><span class="line">                <span class="keyword">if</span> (invoker.isAvailable()) &#123;<span class="comment">//获取第一个可达的服务提供方</span></span><br><span class="line">                    <span class="keyword">return</span> invoker.invoke(invocation);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RpcException(<span class="string">"No provider available in "</span> + invokers);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>欢迎关注技术公众号：ITechHub</strong></p>
+<p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/0.png?raw=true" alt=""></p>
 
       
     </div>
