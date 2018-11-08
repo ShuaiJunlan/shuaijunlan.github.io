@@ -125,7 +125,8 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-10-02 15-49-47.png?raw=true">
 <meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-10-02 15-50-13.png?raw=true">
-<meta property="og:updated_time" content="2018-10-02T09:33:45.744Z">
+<meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/0.png?raw=true">
+<meta property="og:updated_time" content="2018-11-08T07:45:08.013Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dubbo服务端接收请求及响应请求原理分析">
 <meta name="twitter:description" content="之前一篇文章《Dubbo服务提供者发布及注册过程源码分析》已经介绍了Dubbo服务端的服务注册及发布过程，这篇文章将会介绍Dubbo服务端是如何接受请求以及响应请求的。 本文还是以Consumer-Provider的Demo为例，分析接收请求及响应请求的具体流程，在Dubbo服务端发布服务之后，它将会监听一个端口等待接收客户端的请求，当接收到请求后，会经过入站处理器进行处理，我们知道在发布服务的时">
@@ -407,7 +408,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-02 17:33:45" itemprop="dateModified" datetime="2018-10-02T17:33:45+08:00">2018-10-02</time>
+                <time title="修改时间：2018-11-08 15:45:08" itemprop="dateModified" datetime="2018-11-08T15:45:08+08:00">2018-11-08</time>
               
             
           </span>
@@ -475,6 +476,9 @@
 <p>最后获取结果执行<code>channel.send()</code>方法，向服务消费方返回数据</p>
 <p>调用栈：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&quot;DubboServerHandler-211.69.197.55:20881-thread-2@3215&quot; daemon prio=5 tid=0x1a nid=NA runnable</span><br><span class="line">  java.lang.Thread.State: RUNNABLE</span><br><span class="line">	  at org.apache.dubbo.remoting.transport.netty4.NettyChannel.send(NettyChannel.java:101)</span><br><span class="line">	  at org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeChannel.send(HeaderExchangeChannel.java:89)</span><br><span class="line">	  at org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeChannel.send(HeaderExchangeChannel.java:78)</span><br><span class="line">	  at org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.handleRequest(HeaderExchangeHandler.java:103)</span><br><span class="line">	  at org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.received(HeaderExchangeHandler.java:196)</span><br><span class="line">	  at org.apache.dubbo.remoting.transport.DecodeHandler.received(DecodeHandler.java:51)</span><br><span class="line">	  at org.apache.dubbo.remoting.transport.dispatcher.ChannelEventRunnable.run(ChannelEventRunnable.java:57)</span><br><span class="line">	  at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)</span><br><span class="line">	  at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)</span><br><span class="line">	  at java.lang.Thread.run(Thread.java:748)</span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>欢迎关注技术公众号：ITechHub</strong></p>
+<p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/0.png?raw=true" alt=""></p>
 
       
     </div>
