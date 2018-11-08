@@ -115,18 +115,18 @@
 
 
 
-  <meta name="description" content="Java 7中新增了一个灵活的线程同步栅栏—Phaser，如果你需要在执行某些任务之前等待其他任务执行到某个状态，那么Phaser是一个很好的选择，这篇文章将介绍java.util.concurrent.Phaser，它和CountDownLatch具有相似的功能，但是Phaser更灵活。  基本术语在理解Phaser类的运行机制之前，我们先来了解Phaser类中的一些基本术语：  Regist">
+  <meta name="description" content="Java 7中新增了一个灵活的线程同步栅栏—Phaser，如果你需要在执行某些任务之前等待其他任务执行到某个状态，那么Phaser是一个很好的选择，这篇文章将介绍java.util.concurrent.Phaser，它和CountDownLatch具有相似的功能，但是Phaser更灵活。">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Guide to the Java Phaser">
 <meta property="og:url" content="https://shuaijunlan.github.io/2018/11/08/java-phaser/index.html">
 <meta property="og:site_name" content="只争朝夕(帅俊岚)">
-<meta property="og:description" content="Java 7中新增了一个灵活的线程同步栅栏—Phaser，如果你需要在执行某些任务之前等待其他任务执行到某个状态，那么Phaser是一个很好的选择，这篇文章将介绍java.util.concurrent.Phaser，它和CountDownLatch具有相似的功能，但是Phaser更灵活。  基本术语在理解Phaser类的运行机制之前，我们先来了解Phaser类中的一些基本术语：  Regist">
+<meta property="og:description" content="Java 7中新增了一个灵活的线程同步栅栏—Phaser，如果你需要在执行某些任务之前等待其他任务执行到某个状态，那么Phaser是一个很好的选择，这篇文章将介绍java.util.concurrent.Phaser，它和CountDownLatch具有相似的功能，但是Phaser更灵活。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-08T06:54:56.995Z">
+<meta property="og:updated_time" content="2018-11-08T07:22:10.295Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Guide to the Java Phaser">
-<meta name="twitter:description" content="Java 7中新增了一个灵活的线程同步栅栏—Phaser，如果你需要在执行某些任务之前等待其他任务执行到某个状态，那么Phaser是一个很好的选择，这篇文章将介绍java.util.concurrent.Phaser，它和CountDownLatch具有相似的功能，但是Phaser更灵活。  基本术语在理解Phaser类的运行机制之前，我们先来了解Phaser类中的一些基本术语：  Regist">
+<meta name="twitter:description" content="Java 7中新增了一个灵活的线程同步栅栏—Phaser，如果你需要在执行某些任务之前等待其他任务执行到某个状态，那么Phaser是一个很好的选择，这篇文章将介绍java.util.concurrent.Phaser，它和CountDownLatch具有相似的功能，但是Phaser更灵活。">
 
 
 
@@ -387,7 +387,7 @@
                 
               
 
-              <time title="创建时间：2018-11-08 18:43:24 / 修改时间：14:54:56" itemprop="dateCreated datePublished" datetime="2018-11-08T18:43:24+08:00">2018-11-08</time>
+              <time title="创建时间：2018-11-08 18:43:24 / 修改时间：15:22:10" itemprop="dateCreated datePublished" datetime="2018-11-08T18:43:24+08:00">2018-11-08</time>
             
 
             
@@ -448,6 +448,7 @@
         <blockquote>
 <p>Java 7中新增了一个灵活的线程同步栅栏—<strong>Phaser</strong>，如果你需要在执行某些任务之前等待其他任务执行到某个状态，那么<strong>Phaser</strong>是一个很好的选择，这篇文章将介绍<code>java.util.concurrent.Phaser</code>，它和<code>CountDownLatch</code>具有相似的功能，但是<strong>Phaser</strong>更灵活。</p>
 </blockquote>
+<a id="more"></a>
 <h3 id="基本术语"><a href="#基本术语" class="headerlink" title="基本术语"></a>基本术语</h3><p>在理解Phaser类的运行机制之前，我们先来了解Phaser类中的一些基本术语：</p>
 <ul>
 <li><p><strong>Registration</strong></p>
