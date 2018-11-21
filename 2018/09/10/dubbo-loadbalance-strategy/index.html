@@ -15,10 +15,10 @@
 
 
 <html class="theme-next gemini use-motion" lang="zh-CN">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 
 
@@ -39,8 +39,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -63,9 +63,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=6.4.2">
@@ -124,7 +124,7 @@
 <meta property="og:description" content="Dubbo提供了四种负载均衡策略：Random LoadBalance（加权随机负载均衡）、RoundRobin LoadBalance（加权轮询负载均衡）、LeastActive LoadBalance（最少活跃数负载均衡）、ConsistentHash LoadBalance（一致性hash负载均衡），下面将分别分析这四种负载均衡策略的源码。 Random LoadBalance先来看一下Ra">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-09-18 11-16-13.png?raw=true">
-<meta property="og:updated_time" content="2018-11-08T08:03:10.335Z">
+<meta property="og:updated_time" content="2018-11-21T08:32:21.747Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dubbo负载均衡策略分析">
 <meta name="twitter:description" content="Dubbo提供了四种负载均衡策略：Random LoadBalance（加权随机负载均衡）、RoundRobin LoadBalance（加权轮询负载均衡）、LeastActive LoadBalance（最少活跃数负载均衡）、ConsistentHash LoadBalance（一致性hash负载均衡），下面将分别分析这四种负载均衡策略的源码。 Random LoadBalance先来看一下Ra">
@@ -135,7 +135,7 @@
 
 
 
-  <link rel="canonical" href="https://shuaijunlan.github.io/2018/09/10/dubbo-loadbalance-strategy/"/>
+  <link rel="canonical" href="https://shuaijunlan.github.io/2018/09/10/dubbo-loadbalance-strategy/">
 
 
 
@@ -195,7 +195,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -205,7 +205,7 @@
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
@@ -245,7 +245,7 @@
           
           <li class="menu-item menu-item-home">
     <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
   </li>
         
         
@@ -253,7 +253,7 @@
           
           <li class="menu-item menu-item-about">
     <a href="/about/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
   </li>
         
         
@@ -261,7 +261,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
   </li>
         
         
@@ -269,7 +269,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
   </li>
 
       
@@ -279,7 +279,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
         </li>
       
     </ul>
@@ -299,9 +299,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -346,20 +344,20 @@
 
   
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2018/09/10/dubbo-loadbalance-strategy/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuai Junlan">
       <meta itemprop="description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="ITechHub">
     </span>
 
@@ -410,7 +408,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-08 16:03:10" itemprop="dateModified" datetime="2018-11-08T16:03:10+08:00">2018-11-08</time>
+                <time title="修改时间：2018-11-21 16:32:21" itemprop="dateModified" datetime="2018-11-21T16:32:21+08:00">2018-11-21</time>
               
             
           </span>
@@ -426,8 +424,7 @@
                 </span>
                 <a href="/2018/09/10/dubbo-loadbalance-strategy/#comments" itemprop="discussionUrl">
                 
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/09/10/dubbo-loadbalance-strategy/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/09/10/dubbo-loadbalance-strategy/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -438,11 +435,10 @@
 
           
             <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon"
-            >
+            <span class="post-meta-item-icon">
             <i class="fa fa-eye"></i>
              阅读次数： 
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
             </span>
           
 
@@ -613,7 +609,7 @@
 
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
               <p class="site-author-name" itemprop="name">Shuai Junlan</p>
               <p class="site-description motion-element" itemprop="description">Research in RPC Middleware DistributedSystem JavaEE SDN</p>
@@ -794,7 +790,7 @@
 
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动 v3.8.0</div>
 
 
 
