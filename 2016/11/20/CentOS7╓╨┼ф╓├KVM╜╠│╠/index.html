@@ -115,25 +115,27 @@
 
 
 
-  <meta name="description" content="一、MyBatis框架简介 MyBatis 是支持定制化 SQL、存储过程以及高级映射的优秀的持久层框架。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以对配置和原生Map使用简单的 XML 或注解，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。">
-<meta name="keywords" content="MyBatis3">
+  <meta name="description" content="基本环境：CentOS7.0   [root@localhost /]# egrep ‘(vmx|svm)’ /proc/cpuinfo   和 Xen 不同，KVM 需要有 CPU 的支持（Intel VT 或 AMD SVM），在安装 KVM 之前检查一下 CPU 是否提供了虚拟技术的支持,可以通过下面命令查询是否支持，如果输出有相关的vmx或者svm，表明CPU支持，否则就不支持。">
+<meta name="keywords" content="KVM,CentOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MyBatis实战（一)">
-<meta property="og:url" content="https://shuaijunlan.github.io/2017/06/26/MyBatis开发（一）：为什么使用MyBatis？/index.html">
+<meta property="og:title" content="CentOS7中配置KVM教程">
+<meta property="og:url" content="https://shuaijunlan.github.io/2016/11/20/CentOS7╓╨┼ф╓├KVM╜╠│╠/index.html">
 <meta property="og:site_name" content="ITechHub">
-<meta property="og:description" content="一、MyBatis框架简介 MyBatis 是支持定制化 SQL、存储过程以及高级映射的优秀的持久层框架。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以对配置和原生Map使用简单的 XML 或注解，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。">
+<meta property="og:description" content="基本环境：CentOS7.0   [root@localhost /]# egrep ‘(vmx|svm)’ /proc/cpuinfo   和 Xen 不同，KVM 需要有 CPU 的支持（Intel VT 或 AMD SVM），在安装 KVM 之前检查一下 CPU 是否提供了虚拟技术的支持,可以通过下面命令查询是否支持，如果输出有相关的vmx或者svm，表明CPU支持，否则就不支持。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-21T08:32:21.747Z">
+<meta property="og:image" content="http://learningnotes-1251679769.costj.myqcloud.com/virtual/6.png">
+<meta property="og:updated_time" content="2018-11-21T08:32:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MyBatis实战（一)">
-<meta name="twitter:description" content="一、MyBatis框架简介 MyBatis 是支持定制化 SQL、存储过程以及高级映射的优秀的持久层框架。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以对配置和原生Map使用简单的 XML 或注解，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。">
+<meta name="twitter:title" content="CentOS7中配置KVM教程">
+<meta name="twitter:description" content="基本环境：CentOS7.0   [root@localhost /]# egrep ‘(vmx|svm)’ /proc/cpuinfo   和 Xen 不同，KVM 需要有 CPU 的支持（Intel VT 或 AMD SVM），在安装 KVM 之前检查一下 CPU 是否提供了虚拟技术的支持,可以通过下面命令查询是否支持，如果输出有相关的vmx或者svm，表明CPU支持，否则就不支持。">
+<meta name="twitter:image" content="http://learningnotes-1251679769.costj.myqcloud.com/virtual/6.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://shuaijunlan.github.io/2017/06/26/MyBatis开发（一）：为什么使用MyBatis？/">
+  <link rel="canonical" href="https://shuaijunlan.github.io/2016/11/20/CentOS7╓╨┼ф╓├KVM╜╠│╠/">
 
 
 
@@ -143,7 +145,7 @@
   };
 </script>
 
-  <title>MyBatis实战（一) | ITechHub</title>
+  <title>CentOS7中配置KVM教程 | ITechHub</title>
   
 
 
@@ -347,7 +349,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2017/06/26/MyBatis开发（一）：为什么使用MyBatis？/">
+    <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2016/11/20/CentOS7╓╨┼ф╓├KVM╜╠│╠/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuai Junlan">
@@ -364,7 +366,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">MyBatis实战（一)
+          <h2 class="post-title" itemprop="name headline">CentOS7中配置KVM教程
               
             
           </h2>
@@ -389,7 +391,7 @@
                 
               
 
-              <time title="创建时间：2017-06-26 10:07:15" itemprop="dateCreated datePublished" datetime="2017-06-26T10:07:15+08:00">2017-06-26</time>
+              <time title="创建时间：2016-11-20 10:07:15" itemprop="dateCreated datePublished" datetime="2016-11-20T10:07:15+08:00">2016-11-20</time>
             
 
             
@@ -406,7 +408,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-21 16:32:21" itemprop="dateModified" datetime="2018-11-21T16:32:21+08:00">2018-11-21</time>
+                <time title="修改时间：2018-11-21 16:32:22" itemprop="dateModified" datetime="2018-11-21T16:32:22+08:00">2018-11-21</time>
               
             
           </span>
@@ -420,9 +422,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/06/26/MyBatis开发（一）：为什么使用MyBatis？/#comments" itemprop="discussionUrl">
+                <a href="/2016/11/20/CentOS7╓╨┼ф╓├KVM╜╠│╠/#comments" itemprop="discussionUrl">
                 
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/06/26/MyBatis开发（一）：为什么使用MyBatis？/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/11/20/CentOS7╓╨┼ф╓├KVM╜╠│╠/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -457,39 +459,158 @@
       
 
       
-        <h3 id="一、MyBatis框架简介"><a href="#一、MyBatis框架简介" class="headerlink" title="一、MyBatis框架简介"></a>一、MyBatis框架简介</h3><blockquote>
-<p>MyBatis 是支持定制化 SQL、存储过程以及高级映射的优秀的持久层框架。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以对配置和原生Map使用简单的 XML 或注解，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。</p>
+        <blockquote>
+<p>基本环境：CentOS7.0</p>
 </blockquote>
-<a id="more"></a>
-<h3 id="二、使用MyBatis框架与原生开发方式对比"><a href="#二、使用MyBatis框架与原生开发方式对比" class="headerlink" title="二、使用MyBatis框架与原生开发方式对比"></a>二、使用MyBatis框架与原生开发方式对比</h3><ol>
-<li><p>数据库连接配置：</p>
-<ul>
-<li><p>使用MyBatis框架：</p>
-  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"development"</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"development"</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span>/&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>/&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://115.28.61.171:3306/xx"</span>/&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"root"</span>/&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"********"</span>/&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">environment</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用JDBC：</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Connection conn = <span class="keyword">null</span>;   </span><br><span class="line"><span class="keyword">public</span> String url=<span class="string">"jdbc:mysql://134.78.21.143:3306/xx"</span>;  </span><br><span class="line"><span class="keyword">public</span> String password=<span class="string">"********"</span>;  </span><br><span class="line"><span class="keyword">public</span> String dbName=<span class="string">"root"</span>;  </span><br><span class="line"><span class="keyword">public</span> String driverName=<span class="string">"com.mysql.jdbc.Driver"</span>;  </span><br><span class="line"><span class="function"><span class="keyword">public</span> Connection <span class="title">getConnection</span><span class="params">()</span><span class="keyword">throws</span> ClassNotFoundException,SQLException   </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">   <span class="keyword">try</span> &#123;  </span><br><span class="line">           Class.forName(driverName);<span class="comment">//指定连接类型  </span></span><br><span class="line">           conn = DriverManager.getConnection(url, dbName, password);<span class="comment">//获取连接  </span></span><br><span class="line"></span><br><span class="line">    &#125;<span class="keyword">catch</span> (SQLException e)  </span><br><span class="line">    &#123;  </span><br><span class="line">        e.printStackTrace();  </span><br><span class="line">    &#125;  </span><br><span class="line">   <span class="keyword">return</span> conn;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>查询数据库</p>
-<ul>
-<li><p>使用MyBatis框架：</p>
-  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"com.mb.interfaces.IWcUserOperation"</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"WcUser"</span> <span class="attr">id</span>=<span class="string">"resultListUser"</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"openid"</span> <span class="attr">property</span>=<span class="string">"openid"</span>/&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"nickname"</span> <span class="attr">property</span>=<span class="string">"nickname"</span>/&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"province"</span> <span class="attr">property</span>=<span class="string">"province"</span>/&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectUserById"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>  <span class="attr">resultType</span>=<span class="string">"WcUser"</span>&gt;</span>  </span><br><span class="line">        select * from WXUSER where id= #&#123;id&#125;  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IWcUserOperation userOperation  = session.getMapper(IWcUserOperation.class);  </span><br><span class="line">WcUser wcUser = userOperation.selectUserById(<span class="number">15</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用JDBC：</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getArticle</span><span class="params">(Connection conn, ArtisvrInitPara yjsvrInitPara, JSONObject jo)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    String sql = <span class="string">"select * from "</span>+yjsvrInitPara.getTabname()+<span class="string">" where "</span>+yjsvrInitPara.getExp();    </span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;  </span><br><span class="line">        st= conn.createStatement();  </span><br><span class="line">        rs= st.executeQuery(sql);  </span><br><span class="line">        System.out.println(rs);  </span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(rs.next())  </span><br><span class="line">        &#123;  </span><br><span class="line">            Article ar= <span class="keyword">new</span> Article();  </span><br><span class="line"></span><br><span class="line">            ar.setId(       rs.getInt(<span class="string">"id"</span>));  </span><br><span class="line">            ar.setClasses(  rs.getString(<span class="string">"classes"</span>));  </span><br><span class="line">            ar.setContent(  rs.getString(<span class="string">"content"</span>));  </span><br><span class="line">            ar.setClirate(  rs.getInt(<span class="string">"clirate"</span>));  </span><br><span class="line">            ar.setTitle(    rs.getString(<span class="string">"title"</span>));  </span><br><span class="line">            ar.setFbtime(   rs.getString(<span class="string">"fbtime"</span>));  </span><br><span class="line"></span><br><span class="line">            list.add(ar);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125; <span class="keyword">catch</span> (SQLException e)   </span><br><span class="line">    &#123;  </span><br><span class="line">        e.printStackTrace();  </span><br><span class="line">    &#125;  </span><br><span class="line">    JSONArray ja=JSONArray.fromObject(list);  </span><br><span class="line">    jo.put(<span class="string">"ret"</span>, ja);  </span><br><span class="line">    ms.close(rs, st, conn);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
+<ol>
+<li><a href="">[root@localhost /]# </a>egrep ‘(vmx|svm)’ /proc/cpuinfo  <blockquote>
+<p>和 Xen 不同，KVM 需要有 CPU 的支持（Intel VT 或 AMD SVM），在安装 KVM 之前检查一下 CPU 是否提供了虚拟技术的支持,可以通过下面命令查询是否支持，如果输出有相关的vmx或者svm，表明CPU支持，否则就不支持。</p>
+</blockquote>
 </li>
 </ol>
-<h3 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h3><blockquote>
-<p>使用Mybatis框架可以直接将数据表中每个字段映射到实体类的属性，简化了使用JDBC带来的复杂度。</p>
+<a id="more"></a>
+<ol>
+<li><p><a href="">[root@localhost /]# </a>yum install qemu-kvm qemu-img virt-manager libvirt libvirt-python python-virtinst libvirt-client virt-install virt-viewer</p>
+<blockquote>
+<p>kvm相关安装包及其作用（按需选择安装）</p>
+<ul>
+<li>qemu-kvm：qemu模拟器,主要的KVM程序包</li>
+<li>qemu-img：qemu磁盘image管理器</li>
+<li>virt-install：基于libvirt服务的虚拟机创建命令，用来创建虚拟机的命令行工具</li>
+<li>libvirt：提供libvirtd daemon来管理虚拟机和控制hypervisor</li>
+<li>libvirt-client：提供客户端API用来访问server和提供管理虚拟机命令行工具的virsh实体</li>
+<li>python-virtinst：创建虚拟机所需要的命令行工具和程序库</li>
+<li>virt-manager：GUI虚拟机管理工具</li>
+<li>virt-top：虚拟机统计命令</li>
+<li>virt-viewer：GUI连接程序，连接到已配置好的虚拟机</li>
+<li>bridge-utils：创建和管理桥接设备的工具</li>
+</ul>
 </blockquote>
-<h3 id="附录：（完整Demo）"><a href="#附录：（完整Demo）" class="headerlink" title="附录：（完整Demo）"></a>附录：（完整Demo）</h3><p>（暂时没有时间整理Demo，后期提供）</p>
-<hr>
-<p>持续更新中。。。。。。</p>
+</li>
+<li><p>验证是否安装成功</p>
+<ul>
+<li><p>验证内核模块是否加载</p>
+<blockquote>
+<p><a href="">[root@localhost /]# </a>lsmod | grep kvm</p>
+</blockquote>
+</li>
+<li><p>启动服务(同时设置了开机自启)</p>
+<blockquote>
+<p><a href="">[root@localhost /]# </a>systemctl start libvirtd.service</p>
+</blockquote>
+</li>
+<li><p>重启服务</p>
+<blockquote>
+<p><a href="">[root@localhost /]# </a>systemctl restart libvirtd.service</p>
+</blockquote>
+</li>
+<li><p>设置可用</p>
+<blockquote>
+<p><a href="">[root@localhost /]# </a>systemctl enable libvirtd.service</p>
+</blockquote>
+</li>
+<li><p>查看服务基本信息</p>
+<blockquote>
+<p><a href="">[root@localhost /]# </a>systemctl status libvirtd.service</p>
+</blockquote>
+<p><img src="http://learningnotes-1251679769.costj.myqcloud.com/virtual/6.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p>配置虚拟机网络</p>
+<blockquote>
+<p>见<a href="http://www.blog.shuaijunlan.cn/2016/12/07/libvirt%20kvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" target="\_blank">《libvirt kvm虚拟机网络配置》</a>一文</p>
+</blockquote>
+</li>
+<li><p>在CentOS上安装vnc服务，通过vnc客户端远程连接CentOS，通过图形化界面在宿主机上安装客户机，安装教程见《使用VNC工具初级教程》一文</p>
+</li>
+<li><p>最后安装客户机</p>
+<blockquote>
+<ul>
+<li><p>下载虚拟机要安装的ISO系统镜像文件，之后需创建存储池，指定在宿主机上虚拟机磁盘的存储位置，创建存储目录：(目录随便设定，按照自己的需求设定)</p>
+<ul>
+<li><a href="">[root@localhost /]# </a>mkdir -p /home/kvm1</li>
+</ul>
+</li>
+<li><p>定义一个储存池和绑定目录：</p>
+<ul>
+<li><a href="">[root@localhost /]# </a>virsh pool-define-as vmspool –type dir –target /home/kvm1</li>
+</ul>
+</li>
+<li><p>建立并激活存储池：</p>
+<ul>
+<li><a href="">[root@localhost /]# </a>virsh pool-build vmspool</li>
+<li><a href="">[root@localhost /]# </a>virsh pool-start vmspool</li>
+</ul>
+</li>
+<li><p>virsh-install:</p>
+<ul>
+<li>1、输入虚拟机名称</li>
+<li>2、分配多少内存</li>
+<li>3、处理器的个数</li>
+<li>4、此步可以直接输入iso的位置或是url</li>
+<li>5、虚拟机类型KVM</li>
+<li>6、定义虚拟机磁盘映像的位置</li>
+<li>7、磁盘的大小</li>
+<li>6、指定哪个桥或者可以指定多个桥</li>
+<li>7、额外的控制台和KS文件</li>
+<li>8、连接到系统参数</li>
+<li>参数说明注意每行都要空格</li>
+<li>-n 虚拟机名称</li>
+<li>-r 分配虚拟机内存大小</li>
+<li>–vcpus 分配虚拟cpu个数</li>
+<li>-c 镜像文件位置</li>
+<li>–vnc –vncport=5901 –vnclisten=0.0.0.0 启动图形安装界面</li>
+<li>–virt-type 虚拟机模式</li>
+<li>-f 虚拟机系统文件存储目录</li>
+<li>-s 分配磁盘大小（GB）</li>
+<li>-w 联网方式（birdge bridge:br0/nat bridge:virbr0）</li>
+<li>–os-type=’windows’ –os-variant=win2k3 安装windows最好加上这个否则会报错</li>
+<li>virt-install工具安装虚拟机后，在目录/etc/libvirt/qemu/下生成xml配置文件</li>
+<li>-s 用来指定虚拟磁盘的大小单位为GB</li>
+<li>-m 指定虚拟网卡的硬件地址默认virt-install自动产生</li>
+<li>-p 以半虚拟化方式建立虚拟机</li>
+<li>-l 指定安装来源</li>
+<li>-x EXTRA, –extra-args=EXTRA当执行从”–location”选项指定位置的客户机安装时，附加内核命令行参数到安装程序。</li>
+<li>-v, –hvm 设置全虚拟化<br><br><br><br></li>
+</ul>
+</li>
+<li><p>创建第一个guest：</p>
+<ul>
+<li><a href="">[root@localhost /]# </a>virt-install –name=CentOS7-1 –ram=4096 –vcpus=1 –cdrom=/home/kvm1/CentOS-7-x86_64-Minimal-1511.iso –virt-type=kvm –disk  path=/home/kvm1/centos7-1.img,device=disk,format=qcow2,bus=virtio,cache=writeback,size=250 –graphics vnc,listen=0.0.0.0,port=5920,password=123456 –network bridge:br0 –accelerate –force –autostart</li>
+</ul>
+</li>
+<li><p>创建第二个guest：</p>
+<ul>
+<li><a href="">[root@localhost /]# </a>virt-install –name=CentOS7-2 –ram=7168 –vcpus=2,maxvcpus=4 –cdrom=/home/kvm1/CentOS-7-x86_64-Minimal-1511.iso –virt-type=kvm –disk  path=/home/kvm1/centos7-2.img,device=disk,format=qcow2,bus=virtio,cache=writeback,size=400 –graphics vnc,listen=0.0.0.0,port=5921,password=123456 –network bridge:br0 –accelerate –force –autostart</li>
+</ul>
+</li>
+<li><p>创建第三个guest：</p>
+<ul>
+<li><a href="">[root@localhost /]# </a>virt-install –name=CentOS7-3 –ram=7168 –vcpus=6,maxvcpus=9 –cpuset=6,7,8,9,10,11 –cdrom=/home/kvm1/CentOS-7-x86_64-Minimal-1511.iso –virt-type=kvm –disk  path=/home/kvm1/centos7-3.img,device=disk,format=qcow2,bus=virtio,cache=writeback,size=400 –graphics vnc,listen=0.0.0.0,port=5922,password=123456 –network bridge:br0 –accelerate –force –autostart</li>
+</ul>
+</li>
+<li><p>创建第四个guest：</p>
+<ul>
+<li><a href="">[root@localhost /]# </a>virt-install –name=CentOS7-4 –ram=7168 –vcpus=6,maxvcpus=9 –cpuset=12,13,14,15,16,17 –cdrom=/home/kvm1/CentOS-7-x86_64-Minimal-1511.iso –virt-type=kvm –disk  path=/home/kvm1/centos7-4.img,device=disk,format=qcow2,bus=virtio,cache=writeback,size=400 –graphics vnc,listen=0.0.0.0,port=5923,password=123456 –network bridge:br0 –accelerate –force –autostart</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<h4 id="持续更新中……"><a href="#持续更新中……" class="headerlink" title="持续更新中……"></a>持续更新中……</h4><hr>
+<ul>
+<li><p>REFERENCES</p>
+<ol>
+<li><a href="http://blog.csdn.net/chdhust/article/details/7931717" target="\_blank">KVM虚拟机创建功能详细讲解</a></li>
+<li><a href="http://blog.csdn.net/zhaihaifei/article/details/51163750" target="\_blank">绑定KVM虚拟机的vcpu与物理CPU</a></li>
+<li><a href="https://www.teakki.com/p/57dbd24a1b9882de17e7fd37" target="\_blank">基于Linux命令行KVM虚拟机的安装配置与基本使用</a></li>
+<li><a href="http://kulezhaizhuren.lofter.com/post/1cca7553_7e20b47" target="\_blank">CENTOS7 安装KVM笔记之安装</a></li>
+<li><a href="https://www.52os.net/articles/linux-kvm-install-virtual-machines.html" target="\_blank">linux下配置和安装KVM虚拟机</a></li>
+</ol>
+</li>
+</ul>
 
       
     </div>
@@ -511,7 +632,7 @@
     <strong>本文作者： </strong>Shuai Junlan</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://shuaijunlan.github.io/2017/06/26/MyBatis开发（一）：为什么使用MyBatis？/" title="MyBatis实战（一)">https://shuaijunlan.github.io/2017/06/26/MyBatis开发（一）：为什么使用MyBatis？/</a>
+    <a href="https://shuaijunlan.github.io/2016/11/20/CentOS7╓╨┼ф╓├KVM╜╠│╠/" title="CentOS7中配置KVM教程">https://shuaijunlan.github.io/2016/11/20/CentOS7╓╨┼ф╓├KVM╜╠│╠/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>转载请注明出处，欢迎关注公众号：ITechHub <img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/0.png?raw=true" alt=""></li>
@@ -524,7 +645,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/MyBatis3/" rel="tag"># MyBatis3</a>
+            <a href="/tags/KVM/" rel="tag"># KVM</a>
+          
+            <a href="/tags/CentOS/" rel="tag"># CentOS</a>
           
         </div>
       
@@ -537,8 +660,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/26/创建线程的三种方式/" rel="next" title="Java创建线程的三种方式(Thread/Runnable/Callable)">
-                <i class="fa fa-chevron-left"></i> Java创建线程的三种方式(Thread/Runnable/Callable)
+              <a href="/2016/11/16/libvirt kvm╨щ─т╗·═°┬ч┼ф╓├/" rel="next" title="配置KVM虚拟机网络的两种方式（Bridge模式和NAT模式）">
+                <i class="fa fa-chevron-left"></i> 配置KVM虚拟机网络的两种方式（Bridge模式和NAT模式）
               </a>
             
           </div>
@@ -547,8 +670,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/26/analyse-the-source-code-of-Timer/" rel="prev" title="analyse the source code of Timer">
-                analyse the source code of Timer <i class="fa fa-chevron-right"></i>
+              <a href="/2016/11/26/CentOS7╔ш╓├├т├▄╡╟┬╜/" rel="prev" title="CentOS7设置免密登陆">
+                CentOS7设置免密登陆 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -761,7 +884,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、MyBatis框架简介"><span class="nav-number">1.</span> <span class="nav-text">一、MyBatis框架简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、使用MyBatis框架与原生开发方式对比"><span class="nav-number">2.</span> <span class="nav-text">二、使用MyBatis框架与原生开发方式对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、总结"><span class="nav-number">3.</span> <span class="nav-text">三、总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附录：（完整Demo）"><span class="nav-number">4.</span> <span class="nav-text">附录：（完整Demo）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#持续更新中……"><span class="nav-number">1.</span> <span class="nav-text">持续更新中……</span></a></li></ol></div>
             
 
           </div>
@@ -945,9 +1068,9 @@
   
     <script type="text/javascript">
       var disqus_config = function () {
-        this.page.url = 'https://shuaijunlan.github.io/2017/06/26/MyBatis开发（一）：为什么使用MyBatis？/';
-        this.page.identifier = '2017/06/26/MyBatis开发（一）：为什么使用MyBatis？/';
-        this.page.title = 'MyBatis实战（一)';
+        this.page.url = 'https://shuaijunlan.github.io/2016/11/20/CentOS7╓╨┼ф╓├KVM╜╠│╠/';
+        this.page.identifier = '2016/11/20/CentOS7╓╨┼ф╓├KVM╜╠│╠/';
+        this.page.title = 'CentOS7中配置KVM教程';
         };
       function loadComments () {
         var d = document, s = d.createElement('script');

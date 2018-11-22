@@ -115,27 +115,24 @@
 
 
 
-  <meta name="description" content="先来看个采用log4j输出日志的例子  添加依赖包    12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.slf4j&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;slf4j-log4j12&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;1.7.7&amp;lt;/version&amp;gt;&amp;lt;/depe">
-<meta name="keywords" content="log4j">
-<meta property="og:type" content="article">
-<meta property="og:title" content="log4j初级配置教程">
-<meta property="og:url" content="https://shuaijunlan.github.io/2017/04/26/log4j配置详解/index.html">
+  <meta name="description" content="Netty 入门与实战：仿写微信 IM 即时通讯系统笔记 Java NIO的selector实现原理？ 如何理解下面这句话？   IO 读写是面向流的，一次性只能从流中读取一个或者多个字节，并且读完之后流无法再读取，你需要自己缓存数据。 而 NIO 的读写是面向 Buffer 的，你可以随意读取里面任何一个字节数据，不需要你自己缓存数据，这一切只需要移动读写指针即可。   下面是我总结的使用 Ne">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ITechHub">
+<meta property="og:url" content="https://shuaijunlan.github.io/todo/Netty ╚ы├┼╙ы╩╡╒╜г║╖┬╨┤╬в╨┼ IM ╝┤╩▒═и╤╢╧╡═│▒╩╝╟.html">
 <meta property="og:site_name" content="ITechHub">
-<meta property="og:description" content="先来看个采用log4j输出日志的例子  添加依赖包    12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.slf4j&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;slf4j-log4j12&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;1.7.7&amp;lt;/version&amp;gt;&amp;lt;/depe">
+<meta property="og:description" content="Netty 入门与实战：仿写微信 IM 即时通讯系统笔记 Java NIO的selector实现原理？ 如何理解下面这句话？   IO 读写是面向流的，一次性只能从流中读取一个或者多个字节，并且读完之后流无法再读取，你需要自己缓存数据。 而 NIO 的读写是面向 Buffer 的，你可以随意读取里面任何一个字节数据，不需要你自己缓存数据，这一切只需要移动读写指针即可。   下面是我总结的使用 Ne">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://learningnotes-1251679769.costj.myqcloud.com/javabasis/1.png">
-<meta property="og:updated_time" content="2018-11-21T08:32:21.747Z">
+<meta property="og:updated_time" content="2018-11-21T08:32:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="log4j初级配置教程">
-<meta name="twitter:description" content="先来看个采用log4j输出日志的例子  添加依赖包    12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.slf4j&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;slf4j-log4j12&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;1.7.7&amp;lt;/version&amp;gt;&amp;lt;/depe">
-<meta name="twitter:image" content="http://learningnotes-1251679769.costj.myqcloud.com/javabasis/1.png">
+<meta name="twitter:title" content="ITechHub">
+<meta name="twitter:description" content="Netty 入门与实战：仿写微信 IM 即时通讯系统笔记 Java NIO的selector实现原理？ 如何理解下面这句话？   IO 读写是面向流的，一次性只能从流中读取一个或者多个字节，并且读完之后流无法再读取，你需要自己缓存数据。 而 NIO 的读写是面向 Buffer 的，你可以随意读取里面任何一个字节数据，不需要你自己缓存数据，这一切只需要移动读写指针即可。   下面是我总结的使用 Ne">
 
 
 
 
 
 
-  <link rel="canonical" href="https://shuaijunlan.github.io/2017/04/26/log4j配置详解/">
+  <link rel="canonical" href="https://shuaijunlan.github.io/todo/Netty ╚ы├┼╙ы╩╡╒╜г║╖┬╨┤╬в╨┼ IM ╝┤╩▒═и╤╢╧╡═│▒╩╝╟.html">
 
 
 
@@ -145,7 +142,7 @@
   };
 </script>
 
-  <title>log4j初级配置教程 | ITechHub</title>
+  <title> | ITechHub</title>
   
 
 
@@ -329,281 +326,82 @@
           
             
 
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shuaijunlan.github.io/2017/04/26/log4j配置详解/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuai Junlan">
-      <meta itemprop="description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ITechHub">
-    </span>
-
     
+    
+    <div class="post-block page">
       <header class="post-header">
 
-        
-        
-          <h2 class="post-title" itemprop="name headline">log4j初级配置教程
-              
-            
-          </h2>
-        
+<h2 class="post-title" itemprop="name headline"></h2>
 
-        <div class="post-meta">
-          <span class="post-time">
+<div class="post-meta">
+  
+  
 
-            
-            
-            
 
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
 
-              
-                
-              
+</div>
 
-              <time title="创建时间：2017-04-26 10:07:15" itemprop="dateCreated datePublished" datetime="2017-04-26T10:07:15+08:00">2017-04-26</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-21 16:32:21" itemprop="dateModified" datetime="2018-11-21T16:32:21+08:00">2018-11-21</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/04/26/log4j配置详解/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/04/26/log4j配置详解/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon">
-            <i class="fa fa-eye"></i>
-             阅读次数： 
-            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
-            </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</header>
 
       
       
-
       
-        <ul>
-<li><p>先来看个采用log4j输出日志的例子</p>
+      <div class="post-body">
+        
+        
+          <h3 id="Netty-入门与实战：仿写微信-IM-即时通讯系统笔记"><a href="#Netty-入门与实战：仿写微信-IM-即时通讯系统笔记" class="headerlink" title="Netty 入门与实战：仿写微信 IM 即时通讯系统笔记"></a><a href="https://juejin.im/book/5b4bc28bf265da0f60130116" target="_blank" rel="noopener">Netty 入门与实战：仿写微信 IM 即时通讯系统</a>笔记</h3><ul>
+<li>Java NIO的selector实现原理？</li>
+<li>如何理解下面这句话？</li>
+</ul>
 <blockquote>
-<p>添加依赖包</p>
-</blockquote>
-  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-  <a id="more"></a>
-<blockquote>
-<p>添加配置文件log4j.properties放在/resources目录下面</p>
-</blockquote>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">### 设置###</span><br><span class="line">log4j.rootLogger = DEBUG,error,debug,stdout</span><br><span class="line">#log4j.rootLogger = INFO,stdout</span><br><span class="line"></span><br><span class="line">### 输出信息到控制台 ###</span><br><span class="line">log4j.appender.stdout = org.apache.log4j.ConsoleAppender</span><br><span class="line">#log4j.appender.stdout.Threshold = ERROR</span><br><span class="line">log4j.appender.stdout.Target = System.out</span><br><span class="line">log4j.appender.stdout.layout = org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.stdout.layout.ConversionPattern = [%-5p] %d&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; method:%l%n%m%n</span><br><span class="line"></span><br><span class="line">### 输出DEBUG 级别以上的日志到=E://logs/debug.log ###</span><br><span class="line">log4j.appender.debug = org.apache.log4j.DailyRollingFileAppender</span><br><span class="line">log4j.appender.debug.File = E://logs/debug.log</span><br><span class="line">log4j.appender.debug.Append = true</span><br><span class="line">##Threshold是个全局的过滤器，它将把低于所设置的level的信息过滤不显示出来。</span><br><span class="line">log4j.appender.debug.Threshold = DEBUG</span><br><span class="line">log4j.appender.debug.layout = org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.debug.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n</span><br><span class="line"></span><br><span class="line">### 输出ERROR 级别以上的日志到=E://logs/error.log ###</span><br><span class="line">log4j.appender.error = org.apache.log4j.DailyRollingFileAppender</span><br><span class="line">log4j.appender.error.File =E://logs/error.log</span><br><span class="line">log4j.appender.error.Append = true</span><br><span class="line">log4j.appender.error.Threshold = ERROR</span><br><span class="line">log4j.appender.error.layout = org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.error.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>java代码</p>
-</blockquote>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sh.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Mr SJL on 2016/11/26.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> Junlan Shuai</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 记录debug级别的信息</span></span><br><span class="line">        log.debug(<span class="string">"This is debug message."</span>);</span><br><span class="line">        <span class="comment">// 记录info级别的信息</span></span><br><span class="line">        log.info(<span class="string">"This is info message."</span>);</span><br><span class="line">        <span class="comment">// 记录error级别的信息</span></span><br><span class="line">        log.error(<span class="string">"This is error message."</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>控制台输出结果<br>  <img src="http://learningnotes-1251679769.costj.myqcloud.com/javabasis/1.png" alt="image" title="结果"></p>
-</blockquote>
-</li>
-<li><p>log4j主要组件</p>
-<blockquote>
-<p>Log4j有三个主要的组件：Loggers(记录器)，Appenders  (输出源)和Layouts(布局)。这里可简单理解为日志类别，日志要输出的地方和日志以何种形式输出。综合使用这三个组件可以轻松地记录信息的类型和级别，并可以在运行时控制日志输出的样式和位置。</p>
+<p>IO 读写是面向流的，一次性只能从流中读取一个或者多个字节，<strong>并且读完之后流无法再读取，你需要自己缓存数据</strong>。 而 NIO 的读写是面向 Buffer 的，你可以随意读取里面任何一个字节数据，不需要你自己缓存数据，这一切只需要移动读写指针即可。</p>
 </blockquote>
 <ul>
-<li><p>Loggers</p>
-<blockquote>
-<p>Loggers组件在此系统中被分为五个级别：DEBUG、INFO、WARN、ERROR和FATAL。这五个级别是有顺序的，DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL，分别用来指定这条日志信息的重要程度，明白这一点很重要，Log4j有一个规则：只输出级别不低于设定级别的日志信息，假设Loggers级别设定为INFO，则INFO、WARN、ERROR和FATAL级别的日志信息都会输出，而级别比INFO低的DEBUG则不会输出。</p>
-</blockquote>
-</li>
-<li><p>Appenders</p>
-<blockquote>
-<p>禁用和使用日志请求只是Log4j的基本功能，Log4j日志系统还提供许多强大的功能，比如允许把日志输出到不同的地方，如控制台（Console）、文件（Files）等，可以根据天数或者文件大小产生新的文件，可以以流的形式发送到其它地方等等。</p>
-<p>常使用的类如下：</p>
-<p>org.apache.log4j.ConsoleAppender（控制台）<br><br>  org.apache.log4j.FileAppender（文件）<br><br>  org.apache.log4j.DailyRollingFileAppender（每天产生一个日志文件）<br><br>  org.apache.log4j.RollingFileAppender（文件大小到达指定尺寸的时候产生一个新的文件）<br><br>  org.apache.log4j.WriterAppender（将日志信息以流格式发送到任意指定的地方） <br></p>
-</blockquote>
-</li>
-<li><p>Layouts</p>
-<blockquote>
-<p>有时用户希望根据自己的喜好格式化自己的日志输出，Log4j可以在Appenders的后面附加Layouts来完成这个功能。 Layouts提供四种日志输出样式，如根据HTML样式、自由指定样式、包含日志级别与信息的样式和包含日志时间、线程、类别等信息的样式。</p>
-<p>常使用的类如下：</p>
-<p>org.apache.log4j.HTMLLayout（以HTML表格形式布局）<br><br>  org.apache.log4j.PatternLayout（可以灵活地指定布局模式）<br><br>  org.apache.log4j.SimpleLayout（包含日志信息的级别和信息字符串）<br><br>  org.apache.log4j.TTCCLayout（包含日志产生的时间、线程、类别等信息）<br></p>
-</blockquote>
-</li>
+<li>下面是我总结的使用 Netty 不使用 JDK 原生 NIO 的原因</li>
 </ul>
-</li>
-<li><p>log4j.properties配置文件详解</p>
-<blockquote>
-<p>在实际应用中，要使Log4j在系统中运行须事先设定配置文件。配置文件事实上也就是对Logger、Appender及Layout进行相应设定。Log4j支持两种配置文件格式，一种是XML格式的文件，一种是properties属性文件。下面以properties属性文件为例介绍 log4j.properties的配置。</p>
-</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.使用 JDK 自带的NIO需要了解太多的概念，编程复杂，一不小心 bug 横飞</span><br><span class="line">2.Netty 底层 IO 模型随意切换，而这一切只需要做微小的改动，改改参数，Netty可以直接从 NIO 模型变身为 IO 模型</span><br><span class="line">3.Netty 自带的拆包解包，异常检测等机制让你从NIO的繁重细节中脱离出来，让你只需要关心业务逻辑</span><br><span class="line">4.Netty 解决了 JDK 的很多包括空轮询在内的 Bug</span><br><span class="line">5.Netty 底层对线程，selector 做了很多细小的优化，精心设计的 reactor 线程模型做到非常高效的并发处理</span><br><span class="line">6.自带各种协议栈让你处理任何一种通用协议都几乎不用亲自动手</span><br><span class="line">7.Netty 社区活跃，遇到问题随时邮件列表或者 issue</span><br><span class="line">8.Netty 已经历各大 RPC 框架，消息中间件，分布式通信中间件线上的广泛验证，健壮性无比强大.</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>配置根Logger</p>
-<blockquote>
-<p>log4j.rootLogger = [ level ] , appenderName1, appenderName2, …<br><br>  log4j.additivity.org.apache=false：表示Logger不会在父Logger的appender里输出，默认为true。<br><br>  level ：设定日志记录的最低级别，可设的值有OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL或者自定义的级别，Log4j建议只使用中间四个级别。通过在这里设定级别，您可以控制应用程序中相应级别的日志信息的开关，比如在这里设定了INFO级别，则应用程序中所有DEBUG级别的日志信息将不会被打印出来。<br><br>  appenderName：就是指定日志信息要输出到哪里。可以同时指定多个输出目的地，用逗号隔开。<br><br>  例如：log4j.rootLogger＝INFO,A1,B2,C3 <br></p>
-</blockquote>
-</li>
-<li><p>配置控制台输出</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">### 输出信息到控制台 ###</span><br><span class="line">log4j.appender.stdout = org.apache.log4j.ConsoleAppender</span><br><span class="line">### 输出ERROR级别以上的日志到控制台 ###</span><br><span class="line">log4j.appender.stdout.Threshold = ERROR</span><br><span class="line">log4j.appender.stdout.Target = System.out</span><br><span class="line">log4j.appender.stdout.layout = org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.stdout.layout.ConversionPattern = [%-5p] %d&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; method:%l%n%m%n</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置日志文件输出</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">### 输出DEBUG 级别以上的日志到=E://logs/debug.log ###</span><br><span class="line">log4j.appender.debug = org.apache.log4j.DailyRollingFileAppender</span><br><span class="line">log4j.appender.debug.File = E://logs/debug.log</span><br><span class="line">log4j.appender.debug.Append = true</span><br><span class="line">##Threshold是个全局的过滤器，它将把低于所设置的level的信息过滤不显示出来。</span><br><span class="line">log4j.appender.debug.Threshold = DEBUG</span><br><span class="line">log4j.appender.debug.layout = org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.debug.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>REFERENCES</p>
-<ol>
-<li><a href="http://www.open-open.com/lib/view/open1393488356958.html" target="\_blank">Log4j.properties配置详解</a></li>
-<li><a href="http://www.codeceo.com/article/log4j-usage.html" target="\_blank">最详细的Log4j使用教程</a></li>
-</ol>
-</li>
+<li>回调 <code>channelRead()</code> 方法，这里的第二个参数 <code>msg</code>，在我们这个场景中，可以直接强转为 <code>ByteBuf</code>，为什么 Netty 不直接把这个参数类型定义为 <code>ByteBuf</code> ？</li>
 </ul>
 
+        
+      </div>
+      
+      
       
     </div>
-
     
 
+
+
     
     
     
-
-    
-
-    
-
-    
-      <div>
-        <ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者： </strong>Shuai Junlan</li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="https://shuaijunlan.github.io/2017/04/26/log4j配置详解/" title="log4j初级配置教程">https://shuaijunlan.github.io/2017/04/26/log4j配置详解/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>转载请注明出处，欢迎关注公众号：ITechHub <img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/0.png?raw=true" alt=""></li>
-</ul>
-
-      </div>
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/log4j/" rel="tag"># log4j</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/02/26/Collections.sort()分析/" rel="next" title="Collections.sort()源码分析（基于jdk1.8）">
-                <i class="fa fa-chevron-left"></i> Collections.sort()源码分析（基于jdk1.8）
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/26/创建线程的三种方式/" rel="prev" title="Java创建线程的三种方式(Thread/Runnable/Callable)">
-                Java创建线程的三种方式(Thread/Runnable/Callable) <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
   </div>
 
 
@@ -643,8 +441,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -781,6 +588,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Netty-入门与实战：仿写微信-IM-即时通讯系统笔记"><span class="nav-number">1.</span> <span class="nav-text">Netty 入门与实战：仿写微信 IM 即时通讯系统笔记</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -959,9 +782,9 @@
   
     <script type="text/javascript">
       var disqus_config = function () {
-        this.page.url = 'https://shuaijunlan.github.io/2017/04/26/log4j配置详解/';
-        this.page.identifier = '2017/04/26/log4j配置详解/';
-        this.page.title = 'log4j初级配置教程';
+        this.page.url = 'https://shuaijunlan.github.io/todo/Netty ╚ы├┼╙ы╩╡╒╜г║╖┬╨┤╬в╨┼ IM ╝┤╩▒═и╤╢╧╡═│▒╩╝╟.html';
+        this.page.identifier = 'todo/Netty ╚ы├┼╙ы╩╡╒╜г║╖┬╨┤╬в╨┼ IM ╝┤╩▒═и╤╢╧╡═│▒╩╝╟.html';
+        this.page.title = '';
         };
       function loadComments () {
         var d = document, s = d.createElement('script');
