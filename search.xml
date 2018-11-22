@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[abstract-queued-synchronizer]]></title>
+    <title><![CDATA[队列同步器（AbstractQueuedSynchronizer）源码分析]]></title>
     <url>%2F2018%2F11%2F22%2Fjava-abstract-queued-synchronizer%2F</url>
     <content type="text"><![CDATA[]]></content>
       <tags>
