@@ -125,7 +125,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-11-23 20-17-54.png?raw=true">
 <meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-11-23 20-22-05.png?raw=true">
-<meta property="og:updated_time" content="2018-11-23T12:23:38.999Z">
+<meta property="og:updated_time" content="2018-11-23T12:52:37.669Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="队列同步器(AbstractQueuedSynchronizer)源码分析">
 <meta name="twitter:description" content="AbstractQueuedSynchronizer(队列同步器)在Java并发工具中经常被用到，比如说我们常用的CountDownLatch、ReentrantLock、ReentrantReadWriteLock和Semaphore等等并发工具类底层都是基于队列同步器的，只有掌握了队列同步器底层的工作原理才能更好的理解其他的并发工具的工作机制，这篇文章将会从源码的角度分析队列同步器的工作原理">
@@ -409,7 +409,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-23 20:23:38" itemprop="dateModified" datetime="2018-11-23T20:23:38+08:00">2018-11-23</time>
+                <time title="修改时间：2018-11-23 20:52:37" itemprop="dateModified" datetime="2018-11-23T20:52:37+08:00">2018-11-23</time>
               
             
           </span>
@@ -526,7 +526,7 @@
 <tbody>
 <tr>
 <td>int waitStatus</td>
-<td>等待状态，包含如下状态： <br> 1.CANCELLED，值为1，由于在同步队列中等待的线程等待超时或者被中断，需要从同步队列中取消等待。节点进入该状态将不会发生变化<br>2.SIGNAL，值为-1<br>3.CONDITION，值为-2，节点在等待队列中，节点线程等待在Condition上，当其他线程调用了Condition的singal()方法后，该节点将会从等待队列中转移到同步队列中<br>4.PROPAGATE，值为-3，表示下一下共享式同步状态获取将会无条件地被传播下去<br>5.INITIAL，值为0，初始状态</td>
+<td>等待状态，包含如下状态： <br> 1.CANCELLED，值为1，由于在同步队列中等待的线程等待超时或者被中断，需要从同步队列中取消等待。节点进入该状态将不会发生变化<br>2.SIGNAL，值为-1，后继节点的线程处于等待状态，而当前节点的线程如果释放了同步状态或者被取消，将会通知后继节点，使后继节点的线程得以运行<br>3.CONDITION，值为-2，节点在等待队列中，节点线程等待在Condition上，当其他线程调用了Condition的singal()方法后，该节点将会从等待队列中转移到同步队列中<br>4.PROPAGATE，值为-3，表示下一次共享式同步状态获取将会无条件地被传播下去<br>5.INITIAL，值为0，初始状态</td>
 </tr>
 <tr>
 <td>Node prev</td>
