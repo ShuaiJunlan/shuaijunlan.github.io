@@ -115,23 +115,25 @@
 
 
 
-  <meta name="description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
+  <meta name="description" content="VM “intrinsification.” ie CAS (Compare-And-Swap) used in Lock-Free Hash Tables eg:sun.misc.Unsafe.compareAndSwapInt it can make real JNI calls into native code that contains special instructions for">
+<meta name="keywords" content="java">
 <meta property="og:type" content="website">
-<meta property="og:title" content="ITechHub">
-<meta property="og:url" content="https://shuaijunlan.github.io/tags/aqs/index.html">
+<meta property="og:title" content="Java中Unsafe类详解">
+<meta property="og:url" content="https://shuaijunlan.github.io/todo/java-unsafe-class.html">
 <meta property="og:site_name" content="ITechHub">
-<meta property="og:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
+<meta property="og:description" content="VM “intrinsification.” ie CAS (Compare-And-Swap) used in Lock-Free Hash Tables eg:sun.misc.Unsafe.compareAndSwapInt it can make real JNI calls into native code that contains special instructions for">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-29T03:41:59.748Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ITechHub">
-<meta name="twitter:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
+<meta name="twitter:title" content="Java中Unsafe类详解">
+<meta name="twitter:description" content="VM “intrinsification.” ie CAS (Compare-And-Swap) used in Lock-Free Hash Tables eg:sun.misc.Unsafe.compareAndSwapInt it can make real JNI calls into native code that contains special instructions for">
 
 
 
 
 
 
-  <link rel="canonical" href="https://shuaijunlan.github.io/tags/aqs/">
+  <link rel="canonical" href="https://shuaijunlan.github.io/todo/java-unsafe-class.html">
 
 
 
@@ -141,7 +143,7 @@
   };
 </script>
 
-  <title>标签: aqs | ITechHub</title>
+  <title>Java中Unsafe类详解 | ITechHub</title>
   
 
 
@@ -198,7 +200,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -255,7 +257,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
   </li>
@@ -348,56 +350,87 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>aqs<small>标签</small>
-        </h2>
-      </div>
+<h2 class="post-title" itemprop="name headline">Java中Unsafe类详解</h2>
+
+<div class="post-meta">
+  
+  
+
+
+
+</div>
+
+</header>
 
       
+      
+      
+      <div class="post-body">
         
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2018/11/22/java-abstract-queued-synchronizer/" itemprop="url">
-              
-                <span itemprop="name">abstract-queued-synchronizer</span>
-              
-            </a>
-        
-      </h3>
+          <ol>
+<li><p>VM “intrinsification.” ie CAS (Compare-And-Swap) used in Lock-Free Hash Tables eg:sun.misc.Unsafe.compareAndSwapInt it can make real JNI calls into native code that contains special instructions for CAS</p>
+<p>read more about CAS here <a href="http://en.wikipedia.org/wiki/Compare-and-swap" target="_blank" rel="noopener">http://en.wikipedia.org/wiki/Compare-and-swap</a></p>
+</li>
+<li><p>The sun.misc.Unsafe functionality of the host VM can be used to allocate uninitialized objects and then interpret the constructor invocation as any other method call.</p>
+</li>
+<li><p>One can track the data from the native address.It is possible to retrieve an object’s memory address using the java.lang.Unsafe class, and operate on its fields directly via unsafe get/put methods!</p>
+</li>
+<li><p>Compile time optimizations for JVM. HIgh performance VM using “magic”, requiring low-level operations. eg: <a href="http://en.wikipedia.org/wiki/Jikes_RVM" target="_blank" rel="noopener">http://en.wikipedia.org/wiki/Jikes_RVM</a></p>
+</li>
+<li><p>Allocating memory, sun.misc.Unsafe.allocateMemory eg:- DirectByteBuffer constructor internally calls it when ByteBuffer.allocateDirect is invoked</p>
+</li>
+<li><p>Tracing the call stack and replaying with values instantiated by sun.misc.Unsafe, useful for instrumentation</p>
+</li>
+<li><p>sun.misc.Unsafe.arrayBaseOffset and arrayIndexScale can be used to develop arraylets,a technique for efficiently breaking up large arrays into smaller objects to limit the real-time cost of scan, update or move operations on large objects</p>
+</li>
+<li><p><a href="http://robaustin.wikidot.com/how-to-write-to-direct-memory-locations-in-java" target="_blank" rel="noopener">http://robaustin.wikidot.com/how-to-write-to-direct-memory-locations-in-java</a></p>
+</li>
+</ol>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
+<li><a href="https://stackoverflow.com/questions/5574241/why-does-sun-misc-unsafe-exist-and-how-can-it-be-used-in-the-real-world" target="_blank" rel="noopener">https://stackoverflow.com/questions/5574241/why-does-sun-misc-unsafe-exist-and-how-can-it-be-used-in-the-real-world</a></li>
+<li><a href="http://bytescrolls.blogspot.com/2011/04/interesting-uses-of-sunmiscunsafe.html" target="_blank" rel="noopener">http://bytescrolls.blogspot.com/2011/04/interesting-uses-of-sunmiscunsafe.html</a></li>
+</ul>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-22T19:11:40+08:00" content="2018-11-22">
-          11-22
-        </time>
+        
       </div>
-
-    </header>
-  </article>
-
-
+      
+      
       
     </div>
+    
 
+
+
+    
+    
+    
   </div>
-  
-  
-  
-
-  
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -418,8 +451,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -558,6 +600,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">1.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -715,6 +773,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
 
   
 
@@ -729,6 +791,23 @@
     <script id="dsq-count-scr" src="https://shuaijunlan.disqus.com/count.js" async></script>
   
 
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'https://shuaijunlan.github.io/todo/java-unsafe-class.html';
+        this.page.identifier = 'todo/java-unsafe-class.html';
+        this.page.title = 'Java中Unsafe类详解';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://shuaijunlan.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
   
 
 
