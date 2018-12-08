@@ -123,7 +123,7 @@
 <meta property="og:site_name" content="ITechHub">
 <meta property="og:description" content="在传统的文件读写方式中，会有两次数据拷贝，一次是从硬盘拷贝到操作系统内核，另一次是从操作系统内核拷贝到用户态的应用程序。而在内存映射文件中，一般情况下，只有一次拷贝，且内存分配在操作系统内核，应用程序访问的就是操作系统的内核内存空间，这显然要比普通的读写效率更高。 内存映射文件的另一个重要特点是，它可以被多个不同的应用程序共享，多个程序可以映射同一个文件，映射到同一块内存区域，一个程序对内存的修">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-08T12:11:49.734Z">
+<meta property="og:updated_time" content="2018-12-08T12:20:36.311Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java中Memory Mapped File原理分析">
 <meta name="twitter:description" content="在传统的文件读写方式中，会有两次数据拷贝，一次是从硬盘拷贝到操作系统内核，另一次是从操作系统内核拷贝到用户态的应用程序。而在内存映射文件中，一般情况下，只有一次拷贝，且内存分配在操作系统内核，应用程序访问的就是操作系统的内核内存空间，这显然要比普通的读写效率更高。 内存映射文件的另一个重要特点是，它可以被多个不同的应用程序共享，多个程序可以映射同一个文件，映射到同一块内存区域，一个程序对内存的修">
@@ -389,7 +389,7 @@
                 
               
 
-              <time title="创建时间：2018-12-08 12:56:55 / 修改时间：20:11:49" itemprop="dateCreated datePublished" datetime="2018-12-08T12:56:55+08:00">2018-12-08</time>
+              <time title="创建时间：2018-12-08 12:56:55 / 修改时间：20:20:36" itemprop="dateCreated datePublished" datetime="2018-12-08T12:56:55+08:00">2018-12-08</time>
             
 
             
@@ -493,7 +493,7 @@
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
 <li><p>MappedByteBuffer使用虚拟内存，因此分配(map)的内存大小不受JVM的-Xmx参数限制，但是也是有大小限制的。</p>
 </li>
-<li><p>如果当文件超出1.5G限制时，可以通过position参数重新map文件后面的内容。</p>
+<li><p>如果当文件超出Integer.MAX_VALUE字节限制时，可以通过position参数重新map文件后面的内容。</p>
 </li>
 <li><p>MappedByteBuffer在处理大文件时的确性能很高，但也存在一些问题，如内存占用、文件关闭不确定，被其打开的文件只有在垃圾回收的才会被关闭，而且这个时间点是不确定的。<br> javadoc中也提到：<em>A mapped byte buffer and the file mapping that it represents remain valid until the buffer itself is garbage-collected.</em></p>
 </li>
