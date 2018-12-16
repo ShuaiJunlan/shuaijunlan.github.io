@@ -115,18 +115,24 @@
 
 
 
-  <meta name="description" content="在学习Java的文件I/O时，使用direct memory可以大大提高文件  什么是Buffered I/O缓存 I/O 又被称作标准 I/O，大多数文件系统的默认 I/O 操作都是缓存 I/O。在 Linux 的缓存 I/O 机制中，操作系统会将 I/O 的数据缓存在文件系统的页缓存（ page cache ）中，也就是说，数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲">
+  <meta name="description" content="在学习Java的文件I/O时，使用Direct I/O的方式可以大大提高文件读写性能  什么是Buffered I/O缓存 I/O 又被称作标准 I/O，大多数文件系统的默认 I/O 操作都是缓存 I/O。在 Linux 的缓存 I/O 机制中，操作系统会将 I/O 的数据缓存在文件系统的页缓存（ page cache ）中，也就是说，数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内">
 <meta name="keywords" content="Linux,DirectIO">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Liunx中Direct IO机制">
 <meta property="og:url" content="https://shuaijunlan.github.io/todo/linux-direct-io.html">
 <meta property="og:site_name" content="ITechHub">
-<meta property="og:description" content="在学习Java的文件I/O时，使用direct memory可以大大提高文件  什么是Buffered I/O缓存 I/O 又被称作标准 I/O，大多数文件系统的默认 I/O 操作都是缓存 I/O。在 Linux 的缓存 I/O 机制中，操作系统会将 I/O 的数据缓存在文件系统的页缓存（ page cache ）中，也就是说，数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲">
+<meta property="og:description" content="在学习Java的文件I/O时，使用Direct I/O的方式可以大大提高文件读写性能  什么是Buffered I/O缓存 I/O 又被称作标准 I/O，大多数文件系统的默认 I/O 操作都是缓存 I/O。在 Linux 的缓存 I/O 机制中，操作系统会将 I/O 的数据缓存在文件系统的页缓存（ page cache ）中，也就是说，数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-15T13:11:08.200Z">
+<meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-12-16 19-34-34.png?raw=true">
+<meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-12-16 19-40-43.png?raw=true">
+<meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-12-16 19-41-44.png?raw=true">
+<meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-12-16 19-42-31.png?raw=true">
+<meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-12-16 19-43-19.png?raw=true">
+<meta property="og:updated_time" content="2018-12-16T11:49:35.380Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Liunx中Direct IO机制">
-<meta name="twitter:description" content="在学习Java的文件I/O时，使用direct memory可以大大提高文件  什么是Buffered I/O缓存 I/O 又被称作标准 I/O，大多数文件系统的默认 I/O 操作都是缓存 I/O。在 Linux 的缓存 I/O 机制中，操作系统会将 I/O 的数据缓存在文件系统的页缓存（ page cache ）中，也就是说，数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲">
+<meta name="twitter:description" content="在学习Java的文件I/O时，使用Direct I/O的方式可以大大提高文件读写性能  什么是Buffered I/O缓存 I/O 又被称作标准 I/O，大多数文件系统的默认 I/O 操作都是缓存 I/O。在 Linux 的缓存 I/O 机制中，操作系统会将 I/O 的数据缓存在文件系统的页缓存（ page cache ）中，也就是说，数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内">
+<meta name="twitter:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-12-16 19-34-34.png?raw=true">
 
 
 
@@ -376,14 +382,25 @@
         
         
           <blockquote>
-<p>在学习Java的文件I/O时，使用direct memory可以大大提高文件</p>
+<p>在学习Java的文件I/O时，使用Direct I/O的方式可以大大提高文件读写性能</p>
 </blockquote>
 <h3 id="什么是Buffered-I-O"><a href="#什么是Buffered-I-O" class="headerlink" title="什么是Buffered I/O"></a>什么是Buffered I/O</h3><p>缓存 I/O 又被称作标准 I/O，大多数文件系统的默认 I/O 操作都是缓存 I/O。在 Linux 的缓存 I/O 机制中，操作系统会将 I/O 的数据缓存在文件系统的页缓存（ page cache ）中，也就是说，数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间。缓存 I/O 有以下这些优点：</p>
 <ul>
 <li>缓存 I/O 使用了操作系统内核缓冲区，在一定程度上分离了应用程序空间和实际的物理设备。</li>
 <li>缓存 I/O 可以减少读盘的次数，从而提高性能。</li>
 </ul>
-<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-directio/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/linux/l-cn-directio/index.html</a></p>
+<a id="more"></a>
+<p>当应用程序尝试读取某块数据的时候，如果这块数据已经存放在了页缓存中，那么这块数据就可以立即返回给应用程序，而不需要经过实际的物理读盘操作。当然，如果数据在应用程序读取之前并未被存放在页缓存中，那么就需要先将数据从磁盘读到页缓存中去。对于写操作来说，应用程序也会将数据先写到页缓存中去，数据是否被立即写到磁盘上去取决于应用程序所采用的写操作机制：如果用户采用的是同步写机制（ synchronous writes ）, 那么数据会立即被写回到磁盘上，应用程序会一直等到数据被写完为止；如果用户采用的是延迟写机制（ deferred writes ），那么应用程序就完全不需要等到数据全部被写回到磁盘，数据只要被写到页缓存中去就可以了。在延迟写机制的情况下，操作系统会定期地将放在页缓存中的数据刷到磁盘上。与异步写机制（ asynchronous writes ）不同的是，延迟写机制在数据完全写到磁盘上的时候不会通知应用程序，而异步写机制在数据完全写到磁盘上的时候是会返回给应用程序的。所以延迟写机制本身是存在数据丢失的风险的，而异步写机制则不会有这方面的担心。</p>
+<h3 id="缓存I-O的特点"><a href="#缓存I-O的特点" class="headerlink" title="缓存I/O的特点"></a>缓存I/O的特点</h3><p>在缓存 I/O 机制中，DMA 方式可以将数据直接从磁盘读到页缓存中，或者将数据从页缓存直接写回到磁盘上，而不能直接在应用程序地址空间和磁盘之间进行数据传输，这样的话，数据在传输过程中需要在应用程序地址空间和页缓存之间进行多次数据拷贝操作，这些数据拷贝操作所带来的 CPU 以及内存开销是非常大的。</p>
+<p>对于某些特殊的应用程序来说，避开操作系统内核缓冲区而直接在应用程序地址空间和磁盘之间传输数据会比使用操作系统内核缓冲区获取更好的性能，下边这一小节中提到的自缓存应用程序就是其中的一种。</p>
+<h3 id="自缓存应用程序（-self-caching-applications）"><a href="#自缓存应用程序（-self-caching-applications）" class="headerlink" title="自缓存应用程序（ self-caching applications）"></a>自缓存应用程序（ self-caching applications）</h3><p>对于某些应用程序来说，它会有它自己的数据缓存机制，比如，它会将数据缓存在应用程序地址空间，这类应用程序完全不需要使用操作系统内核中的高速缓冲存储器，这类应用程序就被称作是自缓存应用程序（ self-caching applications ）。数据库管理系统是这类应用程序的一个代表。自缓存应用程序倾向于使用数据的逻辑表达方式，而非物理表达方式；当系统内存较低的时候，自缓存应用程序会让这种数据的逻辑缓存被换出，而并非是磁盘上实际的数据被换出。自缓存应用程序对要操作的数据的语义了如指掌，所以它可以采用更加高效的缓存替换算法。自缓存应用程序有可能会在多台主机之间共享一块内存，那么自缓存应用程序就需要提供一种能够有效地将用户地址空间的缓存数据置为无效的机制，从而确保应用程序地址空间缓存数据的一致性。</p>
+<p>对于自缓存应用程序来说，缓存 I/O 明显不是一个好的选择。由此引出我们这篇文章着重要介绍的 Linux 中的直接 I/O 技术。Linux 中的直接 I/O 技术非常适用于自缓存这类应用程序，该技术省略掉缓存 I/O 技术中操作系统内核缓冲区的使用，数据直接在应用程序地址空间和磁盘之间进行传输，从而使得自缓存应用程序可以省略掉复杂的系统级别的缓存结构，而执行程序自己定义的数据读写管理，从而降低系统级别的管理对应用程序访问数据的影响。在下面一节中，我们会着重介绍 Linux 中提供的直接 I/O 机制的设计与实现，该机制为自缓存应用程序提供了很好的支持。</p>
+<h3 id="Linux中的Direct-I-O技术"><a href="#Linux中的Direct-I-O技术" class="headerlink" title="Linux中的Direct I/O技术"></a>Linux中的Direct I/O技术</h3><p>所有的I/O操作都是通过读文件或者写文件来完成的。在这里，我们把所有的外围设备，包括键盘和显示器都看成是文件系统中的文件。Linux中提供的访问文件的方式多种多样，下面将列出Linux中支持的文件访问方式。</p>
+<h4 id="标准访问文件的方式"><a href="#标准访问文件的方式" class="headerlink" title="标准访问文件的方式"></a>标准访问文件的方式</h4><p><img src="https://shuaijunlan.github.io/images/Screenshot from 2018-12-16 19-34-34.png?raw=true" alt=""></p>
+<h4 id="同步访问文件的方式"><a href="#同步访问文件的方式" class="headerlink" title="同步访问文件的方式"></a>同步访问文件的方式</h4><p><img src="https://shuaijunlan.github.io/images/Screenshot from 2018-12-16 19-40-43.png?raw=true" alt=""></p>
+<h4 id="内存映射方式"><a href="#内存映射方式" class="headerlink" title="内存映射方式"></a>内存映射方式</h4><p><img src="https://shuaijunlan.github.io/images/Screenshot from 2018-12-16 19-41-44.png?raw=true" alt=""></p>
+<h4 id="直接I-O的方式"><a href="#直接I-O的方式" class="headerlink" title="直接I/O的方式"></a>直接I/O的方式</h4><p><img src="https://shuaijunlan.github.io/images/Screenshot from 2018-12-16 19-42-31.png?raw=true" alt=""></p>
+<h4 id="异步访问文件的方式"><a href="#异步访问文件的方式" class="headerlink" title="异步访问文件的方式"></a>异步访问文件的方式</h4><p><img src="https://shuaijunlan.github.io/images/Screenshot from 2018-12-16 19-43-19.png?raw=true" alt=""></p>
 
         
       </div>
@@ -462,7 +479,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">46</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -538,7 +555,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -598,7 +617,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是Buffered-I-O"><span class="nav-number">1.</span> <span class="nav-text">什么是Buffered I/O</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是Buffered-I-O"><span class="nav-number">1.</span> <span class="nav-text">什么是Buffered I/O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存I-O的特点"><span class="nav-number">2.</span> <span class="nav-text">缓存I/O的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自缓存应用程序（-self-caching-applications）"><span class="nav-number">3.</span> <span class="nav-text">自缓存应用程序（ self-caching applications）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux中的Direct-I-O技术"><span class="nav-number">4.</span> <span class="nav-text">Linux中的Direct I/O技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#标准访问文件的方式"><span class="nav-number">4.1.</span> <span class="nav-text">标准访问文件的方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同步访问文件的方式"><span class="nav-number">4.2.</span> <span class="nav-text">同步访问文件的方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存映射方式"><span class="nav-number">4.3.</span> <span class="nav-text">内存映射方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#直接I-O的方式"><span class="nav-number">4.4.</span> <span class="nav-text">直接I/O的方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异步访问文件的方式"><span class="nav-number">4.5.</span> <span class="nav-text">异步访问文件的方式</span></a></li></ol></li></ol></div>
             
 
           </div>
