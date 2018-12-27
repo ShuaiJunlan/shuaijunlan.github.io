@@ -123,10 +123,12 @@
 <meta property="og:site_name" content="ITechHub">
 <meta property="og:description" content="在Java中的原子类中频繁的使用CAS策略来保证数据更新的安全性，它是一种Lock-Free机制，这篇文章将会讲解CAS原理，以及它在Java中的应用。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-27T12:22:33.739Z">
+<meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-12-27 20-39-35.png">
+<meta property="og:updated_time" content="2018-12-27T12:43:04.759Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CAS and Lock-Free in Java">
 <meta name="twitter:description" content="在Java中的原子类中频繁的使用CAS策略来保证数据更新的安全性，它是一种Lock-Free机制，这篇文章将会讲解CAS原理，以及它在Java中的应用。">
+<meta name="twitter:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-12-27 20-39-35.png">
 
 
 
@@ -389,7 +391,7 @@
                 
               
 
-              <time title="创建时间：2018-12-27 20:06:41 / 修改时间：20:22:33" itemprop="dateCreated datePublished" datetime="2018-12-27T20:06:41+08:00">2018-12-27</time>
+              <time title="创建时间：2018-12-27 20:06:41 / 修改时间：20:43:04" itemprop="dateCreated datePublished" datetime="2018-12-27T20:06:41+08:00">2018-12-27</time>
             
 
             
@@ -493,6 +495,24 @@
 <li>线程 T2 抢占, pop A, pop B, 然后 push A</li>
 <li>线程 T1 恢复, CAS(&amp;head, B, A) 成功, 则此时 head 指向一个被 pop 的元素 B</li>
 </ul>
+<p>CAS机制还存在其他问题：</p>
+<ul>
+<li><p><strong>循环时间长开销大:</strong></p>
+<blockquote>
+<p>自旋CAS如果长时间不成功，会给CPU带来非常大的执行开销。如果JVM能支持处理器提供的pause指令那么效率会有一定的提升，pause指令有两个作用，第一它可以延迟流水线执行指令（de-pipeline）,使CPU不会消耗过多的执行资源，延迟的时间取决于具体实现的版本，在一些处理器上延迟时间是零。第二它可以避免在退出循环的时候因内存顺序冲突（memory order violation）而引起CPU流水线被清空（CPU pipeline flush），从而提高CPU的执行效率。</p>
+</blockquote>
+</li>
+<li><p><strong>只能保证一个共享变量的原子操作</strong>:</p>
+<blockquote>
+<p>当对一个共享变量执行操作时，我们可以使用循环CAS的方式来保证原子操作，但是对多个共享变量操作时，循环CAS就无法保证操作的原子性，这个时候就可以用锁，或者有一个取巧的办法，就是把多个共享变量合并成一个共享变量来操作。比如有两个共享变量i＝2,j=a，合并一下ij=2a，然后用CAS来操作ij。从Java1.5开始JDK提供了<strong>AtomicReference类来保证引用对象之间的原子性，你可以把多个变量放在一个对象里来进行CAS操作。</strong></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="CAS在Java中的应用"><a href="#CAS在Java中的应用" class="headerlink" title="CAS在Java中的应用"></a>CAS在Java中的应用</h3><ul>
+<li>在Java中所有原子类都采用了CAS机制，并且在jdk1.5之后提供了AtomicStampedReference来解决上述提到的ABA问题；</li>
+<li>AQS，非阻塞数据结构和原子变量类（java.util.concurrent.atomic包中的类），这些concurrent包中的基础类都是使用CAS机制来实现的，而concurrent包中的高层类又是依赖于这些基础类来实现的。从整体来看，concurrent包的实现示意图如下：</li>
+</ul>
+<p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-12-27 20-39-35.png" alt=""></p>
 
       
     </div>
@@ -752,7 +772,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lock-Free"><span class="nav-number">1.</span> <span class="nav-text">Lock-Free</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CAS原语"><span class="nav-number">2.</span> <span class="nav-text">CAS原语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CAS中的ABA问题"><span class="nav-number">3.</span> <span class="nav-text">CAS中的ABA问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lock-Free"><span class="nav-number">1.</span> <span class="nav-text">Lock-Free</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CAS原语"><span class="nav-number">2.</span> <span class="nav-text">CAS原语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CAS中的ABA问题"><span class="nav-number">3.</span> <span class="nav-text">CAS中的ABA问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CAS在Java中的应用"><span class="nav-number">4.</span> <span class="nav-text">CAS在Java中的应用</span></a></li></ol></div>
             
 
           </div>
