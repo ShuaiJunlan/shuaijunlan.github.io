@@ -339,7 +339,7 @@ related_posts:
 
 # Declare license on posts
 post_copyright:
-  enable: true
+  enable: false
   license: <img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/0.png?raw=true" alt="">
 
 # Post edit
