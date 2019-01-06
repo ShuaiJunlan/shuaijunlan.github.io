@@ -167,7 +167,7 @@
   <entry>
     <title><![CDATA[Dubbo基于Javassist实现动态代理分析]]></title>
     <url>%2F2018%2F08%2F02%2Fdubbo-proxy-basing-on-javassist%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[1org.apache.dubbo.common.bytecode.Proxy 123456789101112131415161718192021// create ProxyInstance class.//生成代理类的实例String pcn = pkg + ".proxy" + id;ccp.setClassName(pcn);ccp.addField("public static java.lang.reflect.Method[] methods;");ccp.addField("private " + InvocationHandler.class.getName() + " handler;");ccp.addConstructor(Modifier.PUBLIC, new Class&lt;?&gt;[]&#123;InvocationHandler.class&#125;, new Class&lt;?&gt;[0], "handler=$1;");ccp.addDefaultConstructor();Class&lt;?&gt; clazz = ccp.toClass();clazz.getField("methods").set(null, methods.toArray(new Method[0]));// create Proxy class.//生成代理类，通过调用newInstance()方法获取实例String fcn = Proxy.class.getName() + id;ccm = ClassGenerator.newInstance(cl);ccm.setClassName(fcn);ccm.addDefaultConstructor();ccm.setSuperClass(Proxy.class);ccm.addMethod("public Object newInstance(" + InvocationHandler.class.getName() + " h)&#123; return new " + pcn + "($1); &#125;");Class&lt;?&gt; pc = ccm.toClass();proxy = (Proxy) pc.newInstance();]]></content>
       <tags>
         <tag>dubbo</tag>
         <tag>javassist</tag>
