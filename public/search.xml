@@ -70,7 +70,7 @@
   <entry>
     <title><![CDATA[深入研究Java阻塞队列实现]]></title>
     <url>%2F2018%2F10%2F15%2Fjava-blocking-queue%2F</url>
-    <content type="text"><![CDATA[阻塞队列是一个非常常见的数据结构，比如在线程池中用阻塞队列存放任务，下面我们将围绕阻塞队列的实现对其源码进行深度剖析，主要讲解ArrayBlockingQueue、PriorityBlockingQueue、SynchronousQueue和LinkedBlockingQueue四大阻塞队列的实现。 LinkedBlockingQueue 双锁队列算法的变体 优化 Why copy final member field into local final variable? 双锁队列比单锁队列的好处？ LinkedBlockingQueue#dequeue()的优化 1234567891011private E dequeue() &#123; // assert takeLock.isHeldByCurrentThread(); // assert head.item == null; Node&lt;E&gt; h = head; Node&lt;E&gt; first = h.next; h.next = h; // help GC head = first; E x = first.item; first.item = null; return x;&#125;]]></content>
+    <content type="text"><![CDATA[阻塞队列是一个非常常见的数据结构，比如在线程池中用阻塞队列存放任务，下面我们将围绕阻塞队列的实现对其源码进行深度剖析，主要讲解ArrayBlockingQueue、PriorityBlockingQueue、SynchronousQueue和LinkedBlockingQueue四大阻塞队列的实现。 LinkedBlockingQueue 双锁队列算法的变体 优化 Why copy final member field into local final variable? 双锁队列比单锁队列的好处？ LinkedBlockingQueue#dequeue()的优化 1234567891011private E dequeue() &#123; // assert takeLock.isHeldByCurrentThread(); // assert head.item == null; Node&lt;E&gt; h = head; Node&lt;E&gt; first = h.next; h.next = h; // help GC head = first; E x = first.item; first.item = null; return x;&#125; 基本接口 offer()方法和put()方法的区别？]]></content>
       <tags>
         <tag>java</tag>
       </tags>
@@ -167,7 +167,7 @@
   <entry>
     <title><![CDATA[Dubbo基于Javassist实现动态代理分析]]></title>
     <url>%2F2018%2F08%2F02%2Fdubbo-proxy-basing-on-javassist%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[12345org.apache.dubbo.common.bytecode.Proxy //生成代理类org.apache.dubbo.common.bytecode.ClassGenerator //基于javassist封装org.apache.dubbo.common.utils.ClassHelper; //工具类org.apache.dubbo.common.utils.ReflectUtils; //工具类 123456789101112131415161718192021// create ProxyInstance class.//生成代理类的实例String pcn = pkg + ".proxy" + id;ccp.setClassName(pcn);ccp.addField("public static java.lang.reflect.Method[] methods;");ccp.addField("private " + InvocationHandler.class.getName() + " handler;");ccp.addConstructor(Modifier.PUBLIC, new Class&lt;?&gt;[]&#123;InvocationHandler.class&#125;, new Class&lt;?&gt;[0], "handler=$1;");ccp.addDefaultConstructor();Class&lt;?&gt; clazz = ccp.toClass();clazz.getField("methods").set(null, methods.toArray(new Method[0]));// create Proxy class.//生成代理类，通过调用newInstance()方法获取实例String fcn = Proxy.class.getName() + id;ccm = ClassGenerator.newInstance(cl);ccm.setClassName(fcn);ccm.addDefaultConstructor();ccm.setSuperClass(Proxy.class);ccm.addMethod("public Object newInstance(" + InvocationHandler.class.getName() + " h)&#123; return new " + pcn + "($1); &#125;");Class&lt;?&gt; pc = ccm.toClass();proxy = (Proxy) pc.newInstance();]]></content>
       <tags>
         <tag>dubbo</tag>
         <tag>javassist</tag>
