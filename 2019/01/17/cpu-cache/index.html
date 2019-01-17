@@ -125,7 +125,7 @@
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-21-08.png">
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-30-28.png">
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-45-14.png">
-<meta property="og:updated_time" content="2019-01-17T07:02:03.055Z">
+<meta property="og:updated_time" content="2019-01-17T07:14:24.163Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java编程如何高效利用CPU缓存？">
 <meta name="twitter:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-17-31.png">
@@ -391,7 +391,7 @@
                 
               
 
-              <time title="创建时间：2019-01-17 13:25:47 / 修改时间：15:02:03" itemprop="dateCreated datePublished" datetime="2019-01-17T13:25:47+08:00">2019-01-17</time>
+              <time title="创建时间：2019-01-17 13:25:47 / 修改时间：15:14:24" itemprop="dateCreated datePublished" datetime="2019-01-17T13:25:47+08:00">2019-01-17</time>
             
 
             
@@ -462,7 +462,7 @@
 </blockquote>
 <p>现在主流的多核CPU缓存架构采用了三级缓存模式，如下图：</p>
 <p><img src="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-21-08.png" alt=""></p>
-<p>每个core共享L3 Cache，下面我们来详细说说，缓存与RAM如何进行数据交换的，数据传输的基本单位是什么？。</p>
+<p>每个core共享L3 Cache，为什么要设计三级缓存可以参考这么文章《》，下面我们来详细说说，缓存与RAM如何进行数据交换的，数据传输的基本单位是什么？。</p>
 <h3 id="Cache-Line（缓存行）"><a href="#Cache-Line（缓存行）" class="headerlink" title="Cache Line（缓存行）"></a>Cache Line（缓存行）</h3><p>缓存行 (Cache Line) 便是 CPU Cache 中的最小单位，CPU Cache 由若干缓存行组成，一个缓存行的大小通常是 64 字节（这取决于 CPU），并且它有效地引用主内存中的一块地址。一个 Java 的 long 类型是 8 字节，因此在一个缓存行中可以存 8 个 long 类型的变量。</p>
 <p><img src="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-30-28.png" alt=""></p>
 <p>试想一下你正在遍历一个长度为 16 的 long 数组 data[16]，原始数据自然存在于主内存中，访问过程描述如下</p>
@@ -487,6 +487,8 @@
 <h4 id="Java8中实现字节填充"><a href="#Java8中实现字节填充" class="headerlink" title="Java8中实现字节填充"></a>Java8中实现字节填充</h4><p>Java8 中终于提供了字节填充的官方实现，这无疑使得 CPU Cache 更加可控了，无需担心 jdk 的无效字段优化，无需担心 Cache Line 在不同 CPU 下的大小究竟是不是 64 字节。使用 @Contended 注解可以完美的避免伪共享问题。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(&#123;ElementType.FIELD, ElementType.TYPE&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Contended &#123;</span><br><span class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>更多关于避免伪共享的一些Java实践可以参考《<a href="https://www.cnkirito.moe/cache-line/" target="_blank" rel="noopener">CPU Cache 与缓存行</a>》。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>在这篇文章我们主要介绍了CPU高速缓存架构，多核CPU带来的伪共享问题以及Java实战中是如何利用CPU缓存来提高性能。</p>
+<p>在这里，我想到了一问题，在软件系统架构中经常会用到缓存，那么是如何设计这个缓存的？跟CPU缓存架构有什么异同点？也请各位知道的在下方评论区中留言。</p>
 <p><strong>REFERENCE</strong></p>
 <ul>
 <li><a href="https://www.ibm.com/developerworks/cn/aix/library/au-aix-multicore-multiprocessor/index.html" target="_blank" rel="noopener">多核多处理器架构软件设计的注意事项</a></li>
@@ -765,7 +767,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是CPU缓存"><span class="nav-number">1.</span> <span class="nav-text">什么是CPU缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cache-Line（缓存行）"><span class="nav-number">2.</span> <span class="nav-text">Cache Line（缓存行）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#False-Sharing（伪共享）"><span class="nav-number">3.</span> <span class="nav-text">False Sharing（伪共享）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java中是如何避免伪共享的呢？"><span class="nav-number">4.</span> <span class="nav-text">Java中是如何避免伪共享的呢？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Java6-中实现字节填充"><span class="nav-number">4.1.</span> <span class="nav-text">Java6 中实现字节填充</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java7-中实现字节填充"><span class="nav-number">4.2.</span> <span class="nav-text">Java7 中实现字节填充</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java8中实现字节填充"><span class="nav-number">4.3.</span> <span class="nav-text">Java8中实现字节填充</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是CPU缓存"><span class="nav-number">1.</span> <span class="nav-text">什么是CPU缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cache-Line（缓存行）"><span class="nav-number">2.</span> <span class="nav-text">Cache Line（缓存行）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#False-Sharing（伪共享）"><span class="nav-number">3.</span> <span class="nav-text">False Sharing（伪共享）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java中是如何避免伪共享的呢？"><span class="nav-number">4.</span> <span class="nav-text">Java中是如何避免伪共享的呢？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Java6-中实现字节填充"><span class="nav-number">4.1.</span> <span class="nav-text">Java6 中实现字节填充</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java7-中实现字节填充"><span class="nav-number">4.2.</span> <span class="nav-text">Java7 中实现字节填充</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java8中实现字节填充"><span class="nav-number">4.3.</span> <span class="nav-text">Java8中实现字节填充</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后"><span class="nav-number">5.</span> <span class="nav-text">最后</span></a></li></ol></div>
             
 
           </div>
