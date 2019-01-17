@@ -125,7 +125,7 @@
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-21-08.png">
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-30-28.png">
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-45-14.png">
-<meta property="og:updated_time" content="2019-01-17T06:57:52.087Z">
+<meta property="og:updated_time" content="2019-01-17T07:02:03.055Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java编程如何高效利用CPU缓存？">
 <meta name="twitter:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-17-31.png">
@@ -391,7 +391,7 @@
                 
               
 
-              <time title="创建时间：2019-01-17 13:25:47 / 修改时间：14:57:52" itemprop="dateCreated datePublished" datetime="2019-01-17T13:25:47+08:00">2019-01-17</time>
+              <time title="创建时间：2019-01-17 13:25:47 / 修改时间：15:02:03" itemprop="dateCreated datePublished" datetime="2019-01-17T13:25:47+08:00">2019-01-17</time>
             
 
             
@@ -481,7 +481,7 @@
 <h3 id="Java中是如何避免伪共享的呢？"><a href="#Java中是如何避免伪共享的呢？" class="headerlink" title="Java中是如何避免伪共享的呢？"></a>Java中是如何避免伪共享的呢？</h3><h4 id="Java6-中实现字节填充"><a href="#Java6-中实现字节填充" class="headerlink" title="Java6 中实现字节填充"></a>Java6 中实现字节填充</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaddingObject</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">volatile</span> <span class="keyword">long</span> value = <span class="number">0L</span>;    <span class="comment">// 实际数据</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">long</span> p1, p2, p3, p4, p5, p6; <span class="comment">// 填充</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>PaddingObject 类中需要保存一个 long 类型的 value 值，如果多线程操作同一个 CacheLine 中的 PaddingObject 对象，便无法完全发挥出 CPU Cache 的优势（想象一下你定义了一个 PaddingObject[] 数组，数组元素在内存中连续，却由于伪共享导致无法使用 CPU Cache 带来的沮丧）。</p>
 <p>不知道你注意到没有，实际数据 value + 用于填充的 p1~p6 总共只占据了 7 <em> 8 = 56 个字节，而 Cache Line 的大小应当是 64 字节，这是有意而为之，在 Java 中，<em>*对象头还占据了 8 个字节</em></em>，所以一个 PaddingObject 对象可以恰好占据一个 Cache Line。</p>
-<h4 id="Java7-中实现字节填充"><a href="#Java7-中实现字节填充" class="headerlink" title="Java7 中实现字节填充"></a>Java7 中实现字节填充</h4><p>在 Java7 之后，一个 JVM 的优化给字节填充造成了一些影响，上面的代码片段 <code>public long p1, p2, p3, p4, p5, p6;</code> 会被认为是无效代码被优化掉，有回归到了伪共享的窘境之中。</p>
+<h4 id="Java7-中实现字节填充"><a href="#Java7-中实现字节填充" class="headerlink" title="Java7 中实现字节填充"></a>Java7 中实现字节填充</h4><p>在 Java7 之后，一个 JVM 的优化给字节填充造成了一些影响，上面的代码片段 <code>public long p1, p2, p3, p4, p5, p6;</code> 会被认为是无效代码被优化掉，又回归到了伪共享的窘境之中。</p>
 <p>为了避免 JVM 的自动优化，需要使用继承的方式来填充。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractPaddingObject</span></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">long</span> p1, p2, p3, p4, p5, p6;<span class="comment">// 填充</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaddingObject</span> <span class="keyword">extends</span> <span class="title">AbstractPaddingObject</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">volatile</span> <span class="keyword">long</span> value = <span class="number">0L</span>;    <span class="comment">// 实际数据</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="Java8中实现字节填充"><a href="#Java8中实现字节填充" class="headerlink" title="Java8中实现字节填充"></a>Java8中实现字节填充</h4><p>Java8 中终于提供了字节填充的官方实现，这无疑使得 CPU Cache 更加可控了，无需担心 jdk 的无效字段优化，无需担心 Cache Line 在不同 CPU 下的大小究竟是不是 64 字节。使用 @Contended 注解可以完美的避免伪共享问题。</p>
