@@ -125,7 +125,7 @@
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-21-08.png">
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-30-28.png">
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-45-14.png">
-<meta property="og:updated_time" content="2019-01-17T07:14:24.163Z">
+<meta property="og:updated_time" content="2019-01-17T07:15:26.411Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java编程如何高效利用CPU缓存？">
 <meta name="twitter:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-17-31.png">
@@ -391,7 +391,7 @@
                 
               
 
-              <time title="创建时间：2019-01-17 13:25:47 / 修改时间：15:14:24" itemprop="dateCreated datePublished" datetime="2019-01-17T13:25:47+08:00">2019-01-17</time>
+              <time title="创建时间：2019-01-17 13:25:47 / 修改时间：15:15:26" itemprop="dateCreated datePublished" datetime="2019-01-17T13:25:47+08:00">2019-01-17</time>
             
 
             
@@ -462,7 +462,7 @@
 </blockquote>
 <p>现在主流的多核CPU缓存架构采用了三级缓存模式，如下图：</p>
 <p><img src="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-21-08.png" alt=""></p>
-<p>每个core共享L3 Cache，为什么要设计三级缓存可以参考这么文章《》，下面我们来详细说说，缓存与RAM如何进行数据交换的，数据传输的基本单位是什么？。</p>
+<p>每个core共享L3 Cache，为什么要设计三级缓存可以参考这么文章《<a href="https://juejin.im/entry/57b6a0bcc4c9710055800afe" target="_blank" rel="noopener">[译] 为什么 CPU 有多层缓存</a>》，下面我们来详细说说，缓存与RAM如何进行数据交换的，数据传输的基本单位是什么？。</p>
 <h3 id="Cache-Line（缓存行）"><a href="#Cache-Line（缓存行）" class="headerlink" title="Cache Line（缓存行）"></a>Cache Line（缓存行）</h3><p>缓存行 (Cache Line) 便是 CPU Cache 中的最小单位，CPU Cache 由若干缓存行组成，一个缓存行的大小通常是 64 字节（这取决于 CPU），并且它有效地引用主内存中的一块地址。一个 Java 的 long 类型是 8 字节，因此在一个缓存行中可以存 8 个 long 类型的变量。</p>
 <p><img src="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-30-28.png" alt=""></p>
 <p>试想一下你正在遍历一个长度为 16 的 long 数组 data[16]，原始数据自然存在于主内存中，访问过程描述如下</p>
