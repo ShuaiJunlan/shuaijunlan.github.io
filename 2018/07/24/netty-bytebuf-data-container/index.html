@@ -16,7 +16,7 @@
 <meta property="og:description" content="ByteBuf工作原理ByteBuf维护了两个不同的索引：一个用于读取，一个用于写入。当从ByteBuf读取数据时，它的readerINdex将会递增已被读取的字节数。同样的，当你写入ByteBuf的时候，它的writerIndex也会被递增。  上图中表示的是一个读索引和写索引都设置为0的16字节ByteBuf，若果试图访问超出writerIndex范围的数据将会触发一个IndexOutOfBo">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-07-24 16-02-04.png">
-<meta property="og:updated_time" content="2018-11-21T08:32:22.000Z">
+<meta property="og:updated_time" content="2019-01-17T08:37:14.791Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Netty数据容器---ByteBuf">
 <meta name="twitter:description" content="ByteBuf工作原理ByteBuf维护了两个不同的索引：一个用于读取，一个用于写入。当从ByteBuf读取数据时，它的readerINdex将会递增已被读取的字节数。同样的，当你写入ByteBuf的时候，它的writerIndex也会被递增。  上图中表示的是一个读索引和写索引都设置为0的16字节ByteBuf，若果试图访问超出writerIndex范围的数据将会触发一个IndexOutOfBo">
@@ -132,6 +132,10 @@ var _hmt = _hmt || [];
                     </a>
                     
                 
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
                 
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
@@ -365,6 +369,41 @@ var _hmt = _hmt || [];
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#ByteBuf工作原理">
+        <span class="has-mr-6">1</span>
+        <span>ByteBuf工作原理</span>
+        </a></li><li>
+        <a class="is-flex" href="#ByteBuf的使用模式">
+        <span class="has-mr-6">2</span>
+        <span>ByteBuf的使用模式</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#堆缓冲区">
+        <span class="has-mr-6">2.1</span>
+        <span>堆缓冲区</span>
+        </a></li><li>
+        <a class="is-flex" href="#直接缓冲区">
+        <span class="has-mr-6">2.2</span>
+        <span>直接缓冲区</span>
+        </a></li><li>
+        <a class="is-flex" href="#复合缓冲区">
+        <span class="has-mr-6">2.3</span>
+        <span>复合缓冲区</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#操作ByteBuf字节">
+        <span class="has-mr-6">3</span>
+        <span>操作ByteBuf字节</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 

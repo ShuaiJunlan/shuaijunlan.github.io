@@ -23,7 +23,7 @@
 <meta property="og:image" content="http://learningnotes-1251679769.costj.myqcloud.com/linux/5.png">
 <meta property="og:image" content="http://learningnotes-1251679769.costj.myqcloud.com/linux/5.png">
 <meta property="og:image" content="http://learningnotes-1251679769.costj.myqcloud.com/linux/default-nat.png">
-<meta property="og:updated_time" content="2018-11-21T08:32:22.000Z">
+<meta property="og:updated_time" content="2019-01-17T08:37:15.715Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="配置KVM虚拟机网络的两种方式（Bridge模式和NAT模式）">
 <meta name="twitter:description" content="Bridge原理(桥接模式)  Bridge方式即虚拟网桥的网络连接方式，使客户机和子网里面的机器能够互相通信。可以使虚拟机成为网络中具有独立IP的主机。桥接网络（也叫物理设备共享）被用作把一个物理设备复制到一台虚拟机。网桥多用作高级设置，特别是主机多个网络接口的情况。">
@@ -140,6 +140,10 @@ var _hmt = _hmt || [];
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -208,7 +212,7 @@ var _hmt = _hmt || [];
 <li><p>配置动态IP</p>
 <ul>
 <li><p>在相同目录下面添加一个ifcfg-br0文件，并在文件中添加如下内容</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DEVICE=br0</span><br><span class="line">TYPE=Bridge</span><br><span class="line">NM_CONTROLLED=no</span><br><span class="line">BOOTPROTO=dhcp</span><br><span class="line">ONBOOT=yes</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DEVICE=br0</span><br><span class="line">TYPE=Bridge</span><br><span class="line">NM_CONTROLLED=no</span><br><span class="line">BOOTPROTO=dhcp</span><br><span class="line">ONBOOT=yes</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>并且修改ifcfg-eth0文件<br><br><img src="http://learningnotes-1251679769.costj.myqcloud.com/linux/5.png" alt="image" title="图片1"></p>
 </li>
@@ -433,6 +437,21 @@ var _hmt = _hmt || [];
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#持续更新中……">
+        <span class="has-mr-6">1</span>
+        <span>持续更新中……</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 

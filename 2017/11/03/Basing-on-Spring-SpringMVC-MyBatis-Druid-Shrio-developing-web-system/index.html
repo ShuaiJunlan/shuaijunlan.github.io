@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/menu-manage.png?raw=true">
 <meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/log-manage1.png?raw=true">
 <meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/log-manage2.png?raw=true">
-<meta property="og:updated_time" content="2018-11-22T11:24:54.688Z">
+<meta property="og:updated_time" content="2019-01-17T08:37:15.599Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Basing on Spring SpringMVC MyBatis Druid Shrio developing web system">
 <meta name="twitter:description" content="源码下载地址：https://github.com/shuaijunlan/Autumn-Framework 在线Demo：http://autumn.shuaijunlan.cn 项目介绍Autumn-Framework旨在提供通用的web系统解决方案，目前由作者本人一个人维护，更新速度缓慢，但是会持续更新，此项目适合初学者学习使用，也欢迎您加入我一起维护整个项目。">
@@ -137,6 +137,10 @@ var _hmt = _hmt || [];
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -191,7 +195,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <h4 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h4><p>前端以<code>Layui</code>为主要框架，并使用了<code>ECharts</code>、<code>editor.md</code>等其他第三方插件<br><br>后端主要使用<code>Spring</code>、<code>SpringMVC</code>、<code>MyBatis</code>、<code>Shiro</code>、<code>Druid</code>、<code>Ehcache</code>构建整个web系统，并使用Maven管理项目，使用Mysql存储数据，使用tomcat部署web系统。</p>
-<h4 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a>代码结构</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">└── src-------------------------------------------源码根目录</span><br><span class="line">    └── main</span><br><span class="line">        ├── java</span><br><span class="line">        │   └── com</span><br><span class="line">        │       └── autumnframework</span><br><span class="line">        │           └── cms</span><br><span class="line">        │               ├── architect-------------包含常用的工具类和常量</span><br><span class="line">        │               │   ├── conf</span><br><span class="line">        │               │   ├── constant</span><br><span class="line">        │               │   ├── filter</span><br><span class="line">        │               │   ├── interceptor</span><br><span class="line">        │               │   └── utils</span><br><span class="line">        │               ├── controller------------控制器层</span><br><span class="line">        │               │   └── system</span><br><span class="line">        │               ├── dao-------------------dao层</span><br><span class="line">        │               │   ├── bomapper</span><br><span class="line">        │               │   └── vomapper</span><br><span class="line">        │               │       ├── impl</span><br><span class="line">        │               │       └── interfaces</span><br><span class="line">        │               ├── model-----------------model层</span><br><span class="line">        │               │   ├── bo</span><br><span class="line">        │               │   ├── po</span><br><span class="line">        │               │   └── vo</span><br><span class="line">        │               ├── service---------------service层</span><br><span class="line">        │               │   ├── impl</span><br><span class="line">        │               │   └── interfaces</span><br><span class="line">        │               └── shiroconfig-----------shiro配置</span><br><span class="line">        │                   ├── filter</span><br><span class="line">        │                   └── realm</span><br><span class="line">        ├── resources----------------------------资源文件目录</span><br><span class="line">        │   ├── mapperxml------------------------mapper映射文件</span><br><span class="line">        │   ├── mybatis-generator----------------mybatis-generator配置文件</span><br><span class="line">        │   └── spring---------------------------所有与spring相关的配置文件</span><br><span class="line">        └── webapp-------------------------------前端源码文件</span><br><span class="line">            ├── BasePlu--------------------------公共库</span><br><span class="line">            ├── comm</span><br><span class="line">            ├── Lib------------------------------第三方库</span><br><span class="line">            │   ├── Echarts-3.7.2</span><br><span class="line">            │   ├── editor.md</span><br><span class="line">            │   ├── jquery</span><br><span class="line">            │   └── layui_v2.1.2</span><br><span class="line">            ├── static--------------------------静态资源</span><br><span class="line">            ├── Sys-----------------------------系统功能插件目录</span><br><span class="line">            │   ├── js</span><br><span class="line">            │   └── plugin</span><br><span class="line">            └── WEB-INF</span><br><span class="line">                └── views</span><br><span class="line">                    ├── error-------------------异常目录</span><br><span class="line">                    └── main--------------------系统主界面目录</span><br></pre></td></tr></table></figure>
+<h4 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a>代码结构</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">└── src-------------------------------------------源码根目录</span><br><span class="line">    └── main</span><br><span class="line">        ├── java</span><br><span class="line">        │   └── com</span><br><span class="line">        │       └── autumnframework</span><br><span class="line">        │           └── cms</span><br><span class="line">        │               ├── architect-------------包含常用的工具类和常量</span><br><span class="line">        │               │   ├── conf</span><br><span class="line">        │               │   ├── constant</span><br><span class="line">        │               │   ├── filter</span><br><span class="line">        │               │   ├── interceptor</span><br><span class="line">        │               │   └── utils</span><br><span class="line">        │               ├── controller------------控制器层</span><br><span class="line">        │               │   └── system</span><br><span class="line">        │               ├── dao-------------------dao层</span><br><span class="line">        │               │   ├── bomapper</span><br><span class="line">        │               │   └── vomapper</span><br><span class="line">        │               │       ├── impl</span><br><span class="line">        │               │       └── interfaces</span><br><span class="line">        │               ├── model-----------------model层</span><br><span class="line">        │               │   ├── bo</span><br><span class="line">        │               │   ├── po</span><br><span class="line">        │               │   └── vo</span><br><span class="line">        │               ├── service---------------service层</span><br><span class="line">        │               │   ├── impl</span><br><span class="line">        │               │   └── interfaces</span><br><span class="line">        │               └── shiroconfig-----------shiro配置</span><br><span class="line">        │                   ├── filter</span><br><span class="line">        │                   └── realm</span><br><span class="line">        ├── resources----------------------------资源文件目录</span><br><span class="line">        │   ├── mapperxml------------------------mapper映射文件</span><br><span class="line">        │   ├── mybatis-generator----------------mybatis-generator配置文件</span><br><span class="line">        │   └── spring---------------------------所有与spring相关的配置文件</span><br><span class="line">        └── webapp-------------------------------前端源码文件</span><br><span class="line">            ├── BasePlu--------------------------公共库</span><br><span class="line">            ├── comm</span><br><span class="line">            ├── Lib------------------------------第三方库</span><br><span class="line">            │   ├── Echarts-3.7.2</span><br><span class="line">            │   ├── editor.md</span><br><span class="line">            │   ├── jquery</span><br><span class="line">            │   └── layui_v2.1.2</span><br><span class="line">            ├── static--------------------------静态资源</span><br><span class="line">            ├── Sys-----------------------------系统功能插件目录</span><br><span class="line">            │   ├── js</span><br><span class="line">            │   └── plugin</span><br><span class="line">            └── WEB-INF</span><br><span class="line">                └── views</span><br><span class="line">                    ├── error-------------------异常目录</span><br><span class="line">                    └── main--------------------系统主界面目录</span><br></pre></td></tr></table></figure>
 <h4 id="运行系统"><a href="#运行系统" class="headerlink" title="运行系统"></a>运行系统</h4><ul>
 <li>拷贝代码到本地<code>git clone git@github.com:shuaijunlan/Autumn-Framework.git</code></li>
 <li>进入Autumn-Framework目录<code>cd Autumn-Framework</code></li>
@@ -391,6 +395,45 @@ var _hmt = _hmt || [];
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#项目介绍">
+        <span class="has-mr-6">1</span>
+        <span>项目介绍</span>
+        </a></li><li>
+        <a class="is-flex" href="#效果图">
+        <span class="has-mr-6">2</span>
+        <span>效果图</span>
+        </a></li><li>
+        <a class="is-flex" href="#技术选型">
+        <span class="has-mr-6">3</span>
+        <span>技术选型</span>
+        </a></li><li>
+        <a class="is-flex" href="#代码结构">
+        <span class="has-mr-6">4</span>
+        <span>代码结构</span>
+        </a></li><li>
+        <a class="is-flex" href="#运行系统">
+        <span class="has-mr-6">5</span>
+        <span>运行系统</span>
+        </a></li><li>
+        <a class="is-flex" href="#FAQ">
+        <span class="has-mr-6">6</span>
+        <span>FAQ</span>
+        </a></li><li>
+        <a class="is-flex" href="#联系作者">
+        <span class="has-mr-6">7</span>
+        <span>联系作者</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 

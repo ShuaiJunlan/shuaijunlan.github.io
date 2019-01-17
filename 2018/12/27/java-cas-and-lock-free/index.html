@@ -16,7 +16,7 @@
 <meta property="og:description" content="在Java中的原子类中频繁的使用CAS策略来保证数据更新的安全性，它是一种Lock-Free机制，这篇文章将会讲解CAS原理，以及它在Java中的应用。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-12-27 20-39-35.png?raw=true">
-<meta property="og:updated_time" content="2018-12-27T12:45:15.825Z">
+<meta property="og:updated_time" content="2019-01-17T08:37:16.259Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CAS and Lock-Free in Java">
 <meta name="twitter:description" content="在Java中的原子类中频繁的使用CAS策略来保证数据更新的安全性，它是一种Lock-Free机制，这篇文章将会讲解CAS原理，以及它在Java中的应用。">
@@ -133,6 +133,10 @@ var _hmt = _hmt || [];
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -195,11 +199,11 @@ var _hmt = _hmt || [];
 </blockquote>
 <p>一般来说: <strong>阻塞 &gt; Lock-Free &gt; Wait-Free</strong></p>
 <h3 id="CAS原语"><a href="#CAS原语" class="headerlink" title="CAS原语"></a>CAS原语</h3><p>CAS (compare and swap) 是 CPU 硬件同步原语(primitive), CAS(V, A, B) 操作可以用下面的代码来示意:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">bool</span> <span class="title">CAS</span>(<span class="title">T</span>* <span class="title">addr</span>, <span class="title">T</span> <span class="title">expect_val</span>, <span class="title">T</span> <span class="title">val</span>) &#123;</span></span><br><span class="line">    <span class="keyword">if</span> (*addr == expect_val) &#123;</span><br><span class="line">        *addr = val;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt;</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-title">bool</span> <span class="hljs-title">CAS</span>(<span class="hljs-title">T</span>* <span class="hljs-title">addr</span>, <span class="hljs-title">T</span> <span class="hljs-title">expect_val</span>, <span class="hljs-title">T</span> <span class="hljs-title">val</span>) &#123;</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (*addr == expect_val) &#123;</span><br><span class="line">        *addr = val;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>从 80486 开始, 所有的 Intel 处理器上, 通过一条汇编指令 CMPXCHG 即可实现 CAS 操作. CAS 的价值在于它是一个<strong>原子操作</strong>, 不会被 CPU中断或者其他方式打断, 因为在硬件层实现, 所以<strong>开销极小</strong>.</p>
 <p>CAS 并不是一项新技术, 它的使用可以追溯到 70 年代, 早在 80 年代就有很多经典书籍中提到使用 CAS 来实现并行编程, 如 USC 大牛 <a href="http://gridsec.usc.edu/Hwang.html" target="_blank" rel="noopener">Kai HWang</a> 的 “Computer Architecture and Parallel Processing”.</p>
 <p>GCC 4.1+ 开始支持 CAS 的<a href="https://gcc.gnu.org/onlinedocs/gcc-4.1.1/gcc/Atomic-Builtins.html" target="_blank" rel="noopener">原子操作</a>:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> __sync_bool_compare_and_swap (type *ptr, type oldval, type newval)</span><br><span class="line">type __sync_val_compare_and_swap (type *ptr, type oldval, type newval)</span><br></pre></td></tr></table></figure>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">bool</span> __sync_bool_compare_and_swap (type *ptr, type oldval, type newval)</span><br><span class="line">type __sync_val_compare_and_swap (type *ptr, type oldval, type newval)</span><br></pre></td></tr></table></figure>
 <p>通常将 CAS 用于同步的方式是从地址 V 读取值 A, 执行多步计算来获得新值 B, 然后使用 CAS 将 V 的值从 A 改为 B, 如果 V 处的值尚未同时更改, 则 CAS 操作成功.</p>
 <h3 id="CAS中的ABA问题"><a href="#CAS中的ABA问题" class="headerlink" title="CAS中的ABA问题"></a>CAS中的ABA问题</h3><p>ABA 问题描述:</p>
 <ul>
@@ -423,6 +427,33 @@ var _hmt = _hmt || [];
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#Lock-Free">
+        <span class="has-mr-6">1</span>
+        <span>Lock-Free</span>
+        </a></li><li>
+        <a class="is-flex" href="#CAS原语">
+        <span class="has-mr-6">2</span>
+        <span>CAS原语</span>
+        </a></li><li>
+        <a class="is-flex" href="#CAS中的ABA问题">
+        <span class="has-mr-6">3</span>
+        <span>CAS中的ABA问题</span>
+        </a></li><li>
+        <a class="is-flex" href="#CAS在Java中的应用">
+        <span class="has-mr-6">4</span>
+        <span>CAS在Java中的应用</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 

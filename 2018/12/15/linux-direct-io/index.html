@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-12-16 19-41-44.png?raw=true">
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-12-16 19-42-31.png?raw=true">
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2018-12-16 19-43-19.png?raw=true">
-<meta property="og:updated_time" content="2018-12-27T13:29:05.656Z">
+<meta property="og:updated_time" content="2019-01-17T08:37:15.891Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Liunx中Direct IO机制">
 <meta name="twitter:description" content="什么是Buffered I/O缓存 I/O 又被称作标准 I/O，大多数文件系统的默认 I/O 操作都是缓存 I/O。在 Linux 的缓存 I/O 机制中，操作系统会将 I/O 的数据缓存在文件系统的页缓存（ page cache ）中，也就是说，数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间。缓存 I/O 有以下这些优点：  缓存 I/O 使用了">
@@ -136,6 +136,10 @@ var _hmt = _hmt || [];
                     </a>
                     
                 
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
                 
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
@@ -378,6 +382,53 @@ var _hmt = _hmt || [];
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#什么是Buffered-I-O">
+        <span class="has-mr-6">1</span>
+        <span>什么是Buffered I/O</span>
+        </a></li><li>
+        <a class="is-flex" href="#缓存I-O的特点">
+        <span class="has-mr-6">2</span>
+        <span>缓存I/O的特点</span>
+        </a></li><li>
+        <a class="is-flex" href="#自缓存应用程序（-self-caching-applications）">
+        <span class="has-mr-6">3</span>
+        <span>自缓存应用程序（ self-caching applications）</span>
+        </a></li><li>
+        <a class="is-flex" href="#Linux中的Direct-I-O技术">
+        <span class="has-mr-6">4</span>
+        <span>Linux中的Direct I/O技术</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#标准访问文件的方式">
+        <span class="has-mr-6">4.1</span>
+        <span>标准访问文件的方式</span>
+        </a></li><li>
+        <a class="is-flex" href="#同步访问文件的方式">
+        <span class="has-mr-6">4.2</span>
+        <span>同步访问文件的方式</span>
+        </a></li><li>
+        <a class="is-flex" href="#内存映射方式">
+        <span class="has-mr-6">4.3</span>
+        <span>内存映射方式</span>
+        </a></li><li>
+        <a class="is-flex" href="#直接I-O的方式">
+        <span class="has-mr-6">4.4</span>
+        <span>直接I/O的方式</span>
+        </a></li><li>
+        <a class="is-flex" href="#异步访问文件的方式">
+        <span class="has-mr-6">4.5</span>
+        <span>异步访问文件的方式</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 

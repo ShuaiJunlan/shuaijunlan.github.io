@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="ITechHub">
 <meta property="og:description" content="12345org.apache.dubbo.common.bytecode.Proxy	//生成代理类org.apache.dubbo.common.bytecode.ClassGenerator  //基于javassist封装org.apache.dubbo.common.utils.ClassHelper;  //工具类org.apache.dubbo.common.utils.Reflec">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-06T13:01:12.938Z">
+<meta property="og:updated_time" content="2019-01-17T08:37:15.059Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dubbo基于Javassist实现动态代理分析">
 <meta name="twitter:description" content="12345org.apache.dubbo.common.bytecode.Proxy	//生成代理类org.apache.dubbo.common.bytecode.ClassGenerator  //基于javassist封装org.apache.dubbo.common.utils.ClassHelper;  //工具类org.apache.dubbo.common.utils.Reflec">
@@ -131,6 +131,10 @@ var _hmt = _hmt || [];
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -168,8 +172,8 @@ var _hmt = _hmt || [];
             
         </h1>
         <div class="content">
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">org.apache.dubbo.common.bytecode.Proxy	//生成代理类</span><br><span class="line">org.apache.dubbo.common.bytecode.ClassGenerator  //基于javassist封装</span><br><span class="line"></span><br><span class="line">org.apache.dubbo.common.utils.ClassHelper;  //工具类</span><br><span class="line">org.apache.dubbo.common.utils.ReflectUtils;	//工具类</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// create ProxyInstance class.</span></span><br><span class="line"><span class="comment">//生成代理类的实例</span></span><br><span class="line">String pcn = pkg + <span class="string">".proxy"</span> + id;</span><br><span class="line">ccp.setClassName(pcn);</span><br><span class="line">ccp.addField(<span class="string">"public static java.lang.reflect.Method[] methods;"</span>);</span><br><span class="line">ccp.addField(<span class="string">"private "</span> + InvocationHandler.class.getName() + <span class="string">" handler;"</span>);</span><br><span class="line">ccp.addConstructor(Modifier.PUBLIC, <span class="keyword">new</span> Class&lt;?&gt;[]&#123;InvocationHandler.class&#125;, <span class="keyword">new</span> Class&lt;?&gt;[<span class="number">0</span>], <span class="string">"handler=$1;"</span>);</span><br><span class="line">ccp.addDefaultConstructor();</span><br><span class="line">Class&lt;?&gt; clazz = ccp.toClass();</span><br><span class="line">clazz.getField(<span class="string">"methods"</span>).set(<span class="keyword">null</span>, methods.toArray(<span class="keyword">new</span> Method[<span class="number">0</span>]));</span><br><span class="line"></span><br><span class="line"><span class="comment">// create Proxy class.</span></span><br><span class="line"><span class="comment">//生成代理类，通过调用newInstance()方法获取实例</span></span><br><span class="line">String fcn = Proxy.class.getName() + id;</span><br><span class="line">ccm = ClassGenerator.newInstance(cl);</span><br><span class="line">ccm.setClassName(fcn);</span><br><span class="line">ccm.addDefaultConstructor();</span><br><span class="line">ccm.setSuperClass(Proxy.class);</span><br><span class="line">ccm.addMethod(<span class="string">"public Object newInstance("</span> + InvocationHandler.class.getName() + <span class="string">" h)&#123; return new "</span> + pcn + <span class="string">"($1); &#125;"</span>);</span><br><span class="line">Class&lt;?&gt; pc = ccm.toClass();</span><br><span class="line">proxy = (Proxy) pc.newInstance();</span><br></pre></td></tr></table></figure>
+            <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">org.apache.dubbo.common.bytecode.Proxy	//生成代理类</span><br><span class="line">org.apache.dubbo.common.bytecode.ClassGenerator  //基于javassist封装</span><br><span class="line"></span><br><span class="line">org.apache.dubbo.common.utils.ClassHelper;  //工具类</span><br><span class="line">org.apache.dubbo.common.utils.ReflectUtils;	//工具类</span><br></pre></td></tr></table></figure>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// create ProxyInstance class.</span></span><br><span class="line"><span class="hljs-comment">//生成代理类的实例</span></span><br><span class="line">String pcn = pkg + <span class="hljs-string">".proxy"</span> + id;</span><br><span class="line">ccp.setClassName(pcn);</span><br><span class="line">ccp.addField(<span class="hljs-string">"public static java.lang.reflect.Method[] methods;"</span>);</span><br><span class="line">ccp.addField(<span class="hljs-string">"private "</span> + InvocationHandler.class.getName() + <span class="hljs-string">" handler;"</span>);</span><br><span class="line">ccp.addConstructor(Modifier.PUBLIC, <span class="hljs-keyword">new</span> Class&lt;?&gt;[]&#123;InvocationHandler.class&#125;, <span class="hljs-keyword">new</span> Class&lt;?&gt;[<span class="hljs-number">0</span>], <span class="hljs-string">"handler=$1;"</span>);</span><br><span class="line">ccp.addDefaultConstructor();</span><br><span class="line">Class&lt;?&gt; clazz = ccp.toClass();</span><br><span class="line">clazz.getField(<span class="hljs-string">"methods"</span>).set(<span class="hljs-keyword">null</span>, methods.toArray(<span class="hljs-keyword">new</span> Method[<span class="hljs-number">0</span>]));</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// create Proxy class.</span></span><br><span class="line"><span class="hljs-comment">//生成代理类，通过调用newInstance()方法获取实例</span></span><br><span class="line">String fcn = Proxy.class.getName() + id;</span><br><span class="line">ccm = ClassGenerator.newInstance(cl);</span><br><span class="line">ccm.setClassName(fcn);</span><br><span class="line">ccm.addDefaultConstructor();</span><br><span class="line">ccm.setSuperClass(Proxy.class);</span><br><span class="line">ccm.addMethod(<span class="hljs-string">"public Object newInstance("</span> + InvocationHandler.class.getName() + <span class="hljs-string">" h)&#123; return new "</span> + pcn + <span class="hljs-string">"($1); &#125;"</span>);</span><br><span class="line">Class&lt;?&gt; pc = ccm.toClass();</span><br><span class="line">proxy = (Proxy) pc.newInstance();</span><br></pre></td></tr></table></figure>
         </div>
         
         <div class="level is-size-7 is-uppercase">
@@ -356,6 +360,17 @@ var _hmt = _hmt || [];
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            
+        </div>
+    </div>
+</div>
+
     
         
 

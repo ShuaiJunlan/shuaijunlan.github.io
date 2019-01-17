@@ -17,7 +17,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-11-23 20-17-54.png?raw=true">
 <meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-11-23 20-22-05.png?raw=true">
-<meta property="og:updated_time" content="2018-11-24T03:11:47.311Z">
+<meta property="og:updated_time" content="2019-01-17T08:37:14.971Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="队列同步器(AbstractQueuedSynchronizer)源码分析">
 <meta name="twitter:description" content="AbstractQueuedSynchronizer(队列同步器)在Java并发工具中经常被用到，比如说我们常用的CountDownLatch、ReentrantLock、ReentrantReadWriteLock和Semaphore等等并发工具类底层都是基于队列同步器的，只有掌握了队列同步器底层的工作原理才能更好的理解其他的并发工具的工作机制，这篇文章将会从源码的角度分析队列同步器的工作原理">
@@ -133,6 +133,10 @@ var _hmt = _hmt || [];
                     </a>
                     
                 
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
                 
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
@@ -449,6 +453,41 @@ var _hmt = _hmt || [];
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#同步队列">
+        <span class="has-mr-6">1</span>
+        <span>同步队列</span>
+        </a></li><li>
+        <a class="is-flex" href="#独占式同步状态获取与释放">
+        <span class="has-mr-6">2</span>
+        <span>独占式同步状态获取与释放</span>
+        </a></li><li>
+        <a class="is-flex" href="#共享式同步状态获取与释放">
+        <span class="has-mr-6">3</span>
+        <span>共享式同步状态获取与释放</span>
+        </a></li><li>
+        <a class="is-flex" href="#独占式超时获取同步状态">
+        <span class="has-mr-6">4</span>
+        <span>独占式超时获取同步状态</span>
+        </a></li><li>
+        <a class="is-flex" href="#自定义同步组件">
+        <span class="has-mr-6">5</span>
+        <span>自定义同步组件</span>
+        </a></li><li>
+        <a class="is-flex" href="#Reference">
+        <span class="has-mr-6">6</span>
+        <span>Reference</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
