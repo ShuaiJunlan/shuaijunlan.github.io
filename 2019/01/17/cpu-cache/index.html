@@ -115,18 +115,20 @@
 
 
 
-  <meta name="description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
-<meta name="keywords" content="java,cpu,cache">
+  <meta name="keywords" content="java,cpu,cache">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java编程如何高效利用CPU缓存？">
 <meta property="og:url" content="https://shuaijunlan.github.io/2019/01/17/cpu-cache/index.html">
 <meta property="og:site_name" content="ITechHub">
-<meta property="og:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-17T05:33:14.436Z">
+<meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-17-31.png">
+<meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-21-08.png">
+<meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-30-28.png">
+<meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-45-14.png">
+<meta property="og:updated_time" content="2019-01-17T06:57:52.087Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java编程如何高效利用CPU缓存？">
-<meta name="twitter:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
+<meta name="twitter:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-17-31.png">
 
 
 
@@ -389,7 +391,7 @@
                 
               
 
-              <time title="创建时间：2019-01-17 13:25:47 / 修改时间：13:33:14" itemprop="dateCreated datePublished" datetime="2019-01-17T13:25:47+08:00">2019-01-17</time>
+              <time title="创建时间：2019-01-17 13:25:47 / 修改时间：14:57:52" itemprop="dateCreated datePublished" datetime="2019-01-17T13:25:47+08:00">2019-01-17</time>
             
 
             
@@ -445,7 +447,53 @@
       
 
       
-        
+        <p><img src="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-17-31.png" alt=""></p>
+<a id="more"></a>
+<p>首先我们来看一个Java的例子:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Shuai Junlan[shuaijunlan@gmail.com].</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> Created in 1:43 PM 1/17/19.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayTraverse</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">long</span>[][] arrs = <span class="keyword">new</span> <span class="keyword">long</span>[<span class="number">1024</span>*<span class="number">1024</span>][<span class="number">8</span>];</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> temp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Vertical traverse</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i ++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">1024</span> * <span class="number">1024</span>; j++)&#123;</span><br><span class="line">                temp = arrs[j][i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"Vertical traverse spending time: "</span> + (System.currentTimeMillis() - start) + <span class="string">"ms"</span>);</span><br><span class="line"></span><br><span class="line">        start = System.currentTimeMillis();</span><br><span class="line">        <span class="comment">// Horizontal traverse</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1024</span> * <span class="number">1024</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">8</span>; j++)&#123;</span><br><span class="line">                temp = arrs[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"Horizontal traverse spending time: "</span> + (System.currentTimeMillis() - start) + <span class="string">"ms"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码中定义了一个二维数组，分别从横向遍历和纵向遍历了；两个方面来计算耗时，相信通过上面的代码大家也都能知道两种遍历方式耗时差距很大，结果确实是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Vertical traverse spending time: 75ms</span><br><span class="line">Horizontal traverse spending time: 13ms</span><br></pre></td></tr></table></figure>
+<p>看上面的输出结果，耗时差距确实很大，但是为什么会有这个大的差距呢？显然跟我们这篇文章的题目有关，那就是横向遍历充分利用了CPU高速缓存机制，使得遍历速度要快于纵向遍历，那么……</p>
+<h3 id="什么是CPU缓存"><a href="#什么是CPU缓存" class="headerlink" title="什么是CPU缓存"></a>什么是CPU缓存</h3><blockquote>
+<p>在<a href="https://zh.wikipedia.org/wiki/%E8%AE%A1%E7%AE%97%E6%9C%BA" target="_blank" rel="noopener">计算机</a>系统中，<strong>CPU高速缓存</strong>（英语：CPU Cache，在本文中简称缓存）是用于减少<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%A4%AE%E5%A4%84%E7%90%86%E5%99%A8" target="_blank" rel="noopener">处理器</a>访问内存所需平均时间的部件。在金字塔式<a href="https://zh.wikipedia.org/w/index.php?title=%E5%AD%98%E5%82%A8%E4%BD%93%E7%B3%BB&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">存储体系</a>中它位于自顶向下的第二层，仅次于<a href="https://zh.wikipedia.org/wiki/%E5%AF%84%E5%AD%98%E5%99%A8" target="_blank" rel="noopener">CPU寄存器</a>。其容量远小于<a href="https://zh.wikipedia.org/wiki/%E5%86%85%E5%AD%98" target="_blank" rel="noopener">内存</a>，但速度却可以接近处理器的频率。</p>
+<p>当处理器发出内存访问请求时，会先查看缓存内是否有请求数据。如果存在（命中），则不经访问内存直接返回该数据；如果不存在（失效），则要先把内存中的相应数据载入缓存，再将其返回处理器。</p>
+<p>缓存之所以有效，主要是因为程序运行时对内存的访问呈现局部性（Locality）特征。这种局部性既包括空间局部性（Spatial Locality），也包括时间局部性（Temporal Locality）。有效利用这种局部性，缓存可以达到极高的命中率。</p>
+<p>在处理器看来，缓存是一个透明部件。因此，程序员通常无法直接干预对缓存的操作。但是，确实可以根据缓存的特点对程序代码实施特定优化，从而更好地利用缓存。—From <a href="https://zh.wikipedia.org/wiki/CPU%E7%BC%93%E5%AD%98" target="_blank" rel="noopener">维基百科【CPU缓存】</a></p>
+</blockquote>
+<p>现在主流的多核CPU缓存架构采用了三级缓存模式，如下图：</p>
+<p><img src="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-21-08.png" alt=""></p>
+<p>每个core共享L3 Cache，下面我们来详细说说，缓存与RAM如何进行数据交换的，数据传输的基本单位是什么？。</p>
+<h3 id="Cache-Line（缓存行）"><a href="#Cache-Line（缓存行）" class="headerlink" title="Cache Line（缓存行）"></a>Cache Line（缓存行）</h3><p>缓存行 (Cache Line) 便是 CPU Cache 中的最小单位，CPU Cache 由若干缓存行组成，一个缓存行的大小通常是 64 字节（这取决于 CPU），并且它有效地引用主内存中的一块地址。一个 Java 的 long 类型是 8 字节，因此在一个缓存行中可以存 8 个 long 类型的变量。</p>
+<p><img src="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-30-28.png" alt=""></p>
+<p>试想一下你正在遍历一个长度为 16 的 long 数组 data[16]，原始数据自然存在于主内存中，访问过程描述如下</p>
+<ol>
+<li>访问 data[0]，CPU core 尝试访问 CPU Cache，未命中。</li>
+<li>尝试访问主内存，操作系统一次访问的单位是一个 Cache Line 的大小 — 64 字节，这意味着：既从主内存中获取到了 data[0] 的值，同时将 data[0] ~ data[7] 加入到了 CPU Cache 之中，for free~</li>
+<li>访问 data[1]~data[7]，CPU core 尝试访问 CPU Cache，命中直接返回。</li>
+<li>访问 data[8]，CPU core 尝试访问 CPU Cache，未命中。</li>
+<li>尝试访问主内存。重复步骤 2</li>
+</ol>
+<p>CPU 缓存在顺序访问连续内存数据时挥发出了最大的优势。再回到文章的开头例子，为何横向遍历 <code>arrs[1024 * 1024][8]</code> 要比纵向遍历更快？此处得到了解答，正是更加友好地利用 CPU Cache 带来的优势，甚至有一个专门的词来修饰这种行为 —<code>Mechanical Sympathy</code>。</p>
+<p>上面我们已经提到了，在多核CPU缓存架构中，缓存在多个线程共享某个缓存行的情况，这样就会导致<code>False Sharing（伪共享）</code>问题，下面我将详细介绍什么是<code>False Sharing</code>，以及为什么会产生<code>False Sharing</code>？</p>
+<h3 id="False-Sharing（伪共享）"><a href="#False-Sharing（伪共享）" class="headerlink" title="False Sharing（伪共享）"></a>False Sharing（伪共享）</h3><p>如果两个或多个处理器正在向同一缓存行的不同部分中写入数据，那么很多缓存和总线通信可能会导致其他处理器上的旧行的每个缓存副本失效或进行更新。这称为 <em>“伪共享”</em> 或者也称为 <em>“CPU 缓存行干扰”</em>。和两个或多个线程共享同一数据（因此需要程序化的同步机制来确保按顺序访问）的真正共享不同，当两个或多个线程访问位于同一缓存行上的无关数据时，就会产生伪共享。</p>
+<p><img src="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-45-14.png" alt=""></p>
+<p>关于具体的伪共享是如何产生的可以参考这篇文章《<a href="https://blog.csdn.net/reliveIT/article/details/50450136" target="_blank" rel="noopener">CPU cache结构和缓存一致性（MESI协议）</a>》。</p>
+<h3 id="Java中是如何避免伪共享的呢？"><a href="#Java中是如何避免伪共享的呢？" class="headerlink" title="Java中是如何避免伪共享的呢？"></a>Java中是如何避免伪共享的呢？</h3><h4 id="Java6-中实现字节填充"><a href="#Java6-中实现字节填充" class="headerlink" title="Java6 中实现字节填充"></a>Java6 中实现字节填充</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaddingObject</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">volatile</span> <span class="keyword">long</span> value = <span class="number">0L</span>;    <span class="comment">// 实际数据</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">long</span> p1, p2, p3, p4, p5, p6; <span class="comment">// 填充</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>PaddingObject 类中需要保存一个 long 类型的 value 值，如果多线程操作同一个 CacheLine 中的 PaddingObject 对象，便无法完全发挥出 CPU Cache 的优势（想象一下你定义了一个 PaddingObject[] 数组，数组元素在内存中连续，却由于伪共享导致无法使用 CPU Cache 带来的沮丧）。</p>
+<p>不知道你注意到没有，实际数据 value + 用于填充的 p1~p6 总共只占据了 7 <em> 8 = 56 个字节，而 Cache Line 的大小应当是 64 字节，这是有意而为之，在 Java 中，<em>*对象头还占据了 8 个字节</em></em>，所以一个 PaddingObject 对象可以恰好占据一个 Cache Line。</p>
+<h4 id="Java7-中实现字节填充"><a href="#Java7-中实现字节填充" class="headerlink" title="Java7 中实现字节填充"></a>Java7 中实现字节填充</h4><p>在 Java7 之后，一个 JVM 的优化给字节填充造成了一些影响，上面的代码片段 <code>public long p1, p2, p3, p4, p5, p6;</code> 会被认为是无效代码被优化掉，有回归到了伪共享的窘境之中。</p>
+<p>为了避免 JVM 的自动优化，需要使用继承的方式来填充。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractPaddingObject</span></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">long</span> p1, p2, p3, p4, p5, p6;<span class="comment">// 填充</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaddingObject</span> <span class="keyword">extends</span> <span class="title">AbstractPaddingObject</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">volatile</span> <span class="keyword">long</span> value = <span class="number">0L</span>;    <span class="comment">// 实际数据</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Java8中实现字节填充"><a href="#Java8中实现字节填充" class="headerlink" title="Java8中实现字节填充"></a>Java8中实现字节填充</h4><p>Java8 中终于提供了字节填充的官方实现，这无疑使得 CPU Cache 更加可控了，无需担心 jdk 的无效字段优化，无需担心 Cache Line 在不同 CPU 下的大小究竟是不是 64 字节。使用 @Contended 注解可以完美的避免伪共享问题。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(&#123;ElementType.FIELD, ElementType.TYPE&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Contended &#123;</span><br><span class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>更多关于避免伪共享的一些Java实践可以参考《<a href="https://www.cnkirito.moe/cache-line/" target="_blank" rel="noopener">CPU Cache 与缓存行</a>》。</p>
+<p><strong>REFERENCE</strong></p>
+<ul>
+<li><a href="https://www.ibm.com/developerworks/cn/aix/library/au-aix-multicore-multiprocessor/index.html" target="_blank" rel="noopener">多核多处理器架构软件设计的注意事项</a></li>
+<li><a href="https://www.cnkirito.moe/cache-line/" target="_blank" rel="noopener">CPU Cache 与缓存行</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/31875174" target="_blank" rel="noopener">细说Cache-L1/L2/L3/TLB</a></li>
+</ul>
+
       
     </div>
 
@@ -545,8 +593,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -698,6 +755,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是CPU缓存"><span class="nav-number">1.</span> <span class="nav-text">什么是CPU缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cache-Line（缓存行）"><span class="nav-number">2.</span> <span class="nav-text">Cache Line（缓存行）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#False-Sharing（伪共享）"><span class="nav-number">3.</span> <span class="nav-text">False Sharing（伪共享）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java中是如何避免伪共享的呢？"><span class="nav-number">4.</span> <span class="nav-text">Java中是如何避免伪共享的呢？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Java6-中实现字节填充"><span class="nav-number">4.1.</span> <span class="nav-text">Java6 中实现字节填充</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java7-中实现字节填充"><span class="nav-number">4.2.</span> <span class="nav-text">Java7 中实现字节填充</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java8中实现字节填充"><span class="nav-number">4.3.</span> <span class="nav-text">Java8中实现字节填充</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
