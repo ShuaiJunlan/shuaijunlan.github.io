@@ -19,6 +19,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Collections.sort()源码分析（基于jdk1.8）">
 <meta name="twitter:description" content="Collections类中定义了一系列的静态方法，其中就包括sort方法(下面为该方法的源码),从这个方法的源码中可以看出，它调用的是list.sort()方法，在该方法中先将list转换成数组，然后调用Arrays.sort()方法。在Arrays.sort()方法中，有一个条件判断（LegacyMergeSort.userRequested），当此条件为true时，调用legacyMerge">
+<meta name="twitter:creator" content="@https:&#x2F;&#x2F;twitter.com&#x2F;ShuaiJunlan">
 
 
 
@@ -253,6 +254,30 @@
 </div>
 
 
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://shuaijunlan.github.io/2017/02/26/java-Collections-sort-method/';
+        this.page.identifier = '2017/02/26/java-Collections-sort-method/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'shuaijunlan' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
 </div>
                 
 

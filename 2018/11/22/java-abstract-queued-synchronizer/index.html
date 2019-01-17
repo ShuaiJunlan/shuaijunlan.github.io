@@ -22,6 +22,7 @@
 <meta name="twitter:title" content="队列同步器(AbstractQueuedSynchronizer)源码分析">
 <meta name="twitter:description" content="AbstractQueuedSynchronizer(队列同步器)在Java并发工具中经常被用到，比如说我们常用的CountDownLatch、ReentrantLock、ReentrantReadWriteLock和Semaphore等等并发工具类底层都是基于队列同步器的，只有掌握了队列同步器底层的工作原理才能更好的理解其他的并发工具的工作机制，这篇文章将会从源码的角度分析队列同步器的工作原理">
 <meta name="twitter:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-11-23 20-17-54.png?raw=true">
+<meta name="twitter:creator" content="@https:&#x2F;&#x2F;twitter.com&#x2F;ShuaiJunlan">
 
 
 
@@ -328,6 +329,30 @@
 </div>
 
 
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://shuaijunlan.github.io/2018/11/22/java-abstract-queued-synchronizer/';
+        this.page.identifier = '2018/11/22/java-abstract-queued-synchronizer/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'shuaijunlan' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
 </div>
                 
 

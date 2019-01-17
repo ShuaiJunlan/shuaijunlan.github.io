@@ -21,6 +21,7 @@
 <meta name="twitter:title" content="Dubbo服务提供者发布及注册过程源码分析">
 <meta name="twitter:description" content="Dubbo服务端在启动服务时会经历怎样的调用过程？在收到消费者发送的请求后会经历怎样的调用过程？这篇文章主要针对以上两个调用过程并结合Dubbo源码进行分析。 我们采用的是Consumer-Provider的Demo提供的示例，并按照《Dubbo消费者调用过程源码分析》中的分析思路，下面将对两种过程进行进一步分析，先来看一张服务发布过程的时序图(图片太大建议在新的窗口打开查看)，对服务发布与注册有">
 <meta name="twitter:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/dubbo-provider.png?raw=true">
+<meta name="twitter:creator" content="@https:&#x2F;&#x2F;twitter.com&#x2F;ShuaiJunlan">
 
 
 
@@ -311,6 +312,30 @@
 </div>
 
 
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://shuaijunlan.github.io/2018/09/09/dubbo-provider-calling-process-source-code-analysis/';
+        this.page.identifier = '2018/09/09/dubbo-provider-calling-process-source-code-analysis/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'shuaijunlan' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
 </div>
                 
 
