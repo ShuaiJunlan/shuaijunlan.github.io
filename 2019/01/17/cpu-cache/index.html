@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-21-08.png">
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-30-28.png">
 <meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-45-14.png">
-<meta property="og:updated_time" content="2019-01-18T08:28:19.350Z">
+<meta property="og:updated_time" content="2019-01-19T04:36:15.668Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java编程如何高效利用CPU缓存？">
 <meta name="twitter:description" content="首先我们来看一个Java的例子: 12345678910111213141516171819202122232425262728/** * @author Shuai Junlan[shuaijunlan@gmail.com]. * @since Created in 1:43 PM 1/17/19. */public class ArrayTraverse &amp;#123;    private s">
@@ -162,7 +162,7 @@ var _hmt = _hmt || [];
                 <span class="level-item has-text-grey">
                     
                     
-                    15 分钟 读完 (大约 2214 个字)
+                    15 分钟 读完 (大约 2243 个字)
                 </span>
                 
             </div>
@@ -204,7 +204,7 @@ var _hmt = _hmt || [];
 <p>上面我们已经提到了，在多核CPU缓存架构中，缓存在多个线程共享某个缓存行的情况，这样就会导致<code>False Sharing（伪共享）</code>问题，下面我将详细介绍什么是<code>False Sharing</code>，以及为什么会产生<code>False Sharing</code>？</p>
 <h3 id="False-Sharing（伪共享）"><a href="#False-Sharing（伪共享）" class="headerlink" title="False Sharing（伪共享）"></a>False Sharing（伪共享）</h3><p>如果两个或多个处理器正在向同一缓存行的不同部分中写入数据，那么很多缓存和总线通信可能会导致其他处理器上的旧行的每个缓存副本失效或进行更新。这称为 <em>“伪共享”</em> 或者也称为 <em>“CPU 缓存行干扰”</em>。和两个或多个线程共享同一数据（因此需要程序化的同步机制来确保按顺序访问）的真正共享不同，当两个或多个线程访问位于同一缓存行上的无关数据时，就会产生伪共享。</p>
 <p><img src="https://shuaijunlan.github.io/images/Screenshot from 2019-01-17 14-45-14.png" alt=""></p>
-<p>关于具体的伪共享是如何产生的可以参考这篇文章《<a href="https://blog.csdn.net/reliveIT/article/details/50450136" target="_blank" rel="noopener">CPU cache结构和缓存一致性（MESI协议）</a>》。</p>
+<p>关于具体的伪共享是如何产生的可以参考这篇文章《<a href="https://blog.csdn.net/reliveIT/article/details/50450136" target="_blank" rel="noopener">CPU cache结构和缓存一致性（MESI协议）</a>》和《<a href="https://www.cnblogs.com/cyfonly/p/5800758.html" target="_blank" rel="noopener">伪共享（false sharing），并发编程无声的性能杀手</a>》。</p>
 <h3 id="Java中是如何避免伪共享的呢？"><a href="#Java中是如何避免伪共享的呢？" class="headerlink" title="Java中是如何避免伪共享的呢？"></a>Java中是如何避免伪共享的呢？</h3><h4 id="Java6-中实现字节填充"><a href="#Java6-中实现字节填充" class="headerlink" title="Java6 中实现字节填充"></a>Java6 中实现字节填充</h4><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PaddingObject</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">long</span> value = <span class="hljs-number">0L</span>;    <span class="hljs-comment">// 实际数据</span></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">long</span> p1, p2, p3, p4, p5, p6; <span class="hljs-comment">// 填充</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>PaddingObject 类中需要保存一个 long 类型的 value 值，如果多线程操作同一个 CacheLine 中的 PaddingObject 对象，便无法完全发挥出 CPU Cache 的优势（想象一下你定义了一个 PaddingObject[] 数组，数组元素在内存中连续，却由于伪共享导致无法使用 CPU Cache 带来的沮丧）。</p>
 <p>不知道你注意到没有，实际数据 value + 用于填充的 p1~p6 总共只占据了 7 <em> 8 = 56 个字节，而 Cache Line 的大小应当是 64 字节，这是有意而为之，在 Java 中，<em>*对象头还占据了 8 个字节</em></em>，所以一个 PaddingObject 对象可以恰好占据一个 Cache Line。</p>
