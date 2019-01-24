@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="ITechHub">
 <meta property="og:description" content="前言Netty 服务端启动和交互的逻辑的底层实现是借助于Java NIO ServerSocketChannel来实现，Java NIO ServerSocketChannel作为服务端的绑定端口、接受客户端的连接，这篇文章将详细介绍Netty服务端的启动流程，从源码的角度一步步分析。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-01-24T07:06:11.141Z">
+<meta property="og:updated_time" content="2019-01-24T08:24:16.402Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Netty服务端启动流程分析">
 <meta name="twitter:description" content="前言Netty 服务端启动和交互的逻辑的底层实现是借助于Java NIO ServerSocketChannel来实现，Java NIO ServerSocketChannel作为服务端的绑定端口、接受客户端的连接，这篇文章将详细介绍Netty服务端的启动流程，从源码的角度一步步分析。">
@@ -157,7 +157,7 @@ var _hmt = _hmt || [];
                 <span class="level-item has-text-grey">
                     
                     
-                    25 minutes read (About 3766 words)
+                    28 minutes read (About 4159 words)
                 </span>
                 
             </div>
@@ -314,6 +314,15 @@ var _hmt = _hmt || [];
 <p>上面的核心代码就是：doBind(localAddress);需要注意的是，此doBind方法是在NioServerSocketChannel类中的doBind方法，不是其他类中的。</p>
 <p>NioServerSocketChannel类中的doBind方法代码如下：</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doBind</span><span class="hljs-params">(SocketAddress localAddress)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (PlatformDependent.javaVersion() &gt;= <span class="hljs-number">7</span>) &#123;</span><br><span class="line">        javaChannel().bind(localAddress, config.getBacklog());</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        javaChannel().socket().bind(localAddress, config.getBacklog());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面方法中javaChannel()方法返回的是NioServerSocketChannel实例初始化时所产生的Java NIO ServerSocketChannel实例（更具体点为ServerSocketChannelImple实例）。 等价于语句serverSocketChannel.socket().bind(localAddress)完成了指定端口的绑定，这样就开始监听此端口。</p>
+<p><strong>如果对Java NIO层面的服务端绑定端口对端口的监听、客户端的连接以及交互不太清晰，可以看博文Java NIO 之 ServerSocketChannel/SocketChannel </strong>，这里介绍了 Java NIO 层面的服务端对端口的监听、客户端与服务端之间的连接以及客户端于服务端之间的交互。</p>
+<p>说到这里本来应该就结束了，但是还有如下的一点需要说明：即绑定端口成功后，是这里调用了我们自定义handler的channelActive方法。更多可以结合博文：</p>
+<p>这样就真正的完成了端口的绑定。在绑定之前，isActive()方法返回false，绑定之后返回true。</p>
+<p>这样就进入了如下的if条件的代码块中：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> (!wasActive &amp;&amp; isActive()) &#123;</span><br><span class="line">    invokeLater(<span class="hljs-keyword">new</span> Runnable() &#123;</span><br><span class="line">        <span class="hljs-meta">@Override</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">            pipeline.fireChannelActive();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>进而开始执行 <code>pipeline.fireChannelActive();</code>这行代码 ，这行代码的具体调用链如下所示：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DefaultChannelPipeline#fireChannelActive(); ---&gt; </span><br><span class="line">AbstractChannelHandlerContext#invokeChannelActive()</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>整个流程还是挺复杂的，把Netty服务端的启动流程大体梳理了一遍，还有很多小细节没有具体分析，在接下来的学习过程中我还会继续完善这篇文章。</p>
 <h3 id="REFERENCES"><a href="#REFERENCES" class="headerlink" title="REFERENCES"></a>REFERENCES</h3><ul>
 <li><a href="https://blog.csdn.net/u010412719/article/details/78077183" target="_blank" rel="noopener">Netty源码分析：服务端启动全过程</a></li>
 </ul>
@@ -448,7 +457,7 @@ var _hmt = _hmt || [];
                         Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        28
+                        27
                     </p>
                 </div>
             </div>
@@ -532,8 +541,12 @@ var _hmt = _hmt || [];
         <span class="has-mr-6">2.2</span>
         <span>第2部分，doBind0(regFuture, channel, localAddress, promise)</span>
         </a></li></ul></li><li>
-        <a class="is-flex" href="#REFERENCES">
+        <a class="is-flex" href="#总结">
         <span class="has-mr-6">3</span>
+        <span>总结</span>
+        </a></li><li>
+        <a class="is-flex" href="#REFERENCES">
+        <span class="has-mr-6">4</span>
         <span>REFERENCES</span>
         </a></li></ul>
         </div>
@@ -586,7 +599,7 @@ var _hmt = _hmt || [];
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/AQS/" style="font-size: 10px;">AQS</a> <a href="/tags/CentOS/" style="font-size: 12.5px;">CentOS</a> <a href="/tags/DirectIO/" style="font-size: 10px;">DirectIO</a> <a href="/tags/KVM/" style="font-size: 12.5px;">KVM</a> <a href="/tags/LRU/" style="font-size: 10px;">LRU</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/Micro-Service/" style="font-size: 10px;">Micro Service</a> <a href="/tags/MutliThread/" style="font-size: 12.5px;">MutliThread</a> <a href="/tags/MyBatis3/" style="font-size: 10px;">MyBatis3</a> <a href="/tags/Netty/" style="font-size: 15px;">Netty</a> <a href="/tags/SPI/" style="font-size: 10px;">SPI</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a> <a href="/tags/WebSystem/" style="font-size: 10px;">WebSystem</a> <a href="/tags/cache/" style="font-size: 10px;">cache</a> <a href="/tags/cahce/" style="font-size: 10px;">cahce</a> <a href="/tags/cpu/" style="font-size: 10px;">cpu</a> <a href="/tags/dubbo/" style="font-size: 17.5px;">dubbo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/javassist/" style="font-size: 10px;">javassist</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/mmap/" style="font-size: 10px;">mmap</a> <a href="/tags/nio/" style="font-size: 12.5px;">nio</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/网络配置/" style="font-size: 10px;">网络配置</a> <a href="/tags/虚拟化/" style="font-size: 10px;">虚拟化</a>
+        <a href="/tags/AQS/" style="font-size: 10px;">AQS</a> <a href="/tags/CentOS/" style="font-size: 12.5px;">CentOS</a> <a href="/tags/DirectIO/" style="font-size: 10px;">DirectIO</a> <a href="/tags/KVM/" style="font-size: 12.5px;">KVM</a> <a href="/tags/LRU/" style="font-size: 10px;">LRU</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/Micro-Service/" style="font-size: 10px;">Micro Service</a> <a href="/tags/MutliThread/" style="font-size: 12.5px;">MutliThread</a> <a href="/tags/MyBatis3/" style="font-size: 10px;">MyBatis3</a> <a href="/tags/Netty/" style="font-size: 15px;">Netty</a> <a href="/tags/SPI/" style="font-size: 10px;">SPI</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a> <a href="/tags/WebSystem/" style="font-size: 10px;">WebSystem</a> <a href="/tags/cache/" style="font-size: 12.5px;">cache</a> <a href="/tags/cpu/" style="font-size: 10px;">cpu</a> <a href="/tags/dubbo/" style="font-size: 17.5px;">dubbo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/javassist/" style="font-size: 10px;">javassist</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/mmap/" style="font-size: 10px;">mmap</a> <a href="/tags/nio/" style="font-size: 12.5px;">nio</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/网络配置/" style="font-size: 10px;">网络配置</a> <a href="/tags/虚拟化/" style="font-size: 10px;">虚拟化</a>
     </div>
 </div>
 
@@ -1101,14 +1114,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/cache/">
                         <span class="tag">cache</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/cahce/">
-                        <span class="tag">cahce</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1712,14 +1718,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/cache/">
                         <span class="tag">cache</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/cahce/">
-                        <span class="tag">cahce</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
