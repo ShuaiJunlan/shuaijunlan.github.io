@@ -136,6 +136,120 @@ var _hmt = _hmt || [];
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
     <div class="card">
     
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-01-24T02:36:26.000Z">2019-01-24</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    11 minutes read (About 1723 words)
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/01/24/netty-server-side-bootstrap-process/">Netty服务端启动流程分析</a>
+            
+        </h1>
+        <div class="content">
+            <h4 id="doBind-final-SocketAddress-localAddress-方法"><a href="#doBind-final-SocketAddress-localAddress-方法" class="headerlink" title="doBind(final SocketAddress localAddress)方法"></a>doBind(final SocketAddress localAddress)方法</h4><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> ChannelFuture <span class="hljs-title">doBind</span><span class="hljs-params">(<span class="hljs-keyword">final</span> SocketAddress localAddress)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">//1.初始化和注册Channel</span></span><br><span class="line">    <span class="hljs-keyword">final</span> ChannelFuture regFuture = initAndRegister();</span><br><span class="line">    <span class="hljs-keyword">final</span> Channel channel = regFuture.channel();</span><br><span class="line">    <span class="hljs-keyword">if</span> (regFuture.cause() != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> regFuture;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">if</span> (regFuture.isDone()) &#123;</span><br><span class="line">        <span class="hljs-comment">// At this point we know that the registration was complete and successful.</span></span><br><span class="line">        ChannelPromise promise = channel.newPromise();</span><br><span class="line">        <span class="hljs-comment">//2.绑定端口</span></span><br><span class="line">        doBind0(regFuture, channel, localAddress, promise);</span><br><span class="line">        <span class="hljs-keyword">return</span> promise;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        <span class="hljs-comment">// Registration future is almost always fulfilled already, but just in case it's not.</span></span><br><span class="line">        <span class="hljs-keyword">final</span> PendingRegistrationPromise promise = <span class="hljs-keyword">new</span> PendingRegistrationPromise(channel);</span><br><span class="line">        regFuture.addListener(<span class="hljs-keyword">new</span> ChannelFutureListener() &#123;</span><br><span class="line">            <span class="hljs-meta">@Override</span></span><br><span class="line">            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">operationComplete</span><span class="hljs-params">(ChannelFuture future)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                Throwable cause = future.cause();</span><br><span class="line">                <span class="hljs-keyword">if</span> (cause != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">                    <span class="hljs-comment">// Registration on the EventLoop failed so fail the ChannelPromise directly to not cause an</span></span><br><span class="line">                    <span class="hljs-comment">// IllegalStateException once we try to access the EventLoop of the Channel.</span></span><br><span class="line">                    promise.setFailure(cause);</span><br><span class="line">                &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                    <span class="hljs-comment">// Registration was successful, so set the correct executor to use.</span></span><br><span class="line">                    <span class="hljs-comment">// See https://github.com/netty/netty/issues/2586</span></span><br><span class="line">                    promise.registered();</span><br><span class="line"></span><br><span class="line">                    doBind0(regFuture, channel, localAddress, promise);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="hljs-keyword">return</span> promise;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>doBind这个函数是我们要分析的重点，这个函数的主要工作有如下几点：</p>
+<ul>
+<li><p>1、通过initAndRegister()方法得到一个ChannelFuture的实例regFuture。</p>
+</li>
+<li><p>2、通过regFuture.cause()方法判断是否在执行initAndRegister方法时产生来异常。如果产生来异常，则直接返回，如果没有产生异常则进行第3步。</p>
+</li>
+<li><p>3、通过regFuture.isDone()来判断initAndRegister方法是否执行完毕，如果执行完毕来返回true，然后调用doBind0进行socket绑定。如果没有执行完毕则返回false进行第4步。</p>
+</li>
+<li><p>4、regFuture会添加一个ChannelFutureListener监听，当initAndRegister执行完成时，调用operationComplete方法并执行doBind0进行socket绑定。</p>
+</li>
+</ul>
+<p>第3、4点想干的事就是一个：调用doBind0方法进行socket绑定。</p>
+<p>下面将分成4部分对每行代码具体做了哪些工作进行详细分析。</p>
+<h5 id="第1部分，initAndRegister"><a href="#第1部分，initAndRegister" class="headerlink" title="第1部分，initAndRegister()"></a>第1部分，initAndRegister()</h5><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">final</span> ChannelFuture <span class="hljs-title">initAndRegister</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    Channel channel = <span class="hljs-keyword">null</span>;</span><br><span class="line">    <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">        <span class="hljs-comment">//创建一个channel并初始化</span></span><br><span class="line">        channel = channelFactory.newChannel();</span><br><span class="line">        <span class="hljs-comment">//init逻辑，如果是服务端则调用@ServerBootStrap的init方法，如果是客户端则调用Bootstrap的init方法</span></span><br><span class="line">        <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">             * init逻辑：</span></span><br><span class="line"><span class="hljs-comment">             * 如果是服务端则调用&#123;<span class="hljs-doctag">@link</span> ServerBootstrap#init(Channel channel)&#125;方法，</span></span><br><span class="line"><span class="hljs-comment">             * 如果是客户端则调用&#123;<span class="hljs-doctag">@link</span> Bootstrap#init(Channel channel)&#125;方法</span></span><br><span class="line"><span class="hljs-comment">             */</span></span><br><span class="line">        init(channel);</span><br><span class="line">    &#125; <span class="hljs-keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (channel != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">            <span class="hljs-comment">// channel can be null if newChannel crashed (eg SocketException("too many open files"))</span></span><br><span class="line">            channel.unsafe().closeForcibly();</span><br><span class="line">            <span class="hljs-comment">// as the Channel is not registered yet we need to force the usage of the GlobalEventExecutor</span></span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> DefaultChannelPromise(channel, GlobalEventExecutor.INSTANCE).setFailure(t);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-comment">// as the Channel is not registered yet we need to force the usage of the GlobalEventExecutor</span></span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> DefaultChannelPromise(<span class="hljs-keyword">new</span> FailedChannel(), GlobalEventExecutor.INSTANCE).setFailure(t);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ChannelFuture regFuture = config().group().register(channel);</span><br><span class="line">    <span class="hljs-keyword">if</span> (regFuture.cause() != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (channel.isRegistered()) &#123;</span><br><span class="line">            channel.close();</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            channel.unsafe().closeForcibly();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// If we are here and the promise is not failed, it's one of the following cases:</span></span><br><span class="line">    <span class="hljs-comment">// 1) If we attempted registration from the event loop, the registration has been completed at this point.</span></span><br><span class="line">    <span class="hljs-comment">//    i.e. It's safe to attempt bind() or connect() now because the channel has been registered.</span></span><br><span class="line">    <span class="hljs-comment">// 2) If we attempted registration from the other thread, the registration request has been successfully</span></span><br><span class="line">    <span class="hljs-comment">//    added to the event loop's task queue for later execution.</span></span><br><span class="line">    <span class="hljs-comment">//    i.e. It's safe to attempt bind() or connect() now:</span></span><br><span class="line">    <span class="hljs-comment">//         because bind() or connect() will be executed *after* the scheduled registration task is executed</span></span><br><span class="line">    <span class="hljs-comment">//         because register(), bind(), and connect() are all bound to the same thread.</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> regFuture;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在initAndRegister()函数中，通过函数名字也能看出来主要就三个过程：</p>
+<ul>
+<li>1.创建channel</li>
+</ul>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">channel = channelFactory.newChannel();</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>2.初始化channel</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">init(channel);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3.向group注册channel：</p>
+</li>
+</ul>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ChannelFuture regFuture = config().group().register(channel);</span><br></pre></td></tr></table></figure>
+<p>下面我们来分别分析下上面的三个过程：</p>
+<h6 id="1-创建channel：channelFactory-newChannel"><a href="#1-创建channel：channelFactory-newChannel" class="headerlink" title="1.创建channel：channelFactory.newChannel();"></a>1.创建channel：channelFactory.newChannel();</h6><p>我们知道<code>b.channel(NioServerSocketChannel.class)</code>的功能为：设置父类属性<code>channelFactory</code>为： <code>ReflectiveChannelFactory</code>类的对象。其中这里<code>ReflectiveChannelFactory</code>对象中包括一个<code>clazz</code>属性为：<code>NioServerSocketChannel.class</code>。</p>
+<p>因此，<code>channel = channelFactory.newChannel();</code>就是调用的ReflectiveChannelFactory类中的newChannel()方法，该方法的源码为：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">newChannel</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> clazz.getConstructor().newInstance();</span><br><span class="line">    &#125; <span class="hljs-keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ChannelException(<span class="hljs-string">"Unable to create Channel from class "</span> + clazz, t);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过这个方法，我们可以得出结论，是通过反射机制来产生一个<code>NioServerSocketChannel</code>类的实例。</p>
+<p>下面将看下<code>NioServerSocketChannel</code>类的构造函数做了哪些工作。</p>
+<p>调用它的无参构造函数：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Create a new instance</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">NioServerSocketChannel</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>(newSocket(DEFAULT_SELECTOR_PROVIDER));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>无参构造函数中<code>SelectorProvider DEFAULT_SELECTOR_PROVIDER = SelectorProvider.provider()</code>。</p>
+<p>函数<code>newSocket</code>的功能为：利用SelectorProvider产生一个SocketChannelImpl对象。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> ServerSocketChannel <span class="hljs-title">newSocket</span><span class="hljs-params">(SelectorProvider provider)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">        <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">             *  Use the &#123;<span class="hljs-doctag">@link</span> SelectorProvider&#125; to open &#123;<span class="hljs-doctag">@link</span> SocketChannel&#125; and so remove condition in</span></span><br><span class="line"><span class="hljs-comment">             *  &#123;<span class="hljs-doctag">@link</span> SelectorProvider#provider()&#125; which is called by each ServerSocketChannel.open() otherwise.</span></span><br><span class="line"><span class="hljs-comment">             *</span></span><br><span class="line"><span class="hljs-comment">             *  See &lt;a href="https://github.com/netty/netty/issues/2308"&gt;#2308&lt;/a&gt;.</span></span><br><span class="line"><span class="hljs-comment">             */</span></span><br><span class="line">        <span class="hljs-keyword">return</span> provider.openServerSocketChannel();</span><br><span class="line">    &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ChannelException(</span><br><span class="line">            <span class="hljs-string">"Failed to open a server socket."</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> ServerSocketChannel <span class="hljs-title">openServerSocketChannel</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ServerSocketChannelImpl(<span class="hljs-keyword">this</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后继续调用有参构造函数以及父类的构造函数，调用过程如下：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Create a new instance using the given &#123;<span class="hljs-doctag">@link</span> ServerSocketChannel&#125;.</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">NioServerSocketChannel</span><span class="hljs-params">(ServerSocketChannel channel)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>(<span class="hljs-keyword">null</span>, channel, SelectionKey.OP_ACCEPT);</span><br><span class="line">    config = <span class="hljs-keyword">new</span> NioServerSocketChannelConfig(<span class="hljs-keyword">this</span>, javaChannel().socket());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>父类AbstractNioMessageChannel构造函数</li>
+</ul>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@see</span> AbstractNioChannel#AbstractNioChannel(Channel, SelectableChannel, int)</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-title">AbstractNioMessageChannel</span><span class="hljs-params">(Channel parent, SelectableChannel ch, <span class="hljs-keyword">int</span> readInterestOp)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>(parent, ch, readInterestOp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>父类AbstractNioChannel构造函数</li>
+</ul>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Create a new instance</span></span><br><span class="line"><span class="hljs-comment">     *</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> parent            the parent &#123;<span class="hljs-doctag">@link</span> Channel&#125; by which this instance was created. May be &#123;<span class="hljs-doctag">@code</span> null&#125;</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> ch                the underlying &#123;<span class="hljs-doctag">@link</span> SelectableChannel&#125; on which it operates</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> readInterestOp    the ops to set to receive data from the &#123;<span class="hljs-doctag">@link</span> SelectableChannel&#125;</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-title">AbstractNioChannel</span><span class="hljs-params">(Channel parent, SelectableChannel ch, <span class="hljs-keyword">int</span> readInterestOp)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>(parent);</span><br><span class="line">    <span class="hljs-keyword">this</span>.ch = ch;</span><br><span class="line">    <span class="hljs-keyword">this</span>.readInterestOp = readInterestOp;</span><br><span class="line">    <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">        ch.configureBlocking(<span class="hljs-keyword">false</span>);</span><br><span class="line">    &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            ch.close();</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (IOException e2) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (logger.isWarnEnabled()) &#123;</span><br><span class="line">                logger.warn(</span><br><span class="line">                    <span class="hljs-string">"Failed to close a partially initialized socket."</span>, e2);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ChannelException(<span class="hljs-string">"Failed to enter non-blocking mode."</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>父类AbstractChannel构造函数</li>
+</ul>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Creates a new instance.</span></span><br><span class="line"><span class="hljs-comment">     *</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> parent</span></span><br><span class="line"><span class="hljs-comment">     *        the parent of this channel. &#123;<span class="hljs-doctag">@code</span> null&#125; if there's no parent.</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-title">AbstractChannel</span><span class="hljs-params">(Channel parent)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.parent = parent;</span><br><span class="line">    id = newId();</span><br><span class="line">    unsafe = newUnsafe();</span><br><span class="line">    pipeline = newChannelPipeline();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过分析<code>NioServerSocketChannel</code>实例化过程，调用那么多的构造函数其实主要干了五件事情：</p>
+<p>1、产生来一个SocketChannelImpl类的实例，并设置为非阻塞的</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ch.configureBlocking(<span class="hljs-keyword">false</span>);</span><br></pre></td></tr></table></figure>
+<p>2、设置了config属性</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config = <span class="hljs-keyword">new</span> NioServerSocketChannelConfig(<span class="hljs-keyword">this</span>, javaChannel().socket());</span><br></pre></td></tr></table></figure>
+<p>3、设置SelectionKey.OP_ACCEPT事件</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">this</span>.readInterestOp = readInterestOp;<span class="hljs-comment">//SelectionKey.OP_ACCEPT</span></span><br></pre></td></tr></table></figure>
+<p>4、设置unsafe属性</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">unsafe = newUnsafe();</span><br><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">protected</span> AbstractNioUnsafe <span class="hljs-title">newUnsafe</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> NioMessageUnsafe();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主要作用为：用来负责底层的connect、register、read和write等操作。</p>
+<p>5、设置pipeline属性</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pipeline = <span class="hljs-keyword">new</span> DefaultChannelPipeline(<span class="hljs-keyword">this</span>);</span><br></pre></td></tr></table></figure>
+<p>每个Channel都有自己的pipeline，当有请求事件发生时，pipeline负责调用相应的hander进行处理。</p>
+<p>这些属性在后面都会用到，至于NioServerSocketChannel 对象中的unsafe、pipeline属性的具体实现后面进行分析。</p>
+<blockquote>
+<p>结论：final Channel channel = channelFactory().newChannel();这行代码的作用为通过反射产生来一个NioServerSocketChannel类的实例，其中这个NioServerSocketChannel类对象有这样几个属性：SocketChannel、NioServerSocketChannelConfig 、SelectionKey.OP_ACCEPT事件、NioMessageUnsafe、DefaultChannelPipeline</p>
+</blockquote>
+<h6 id="2-初始化channel：init-channel"><a href="#2-初始化channel：init-channel" class="headerlink" title="2.初始化channel：init(channel);"></a>2.初始化channel：init(channel);</h6><p>因为这篇文章是分析Netty服务端的启动流程，因此会进入<code>ServerBootstrap#init()</code>方法中：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(Channel channel)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">final</span> Map&lt;ChannelOption&lt;?&gt;, Object&gt; options = options0();</span><br><span class="line">    <span class="hljs-keyword">synchronized</span> (options) &#123;</span><br><span class="line">        setChannelOptions(channel, options, logger);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">final</span> Map&lt;AttributeKey&lt;?&gt;, Object&gt; attrs = attrs0();</span><br><span class="line">    <span class="hljs-keyword">synchronized</span> (attrs) &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (Entry&lt;AttributeKey&lt;?&gt;, Object&gt; e: attrs.entrySet()) &#123;</span><br><span class="line">            <span class="hljs-meta">@SuppressWarnings</span>(<span class="hljs-string">"unchecked"</span>)</span><br><span class="line">            AttributeKey&lt;Object&gt; key = (AttributeKey&lt;Object&gt;) e.getKey();</span><br><span class="line">            channel.attr(key).set(e.getValue());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ChannelPipeline p = channel.pipeline();</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">final</span> EventLoopGroup currentChildGroup = childGroup;</span><br><span class="line">    <span class="hljs-keyword">final</span> ChannelHandler currentChildHandler = childHandler;</span><br><span class="line">    <span class="hljs-keyword">final</span> Entry&lt;ChannelOption&lt;?&gt;, Object&gt;[] currentChildOptions;</span><br><span class="line">    <span class="hljs-keyword">final</span> Entry&lt;AttributeKey&lt;?&gt;, Object&gt;[] currentChildAttrs;</span><br><span class="line">    <span class="hljs-keyword">synchronized</span> (childOptions) &#123;</span><br><span class="line">        currentChildOptions = childOptions.entrySet().toArray(newOptionArray(<span class="hljs-number">0</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">synchronized</span> (childAttrs) &#123;</span><br><span class="line">        currentChildAttrs = childAttrs.entrySet().toArray(newAttrArray(<span class="hljs-number">0</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    p.addLast(<span class="hljs-keyword">new</span> ChannelInitializer&lt;Channel&gt;() &#123;</span><br><span class="line">        <span class="hljs-meta">@Override</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initChannel</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Channel ch)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">final</span> ChannelPipeline pipeline = ch.pipeline();</span><br><span class="line">            ChannelHandler handler = config.handler();</span><br><span class="line">            <span class="hljs-keyword">if</span> (handler != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">                pipeline.addLast(handler);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            ch.eventLoop().execute(<span class="hljs-keyword">new</span> Runnable() &#123;</span><br><span class="line">                <span class="hljs-meta">@Override</span></span><br><span class="line">                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">                    pipeline.addLast(<span class="hljs-keyword">new</span> ServerBootstrapAcceptor(</span><br><span class="line">                        ch, currentChildGroup, currentChildHandler, currentChildOptions, currentChildAttrs));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="3-注册channel：config-group-register-channel"><a href="#3-注册channel：config-group-register-channel" class="headerlink" title="3.注册channel：config().group().register(channel);"></a>3.注册channel：config().group().register(channel);</h6><h3 id="REFERENCES"><a href="#REFERENCES" class="headerlink" title="REFERENCES"></a>REFERENCES</h3><ul>
+<li><a href="https://blog.csdn.net/u010412719/article/details/78077183" target="_blank" rel="noopener">Netty源码分析：服务端启动全过程</a></li>
+</ul>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
     <div class="card-image">
         <a href="/2019/01/22/java-nio-selector/" class="image is-7by1">
             <img class="thumbnail" src="/gallery/thumbnails/Du8u0QQWkAIb9Iu.jpg" alt="Java NIO核心组件：Selector">
@@ -349,59 +463,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2018/12/26/java-basic-knowledge-summary/" class="image is-7by1">
-            <img class="thumbnail" src="/gallery/thumbnails/desert.jpg" alt="Java基础知识点总结">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-12-26T07:41:34.000Z">2018-12-26</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a few seconds read (About 84 words)
-                </span>
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/12/26/java-basic-knowledge-summary/">Java基础知识点总结</a>
-            
-        </h1>
-        <div class="content">
-            <p>总结了一些Java基础知识点，主要包括Container、Concurrent、IO、JVM等方面，通过思维导图的方式展现，随着我进一步的学习，也会不断更新下面的知识点，具体请看下图：</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/12/26/java-basic-knowledge-summary/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -466,7 +527,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        51
+                        52
                     </p>
                 </div>
             </div>
@@ -486,7 +547,7 @@ var _hmt = _hmt || [];
                         Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        27
+                        28
                     </p>
                 </div>
             </div>
@@ -581,7 +642,7 @@ var _hmt = _hmt || [];
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/AQS/" style="font-size: 10px;">AQS</a> <a href="/tags/CentOS/" style="font-size: 12.5px;">CentOS</a> <a href="/tags/DirectIO/" style="font-size: 10px;">DirectIO</a> <a href="/tags/KVM/" style="font-size: 12.5px;">KVM</a> <a href="/tags/LRU/" style="font-size: 10px;">LRU</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/Micro-Service/" style="font-size: 10px;">Micro Service</a> <a href="/tags/MutliThread/" style="font-size: 12.5px;">MutliThread</a> <a href="/tags/MyBatis3/" style="font-size: 10px;">MyBatis3</a> <a href="/tags/Netty/" style="font-size: 15px;">Netty</a> <a href="/tags/SPI/" style="font-size: 10px;">SPI</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a> <a href="/tags/WebSystem/" style="font-size: 10px;">WebSystem</a> <a href="/tags/cache/" style="font-size: 10px;">cache</a> <a href="/tags/cpu/" style="font-size: 10px;">cpu</a> <a href="/tags/dubbo/" style="font-size: 17.5px;">dubbo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/javassist/" style="font-size: 10px;">javassist</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/mmap/" style="font-size: 10px;">mmap</a> <a href="/tags/nio/" style="font-size: 12.5px;">nio</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/网络配置/" style="font-size: 10px;">网络配置</a> <a href="/tags/虚拟化/" style="font-size: 10px;">虚拟化</a>
+        <a href="/tags/AQS/" style="font-size: 10px;">AQS</a> <a href="/tags/CentOS/" style="font-size: 12.5px;">CentOS</a> <a href="/tags/DirectIO/" style="font-size: 10px;">DirectIO</a> <a href="/tags/KVM/" style="font-size: 12.5px;">KVM</a> <a href="/tags/LRU/" style="font-size: 10px;">LRU</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/Micro-Service/" style="font-size: 10px;">Micro Service</a> <a href="/tags/MutliThread/" style="font-size: 12.5px;">MutliThread</a> <a href="/tags/MyBatis3/" style="font-size: 10px;">MyBatis3</a> <a href="/tags/Netty/" style="font-size: 15px;">Netty</a> <a href="/tags/SPI/" style="font-size: 10px;">SPI</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a> <a href="/tags/WebSystem/" style="font-size: 10px;">WebSystem</a> <a href="/tags/cache/" style="font-size: 10px;">cache</a> <a href="/tags/cpu/" style="font-size: 10px;">cpu</a> <a href="/tags/dubbo/" style="font-size: 17.5px;">dubbo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/javassist/" style="font-size: 10px;">javassist</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/mmap/" style="font-size: 10px;">mmap</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/nio/" style="font-size: 12.5px;">nio</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/网络配置/" style="font-size: 10px;">网络配置</a> <a href="/tags/虚拟化/" style="font-size: 10px;">虚拟化</a>
     </div>
 </div>
 
@@ -595,6 +656,25 @@ var _hmt = _hmt || [];
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/01/24/netty-server-side-bootstrap-process/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Netty服务端启动流程分析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-24T02:36:26.000Z">2019-01-24</time></div>
+                    <a href="/2019/01/24/netty-server-side-bootstrap-process/" class="has-link-black-ter is-size-6">Netty服务端启动流程分析</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -672,25 +752,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2018/12/26/java-basic-knowledge-summary/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/desert.jpg" alt="Java基础知识点总结">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-26T07:41:34.000Z">2018-12-26</time></div>
-                    <a href="/2018/12/26/java-basic-knowledge-summary/" class="has-link-black-ter is-size-6">Java基础知识点总结</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -709,7 +770,7 @@ var _hmt = _hmt || [];
                     <span class="level-item">January 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1145,6 +1206,13 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/mmap/">
                         <span class="tag">mmap</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/netty/">
+                        <span class="tag">netty</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1202,6 +1270,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/01/24/netty-server-side-bootstrap-process/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Netty服务端启动流程分析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-24T02:36:26.000Z">2019-01-24</time></div>
+                    <a href="/2019/01/24/netty-server-side-bootstrap-process/" class="has-link-black-ter is-size-6">Netty服务端启动流程分析</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/01/22/java-nio-selector/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/gallery/thumbnails/Du8u0QQWkAIb9Iu.jpg" alt="Java NIO核心组件：Selector">
@@ -1276,25 +1363,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2018/12/26/java-basic-knowledge-summary/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/desert.jpg" alt="Java基础知识点总结">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-26T07:41:34.000Z">2018-12-26</time></div>
-                    <a href="/2018/12/26/java-basic-knowledge-summary/" class="has-link-black-ter is-size-6">Java基础知识点总结</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1313,7 +1381,7 @@ var _hmt = _hmt || [];
                     <span class="level-item">January 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1749,6 +1817,13 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/mmap/">
                         <span class="tag">mmap</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/netty/">
+                        <span class="tag">netty</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
