@@ -140,6 +140,55 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-11-22T11:11:40.000Z">2018-11-22</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    8 minutes read (About 1181 words)
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/11/22/java-abstract-queued-synchronizer/">队列同步器(AbstractQueuedSynchronizer)源码分析</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p><code>AbstractQueuedSynchronizer(队列同步器)</code>在Java并发工具中经常被用到，比如说我们常用的<code>CountDownLatch</code>、<code>ReentrantLock</code>、<code>ReentrantReadWriteLock</code>和<code>Semaphore</code>等等并发工具类底层都是基于<code>队列同步器</code>的，只有掌握了<code>队列同步器</code>底层的工作原理才能更好的理解其他的并发工具的工作机制，这篇文章将会从源码的角度分析<code>队列同步器</code>的工作原理。</p>
+</blockquote>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/11/22/java-abstract-queued-synchronizer/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-11-08T10:43:24.000Z">2018-11-08</time>
                 
                 
@@ -326,55 +375,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-09-24T02:57:36.000Z">2018-09-24</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    8 minutes read (About 1233 words)
-                </span>
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/09/24/dubbo-provider-request-and-response-analysis/">Dubbo服务端接收请求及响应请求原理分析</a>
-            
-        </h1>
-        <div class="content">
-            <p>之前一篇文章<a href="https://shuaijunlan.github.io/2018/09/09/dubbo-provider-calling-process-source-code-analysis/">《Dubbo服务提供者发布及注册过程源码分析》</a>已经介绍了Dubbo服务端的服务注册及发布过程，这篇文章将会介绍Dubbo服务端是如何接受请求以及响应请求的。</p>
-<p>本文还是以<a href="https://github.com/shuaijunlan/Spring-Learning/tree/master/dubbo" target="_blank" rel="noopener"><strong>Consumer-Provider的Demo</strong></a>为例，分析接收请求及响应请求的具体流程，在Dubbo服务端发布服务之后，它将会监听一个端口等待接收客户端的请求，当接收到请求后，会经过入站处理器进行处理，我们知道在发布服务的时候设置了<code>NettyServerHandler</code>入站处理器，接收到请求之后，会经过<code>NettyServerHandler#channelRead()</code>方法来获取请求的消息，我们来看一下它的实现：</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">channelRead</span><span class="hljs-params">(ChannelHandlerContext ctx, Object msg)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="hljs-comment">//以ctx.channel()为key，以NettyChannel为value，存储在ConcurrentHashMap中</span></span><br><span class="line">    NettyChannel channel = NettyChannel.getOrAddChannel(ctx.channel(), url, handler);</span><br><span class="line">    <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">        handler.received(channel, msg);</span><br><span class="line">    &#125; <span class="hljs-keyword">finally</span> &#123;</span><br><span class="line">        NettyChannel.removeChannelIfDisconnected(ctx.channel());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/09/24/dubbo-provider-request-and-response-analysis/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -443,7 +443,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        52
+                        53
                     </p>
                 </div>
             </div>
@@ -575,6 +575,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/02/18/netty-client-side-connection/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-client-side-connection">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T03:41:34.000Z">2019-02-18</time></div>
+                    <a href="/2019/02/18/netty-client-side-connection/" class="has-link-black-ter is-size-6">netty-client-side-connection</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/01/24/netty-server-side-bootstrap-process/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/gallery/thumbnails/DxJmW2kX4AUYoY1.jpg" alt="Netty服务端启动流程分析">
@@ -649,25 +668,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2018/12/27/java-cas-and-lock-free/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/DsUEr0nX4AARnqC.jpg" alt="CAS and Lock-Free in Java">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-27T12:06:41.000Z">2018-12-27</time></div>
-                    <a href="/2018/12/27/java-cas-and-lock-free/" class="has-link-black-ter is-size-6">CAS and Lock-Free in Java</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -679,6 +679,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/01/">
@@ -1179,6 +1190,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/02/18/netty-client-side-connection/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-client-side-connection">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T03:41:34.000Z">2019-02-18</time></div>
+                    <a href="/2019/02/18/netty-client-side-connection/" class="has-link-black-ter is-size-6">netty-client-side-connection</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/01/24/netty-server-side-bootstrap-process/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/gallery/thumbnails/DxJmW2kX4AUYoY1.jpg" alt="Netty服务端启动流程分析">
@@ -1253,25 +1283,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2018/12/27/java-cas-and-lock-free/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/DsUEr0nX4AARnqC.jpg" alt="CAS and Lock-Free in Java">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-27T12:06:41.000Z">2018-12-27</time></div>
-                    <a href="/2018/12/27/java-cas-and-lock-free/" class="has-link-black-ter is-size-6">CAS and Lock-Free in Java</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1283,6 +1294,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/01/">

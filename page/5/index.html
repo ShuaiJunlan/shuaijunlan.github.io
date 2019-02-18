@@ -140,6 +140,55 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-09-06T07:53:53.000Z">2018-09-06</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    8 minutes read (About 1162 words)
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/09/06/netty-future-and-promise/">Netty中Future与Promise的实现分析</a>
+            
+        </h1>
+        <div class="content">
+            <p>从Java 1.5开始，JDK就提供了Callable和Future，通过它们可以在任务异步执行完毕之后获取任务的执行结果。</p>
+<p>Netty扩展了JDK中的Future机制，下面我们来看一张Netty中Future和Promise类关系图：</p>
+<p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/DefaultPromise.png?raw=true" alt=""></p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/09/06/netty-future-and-promise/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-08-13T13:06:34.000Z">2018-08-13</time>
                 
                 
@@ -348,46 +397,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-08-02T08:22:08.000Z">2018-08-02</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a minute read (About 161 words)
-                </span>
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/08/02/dubbo-proxy-basing-on-javassist/">Dubbo基于Javassist实现动态代理分析</a>
-            
-        </h1>
-        <div class="content">
-            <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">org.apache.dubbo.common.bytecode.Proxy	//生成代理类</span><br><span class="line">org.apache.dubbo.common.bytecode.ClassGenerator  //基于javassist封装</span><br><span class="line"></span><br><span class="line">org.apache.dubbo.common.utils.ClassHelper;  //工具类</span><br><span class="line">org.apache.dubbo.common.utils.ReflectUtils;	//工具类</span><br></pre></td></tr></table></figure>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// create ProxyInstance class.</span></span><br><span class="line"><span class="hljs-comment">//生成代理类的实例</span></span><br><span class="line">String pcn = pkg + <span class="hljs-string">".proxy"</span> + id;</span><br><span class="line">ccp.setClassName(pcn);</span><br><span class="line">ccp.addField(<span class="hljs-string">"public static java.lang.reflect.Method[] methods;"</span>);</span><br><span class="line">ccp.addField(<span class="hljs-string">"private "</span> + InvocationHandler.class.getName() + <span class="hljs-string">" handler;"</span>);</span><br><span class="line">ccp.addConstructor(Modifier.PUBLIC, <span class="hljs-keyword">new</span> Class&lt;?&gt;[]&#123;InvocationHandler.class&#125;, <span class="hljs-keyword">new</span> Class&lt;?&gt;[<span class="hljs-number">0</span>], <span class="hljs-string">"handler=$1;"</span>);</span><br><span class="line">ccp.addDefaultConstructor();</span><br><span class="line">Class&lt;?&gt; clazz = ccp.toClass();</span><br><span class="line">clazz.getField(<span class="hljs-string">"methods"</span>).set(<span class="hljs-keyword">null</span>, methods.toArray(<span class="hljs-keyword">new</span> Method[<span class="hljs-number">0</span>]));</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// create Proxy class.</span></span><br><span class="line"><span class="hljs-comment">//生成代理类，通过调用newInstance()方法获取实例</span></span><br><span class="line">String fcn = Proxy.class.getName() + id;</span><br><span class="line">ccm = ClassGenerator.newInstance(cl);</span><br><span class="line">ccm.setClassName(fcn);</span><br><span class="line">ccm.addDefaultConstructor();</span><br><span class="line">ccm.setSuperClass(Proxy.class);</span><br><span class="line">ccm.addMethod(<span class="hljs-string">"public Object newInstance("</span> + InvocationHandler.class.getName() + <span class="hljs-string">" h)&#123; return new "</span> + pcn + <span class="hljs-string">"($1); &#125;"</span>);</span><br><span class="line">Class&lt;?&gt; pc = ccm.toClass();</span><br><span class="line">proxy = (Proxy) pc.newInstance();</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -458,7 +467,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        52
+                        53
                     </p>
                 </div>
             </div>
@@ -590,6 +599,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/02/18/netty-client-side-connection/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-client-side-connection">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T03:41:34.000Z">2019-02-18</time></div>
+                    <a href="/2019/02/18/netty-client-side-connection/" class="has-link-black-ter is-size-6">netty-client-side-connection</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/01/24/netty-server-side-bootstrap-process/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/gallery/thumbnails/DxJmW2kX4AUYoY1.jpg" alt="Netty服务端启动流程分析">
@@ -664,25 +692,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2018/12/27/java-cas-and-lock-free/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/DsUEr0nX4AARnqC.jpg" alt="CAS and Lock-Free in Java">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-27T12:06:41.000Z">2018-12-27</time></div>
-                    <a href="/2018/12/27/java-cas-and-lock-free/" class="has-link-black-ter is-size-6">CAS and Lock-Free in Java</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -694,6 +703,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/01/">
@@ -1194,6 +1214,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/02/18/netty-client-side-connection/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-client-side-connection">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T03:41:34.000Z">2019-02-18</time></div>
+                    <a href="/2019/02/18/netty-client-side-connection/" class="has-link-black-ter is-size-6">netty-client-side-connection</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/01/24/netty-server-side-bootstrap-process/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/gallery/thumbnails/DxJmW2kX4AUYoY1.jpg" alt="Netty服务端启动流程分析">
@@ -1268,25 +1307,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2018/12/27/java-cas-and-lock-free/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/DsUEr0nX4AARnqC.jpg" alt="CAS and Lock-Free in Java">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-27T12:06:41.000Z">2018-12-27</time></div>
-                    <a href="/2018/12/27/java-cas-and-lock-free/" class="has-link-black-ter is-size-6">CAS and Lock-Free in Java</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1298,6 +1318,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/01/">
