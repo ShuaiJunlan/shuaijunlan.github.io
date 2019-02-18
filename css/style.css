@@ -88,6 +88,7 @@ img.thumbnail {
   align-items: stretch;
   display: flex;
   padding: 0;
+  flex-shrink: 0;
 }
 .navbar-main .navbar-menu {
   flex-grow: 1;

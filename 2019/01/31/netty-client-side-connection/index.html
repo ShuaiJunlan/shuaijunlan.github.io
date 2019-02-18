@@ -2,20 +2,22 @@
 <html lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Archives: 2019/2 - ITechHub</title>
+<title>Netty客户端连接过程源码分析 - ITechHub</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
     <meta name="description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ITechHub">
-<meta property="og:url" content="https://shuaijunlan.github.io/archives/2019/02/index.html">
+<meta name="keywords" content="netty">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Netty客户端连接过程源码分析">
+<meta property="og:url" content="https://shuaijunlan.github.io/2019/01/31/netty-client-side-connection/index.html">
 <meta property="og:site_name" content="ITechHub">
 <meta property="og:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-02-18T03:43:13.720Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ITechHub">
+<meta name="twitter:title" content="Netty客户端连接过程源码分析">
 <meta name="twitter:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
 <meta name="twitter:creator" content="@https:&#x2F;&#x2F;twitter.com&#x2F;ShuaiJunlan">
 
@@ -97,7 +99,7 @@ var _hmt = _hmt || [];
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.png" alt="ITechHub" height="28">
+                <img src="/images/logo.png" alt="Netty客户端连接过程源码分析" height="28">
             
             </a>
         </div>
@@ -133,35 +135,101 @@ var _hmt = _hmt || [];
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        February 2019
-        </h3>
-        <div class="timeline">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
         
-            <article class="media">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-01-31T03:41:34.000Z">2019-01-31</time>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-02-18T03:41:34.000Z">2019-02-18</time>
-                        <a href="/2019/02/18/netty-client-side-connection/" class="has-link-black-ter is-size-6">netty-client-side-connection</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a few seconds read (About 0 words)
+                </span>
+                
+                
+            </div>
         </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Netty客户端连接过程源码分析
+            
+        </h1>
+        <div class="content">
+            
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/netty/">netty</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <!-- AddToAny BEGIN -->
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_google_plus"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+        
     </div>
 </div>
 
 
 
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/01/24/netty-server-side-bootstrap-process/">
+                <span class="level-item">Netty服务端启动流程分析</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://shuaijunlan.github.io/2019/01/31/netty-client-side-connection/';
+        this.page.identifier = '2019/01/31/netty-client-side-connection/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'shuaijunlan' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
 </div>
                 
 
@@ -176,7 +244,9 @@ var _hmt = _hmt || [];
         <nav class="level">
             <div class="level-item has-text-centered">
                 <div>
-                    <img class="image is-128x128 has-mb-6" src="/avatar.gif" alt="Shuai Junlan">
+                    
+                        <img class="image is-128x128 has-mb-6" src="/avatar.gif" alt="Shuai Junlan">
+                    
                     
                     <p class="is-size-4 is-block">
                         Shuai Junlan
@@ -223,7 +293,7 @@ var _hmt = _hmt || [];
                         Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        27
+                        28
                     </p>
                 </div>
             </div>
@@ -318,7 +388,7 @@ var _hmt = _hmt || [];
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/AQS/" style="font-size: 10px;">AQS</a> <a href="/tags/CentOS/" style="font-size: 12.5px;">CentOS</a> <a href="/tags/DirectIO/" style="font-size: 10px;">DirectIO</a> <a href="/tags/KVM/" style="font-size: 12.5px;">KVM</a> <a href="/tags/LRU/" style="font-size: 10px;">LRU</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/Micro-Service/" style="font-size: 10px;">Micro Service</a> <a href="/tags/MutliThread/" style="font-size: 12.5px;">MutliThread</a> <a href="/tags/MyBatis3/" style="font-size: 10px;">MyBatis3</a> <a href="/tags/Netty/" style="font-size: 15px;">Netty</a> <a href="/tags/SPI/" style="font-size: 10px;">SPI</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a> <a href="/tags/WebSystem/" style="font-size: 10px;">WebSystem</a> <a href="/tags/cache/" style="font-size: 12.5px;">cache</a> <a href="/tags/cpu/" style="font-size: 10px;">cpu</a> <a href="/tags/dubbo/" style="font-size: 17.5px;">dubbo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/javassist/" style="font-size: 10px;">javassist</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/mmap/" style="font-size: 10px;">mmap</a> <a href="/tags/nio/" style="font-size: 12.5px;">nio</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/网络配置/" style="font-size: 10px;">网络配置</a> <a href="/tags/虚拟化/" style="font-size: 10px;">虚拟化</a>
+        <a href="/tags/AQS/" style="font-size: 10px;">AQS</a> <a href="/tags/CentOS/" style="font-size: 12.5px;">CentOS</a> <a href="/tags/DirectIO/" style="font-size: 10px;">DirectIO</a> <a href="/tags/KVM/" style="font-size: 12.5px;">KVM</a> <a href="/tags/LRU/" style="font-size: 10px;">LRU</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/Micro-Service/" style="font-size: 10px;">Micro Service</a> <a href="/tags/MutliThread/" style="font-size: 12.5px;">MutliThread</a> <a href="/tags/MyBatis3/" style="font-size: 10px;">MyBatis3</a> <a href="/tags/Netty/" style="font-size: 15px;">Netty</a> <a href="/tags/SPI/" style="font-size: 10px;">SPI</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a> <a href="/tags/WebSystem/" style="font-size: 10px;">WebSystem</a> <a href="/tags/cache/" style="font-size: 12.5px;">cache</a> <a href="/tags/cpu/" style="font-size: 10px;">cpu</a> <a href="/tags/dubbo/" style="font-size: 17.5px;">dubbo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/javassist/" style="font-size: 10px;">javassist</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/mmap/" style="font-size: 10px;">mmap</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/nio/" style="font-size: 12.5px;">nio</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/网络配置/" style="font-size: 10px;">网络配置</a> <a href="/tags/虚拟化/" style="font-size: 10px;">虚拟化</a>
     </div>
 </div>
 
@@ -335,16 +405,16 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
-            <a href="/2019/02/18/netty-client-side-connection/" class="media-left">
+            <a href="/2019/01/31/netty-client-side-connection/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-client-side-connection">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Netty客户端连接过程源码分析">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T03:41:34.000Z">2019-02-18</time></div>
-                    <a href="/2019/02/18/netty-client-side-connection/" class="has-link-black-ter is-size-6">netty-client-side-connection</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-31T03:41:34.000Z">2019-01-31</time></div>
+                    <a href="/2019/01/31/netty-client-side-connection/" class="has-link-black-ter is-size-6">Netty客户端连接过程源码分析</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -441,23 +511,12 @@ var _hmt = _hmt || [];
         <ul class="menu-list">
         
         <li>
-            <a class="level is-marginless" href="/archives/2019/02/">
-                <span class="level-start">
-                    <span class="level-item">February 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
             <a class="level is-marginless" href="/archives/2019/01/">
                 <span class="level-start">
                     <span class="level-item">January 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -893,6 +952,13 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/mmap/">
                         <span class="tag">mmap</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/netty/">
+                        <span class="tag">netty</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -950,16 +1016,16 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
-            <a href="/2019/02/18/netty-client-side-connection/" class="media-left">
+            <a href="/2019/01/31/netty-client-side-connection/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-client-side-connection">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Netty客户端连接过程源码分析">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T03:41:34.000Z">2019-02-18</time></div>
-                    <a href="/2019/02/18/netty-client-side-connection/" class="has-link-black-ter is-size-6">netty-client-side-connection</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-31T03:41:34.000Z">2019-01-31</time></div>
+                    <a href="/2019/01/31/netty-client-side-connection/" class="has-link-black-ter is-size-6">Netty客户端连接过程源码分析</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1056,23 +1122,12 @@ var _hmt = _hmt || [];
         <ul class="menu-list">
         
         <li>
-            <a class="level is-marginless" href="/archives/2019/02/">
-                <span class="level-start">
-                    <span class="level-item">February 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
             <a class="level is-marginless" href="/archives/2019/01/">
                 <span class="level-start">
                     <span class="level-item">January 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1513,6 +1568,13 @@ var _hmt = _hmt || [];
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/netty/">
+                        <span class="tag">netty</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/nio/">
                         <span class="tag">nio</span>
                         <span class="tag is-grey">2</span>
@@ -1557,40 +1619,23 @@ var _hmt = _hmt || [];
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.png" alt="ITechHub" height="28">
+                    <img src="/images/logo.png" alt="Netty客户端连接过程源码分析" height="28">
                 
                 </a>
                 <p class="is-size-7">
                 &copy; 2019 Shuai Junlan&nbsp;
                 Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+                
                 </p>
-
-
-                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-                本站总访问量<span id="busuanzi_value_site_pv"></span>次<br>
-                本站访客数<span id="busuanzi_value_site_uv"></span>人次<br>
-                本文总阅读量<span id="busuanzi_value_page_pv"></span>次<br>
-
 
                 <p class="is-size-7">
                 </p><h3 class="h3-title" id="slide-collect">Since 2019.01.19 </h3>
                 <a href="https://info.flagcounter.com/nDau"><img src="https://s01.flagcounter.com/count/nDau/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
                 <p></p>
-
             </div>
             <div class="level-end">
             
             </div>
-
-            <!--
-            <script>
-              ((window.gitter = {}).chat = {}).options = {
-                room: 'shuaijunlan/community'
-              };
-            </script>
-            <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-            -->
-
         </div>
     </div>
 </footer>
@@ -1640,9 +1685,21 @@ var _hmt = _hmt || [];
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     MathJax.Hub.Config({
-        'HTML-CSS': {matchFontHeight: false},
-        SVG: {matchFontHeight: false},
-        CommonHTML: {matchFontHeight: false}
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
     });
 });
 </script>

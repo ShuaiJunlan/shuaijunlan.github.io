@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[netty-client-side-connection]]></title>
-    <url>%2F2019%2F02%2F18%2Fnetty-client-side-connection%2F</url>
+    <title><![CDATA[Netty客户端连接过程源码分析]]></title>
+    <url>%2F2019%2F01%2F31%2Fnetty-client-side-connection%2F</url>
     <content type="text"></content>
+      <tags>
+        <tag>netty</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[Netty服务端启动流程分析]]></title>
