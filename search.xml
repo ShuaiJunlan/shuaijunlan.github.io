@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[netty-channelpipeline]]></title>
+    <title><![CDATA[netty-reactor]]></title>
+    <url>%2F2019%2F02%2F18%2Fnetty-reactor%2F</url>
+    <content type="text"><![CDATA[netty源码分析之揭开reactor线程的面纱（三）]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Netty服务端接收连接过程分析]]></title>
+    <url>%2F2019%2F02%2F18%2Fnetty-server-side-accept-connections%2F</url>
+    <content type="text"><![CDATA[https://blog.csdn.net/u013160932/article/details/80474486 netty源码分析之新连接接入全解析]]></content>
+      <tags>
+        <tag>Netty</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Netty核心组件之ChannelPipeline]]></title>
     <url>%2F2019%2F02%2F18%2Fnetty-channelpipeline%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[netty在服务端端口绑定和新连接建立的过程中会建立相应的channel，而与channel的动作密切相关的是pipeline这个概念，pipeline像是可以看作是一条流水线，原始的原料(字节流)进来，经过加工，最后输出，下面我将从]]></content>
+      <tags>
+        <tag>Netty</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[Netty客户端连接过程源码分析]]></title>

@@ -146,6 +146,102 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-17T02:03:57.000Z">2018-10-17</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 minutes read (About 801 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/17/dubbo-router-analysis/">Dubbo路由机制分析</a>
+            
+        </h1>
+        <div class="content">
+            <p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot from 2018-10-17 16-41-11.png?raw=true" alt=""></p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/10/17/dubbo-router-analysis/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-15T07:24:55.000Z">2018-10-15</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a minute read (About 211 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/15/java-blocking-queue/">深入研究Java阻塞队列实现</a>
+            
+        </h1>
+        <div class="content">
+            <p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/BlockingQueue.png?raw=true" alt=""></p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/10/15/java-blocking-queue/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-10-11T01:03:18.000Z">2018-10-11</time>
                 
                 
@@ -280,109 +376,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-09-18T07:34:45.000Z">2018-09-18</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    17 minutes read (About 2490 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/09/18/dubbo-cluster-fault-tolerance/">Dubbo集群容错机制</a>
-            
-        </h1>
-        <div class="content">
-            <p>在之前一篇文章<a href="https://shuaijunlan.github.io/2018/08/05/dubbo-consumer-calling-process-source-code-analysis/">《Dubbo消费者调用过程源码分析》</a>讲到，在创建代理的时候会生成调用对象invoker，这个时候就会绑定集群策略，我们来看生成invoker的代码，在类<code>ReferenceConfig#createProxy(Map&lt;String, String&gt; map)</code>方法中：</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//直接在配置文件中配置url，实现直接通信（如果既配置了直连地址又配置了注册中心的地址，则自动忽略注册中心的地址）</span></span><br><span class="line"><span class="hljs-keyword">if</span> (url != <span class="hljs-keyword">null</span> &amp;&amp; url.length() &gt; <span class="hljs-number">0</span>) &#123; <span class="hljs-comment">// user specified URL, could be peer-to-peer address, or register center's address.</span></span><br><span class="line">    String[] us = Constants.SEMICOLON_SPLIT_PATTERN.split(url);</span><br><span class="line">    <span class="hljs-keyword">if</span> (us != <span class="hljs-keyword">null</span> &amp;&amp; us.length &gt; <span class="hljs-number">0</span>) &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (String u : us) &#123;</span><br><span class="line">            URL url = URL.valueOf(u);</span><br><span class="line">            <span class="hljs-keyword">if</span> (url.getPath() == <span class="hljs-keyword">null</span> || url.getPath().length() == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">                url = url.setPath(interfaceName);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="hljs-keyword">if</span> (Constants.REGISTRY_PROTOCOL.equals(url.getProtocol())) &#123;</span><br><span class="line">                urls.add(url.addParameterAndEncoded(Constants.REFER_KEY, StringUtils.toQueryString(map)));</span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                urls.add(ClusterUtils.mergeUrl(url, map));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="hljs-keyword">else</span> &#123; <span class="hljs-comment">// assemble URL from register center's configuration</span></span><br><span class="line">    <span class="hljs-comment">//获取配置注册中心的url（可以有多个注册中心的url）</span></span><br><span class="line">    List&lt;URL&gt; us = loadRegistries(<span class="hljs-keyword">false</span>);</span><br><span class="line">    <span class="hljs-keyword">if</span> (us != <span class="hljs-keyword">null</span> &amp;&amp; !us.isEmpty()) &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (URL u : us) &#123;</span><br><span class="line">            URL monitorUrl = loadMonitor(u);</span><br><span class="line">            <span class="hljs-keyword">if</span> (monitorUrl != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">                map.put(Constants.MONITOR_KEY, URL.encode(monitorUrl.toFullString()));</span><br><span class="line">            &#125;</span><br><span class="line">            urls.add(u.addParameterAndEncoded(Constants.REFER_KEY, StringUtils.toQueryString(map)));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">//如果urls为空，则抛出异常</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (urls.isEmpty()) &#123;</span><br><span class="line">        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalStateException(<span class="hljs-string">"No such any registry to reference "</span> + interfaceName + <span class="hljs-string">" on the consumer "</span> + NetUtils.getLocalHost() + <span class="hljs-string">" use dubbo version "</span> + Version.getVersion() + <span class="hljs-string">", please config &lt;dubbo:registry address=\"...\" /&gt; to your spring config."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">//当urls的长度为一时，可能为服务的直连地址也可能为注册中心的地址</span></span><br><span class="line"><span class="hljs-keyword">if</span> (urls.size() == <span class="hljs-number">1</span>) &#123;</span><br><span class="line">    invoker = refprotocol.refer(interfaceClass, urls.get(<span class="hljs-number">0</span>));</span><br><span class="line">&#125; <span class="hljs-keyword">else</span> &#123;<span class="hljs-comment">//有多个直连地址，或者多个注册中心的地址</span></span><br><span class="line">    List&lt;Invoker&lt;?&gt;&gt; invokers = <span class="hljs-keyword">new</span> ArrayList&lt;Invoker&lt;?&gt;&gt;();</span><br><span class="line">    URL registryURL = <span class="hljs-keyword">null</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (URL url : urls) &#123;</span><br><span class="line">        <span class="hljs-comment">//获取每个url对应的invoker</span></span><br><span class="line">        invokers.add(refprotocol.refer(interfaceClass, url));</span><br><span class="line">        <span class="hljs-keyword">if</span> (Constants.REGISTRY_PROTOCOL.equals(url.getProtocol())) &#123;</span><br><span class="line">            <span class="hljs-comment">//获取最后一个注册中心的地址</span></span><br><span class="line">            registryURL = url; <span class="hljs-comment">// use last registry url</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">if</span> (registryURL != <span class="hljs-keyword">null</span>) &#123; <span class="hljs-comment">// registry url is available</span></span><br><span class="line">        <span class="hljs-comment">// use AvailableCluster only when register's cluster is available</span></span><br><span class="line">        <span class="hljs-comment">//当有注册中心的地址时，第一层使用AvailableCluster集群策略，第二层使用默认的集群策略</span></span><br><span class="line">        URL u = registryURL.addParameter(Constants.CLUSTER_KEY, AvailableCluster.NAME);</span><br><span class="line">        invoker = cluster.join(<span class="hljs-keyword">new</span> StaticDirectory(u, invokers));</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123; <span class="hljs-comment">// not a registry url</span></span><br><span class="line">        <span class="hljs-comment">//如果没有注册中心地址，则使用默认的集群策略</span></span><br><span class="line">        invoker = cluster.join(<span class="hljs-keyword">new</span> StaticDirectory(invokers));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们总结出三种生成集群策略的入口，<strong>当urls的长度为1时，此时该url可能为注册中心的地址也可能是服务的直连地址，则进一步执行<code>invoker = refprotocol.refer(interfaceClass, urls.get(0));</code>；当urls的长度不为1时，此时可能为多个注册中心的地址或者多个服务直连地址，当为多个注册中心的地址时，会执行：</strong></p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">URL u = registryURL.addParameter(Constants.CLUSTER_KEY, AvailableCluster.NAME);</span><br><span class="line">invoker = cluster.join(<span class="hljs-keyword">new</span> StaticDirectory(u, invokers));</span><br></pre></td></tr></table></figure>
-<p><strong>当为多个直连地址时，则执行：<code>invoker = cluster.join(new StaticDirectory(invokers));</code></strong>，下面将对这三种方式进行详细的分析。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/09/18/dubbo-cluster-fault-tolerance/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-09-10T12:12:04.000Z">2018-09-10</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    12 minutes read (About 1861 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/09/10/dubbo-loadbalance-strategy/">Dubbo负载均衡策略分析</a>
-            
-        </h1>
-        <div class="content">
-            <p>Dubbo提供了四种负载均衡策略：Random LoadBalance（加权随机负载均衡）、RoundRobin LoadBalance（加权轮询负载均衡）、LeastActive LoadBalance（最少活跃数负载均衡）、ConsistentHash LoadBalance（一致性hash负载均衡），下面将分别分析这四种负载均衡策略的源码。</p>
-<h4 id="Random-LoadBalance"><a href="#Random-LoadBalance" class="headerlink" title="Random LoadBalance"></a>Random LoadBalance</h4><p>先来看一下RandomLoadBalance类的源码：</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RandomLoadBalance</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractLoadBalance</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String NAME = <span class="hljs-string">"random"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-keyword">protected</span> &lt;T&gt; <span class="hljs-function">Invoker&lt;T&gt; <span class="hljs-title">doSelect</span><span class="hljs-params">(List&lt;Invoker&lt;T&gt;&gt; invokers, URL url, Invocation invocation)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> length = invokers.size(); <span class="hljs-comment">// Number of invokers</span></span><br><span class="line">        <span class="hljs-keyword">int</span> totalWeight = <span class="hljs-number">0</span>; <span class="hljs-comment">// The sum of weights</span></span><br><span class="line">        <span class="hljs-keyword">boolean</span> sameWeight = <span class="hljs-keyword">true</span>; <span class="hljs-comment">// Every invoker has the same weight?</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            <span class="hljs-comment">//获取权重</span></span><br><span class="line">            <span class="hljs-keyword">int</span> weight = getWeight(invokers.get(i), invocation);</span><br><span class="line">            <span class="hljs-comment">//权重累积和</span></span><br><span class="line">            totalWeight += weight; <span class="hljs-comment">// Sum</span></span><br><span class="line">        	<span class="hljs-comment">//记录所有的invokers的weight是否是一样的</span></span><br><span class="line">            <span class="hljs-keyword">if</span> (sameWeight &amp;&amp; i &gt; <span class="hljs-number">0</span></span><br><span class="line">                    &amp;&amp; weight != getWeight(invokers.get(i - <span class="hljs-number">1</span>), invocation)) &#123;</span><br><span class="line">                sameWeight = <span class="hljs-keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-comment">//如果不是所有的invoker权重都一样</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (totalWeight &gt; <span class="hljs-number">0</span> &amp;&amp; !sameWeight) &#123;</span><br><span class="line">            <span class="hljs-comment">// If (not every invoker has the same weight &amp; at least one invoker's weight&gt;0), select randomly based on totalWeight.</span></span><br><span class="line">            <span class="hljs-comment">//获取随机数的范围是[0, totalWeight)</span></span><br><span class="line">            <span class="hljs-keyword">int</span> offset = ThreadLocalRandom.current().nextInt(totalWeight);</span><br><span class="line">            <span class="hljs-comment">// Return a invoker based on the random value.</span></span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">                offset -= getWeight(invokers.get(i), invocation);</span><br><span class="line">                <span class="hljs-keyword">if</span> (offset &lt; <span class="hljs-number">0</span>) &#123;</span><br><span class="line">                    <span class="hljs-comment">//返回invoker</span></span><br><span class="line">                    <span class="hljs-keyword">return</span> invokers.get(i);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-comment">//如果所有的invoker都是一样的weight，则直接获取随机数，并返回</span></span><br><span class="line">        <span class="hljs-comment">//这里使用了ThreadLocalRandom做了优化</span></span><br><span class="line">        <span class="hljs-comment">// If all invokers have the same weight value or totalWeight=0, return evenly.</span></span><br><span class="line">        <span class="hljs-keyword">return</span> invokers.get(ThreadLocalRandom.current().nextInt(length));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>随机加权轮询算法还是比较容易理解的，下面继续分析RoundRobin LoadBalance。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/09/10/dubbo-loadbalance-strategy/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -407,7 +400,7 @@ var _hmt = _hmt || [];
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/11/">11</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/12/">12</a></li>
             
         </ul>
     </nav>
@@ -455,7 +448,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        54
+                        56
                     </p>
                 </div>
             </div>
@@ -570,7 +563,7 @@ var _hmt = _hmt || [];
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/AQS/" style="font-size: 10px;">AQS</a> <a href="/tags/CentOS/" style="font-size: 12.5px;">CentOS</a> <a href="/tags/DirectIO/" style="font-size: 10px;">DirectIO</a> <a href="/tags/KVM/" style="font-size: 12.5px;">KVM</a> <a href="/tags/LRU/" style="font-size: 10px;">LRU</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/Micro-Service/" style="font-size: 10px;">Micro Service</a> <a href="/tags/MutliThread/" style="font-size: 12.5px;">MutliThread</a> <a href="/tags/MyBatis3/" style="font-size: 10px;">MyBatis3</a> <a href="/tags/Netty/" style="font-size: 15px;">Netty</a> <a href="/tags/SPI/" style="font-size: 10px;">SPI</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a> <a href="/tags/WebSystem/" style="font-size: 10px;">WebSystem</a> <a href="/tags/cache/" style="font-size: 12.5px;">cache</a> <a href="/tags/cpu/" style="font-size: 10px;">cpu</a> <a href="/tags/dubbo/" style="font-size: 17.5px;">dubbo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/javassist/" style="font-size: 10px;">javassist</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/mmap/" style="font-size: 10px;">mmap</a> <a href="/tags/nio/" style="font-size: 12.5px;">nio</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/网络配置/" style="font-size: 10px;">网络配置</a> <a href="/tags/虚拟化/" style="font-size: 10px;">虚拟化</a>
+        <a href="/tags/AQS/" style="font-size: 10px;">AQS</a> <a href="/tags/CentOS/" style="font-size: 13.33px;">CentOS</a> <a href="/tags/DirectIO/" style="font-size: 10px;">DirectIO</a> <a href="/tags/KVM/" style="font-size: 13.33px;">KVM</a> <a href="/tags/LRU/" style="font-size: 10px;">LRU</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Micro-Service/" style="font-size: 10px;">Micro Service</a> <a href="/tags/MutliThread/" style="font-size: 13.33px;">MutliThread</a> <a href="/tags/MyBatis3/" style="font-size: 10px;">MyBatis3</a> <a href="/tags/Netty/" style="font-size: 16.67px;">Netty</a> <a href="/tags/SPI/" style="font-size: 10px;">SPI</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a> <a href="/tags/WebSystem/" style="font-size: 10px;">WebSystem</a> <a href="/tags/cache/" style="font-size: 13.33px;">cache</a> <a href="/tags/cpu/" style="font-size: 10px;">cpu</a> <a href="/tags/dubbo/" style="font-size: 16.67px;">dubbo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/javassist/" style="font-size: 10px;">javassist</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/mmap/" style="font-size: 10px;">mmap</a> <a href="/tags/nio/" style="font-size: 13.33px;">nio</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/网络配置/" style="font-size: 10px;">网络配置</a> <a href="/tags/虚拟化/" style="font-size: 10px;">虚拟化</a>
     </div>
 </div>
 
@@ -587,16 +580,54 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/02/18/netty-reactor/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-reactor">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T11:06:15.000Z">2019-02-18</time></div>
+                    <a href="/2019/02/18/netty-reactor/" class="has-link-black-ter is-size-6">netty-reactor</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/18/netty-server-side-accept-connections/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Netty服务端接收连接过程分析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T09:01:12.000Z">2019-02-18</time></div>
+                    <a href="/2019/02/18/netty-server-side-accept-connections/" class="has-link-black-ter is-size-6">Netty服务端接收连接过程分析</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/02/18/netty-channelpipeline/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-channelpipeline">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Netty核心组件之ChannelPipeline">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T06:54:06.000Z">2019-02-18</time></div>
-                    <a href="/2019/02/18/netty-channelpipeline/" class="has-link-black-ter is-size-6">netty-channelpipeline</a>
+                    <a href="/2019/02/18/netty-channelpipeline/" class="has-link-black-ter is-size-6">Netty核心组件之ChannelPipeline</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -642,44 +673,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/01/22/java-nio-selector/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/DwLXzOdWsAQJpOK.jpg" alt="Java NIO核心组件：Selector">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-22T02:45:05.000Z">2019-01-22</time></div>
-                    <a href="/2019/01/22/java-nio-selector/" class="has-link-black-ter is-size-6">Java NIO核心组件：Selector</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/01/18/java-treemap/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/plant.jpg" alt="Java TreeMap源码分析">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-18T05:22:06.000Z">2019-01-18</time></div>
-                    <a href="/2019/01/18/java-treemap/" class="has-link-black-ter is-size-6">Java TreeMap源码分析</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -698,7 +691,7 @@ var _hmt = _hmt || [];
                     <span class="level-item">February 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1054,7 +1047,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Netty/">
                         <span class="tag">Netty</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">10</span>
                     </a>
                 </div>
                 
@@ -1202,16 +1195,54 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/02/18/netty-reactor/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-reactor">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T11:06:15.000Z">2019-02-18</time></div>
+                    <a href="/2019/02/18/netty-reactor/" class="has-link-black-ter is-size-6">netty-reactor</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/18/netty-server-side-accept-connections/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Netty服务端接收连接过程分析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T09:01:12.000Z">2019-02-18</time></div>
+                    <a href="/2019/02/18/netty-server-side-accept-connections/" class="has-link-black-ter is-size-6">Netty服务端接收连接过程分析</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/02/18/netty-channelpipeline/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-channelpipeline">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Netty核心组件之ChannelPipeline">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T06:54:06.000Z">2019-02-18</time></div>
-                    <a href="/2019/02/18/netty-channelpipeline/" class="has-link-black-ter is-size-6">netty-channelpipeline</a>
+                    <a href="/2019/02/18/netty-channelpipeline/" class="has-link-black-ter is-size-6">Netty核心组件之ChannelPipeline</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1257,44 +1288,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/01/22/java-nio-selector/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/DwLXzOdWsAQJpOK.jpg" alt="Java NIO核心组件：Selector">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-22T02:45:05.000Z">2019-01-22</time></div>
-                    <a href="/2019/01/22/java-nio-selector/" class="has-link-black-ter is-size-6">Java NIO核心组件：Selector</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/01/18/java-treemap/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/plant.jpg" alt="Java TreeMap源码分析">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-18T05:22:06.000Z">2019-01-18</time></div>
-                    <a href="/2019/01/18/java-treemap/" class="has-link-black-ter is-size-6">Java TreeMap源码分析</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1313,7 +1306,7 @@ var _hmt = _hmt || [];
                     <span class="level-item">February 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1669,7 +1662,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Netty/">
                         <span class="tag">Netty</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">10</span>
                     </a>
                 </div>
                 

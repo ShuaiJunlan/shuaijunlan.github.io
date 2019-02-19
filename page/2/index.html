@@ -143,6 +143,113 @@ var _hmt = _hmt || [];
     <div class="card">
     
     <div class="card-image">
+        <a href="/2019/01/22/java-nio-selector/" class="image is-7by1">
+            <img class="thumbnail" src="/gallery/thumbnails/DwLXzOdWsAQJpOK.jpg" alt="Java NIO核心组件：Selector">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-01-22T02:45:05.000Z">2019-01-22</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a few seconds read (About 6 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/01/22/java-nio-selector/">Java NIO核心组件：Selector</a>
+            
+        </h1>
+        <div class="content">
+            <a id="more"></a>
+<h3 id="REFERENCES"><a href="#REFERENCES" class="headerlink" title="REFERENCES"></a>REFERENCES</h3><p><a href="http://ifeve.com/selectors/" target="_blank" rel="noopener">http://ifeve.com/selectors/</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
+        <a href="/2019/01/18/java-treemap/" class="image is-7by1">
+            <img class="thumbnail" src="/gallery/thumbnails/plant.jpg" alt="Java TreeMap源码分析">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-01-18T05:22:06.000Z">2019-01-18</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 minutes read (About 1049 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/01/18/java-treemap/">Java TreeMap源码分析</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><blockquote>
+<p> A <strong>Red-Black tree</strong> based {@link NavigableMap} implementation. <strong>The map is sorted according to the {@linkplain Comparable natural ordering} of its keys</strong>, or by a {@link Comparator} provided at map creation time, depending on which constructor is used.</p>
+<p> This implementation provides guaranteed <strong>log(n) time cost</strong> for the {@code containsKey}, {@code get}, {@code put} and {@code remove} operations.  Algorithms are adaptations of those in Cormen, Leiserson, and Rivest’s <em>Introduction to Algorithms</em>.</p>
+</blockquote>
+<p>上面是一段关于TreeMap的官方Javadoc描述，简单来说就是，TreeMap底层是基于<a href="https://zh.wikipedia.org/wiki/%E7%BA%A2%E9%BB%91%E6%A0%91" target="_blank" rel="noopener">红黑树</a>，保持了key的大小有序性，因此查找等操作的时间复杂度为<code>O(logn)</code>；</p>
+<p>在这篇文章中我主要分析Java中是如何利用红黑树实现TreeMap的，关于红黑树的详细原理介绍可以参考这篇文章《<a href="https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.01.md" target="_blank" rel="noopener">教你透彻了解红黑树</a>》。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/01/18/java-treemap/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
         <a href="/2019/01/17/cpu-cache/" class="image is-7by1">
             <img class="thumbnail" src="/gallery/thumbnails/Dv2c901X4AEtFH3.jpg" alt="Java编程如何高效利用CPU缓存？">
         </a>
@@ -306,109 +413,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-12-15T12:04:58.000Z">2018-12-15</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    11 minutes read (About 1649 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/12/15/linux-direct-io/">Liunx中Direct IO机制</a>
-            
-        </h1>
-        <div class="content">
-            <h3 id="什么是Buffered-I-O"><a href="#什么是Buffered-I-O" class="headerlink" title="什么是Buffered I/O"></a>什么是Buffered I/O</h3><p>缓存 I/O 又被称作标准 I/O，大多数文件系统的默认 I/O 操作都是缓存 I/O。在 Linux 的缓存 I/O 机制中，操作系统会将 I/O 的数据缓存在文件系统的页缓存（ page cache ）中，也就是说，数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间。缓存 I/O 有以下这些优点：</p>
-<ul>
-<li>缓存 I/O 使用了操作系统内核缓冲区，在一定程度上分离了应用程序空间和实际的物理设备。</li>
-<li>缓存 I/O 可以减少读盘的次数，从而提高性能。</li>
-</ul>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/12/15/linux-direct-io/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-12-08T04:56:55.000Z">2018-12-08</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    15 minutes read (About 2187 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/12/08/java-memory-mapped-file/">Java中Memory Mapped File原理分析</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>在传统的文件读写方式中，会有两次数据拷贝，一次是从硬盘拷贝到操作系统内核，另一次是从操作系统内核拷贝到用户态的应用程序。而在内存映射文件中，一般情况下，只有一次拷贝，且内存分配在操作系统内核，应用程序访问的就是操作系统的内核内存空间，这显然要比普通的读写效率更高。</p>
-<p>内存映射文件的另一个重要特点是，它可以被多个不同的应用程序共享，多个程序可以映射同一个文件，映射到同一块内存区域，一个程序对内存的修改，可以让其他程序也看到，这使得它特别适合用于不同应用程序之间的通信。<strong>比普通的基于loopback接口的Socket要快10倍。</strong>那么在Java语言中是如何实现Memory Mapped File的呢？</p>
-</blockquote>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/12/08/java-memory-mapped-file/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -429,7 +433,7 @@ var _hmt = _hmt || [];
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/11/">11</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/12/">12</a></li>
             
         </ul>
     </nav>
@@ -477,7 +481,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        54
+                        56
                     </p>
                 </div>
             </div>
@@ -592,7 +596,7 @@ var _hmt = _hmt || [];
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/AQS/" style="font-size: 10px;">AQS</a> <a href="/tags/CentOS/" style="font-size: 12.5px;">CentOS</a> <a href="/tags/DirectIO/" style="font-size: 10px;">DirectIO</a> <a href="/tags/KVM/" style="font-size: 12.5px;">KVM</a> <a href="/tags/LRU/" style="font-size: 10px;">LRU</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/Micro-Service/" style="font-size: 10px;">Micro Service</a> <a href="/tags/MutliThread/" style="font-size: 12.5px;">MutliThread</a> <a href="/tags/MyBatis3/" style="font-size: 10px;">MyBatis3</a> <a href="/tags/Netty/" style="font-size: 15px;">Netty</a> <a href="/tags/SPI/" style="font-size: 10px;">SPI</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a> <a href="/tags/WebSystem/" style="font-size: 10px;">WebSystem</a> <a href="/tags/cache/" style="font-size: 12.5px;">cache</a> <a href="/tags/cpu/" style="font-size: 10px;">cpu</a> <a href="/tags/dubbo/" style="font-size: 17.5px;">dubbo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/javassist/" style="font-size: 10px;">javassist</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/mmap/" style="font-size: 10px;">mmap</a> <a href="/tags/nio/" style="font-size: 12.5px;">nio</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/网络配置/" style="font-size: 10px;">网络配置</a> <a href="/tags/虚拟化/" style="font-size: 10px;">虚拟化</a>
+        <a href="/tags/AQS/" style="font-size: 10px;">AQS</a> <a href="/tags/CentOS/" style="font-size: 13.33px;">CentOS</a> <a href="/tags/DirectIO/" style="font-size: 10px;">DirectIO</a> <a href="/tags/KVM/" style="font-size: 13.33px;">KVM</a> <a href="/tags/LRU/" style="font-size: 10px;">LRU</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Micro-Service/" style="font-size: 10px;">Micro Service</a> <a href="/tags/MutliThread/" style="font-size: 13.33px;">MutliThread</a> <a href="/tags/MyBatis3/" style="font-size: 10px;">MyBatis3</a> <a href="/tags/Netty/" style="font-size: 16.67px;">Netty</a> <a href="/tags/SPI/" style="font-size: 10px;">SPI</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a> <a href="/tags/WebSystem/" style="font-size: 10px;">WebSystem</a> <a href="/tags/cache/" style="font-size: 13.33px;">cache</a> <a href="/tags/cpu/" style="font-size: 10px;">cpu</a> <a href="/tags/dubbo/" style="font-size: 16.67px;">dubbo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/javassist/" style="font-size: 10px;">javassist</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/mmap/" style="font-size: 10px;">mmap</a> <a href="/tags/nio/" style="font-size: 13.33px;">nio</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/网络配置/" style="font-size: 10px;">网络配置</a> <a href="/tags/虚拟化/" style="font-size: 10px;">虚拟化</a>
     </div>
 </div>
 
@@ -609,16 +613,54 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/02/18/netty-reactor/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-reactor">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T11:06:15.000Z">2019-02-18</time></div>
+                    <a href="/2019/02/18/netty-reactor/" class="has-link-black-ter is-size-6">netty-reactor</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/18/netty-server-side-accept-connections/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Netty服务端接收连接过程分析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T09:01:12.000Z">2019-02-18</time></div>
+                    <a href="/2019/02/18/netty-server-side-accept-connections/" class="has-link-black-ter is-size-6">Netty服务端接收连接过程分析</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/02/18/netty-channelpipeline/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-channelpipeline">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Netty核心组件之ChannelPipeline">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T06:54:06.000Z">2019-02-18</time></div>
-                    <a href="/2019/02/18/netty-channelpipeline/" class="has-link-black-ter is-size-6">netty-channelpipeline</a>
+                    <a href="/2019/02/18/netty-channelpipeline/" class="has-link-black-ter is-size-6">Netty核心组件之ChannelPipeline</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -664,44 +706,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/01/22/java-nio-selector/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/DwLXzOdWsAQJpOK.jpg" alt="Java NIO核心组件：Selector">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-22T02:45:05.000Z">2019-01-22</time></div>
-                    <a href="/2019/01/22/java-nio-selector/" class="has-link-black-ter is-size-6">Java NIO核心组件：Selector</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/01/18/java-treemap/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/plant.jpg" alt="Java TreeMap源码分析">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-18T05:22:06.000Z">2019-01-18</time></div>
-                    <a href="/2019/01/18/java-treemap/" class="has-link-black-ter is-size-6">Java TreeMap源码分析</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -720,7 +724,7 @@ var _hmt = _hmt || [];
                     <span class="level-item">February 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1076,7 +1080,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Netty/">
                         <span class="tag">Netty</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">10</span>
                     </a>
                 </div>
                 
@@ -1224,16 +1228,54 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/02/18/netty-reactor/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-reactor">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T11:06:15.000Z">2019-02-18</time></div>
+                    <a href="/2019/02/18/netty-reactor/" class="has-link-black-ter is-size-6">netty-reactor</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/18/netty-server-side-accept-connections/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Netty服务端接收连接过程分析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T09:01:12.000Z">2019-02-18</time></div>
+                    <a href="/2019/02/18/netty-server-side-accept-connections/" class="has-link-black-ter is-size-6">Netty服务端接收连接过程分析</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/02/18/netty-channelpipeline/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-channelpipeline">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Netty核心组件之ChannelPipeline">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T06:54:06.000Z">2019-02-18</time></div>
-                    <a href="/2019/02/18/netty-channelpipeline/" class="has-link-black-ter is-size-6">netty-channelpipeline</a>
+                    <a href="/2019/02/18/netty-channelpipeline/" class="has-link-black-ter is-size-6">Netty核心组件之ChannelPipeline</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1279,44 +1321,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/01/22/java-nio-selector/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/DwLXzOdWsAQJpOK.jpg" alt="Java NIO核心组件：Selector">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-22T02:45:05.000Z">2019-01-22</time></div>
-                    <a href="/2019/01/22/java-nio-selector/" class="has-link-black-ter is-size-6">Java NIO核心组件：Selector</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/01/18/java-treemap/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/plant.jpg" alt="Java TreeMap源码分析">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-18T05:22:06.000Z">2019-01-18</time></div>
-                    <a href="/2019/01/18/java-treemap/" class="has-link-black-ter is-size-6">Java TreeMap源码分析</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1335,7 +1339,7 @@ var _hmt = _hmt || [];
                     <span class="level-item">February 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1691,7 +1695,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Netty/">
                         <span class="tag">Netty</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">10</span>
                     </a>
                 </div>
                 
