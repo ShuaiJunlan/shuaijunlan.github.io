@@ -193,7 +193,7 @@ var _hmt = _hmt || [];
                 <span class="level-item has-text-grey">
                     
                     
-                    a few seconds read (About 29 words)
+                    9 minutes read (About 1343 words)
                 </span>
                 
                 
@@ -206,11 +206,23 @@ var _hmt = _hmt || [];
             
         </h1>
         <div class="content">
-            <p><a href="https://blog.csdn.net/u013160932/article/details/80474486" target="_blank" rel="noopener">https://blog.csdn.net/u013160932/article/details/80474486</a></p>
-<p><a href="https://www.jianshu.com/p/0242b1d4dd21" target="_blank" rel="noopener">netty源码分析之新连接接入全解析</a></p>
-
+            <p>前面<a href="https://shuaijunlan.github.io/2019/01/24/netty-server-side-bootstrap-process/">《Netty服务端启动流程分析》</a>这篇文章主要介绍了Netty服务端的启动过程，那么这里有个问题：<strong>启动服务端之后，有新的连接向服务端发起请求，服务端是如何接收并处理这些连接请求的？</strong>带着这个问题我将结合netty源码分析Netty服务端接收连接的过程。</p>
+<p>这篇文章我将主要讲解一下几个部分：</p>
+<ul>
+<li>1、netty如何接收新的请求</li>
+<li>2、netty如何给新的请求分配reactor线程</li>
+<li>3、netty如何给每个新连接天剑ChannelHandler</li>
+</ul>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/02/18/netty-server-side-accept-connections/#more">Read More</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>

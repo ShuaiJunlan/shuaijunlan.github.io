@@ -7,18 +7,18 @@
 
 
 
-    <meta name="description" content="https://blog.csdn.net/u013160932/article/details/80474486 netty源码分析之新连接接入全解析">
+    <meta name="description" content="前面《Netty服务端启动流程分析》这篇文章主要介绍了Netty服务端的启动过程，那么这里有个问题：启动服务端之后，有新的连接向服务端发起请求，服务端是如何接收并处理这些连接请求的？带着这个问题我将结合netty源码分析Netty服务端接收连接的过程。 这篇文章我将主要讲解一下几个部分：  1、netty如何接收新的请求 2、netty如何给新的请求分配reactor线程 3、netty如何给每个">
 <meta name="keywords" content="Netty">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Netty服务端接收连接过程分析">
 <meta property="og:url" content="https://shuaijunlan.github.io/2019/02/18/netty-server-side-accept-connections/index.html">
 <meta property="og:site_name" content="ITechHub">
-<meta property="og:description" content="https://blog.csdn.net/u013160932/article/details/80474486 netty源码分析之新连接接入全解析">
+<meta property="og:description" content="前面《Netty服务端启动流程分析》这篇文章主要介绍了Netty服务端的启动过程，那么这里有个问题：启动服务端之后，有新的连接向服务端发起请求，服务端是如何接收并处理这些连接请求的？带着这个问题我将结合netty源码分析Netty服务端接收连接的过程。 这篇文章我将主要讲解一下几个部分：  1、netty如何接收新的请求 2、netty如何给新的请求分配reactor线程 3、netty如何给每个">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-19T10:24:54.845Z">
+<meta property="og:updated_time" content="2019-02-19T12:12:00.982Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Netty服务端接收连接过程分析">
-<meta name="twitter:description" content="https://blog.csdn.net/u013160932/article/details/80474486 netty源码分析之新连接接入全解析">
+<meta name="twitter:description" content="前面《Netty服务端启动流程分析》这篇文章主要介绍了Netty服务端的启动过程，那么这里有个问题：启动服务端之后，有新的连接向服务端发起请求，服务端是如何接收并处理这些连接请求的？带着这个问题我将结合netty源码分析Netty服务端接收连接的过程。 这篇文章我将主要讲解一下几个部分：  1、netty如何接收新的请求 2、netty如何给新的请求分配reactor线程 3、netty如何给每个">
 <meta name="twitter:creator" content="@https:&#x2F;&#x2F;twitter.com&#x2F;ShuaiJunlan">
 
 
@@ -128,6 +128,10 @@ var _hmt = _hmt || [];
             <div class="navbar-end">
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="Search" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -153,7 +157,7 @@ var _hmt = _hmt || [];
                 <span class="level-item has-text-grey">
                     
                     
-                    a few seconds read (About 29 words)
+                    9 minutes read (About 1343 words)
                 </span>
                 
                 
@@ -171,7 +175,44 @@ var _hmt = _hmt || [];
             
         </h1>
         <div class="content">
-            <p><a href="https://blog.csdn.net/u013160932/article/details/80474486" target="_blank" rel="noopener">https://blog.csdn.net/u013160932/article/details/80474486</a></p>
+            <p>前面<a href="https://shuaijunlan.github.io/2019/01/24/netty-server-side-bootstrap-process/">《Netty服务端启动流程分析》</a>这篇文章主要介绍了Netty服务端的启动过程，那么这里有个问题：<strong>启动服务端之后，有新的连接向服务端发起请求，服务端是如何接收并处理这些连接请求的？</strong>带着这个问题我将结合netty源码分析Netty服务端接收连接的过程。</p>
+<p>这篇文章我将主要讲解一下几个部分：</p>
+<ul>
+<li>1、netty如何接收新的请求</li>
+<li>2、netty如何给新的请求分配reactor线程</li>
+<li>3、netty如何给每个新连接天剑ChannelHandler</li>
+</ul>
+<a id="more"></a>
+<h3 id="检测到有新连接进入"><a href="#检测到有新连接进入" class="headerlink" title="检测到有新连接进入"></a>检测到有新连接进入</h3><p>我们已经知道，当服务端绑启动之后，服务端的channel已经注册到boos reactor线程中，reactor不断检测有新的事件，直到检测出有accept事件发生；</p>
+<p><code>NioEventLoop.java</code></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">processSelectedKey</span><span class="hljs-params">(SelectionKey k, AbstractNioChannel ch)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">final</span> AbstractNioChannel.NioUnsafe unsafe = ch.unsafe();</span><br><span class="line">    <span class="hljs-keyword">int</span> readyOps = k.readyOps();</span><br><span class="line">    <span class="hljs-keyword">if</span> ((readyOps &amp; (SelectionKey.OP_READ | SelectionKey.OP_ACCEPT)) != <span class="hljs-number">0</span> || readyOps == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">        unsafe.read();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面这段代码是<a href="https://www.jianshu.com/p/467a9b41833e" target="_blank" rel="noopener">reactor线程三部曲中的第二部曲</a>，表示boos reactor线程已经轮询到 <code>SelectionKey.OP_ACCEPT</code> 事件，说明有新的连接进入，此时将调用channel的 <code>unsafe</code>来进行实际的操作</p>
+<p>关于 <code>unsafe</code>，这篇文章我不打算细讲，下面是netty作者对于unsafe的解释</p>
+<blockquote>
+<p>Unsafe operations that should never be called from user-code. These methods are only provided to implement the actual transport.</p>
+</blockquote>
+<p>你只需要了解一个大概的概念，就是所有的channel底层都会有一个与unsafe绑定，每种类型的channel实际的操作都由unsafe来实现</p>
+<p>而从上一篇文章，<a href="https://www.jianshu.com/p/c5068caab217" target="_blank" rel="noopener">服务端的启动过程</a>中，我们已经知道，服务端对应的channel的unsafe是 <code>NioMessageUnsafe</code>，那么，我们进入到它的<code>read</code>方法，进入新连接处理的<strong>第二步</strong></p>
+<h3 id="注册到worker-reactor线程"><a href="#注册到worker-reactor线程" class="headerlink" title="注册到worker reactor线程"></a>注册到worker reactor线程</h3><p><code>NioMessageUnsafe.java</code></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> List&lt;Object&gt; readBuf = <span class="hljs-keyword">new</span> ArrayList&lt;Object&gt;();</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">read</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">assert</span> <span class="hljs-title">eventLoop</span><span class="hljs-params">()</span>.<span class="hljs-title">inEventLoop</span><span class="hljs-params">()</span></span>;</span><br><span class="line">    <span class="hljs-keyword">final</span> ChannelPipeline pipeline = pipeline();</span><br><span class="line">    <span class="hljs-keyword">final</span> RecvByteBufAllocator.Handle allocHandle = unsafe().recvBufAllocHandle();</span><br><span class="line">    <span class="hljs-keyword">do</span> &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> localRead = doReadMessages(readBuf);</span><br><span class="line">        <span class="hljs-keyword">if</span> (localRead == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span> (localRead &lt; <span class="hljs-number">0</span>) &#123;</span><br><span class="line">            closed = <span class="hljs-keyword">true</span>;</span><br><span class="line">            <span class="hljs-keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="hljs-keyword">while</span> (allocHandle.continueReading());</span><br><span class="line">    <span class="hljs-keyword">int</span> size = readBuf.size();</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i ++) &#123;</span><br><span class="line">        pipeline.fireChannelRead(readBuf.get(i));</span><br><span class="line">    &#125;</span><br><span class="line">    readBuf.clear();</span><br><span class="line">    pipeline.fireChannelReadComplete();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我省去了非关键部分的代码，可以看到，一上来，就用一条断言确定该read方法必须是reactor线程调用，然后拿到channel对应的pipeline和 <code>RecvByteBufAllocator.Handle</code>(先不解释)</p>
+<p>接下来，调用 <code>doReadMessages</code> 方法不断地读取消息，用 <code>readBuf</code> 作为容器，这里，其实可以猜到读取的是一个个连接，然后调用 <code>pipeline.fireChannelRead()</code>，将每条新连接经过一层服务端channel的洗礼</p>
+<p>之后清理容器，触发 <code>pipeline.fireChannelReadComplete()</code>，整个过程清晰明了，不含一丝杂质，下面我们具体看下这两个方法：</p>
+<ul>
+<li><p>1.doReadMessages(List)</p>
+</li>
+<li><p>2.pipeline.fireChannelRead(NioSocketChannel)</p>
+</li>
+</ul>
+<h4 id="doReadMessages-List"><a href="#doReadMessages-List" class="headerlink" title="doReadMessages(List)"></a>doReadMessages(List)</h4><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">int</span> <span class="hljs-title">doReadMessages</span><span class="hljs-params">(List&lt;Object&gt; buf)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    SocketChannel ch = SocketUtils.accept(javaChannel());</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (ch != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">            buf.add(<span class="hljs-keyword">new</span> NioSocketChannel(<span class="hljs-keyword">this</span>, ch));</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="hljs-keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">        logger.warn(<span class="hljs-string">"Failed to create a new channel from an accepted socket."</span>, t);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            ch.close();</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (Throwable t2) &#123;</span><br><span class="line">            logger.warn(<span class="hljs-string">"Failed to close a socket."</span>, t2);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码应该很熟悉，通过调用jdk底层nio的方法<code>SocketUtils.accept(javaChannel());</code>，由于netty中reactor线程第一步就扫描到有accept事件发生，因此，这里的<code>accept</code>方法是立即返回的，返回jdk底层nio创建的一条channel。</p>
+<p>netty将jdk的 <code>SocketChannel</code> 封装成自定义的 <code>NioSocketChannel</code>，加入到list里面，这样外层就可以遍历该list，做后续处理；</p>
+<p>关于NioSocketChannel的创建过程可以参考<a href="https://shuaijunlan.github.io/2019/01/31/netty-client-side-connection/">《Netty客户端连接过程源码分析》</a>，在创建出一条<code>NioSocketChannel</code>之后，放置在List容器里，就开始进行下一步操作</p>
+<h4 id="pipeline-fireChannelRead-NioSocketChannel"><a href="#pipeline-fireChannelRead-NioSocketChannel" class="headerlink" title="pipeline.fireChannelRead(NioSocketChannel)"></a>pipeline.fireChannelRead(NioSocketChannel)</h4><p>关于pipline的介绍可以看另一篇文章《》，通过<a href="https://shuaijunlan.github.io/2019/01/24/netty-server-side-bootstrap-process/">《Netty服务端启动流程分析》</a>这篇文章我们知道，在服务端处理新连接的pipeline中，已经自动添加了一个pipeline处理器 <code>ServerBootstrapAcceptor</code>, 并已经将用户代码中设置的一系列的参数传入了构造函数，接下来，我们就来看下<code>ServerBootstrapAcceptor</code>；</p>
+<p><code>ServerBootstrapAcceptor.java</code></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ServerBootstrapAcceptor</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ChannelInboundHandlerAdapter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> EventLoopGroup childGroup;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ChannelHandler childHandler;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Entry&lt;ChannelOption&lt;?&gt;, Object&gt;[] childOptions;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Entry&lt;AttributeKey&lt;?&gt;, Object&gt;[] childAttrs;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Runnable enableAutoReadTask;</span><br><span class="line"></span><br><span class="line">    ServerBootstrapAcceptor(</span><br><span class="line">        <span class="hljs-keyword">final</span> Channel channel, EventLoopGroup childGroup, ChannelHandler childHandler,</span><br><span class="line">        Entry&lt;ChannelOption&lt;?&gt;, Object&gt;[] childOptions, Entry&lt;AttributeKey&lt;?&gt;, Object&gt;[] childAttrs) &#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.childGroup = childGroup;</span><br><span class="line">        <span class="hljs-keyword">this</span>.childHandler = childHandler;</span><br><span class="line">        <span class="hljs-keyword">this</span>.childOptions = childOptions;</span><br><span class="line">        <span class="hljs-keyword">this</span>.childAttrs = childAttrs;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// Task which is scheduled to re-enable auto-read.</span></span><br><span class="line">        <span class="hljs-comment">// It's important to create this Runnable before we try to submit it as otherwise the URLClassLoader may</span></span><br><span class="line">        <span class="hljs-comment">// not be able to load the class because of the file limit it already reached.</span></span><br><span class="line">        <span class="hljs-comment">//</span></span><br><span class="line">        <span class="hljs-comment">// See https://github.com/netty/netty/issues/1328</span></span><br><span class="line">        enableAutoReadTask = <span class="hljs-keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="hljs-meta">@Override</span></span><br><span class="line">            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">                channel.config().setAutoRead(<span class="hljs-keyword">true</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-meta">@SuppressWarnings</span>(<span class="hljs-string">"unchecked"</span>)</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">channelRead</span><span class="hljs-params">(ChannelHandlerContext ctx, Object msg)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">final</span> Channel child = (Channel) msg;</span><br><span class="line"></span><br><span class="line">        child.pipeline().addLast(childHandler);</span><br><span class="line"></span><br><span class="line">        setChannelOptions(child, childOptions, logger);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">for</span> (Entry&lt;AttributeKey&lt;?&gt;, Object&gt; e: childAttrs) &#123;</span><br><span class="line">            child.attr((AttributeKey&lt;Object&gt;) e.getKey()).set(e.getValue());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            childGroup.register(child).addListener(<span class="hljs-keyword">new</span> ChannelFutureListener() &#123;</span><br><span class="line">                <span class="hljs-meta">@Override</span></span><br><span class="line">                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">operationComplete</span><span class="hljs-params">(ChannelFuture future)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                    <span class="hljs-keyword">if</span> (!future.isSuccess()) &#123;</span><br><span class="line">                        forceClose(child, future.cause());</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">            forceClose(child, t);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>前面的 <code>pipeline.fireChannelRead(NioSocketChannel);</code> 最终通过<code>head-&gt;unsafe-&gt;ServerBootstrapAcceptor</code>的调用链，调用到这里的 <code>ServerBootstrapAcceptor</code>  的<code>channelRead</code>方法</p>
+<h3 id="注册读事件"><a href="#注册读事件" class="headerlink" title="注册读事件"></a>注册读事件</h3><h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a href="https://blog.csdn.net/u013160932/article/details/80474486" target="_blank" rel="noopener">https://blog.csdn.net/u013160932/article/details/80474486</a></p>
 <p><a href="https://www.jianshu.com/p/0242b1d4dd21" target="_blank" rel="noopener">netty源码分析之新连接接入全解析</a></p>
 
         </div>
@@ -362,6 +403,41 @@ var _hmt = _hmt || [];
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#检测到有新连接进入">
+        <span class="has-mr-6">1</span>
+        <span>检测到有新连接进入</span>
+        </a></li><li>
+        <a class="is-flex" href="#注册到worker-reactor线程">
+        <span class="has-mr-6">2</span>
+        <span>注册到worker reactor线程</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#doReadMessages-List">
+        <span class="has-mr-6">2.1</span>
+        <span>doReadMessages(List)</span>
+        </a></li><li>
+        <a class="is-flex" href="#pipeline-fireChannelRead-NioSocketChannel">
+        <span class="has-mr-6">2.2</span>
+        <span>pipeline.fireChannelRead(NioSocketChannel)</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#注册读事件">
+        <span class="has-mr-6">3</span>
+        <span>注册读事件</span>
+        </a></li><li>
+        <a class="is-flex" href="#References">
+        <span class="has-mr-6">4</span>
+        <span>References</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
