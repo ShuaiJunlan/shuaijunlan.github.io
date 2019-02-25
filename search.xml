@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[netty-bytebuf]]></title>
-    <url>%2F2019%2F02%2F25%2Fnetty-bytebuf%2F</url>
-    <content type="text"></content>
-  </entry>
-  <entry>
     <title><![CDATA[netty-reactor]]></title>
     <url>%2F2019%2F02%2F18%2Fnetty-reactor%2F</url>
     <content type="text"><![CDATA[netty源码分析之揭开reactor线程的面纱（三）]]></content>

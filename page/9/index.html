@@ -146,54 +146,6 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-04-01T10:58:32.000Z">2018-04-01</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a minute read (About 174 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/04/01/Java-Class-and-Object-Initializing-Process/">Java类与对象初始化过程</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="看看如下代码，输出结果是啥？"><a href="#看看如下代码，输出结果是啥？" class="headerlink" title="看看如下代码，输出结果是啥？"></a>看看如下代码，输出结果是啥？</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> Junlan Shuai[shuaijunlan@gmail.com].</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@date</span> Created on 18:59 2018/4/1.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Test t1 = <span class="hljs-keyword">new</span> Test(<span class="hljs-string">"t1"</span>);</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Test t2 = <span class="hljs-keyword">new</span> Test(<span class="hljs-string">"t2"</span>);</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> i = print(<span class="hljs-string">"i"</span>);</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> n = <span class="hljs-number">99</span>;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> j = print(<span class="hljs-string">"j"</span>);</span><br><span class="line">    <span class="hljs-keyword">static</span> &#123;</span><br><span class="line">        print(<span class="hljs-string">"静态块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Test</span><span class="hljs-params">(String string)</span></span>&#123;</span><br><span class="line">        System.out.println((++k) + <span class="hljs-string">":"</span> + string + <span class="hljs-string">" i="</span> + i + <span class="hljs-string">" n="</span> + n);</span><br><span class="line">        ++i;</span><br><span class="line">        ++n;</span><br><span class="line">    &#125;</span><br><span class="line">    &#123;</span><br><span class="line">        print(<span class="hljs-string">"构造块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">print</span><span class="hljs-params">(String string)</span></span>&#123;</span><br><span class="line">        System.out.println((++k) + <span class="hljs-string">":"</span> + string + <span class="hljs-string">" i="</span> + i + <span class="hljs-string">" n="</span> + n);</span><br><span class="line">        ++n;</span><br><span class="line">        <span class="hljs-keyword">return</span> ++i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Test test = <span class="hljs-keyword">new</span> Test(<span class="hljs-string">"init"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/04/01/Java-Class-and-Object-Initializing-Process/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-03-31T08:53:40.000Z">2018-03-31</time>
                 
                 
@@ -386,6 +338,60 @@ var _hmt = _hmt || [];
 
 
 
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-26T02:58:57.000Z">2017-07-26</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/java/">java</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 minutes read (About 675 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/26/analyse-the-source-code-of-Timer/">analyse the source code of Timer</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="Timer-Class-Introduction"><a href="#Timer-Class-Introduction" class="headerlink" title="Timer Class Introduction"></a>Timer Class Introduction</h2><blockquote>
+<p>在JDK库中Timer类主要负责计划任务的功能，也就是在指定的时间开始执行某任务。</p>
+</blockquote>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2017/07/26/analyse-the-source-code-of-Timer/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
 
     
 <div class="card card-transparent">
@@ -460,7 +466,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        57
+                        56
                     </p>
                 </div>
             </div>
@@ -590,25 +596,6 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
-            <a href="/2019/02/25/netty-bytebuf/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-bytebuf">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-25T03:59:25.000Z">2019-02-25</time></div>
-                    <a href="/2019/02/25/netty-bytebuf/" class="has-link-black-ter is-size-6">netty-bytebuf</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2019/02/18/netty-reactor/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/gallery/images/honey-bee-3930374_640.jpg" alt="netty-reactor">
@@ -683,6 +670,25 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2019/01/24/netty-server-side-bootstrap-process/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/DxJmW2kX4AUYoY1.jpg" alt="Netty服务端启动流程分析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-24T02:36:26.000Z">2019-01-24</time></div>
+                    <a href="/2019/01/24/netty-server-side-bootstrap-process/" class="has-link-black-ter is-size-6">Netty服务端启动流程分析</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -701,7 +707,7 @@ var _hmt = _hmt || [];
                     <span class="level-item">February 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1205,25 +1211,6 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
-            <a href="/2019/02/25/netty-bytebuf/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-bytebuf">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-25T03:59:25.000Z">2019-02-25</time></div>
-                    <a href="/2019/02/25/netty-bytebuf/" class="has-link-black-ter is-size-6">netty-bytebuf</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2019/02/18/netty-reactor/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/gallery/images/honey-bee-3930374_640.jpg" alt="netty-reactor">
@@ -1298,6 +1285,25 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2019/01/24/netty-server-side-bootstrap-process/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/DxJmW2kX4AUYoY1.jpg" alt="Netty服务端启动流程分析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-24T02:36:26.000Z">2019-01-24</time></div>
+                    <a href="/2019/01/24/netty-server-side-bootstrap-process/" class="has-link-black-ter is-size-6">Netty服务端启动流程分析</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1316,7 +1322,7 @@ var _hmt = _hmt || [];
                     <span class="level-item">February 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
