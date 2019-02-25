@@ -2,22 +2,22 @@
 <html lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>ITechHub</title>
+<title>netty-bytebuf - ITechHub</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="Netty 入门与实战：仿写微信 IM 即时通讯系统笔记 Java NIO的selector实现原理？ 如何理解下面这句话？   IO 读写是面向流的，一次性只能从流中读取一个或者多个字节，并且读完之后流无法再读取，你需要自己缓存数据。 而 NIO 的读写是面向 Buffer 的，你可以随意读取里面任何一个字节数据，不需要你自己缓存数据，这一切只需要移动读写指针即可。   下面是我总结的使用 Ne">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ITechHub">
-<meta property="og:url" content="https://shuaijunlan.github.io/todo/Netty ╚ы├┼╙ы╩╡╒╜г║╖┬╨┤╬в╨┼ IM ╝┤╩▒═и╤╢╧╡═│▒╩╝╟.html">
+    <meta name="description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="netty-bytebuf">
+<meta property="og:url" content="https://shuaijunlan.github.io/2019/02/25/netty-bytebuf/index.html">
 <meta property="og:site_name" content="ITechHub">
-<meta property="og:description" content="Netty 入门与实战：仿写微信 IM 即时通讯系统笔记 Java NIO的selector实现原理？ 如何理解下面这句话？   IO 读写是面向流的，一次性只能从流中读取一个或者多个字节，并且读完之后流无法再读取，你需要自己缓存数据。 而 NIO 的读写是面向 Buffer 的，你可以随意读取里面任何一个字节数据，不需要你自己缓存数据，这一切只需要移动读写指针即可。   下面是我总结的使用 Ne">
+<meta property="og:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-21T08:32:22.000Z">
+<meta property="og:updated_time" content="2019-02-25T03:59:25.625Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ITechHub">
-<meta name="twitter:description" content="Netty 入门与实战：仿写微信 IM 即时通讯系统笔记 Java NIO的selector实现原理？ 如何理解下面这句话？   IO 读写是面向流的，一次性只能从流中读取一个或者多个字节，并且读完之后流无法再读取，你需要自己缓存数据。 而 NIO 的读写是面向 Buffer 的，你可以随意读取里面任何一个字节数据，不需要你自己缓存数据，这一切只需要移动读写指针即可。   下面是我总结的使用 Ne">
+<meta name="twitter:title" content="netty-bytebuf">
+<meta name="twitter:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
 <meta name="twitter:creator" content="@https:&#x2F;&#x2F;twitter.com&#x2F;ShuaiJunlan">
 
 
@@ -104,7 +104,7 @@ var _hmt = _hmt || [];
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.png" alt="" height="28">
+                <img src="/images/logo.png" alt="netty-bytebuf" height="28">
             
             </a>
         </div>
@@ -144,27 +144,33 @@ var _hmt = _hmt || [];
     
     <div class="card-content article ">
         
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-02-25T03:59:25.000Z">2019-02-25</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a few seconds read (About 0 words)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span> visits
+                </span>
+                
+            </div>
+        </div>
+        
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                
+                netty-bytebuf
             
         </h1>
         <div class="content">
-            <h3 id="Netty-入门与实战：仿写微信-IM-即时通讯系统笔记"><a href="#Netty-入门与实战：仿写微信-IM-即时通讯系统笔记" class="headerlink" title="Netty 入门与实战：仿写微信 IM 即时通讯系统笔记"></a><a href="https://juejin.im/book/5b4bc28bf265da0f60130116" target="_blank" rel="noopener">Netty 入门与实战：仿写微信 IM 即时通讯系统</a>笔记</h3><ul>
-<li>Java NIO的selector实现原理？</li>
-<li>如何理解下面这句话？</li>
-</ul>
-<blockquote>
-<p>IO 读写是面向流的，一次性只能从流中读取一个或者多个字节，<strong>并且读完之后流无法再读取，你需要自己缓存数据</strong>。 而 NIO 的读写是面向 Buffer 的，你可以随意读取里面任何一个字节数据，不需要你自己缓存数据，这一切只需要移动读写指针即可。</p>
-</blockquote>
-<ul>
-<li>下面是我总结的使用 Netty 不使用 JDK 原生 NIO 的原因</li>
-</ul>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.使用 JDK 自带的NIO需要了解太多的概念，编程复杂，一不小心 bug 横飞</span><br><span class="line">2.Netty 底层 IO 模型随意切换，而这一切只需要做微小的改动，改改参数，Netty可以直接从 NIO 模型变身为 IO 模型</span><br><span class="line">3.Netty 自带的拆包解包，异常检测等机制让你从NIO的繁重细节中脱离出来，让你只需要关心业务逻辑</span><br><span class="line">4.Netty 解决了 JDK 的很多包括空轮询在内的 Bug</span><br><span class="line">5.Netty 底层对线程，selector 做了很多细小的优化，精心设计的 reactor 线程模型做到非常高效的并发处理</span><br><span class="line">6.自带各种协议栈让你处理任何一种通用协议都几乎不用亲自动手</span><br><span class="line">7.Netty 社区活跃，遇到问题随时邮件列表或者 issue</span><br><span class="line">8.Netty 已经历各大 RPC 框架，消息中间件，分布式通信中间件线上的广泛验证，健壮性无比强大.</span><br></pre></td></tr></table></figure>
-<ul>
-<li>回调 <code>channelRead()</code> 方法，这里的第二个参数 <code>msg</code>，在我们这个场景中，可以直接强转为 <code>ByteBuf</code>，为什么 Netty 不直接把这个参数类型定义为 <code>ByteBuf</code> ？</li>
-</ul>
-
+            
         </div>
         
         
@@ -186,6 +192,20 @@ var _hmt = _hmt || [];
 
 
 
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/02/18/netty-reactor/">
+                <span class="level-item">netty-reactor</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
 
 
 <div class="card">
@@ -194,8 +214,8 @@ var _hmt = _hmt || [];
         
 <script>
     var disqus_config = function () {
-        this.page.url = 'https://shuaijunlan.github.io/todo/Netty ╚ы├┼╙ы╩╡╒╜г║╖┬╨┤╬в╨┼ IM ╝┤╩▒═и╤╢╧╡═│▒╩╝╟.html';
-        this.page.identifier = 'todo/Netty ╚ы├┼╙ы╩╡╒╜г║╖┬╨┤╬в╨┼ IM ╝┤╩▒═и╤╢╧╡═│▒╩╝╟.html';
+        this.page.url = 'https://shuaijunlan.github.io/2019/02/25/netty-bytebuf/';
+        this.page.identifier = '2019/02/25/netty-bytebuf/';
     };
     (function() {
         var d = document, s = d.createElement('script');  
@@ -1608,7 +1628,7 @@ var _hmt = _hmt || [];
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.png" alt="" height="28">
+                    <img src="/images/logo.png" alt="netty-bytebuf" height="28">
                 
                 </a>
                 <p class="is-size-7">

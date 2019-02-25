@@ -15,17 +15,17 @@
 <meta property="og:site_name" content="ITechHub">
 <meta property="og:description" content="netty在服务端端口绑定和新连接建立的过程中会建立相应的channel，而与channel的动作密切相关的是pipeline这个概念，pipeline像是可以看作是一条流水线，原始的原料(字节流)进来，经过加工，最后输出，在前面的文章《Netty服务端启动流程分析》中已经讲到在创建实例化channel的时候，会初始化它的各种属性，其中就包括pipline，因此这篇文章将从pipline初始化为入">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://shuaijunlan.github.io/home/shuaijunlan/.config/Typora/typora-user-images/1551061669291.png">
+<meta property="og:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-02-25 10-27-34.png">
 <meta property="og:image" content="https:////upload-images.jianshu.io/upload_images/1357217-1cb6fbfe91e07922.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
 <meta property="og:image" content="https:////upload-images.jianshu.io/upload_images/1357217-a3e3777fcd5fde27.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/690/format/webp">
 <meta property="og:image" content="https:////upload-images.jianshu.io/upload_images/1357217-41276149de306c11.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/852/format/webp">
 <meta property="og:image" content="https:////upload-images.jianshu.io/upload_images/1357217-24a16a6b46895704.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/852/format/webp">
 <meta property="og:image" content="https:////upload-images.jianshu.io/upload_images/1357217-af88d921913c6315.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/662/format/webp">
-<meta property="og:updated_time" content="2019-02-25T03:01:57.433Z">
+<meta property="og:updated_time" content="2019-02-25T03:08:39.475Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Netty核心组件之ChannelPipeline">
 <meta name="twitter:description" content="netty在服务端端口绑定和新连接建立的过程中会建立相应的channel，而与channel的动作密切相关的是pipeline这个概念，pipeline像是可以看作是一条流水线，原始的原料(字节流)进来，经过加工，最后输出，在前面的文章《Netty服务端启动流程分析》中已经讲到在创建实例化channel的时候，会初始化它的各种属性，其中就包括pipline，因此这篇文章将从pipline初始化为入">
-<meta name="twitter:image" content="https://shuaijunlan.github.io/home/shuaijunlan/.config/Typora/typora-user-images/1551061669291.png">
+<meta name="twitter:image" content="https://shuaijunlan.github.io/images/Screenshot from 2019-02-25 10-27-34.png">
 <meta name="twitter:creator" content="@https:&#x2F;&#x2F;twitter.com&#x2F;ShuaiJunlan">
 
 
@@ -187,7 +187,7 @@ var _hmt = _hmt || [];
 <p>我们来看下<code>DefaultChannelPipeline</code>的构造函数：</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-title">DefaultChannelPipeline</span><span class="hljs-params">(Channel channel)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.channel = ObjectUtil.checkNotNull(channel, <span class="hljs-string">"channel"</span>);</span><br><span class="line">    succeededFuture = <span class="hljs-keyword">new</span> SucceededChannelFuture(channel, <span class="hljs-keyword">null</span>);</span><br><span class="line">    voidPromise =  <span class="hljs-keyword">new</span> VoidChannelPromise(channel, <span class="hljs-keyword">true</span>);</span><br><span class="line">	<span class="hljs-comment">//创建tail节点</span></span><br><span class="line">    tail = <span class="hljs-keyword">new</span> TailContext(<span class="hljs-keyword">this</span>);</span><br><span class="line">    <span class="hljs-comment">//创建head节点</span></span><br><span class="line">    head = <span class="hljs-keyword">new</span> HeadContext(<span class="hljs-keyword">this</span>);</span><br><span class="line"></span><br><span class="line">    head.next = tail;</span><br><span class="line">    tail.prev = head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>因此最开始的pipline的结构如下所示</p>
-<p><img src="/home/shuaijunlan/.config/Typora/typora-user-images/1551061669291.png" alt="1551061669291"></p>
+<p><img src="https://shuaijunlan.github.io/images/Screenshot from 2019-02-25 10-27-34.png" alt=""></p>
 <h3 id="pipline添加节点"><a href="#pipline添加节点" class="headerlink" title="pipline添加节点"></a>pipline添加节点</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> ChannelPipeline <span class="hljs-title">addLast</span><span class="hljs-params">(EventExecutorGroup group, String name, ChannelHandler handler)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">final</span> AbstractChannelHandlerContext newCtx;</span><br><span class="line">    <span class="hljs-comment">//同步代码块，保证线程安全</span></span><br><span class="line">    <span class="hljs-keyword">synchronized</span> (<span class="hljs-keyword">this</span>) &#123;</span><br><span class="line">        <span class="hljs-comment">// 1、检查是否有重复的handler</span></span><br><span class="line">        checkMultiplicity(handler);</span><br><span class="line">        <span class="hljs-comment">// 2、创建节点</span></span><br><span class="line">        newCtx = newContext(group, filterName(name, handler), handler);</span><br><span class="line">        <span class="hljs-comment">// 3、添加节点</span></span><br><span class="line">        addLast0(newCtx);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// If the registered is false it means that the channel was not registered on an eventloop yet.</span></span><br><span class="line">        <span class="hljs-comment">// In this case we add the context to the pipeline and add a task that will call</span></span><br><span class="line">        <span class="hljs-comment">// ChannelHandler.handlerAdded(...) once the channel is registered.</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (!registered) &#123;</span><br><span class="line">            newCtx.setAddPending();</span><br><span class="line">            callHandlerCallbackLater(newCtx, <span class="hljs-keyword">true</span>);</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        EventExecutor executor = newCtx.executor();</span><br><span class="line">        <span class="hljs-keyword">if</span> (!executor.inEventLoop()) &#123;</span><br><span class="line">            newCtx.setAddPending();</span><br><span class="line">            executor.execute(<span class="hljs-keyword">new</span> Runnable() &#123;</span><br><span class="line">                <span class="hljs-meta">@Override</span></span><br><span class="line">                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">                    callHandlerAdded0(newCtx);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">// 4、回调用户方法</span></span><br><span class="line">    callHandlerAdded0(newCtx);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="检查是否有重复的handler"><a href="#检查是否有重复的handler" class="headerlink" title="检查是否有重复的handler"></a>检查是否有重复的handler</h4><p>在用户代码添加一条handler的时候，首先会查看该handler有没有添加过</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">checkMultiplicity</span><span class="hljs-params">(ChannelHandler handler)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (handler <span class="hljs-keyword">instanceof</span> ChannelHandlerAdapter) &#123;</span><br><span class="line">        ChannelHandlerAdapter h = (ChannelHandlerAdapter) handler;</span><br><span class="line">        <span class="hljs-keyword">if</span> (!h.isSharable() &amp;&amp; h.added) &#123;</span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ChannelPipelineException(</span><br><span class="line">                    h.getClass().getName() +</span><br><span class="line">                    <span class="hljs-string">" is not a @Sharable handler, so can't be added or removed multiple times."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        h.added = <span class="hljs-keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -424,7 +424,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        56
+                        57
                     </p>
                 </div>
             </div>
@@ -554,6 +554,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/02/25/netty-bytebuf/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-bytebuf">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-25T03:59:25.000Z">2019-02-25</time></div>
+                    <a href="/2019/02/25/netty-bytebuf/" class="has-link-black-ter is-size-6">netty-bytebuf</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/02/18/netty-reactor/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-reactor">
@@ -628,25 +647,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/01/24/netty-server-side-bootstrap-process/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/DxJmW2kX4AUYoY1.jpg" alt="Netty服务端启动流程分析">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-24T02:36:26.000Z">2019-01-24</time></div>
-                    <a href="/2019/01/24/netty-server-side-bootstrap-process/" class="has-link-black-ter is-size-6">Netty服务端启动流程分析</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -665,7 +665,7 @@ var _hmt = _hmt || [];
                     <span class="level-item">February 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1169,6 +1169,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/02/25/netty-bytebuf/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-bytebuf">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-25T03:59:25.000Z">2019-02-25</time></div>
+                    <a href="/2019/02/25/netty-bytebuf/" class="has-link-black-ter is-size-6">netty-bytebuf</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/02/18/netty-reactor/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-reactor">
@@ -1243,25 +1262,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/01/24/netty-server-side-bootstrap-process/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/DxJmW2kX4AUYoY1.jpg" alt="Netty服务端启动流程分析">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-24T02:36:26.000Z">2019-01-24</time></div>
-                    <a href="/2019/01/24/netty-server-side-bootstrap-process/" class="has-link-black-ter is-size-6">Netty服务端启动流程分析</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1280,7 +1280,7 @@ var _hmt = _hmt || [];
                     <span class="level-item">February 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
