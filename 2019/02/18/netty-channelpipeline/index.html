@@ -21,7 +21,7 @@
 <meta property="og:image" content="https:////upload-images.jianshu.io/upload_images/1357217-41276149de306c11.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/852/format/webp">
 <meta property="og:image" content="https:////upload-images.jianshu.io/upload_images/1357217-24a16a6b46895704.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/852/format/webp">
 <meta property="og:image" content="https:////upload-images.jianshu.io/upload_images/1357217-af88d921913c6315.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/662/format/webp">
-<meta property="og:updated_time" content="2019-02-25T03:08:39.475Z">
+<meta property="og:updated_time" content="2019-02-25T07:14:35.924Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Netty核心组件之ChannelPipeline">
 <meta name="twitter:description" content="netty在服务端端口绑定和新连接建立的过程中会建立相应的channel，而与channel的动作密切相关的是pipeline这个概念，pipeline像是可以看作是一条流水线，原始的原料(字节流)进来，经过加工，最后输出，在前面的文章《Netty服务端启动流程分析》中已经讲到在创建实例化channel的时候，会初始化它的各种属性，其中就包括pipline，因此这篇文章将从pipline初始化为入">
@@ -135,6 +135,10 @@ var _hmt = _hmt || [];
             <div class="navbar-end">
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="Search" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -149,6 +153,12 @@ var _hmt = _hmt || [];
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/gallery/images/cityscape-3995532_640.png" alt="Netty核心组件之ChannelPipeline">
+        </span>
+    </div>
     
     <div class="card-content article ">
         
@@ -388,6 +398,61 @@ var _hmt = _hmt || [];
 <div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#pipline添加节点">
+        <span class="has-mr-6">1</span>
+        <span>pipline添加节点</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#检查是否有重复的handler">
+        <span class="has-mr-6">1.1</span>
+        <span>检查是否有重复的handler</span>
+        </a></li><li>
+        <a class="is-flex" href="#创建节点">
+        <span class="has-mr-6">1.2</span>
+        <span>创建节点</span>
+        </a></li><li>
+        <a class="is-flex" href="#添加节点">
+        <span class="has-mr-6">1.3</span>
+        <span>添加节点</span>
+        </a></li><li>
+        <a class="is-flex" href="#回调用户方法">
+        <span class="has-mr-6">1.4</span>
+        <span>回调用户方法</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#pipline删除节点">
+        <span class="has-mr-6">2</span>
+        <span>pipline删除节点</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#找到待删除的节点">
+        <span class="has-mr-6">2.1</span>
+        <span>找到待删除的节点</span>
+        </a></li><li>
+        <a class="is-flex" href="#调整双向链表指针删除">
+        <span class="has-mr-6">2.2</span>
+        <span>调整双向链表指针删除</span>
+        </a></li><li>
+        <a class="is-flex" href="#回调用户函数">
+        <span class="has-mr-6">2.3</span>
+        <span>回调用户函数</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#总结">
+        <span class="has-mr-6">3</span>
+        <span>总结</span>
+        </a></li><li>
+        <a class="is-flex" href="#Reference">
+        <span class="has-mr-6">4</span>
+        <span>Reference</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 <div class="card widget">
@@ -537,7 +602,7 @@ var _hmt = _hmt || [];
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/AQS/" style="font-size: 10px;">AQS</a> <a href="/tags/CentOS/" style="font-size: 13.33px;">CentOS</a> <a href="/tags/DirectIO/" style="font-size: 10px;">DirectIO</a> <a href="/tags/KVM/" style="font-size: 13.33px;">KVM</a> <a href="/tags/LRU/" style="font-size: 10px;">LRU</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Micro-Service/" style="font-size: 10px;">Micro Service</a> <a href="/tags/MutliThread/" style="font-size: 13.33px;">MutliThread</a> <a href="/tags/MyBatis3/" style="font-size: 10px;">MyBatis3</a> <a href="/tags/Netty/" style="font-size: 16.67px;">Netty</a> <a href="/tags/SPI/" style="font-size: 10px;">SPI</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a> <a href="/tags/WebSystem/" style="font-size: 10px;">WebSystem</a> <a href="/tags/cache/" style="font-size: 13.33px;">cache</a> <a href="/tags/cpu/" style="font-size: 10px;">cpu</a> <a href="/tags/dubbo/" style="font-size: 16.67px;">dubbo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/javassist/" style="font-size: 10px;">javassist</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/mmap/" style="font-size: 10px;">mmap</a> <a href="/tags/nio/" style="font-size: 13.33px;">nio</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/网络配置/" style="font-size: 10px;">网络配置</a> <a href="/tags/虚拟化/" style="font-size: 10px;">虚拟化</a>
+        <a href="/tags/AQS/" style="font-size: 10px;">AQS</a> <a href="/tags/CentOS/" style="font-size: 12.5px;">CentOS</a> <a href="/tags/DirectIO/" style="font-size: 10px;">DirectIO</a> <a href="/tags/KVM/" style="font-size: 12.5px;">KVM</a> <a href="/tags/LRU/" style="font-size: 10px;">LRU</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/Micro-Service/" style="font-size: 10px;">Micro Service</a> <a href="/tags/MutliThread/" style="font-size: 12.5px;">MutliThread</a> <a href="/tags/MyBatis3/" style="font-size: 10px;">MyBatis3</a> <a href="/tags/Netty/" style="font-size: 17.5px;">Netty</a> <a href="/tags/SPI/" style="font-size: 10px;">SPI</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a> <a href="/tags/WebSystem/" style="font-size: 10px;">WebSystem</a> <a href="/tags/cache/" style="font-size: 12.5px;">cache</a> <a href="/tags/cpu/" style="font-size: 10px;">cpu</a> <a href="/tags/dubbo/" style="font-size: 15px;">dubbo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/javassist/" style="font-size: 10px;">javassist</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/mmap/" style="font-size: 10px;">mmap</a> <a href="/tags/nio/" style="font-size: 12.5px;">nio</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/网络配置/" style="font-size: 10px;">网络配置</a> <a href="/tags/虚拟化/" style="font-size: 10px;">虚拟化</a>
     </div>
 </div>
 
@@ -575,7 +640,7 @@ var _hmt = _hmt || [];
             
             <a href="/2019/02/18/netty-reactor/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-reactor">
+                    <img class="thumbnail" src="/gallery/images/honey-bee-3930374_640.jpg" alt="netty-reactor">
                 </p>
             </a>
             
@@ -594,7 +659,7 @@ var _hmt = _hmt || [];
             
             <a href="/2019/02/18/netty-server-side-accept-connections/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Netty服务端接收连接过程分析">
+                    <img class="thumbnail" src="/gallery/images/architecture-4012400_640.jpg" alt="Netty服务端接收连接过程分析">
                 </p>
             </a>
             
@@ -613,7 +678,7 @@ var _hmt = _hmt || [];
             
             <a href="/2019/02/18/netty-channelpipeline/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Netty核心组件之ChannelPipeline">
+                    <img class="thumbnail" src="/gallery/images/cityscape-3995532_640.png" alt="Netty核心组件之ChannelPipeline">
                 </p>
             </a>
             
@@ -1021,7 +1086,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Netty/">
                         <span class="tag">Netty</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1190,7 +1255,7 @@ var _hmt = _hmt || [];
             
             <a href="/2019/02/18/netty-reactor/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-reactor">
+                    <img class="thumbnail" src="/gallery/images/honey-bee-3930374_640.jpg" alt="netty-reactor">
                 </p>
             </a>
             
@@ -1209,7 +1274,7 @@ var _hmt = _hmt || [];
             
             <a href="/2019/02/18/netty-server-side-accept-connections/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Netty服务端接收连接过程分析">
+                    <img class="thumbnail" src="/gallery/images/architecture-4012400_640.jpg" alt="Netty服务端接收连接过程分析">
                 </p>
             </a>
             
@@ -1228,7 +1293,7 @@ var _hmt = _hmt || [];
             
             <a href="/2019/02/18/netty-channelpipeline/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Netty核心组件之ChannelPipeline">
+                    <img class="thumbnail" src="/gallery/images/cityscape-3995532_640.png" alt="Netty核心组件之ChannelPipeline">
                 </p>
             </a>
             
@@ -1636,7 +1701,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Netty/">
                         <span class="tag">Netty</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
