@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="ITechHub">
 <meta property="og:description" content="HashMapHashMap基本属性及其默认值HashMap底部数据结构get()和put()方法resize()方法treeifyBin()方法tableSizeFor()方法红黑树TreeNode在HashMap中的实现HashMap在jdk1.7和jdk1.8中的区别HashMap在并发环境下存在的安全问题 HashMap在并发下可能出现的问题分析  常见hash算法原理hash冲突解决办法">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-23T07:40:29.744Z">
+<meta property="og:updated_time" content="2019-02-27T05:16:47.359Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ITechHub">
 <meta name="twitter:description" content="HashMapHashMap基本属性及其默认值HashMap底部数据结构get()和put()方法resize()方法treeifyBin()方法tableSizeFor()方法红黑树TreeNode在HashMap中的实现HashMap在jdk1.7和jdk1.8中的区别HashMap在并发环境下存在的安全问题 HashMap在并发下可能出现的问题分析  常见hash算法原理hash冲突解决办法">
@@ -163,37 +163,52 @@ var _hmt = _hmt || [];
 <th></th>
 <th>HashMap</th>
 <th>HashTable</th>
+<th>ConcurrentHashMap</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>默认initialCapacity</td>
+<td>默认DEFAULT_CAPACITY</td>
 <td>16</td>
 <td>11</td>
+<td>16</td>
 </tr>
 <tr>
 <td>默认loadFactors</td>
 <td>0.75f</td>
 <td>0.75f</td>
+<td></td>
 </tr>
 <tr>
 <td>安全性</td>
 <td>不安全</td>
 <td>使用synchronize同步</td>
+<td></td>
 </tr>
 <tr>
 <td>扩容</td>
 <td>newCap = oldCap &lt;&lt; 1</td>
 <td>int newCapacity = (oldCapacity &lt;&lt; 1) + 1;</td>
+<td></td>
 </tr>
 <tr>
 <td>hash算法</td>
-<td><code>int hash = key.hashCode(); int index = (hash &amp; 0x7FFFFFFF) % tab.length;</code></td>
-<td>static final int hash(Object key) {     int h;     return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16); };      (n - 1) &amp; hash</td>
+<td><code>int hash = (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</code><br><code>int index = (tab.length - 1) &amp; hash</code></td>
+<td><code>int hash = key.hashCode();</code><br><code>int index = (hash &amp; 0x7FFFFFFF) % tab.length;</code></td>
+<td>return (h ^ (h &gt;&gt;&gt; 16)) &amp; HASH_BITS;</td>
+</tr>
+<tr>
+<td>是否支持NULL</td>
+<td>key和value都能为null</td>
+<td>key和value都不能为null</td>
+<td>key和value都不能为null</td>
 </tr>
 </tbody>
 </table>
-<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><h3 id="关于红黑树算法的原理"><a href="#关于红黑树算法的原理" class="headerlink" title="关于红黑树算法的原理"></a>关于红黑树算法的原理</h3>
+<h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><ul>
+<li><a href="https://blog.csdn.net/fclxyz/article/details/64945960" target="_blank" rel="noopener">JAVA面试题05-ConcurrentHashMap的实现</a></li>
+</ul>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><h3 id="关于红黑树算法的原理"><a href="#关于红黑树算法的原理" class="headerlink" title="关于红黑树算法的原理"></a>关于红黑树算法的原理</h3><h3 id="如何防止恶意碰撞（hash）"><a href="#如何防止恶意碰撞（hash）" class="headerlink" title="如何防止恶意碰撞（hash）"></a>如何防止恶意碰撞（hash）</h3>
         </div>
         
         
@@ -417,14 +432,14 @@ var _hmt = _hmt || [];
             
             <a href="/2019/02/18/netty-reactor/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/images/honey-bee-3930374_640.jpg" alt="netty-reactor">
+                    <img class="thumbnail" src="/gallery/images/honey-bee-3930374_640.jpg" alt="Netty中Reactor线程模型详解">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T11:06:15.000Z">2019-02-18</time></div>
-                    <a href="/2019/02/18/netty-reactor/" class="has-link-black-ter is-size-6">netty-reactor</a>
+                    <a href="/2019/02/18/netty-reactor/" class="has-link-black-ter is-size-6">Netty中Reactor线程模型详解</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1032,14 +1047,14 @@ var _hmt = _hmt || [];
             
             <a href="/2019/02/18/netty-reactor/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/images/honey-bee-3930374_640.jpg" alt="netty-reactor">
+                    <img class="thumbnail" src="/gallery/images/honey-bee-3930374_640.jpg" alt="Netty中Reactor线程模型详解">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T11:06:15.000Z">2019-02-18</time></div>
-                    <a href="/2019/02/18/netty-reactor/" class="has-link-black-ter is-size-6">netty-reactor</a>
+                    <a href="/2019/02/18/netty-reactor/" class="has-link-black-ter is-size-6">Netty中Reactor线程模型详解</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
