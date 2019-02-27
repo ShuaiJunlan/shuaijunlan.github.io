@@ -2,22 +2,23 @@
 <html lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>ITechHub</title>
+<title>HashMap&amp;HashTable&amp;ConcurrentHashMap (jdk1.8) - ITechHub</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="HashMapHashMap基本属性及其默认值HashMap底部数据结构get()和put()方法resize()方法treeifyBin()方法tableSizeFor()方法红黑树TreeNode在HashMap中的实现HashMap在jdk1.7和jdk1.8中的区别HashMap在并发环境下存在的安全问题 HashMap在并发下可能出现的问题分析  常见hash算法原理hash冲突解决办法">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ITechHub">
-<meta property="og:url" content="https://shuaijunlan.github.io/todo/hashmap&hashtable.html">
+    <meta name="description" content="Java中常用Map数据结构介绍">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HashMap&amp;HashTable&amp;ConcurrentHashMap (jdk1.8)">
+<meta property="og:url" content="https://shuaijunlan.github.io/2019/02/27/java-hashmap-hashtable-concurrenthashmap/index.html">
 <meta property="og:site_name" content="ITechHub">
-<meta property="og:description" content="HashMapHashMap基本属性及其默认值HashMap底部数据结构get()和put()方法resize()方法treeifyBin()方法tableSizeFor()方法红黑树TreeNode在HashMap中的实现HashMap在jdk1.7和jdk1.8中的区别HashMap在并发环境下存在的安全问题 HashMap在并发下可能出现的问题分析  常见hash算法原理hash冲突解决办法">
+<meta property="og:description" content="Java中常用Map数据结构介绍">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-27T05:16:47.359Z">
+<meta property="og:updated_time" content="2019-02-27T06:23:58.562Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ITechHub">
-<meta name="twitter:description" content="HashMapHashMap基本属性及其默认值HashMap底部数据结构get()和put()方法resize()方法treeifyBin()方法tableSizeFor()方法红黑树TreeNode在HashMap中的实现HashMap在jdk1.7和jdk1.8中的区别HashMap在并发环境下存在的安全问题 HashMap在并发下可能出现的问题分析  常见hash算法原理hash冲突解决办法">
+<meta name="twitter:title" content="HashMap&amp;HashTable&amp;ConcurrentHashMap (jdk1.8)">
+<meta name="twitter:description" content="Java中常用Map数据结构介绍">
 <meta name="twitter:creator" content="@https:&#x2F;&#x2F;twitter.com&#x2F;ShuaiJunlan">
 
 
@@ -104,7 +105,7 @@ var _hmt = _hmt || [];
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.png" alt="" height="28">
+                <img src="/images/logo.png" alt="HashMap&amp;HashTable&amp;ConcurrentHashMap (jdk1.8)" height="28">
             
             </a>
         </div>
@@ -127,6 +128,10 @@ var _hmt = _hmt || [];
             <div class="navbar-end">
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="Search" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -142,22 +147,54 @@ var _hmt = _hmt || [];
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
     
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/gallery/images/natural-4013464_640.jpg" alt="HashMap&amp;HashTable&amp;ConcurrentHashMap (jdk1.8)">
+        </span>
+    </div>
+    
     <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-02-27T10:43:24.000Z">2019-02-27</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 minutes read (About 690 words)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span> visits
+                </span>
+                
+            </div>
+        </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                
+                HashMap&amp;HashTable&amp;ConcurrentHashMap (jdk1.8)
             
         </h1>
         <div class="content">
-            <h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><h3 id="HashMap基本属性及其默认值"><a href="#HashMap基本属性及其默认值" class="headerlink" title="HashMap基本属性及其默认值"></a>HashMap基本属性及其默认值</h3><h3 id="HashMap底部数据结构"><a href="#HashMap底部数据结构" class="headerlink" title="HashMap底部数据结构"></a>HashMap底部数据结构</h3><h3 id="get-和put-方法"><a href="#get-和put-方法" class="headerlink" title="get()和put()方法"></a>get()和put()方法</h3><h3 id="resize-方法"><a href="#resize-方法" class="headerlink" title="resize()方法"></a>resize()方法</h3><h3 id="treeifyBin-方法"><a href="#treeifyBin-方法" class="headerlink" title="treeifyBin()方法"></a>treeifyBin()方法</h3><h3 id="tableSizeFor-方法"><a href="#tableSizeFor-方法" class="headerlink" title="tableSizeFor()方法"></a>tableSizeFor()方法</h3><h3 id="红黑树TreeNode在HashMap中的实现"><a href="#红黑树TreeNode在HashMap中的实现" class="headerlink" title="红黑树TreeNode在HashMap中的实现"></a>红黑树TreeNode在HashMap中的实现</h3><h3 id="HashMap在jdk1-7和jdk1-8中的区别"><a href="#HashMap在jdk1-7和jdk1-8中的区别" class="headerlink" title="HashMap在jdk1.7和jdk1.8中的区别"></a>HashMap在jdk1.7和jdk1.8中的区别</h3><h3 id="HashMap在并发环境下存在的安全问题"><a href="#HashMap在并发环境下存在的安全问题" class="headerlink" title="HashMap在并发环境下存在的安全问题"></a>HashMap在并发环境下存在的安全问题</h3><ul>
+            <p>Java中常用Map数据结构介绍<br><a id="more"></a></p>
+<h3 id="HashMap基本属性及其默认值"><a href="#HashMap基本属性及其默认值" class="headerlink" title="HashMap基本属性及其默认值"></a>HashMap基本属性及其默认值</h3><h3 id="HashMap底部数据结构"><a href="#HashMap底部数据结构" class="headerlink" title="HashMap底部数据结构"></a>HashMap底部数据结构</h3><h3 id="get-和put-方法"><a href="#get-和put-方法" class="headerlink" title="get()和put()方法"></a>get()和put()方法</h3><h3 id="resize-方法"><a href="#resize-方法" class="headerlink" title="resize()方法"></a>resize()方法</h3><h3 id="treeifyBin-方法"><a href="#treeifyBin-方法" class="headerlink" title="treeifyBin()方法"></a>treeifyBin()方法</h3><h3 id="tableSizeFor-方法"><a href="#tableSizeFor-方法" class="headerlink" title="tableSizeFor()方法"></a>tableSizeFor()方法</h3><h3 id="红黑树TreeNode在HashMap中的实现"><a href="#红黑树TreeNode在HashMap中的实现" class="headerlink" title="红黑树TreeNode在HashMap中的实现"></a>红黑树TreeNode在HashMap中的实现</h3><h3 id="HashMap在jdk1-7和jdk1-8中的区别"><a href="#HashMap在jdk1-7和jdk1-8中的区别" class="headerlink" title="HashMap在jdk1.7和jdk1.8中的区别"></a>HashMap在jdk1.7和jdk1.8中的区别</h3><h3 id="HashMap在并发环境下存在的安全问题"><a href="#HashMap在并发环境下存在的安全问题" class="headerlink" title="HashMap在并发环境下存在的安全问题"></a>HashMap在并发环境下存在的安全问题</h3><ul>
 <li><a href="https://www.cnblogs.com/binyue/p/3726403.html" target="_blank" rel="noopener">HashMap在并发下可能出现的问题分析</a></li>
 </ul>
 <h4 id="常见hash算法原理"><a href="#常见hash算法原理" class="headerlink" title="常见hash算法原理"></a>常见hash算法原理</h4><h4 id="hash冲突解决办法"><a href="#hash冲突解决办法" class="headerlink" title="hash冲突解决办法"></a>hash冲突解决办法</h4><p>开放地址法、链地址法、再哈希法</p>
 <h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><ul>
 <li><a href="https://blog.csdn.net/u012512634/article/details/72735183" target="_blank" rel="noopener">【java集合】HashMap常见面试题</a></li>
 </ul>
-<h2 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h2><h3 id="基本属性及其默认值"><a href="#基本属性及其默认值" class="headerlink" title="基本属性及其默认值"></a>基本属性及其默认值</h3><h3 id="get-和put-方法-1"><a href="#get-和put-方法-1" class="headerlink" title="get()和put()方法"></a>get()和put()方法</h3><h3 id="rehash-方法"><a href="#rehash-方法" class="headerlink" title="rehash()方法"></a>rehash()方法</h3><h2 id="HashMap和HashTable对比分析"><a href="#HashMap和HashTable对比分析" class="headerlink" title="HashMap和HashTable对比分析"></a>HashMap和HashTable对比分析</h2><table>
+<h2 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h2><h3 id="基本属性及其默认值"><a href="#基本属性及其默认值" class="headerlink" title="基本属性及其默认值"></a>基本属性及其默认值</h3><h3 id="get-和put-方法-1"><a href="#get-和put-方法-1" class="headerlink" title="get()和put()方法"></a>get()和put()方法</h3><h3 id="rehash-方法"><a href="#rehash-方法" class="headerlink" title="rehash()方法"></a>rehash()方法</h3><h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><h3 id="get-方法没有加锁，如何能保证线程安全"><a href="#get-方法没有加锁，如何能保证线程安全" class="headerlink" title="get()方法没有加锁，如何能保证线程安全"></a>get()方法没有加锁，如何能保证线程安全</h3><blockquote>
+<p><a href="https://juejin.im/entry/5b98b89bf265da0abd35034c" target="_blank" rel="noopener">为什么ConcurrentHashMap的读操作不需要加锁？</a></p>
+<p>get 操作的高效之处在于整个 get 过程不需要加锁，除非读到的值是空的才会加锁重读，我们知道 HashTable 容器的 get 方法是需要加锁的，那么 ConcurrentHashMap 的 get 操作是如何做到不加锁的呢？原因是它的 get 方法里将要使用的共享变量都定义成 volatile，如用于统计当前 Segement 大小的 count 字段和用于存储值的 HashEntry 的 value。定义成 volatile 的变量，能够在线程之间保持可见性，能够被多线程同时读，并且保证不会读到过期的值，但是只能被单线程写（有一种情况可以被多线程写，就是写入的值不依赖于原值），在 get 操作里只需要读不需要写共享变量 count 和 value，所以可以不用加锁。之所以不会读到过期的值，是根据 java 内存模型的 happen before 原则，对 volatile 字段的写入操作先于读操作，即使两个线程同时修改和获取 volatile 变量，get 操作也能拿到最新的值，这是用 volatile 替换锁的经典应用场景。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="hljs-keyword">transient</span> <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">int</span> count;</span><br><span class="line">&gt; <span class="hljs-keyword">volatile</span> V value;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="HashMap-amp-HashTable-amp-Concurrent对比分析"><a href="#HashMap-amp-HashTable-amp-Concurrent对比分析" class="headerlink" title="HashMap&amp;HashTable&amp;Concurrent对比分析"></a>HashMap&amp;HashTable&amp;Concurrent对比分析</h2><table>
 <thead>
 <tr>
 <th></th>
@@ -177,25 +214,25 @@ var _hmt = _hmt || [];
 <td>默认loadFactors</td>
 <td>0.75f</td>
 <td>0.75f</td>
-<td></td>
+<td>0.75f</td>
 </tr>
 <tr>
 <td>安全性</td>
 <td>不安全</td>
 <td>使用synchronize同步</td>
-<td></td>
+<td>线程安全，采用分段锁</td>
 </tr>
 <tr>
 <td>扩容</td>
 <td>newCap = oldCap &lt;&lt; 1</td>
 <td>int newCapacity = (oldCapacity &lt;&lt; 1) + 1;</td>
-<td></td>
+<td>？？</td>
 </tr>
 <tr>
 <td>hash算法</td>
 <td><code>int hash = (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</code><br><code>int index = (tab.length - 1) &amp; hash</code></td>
 <td><code>int hash = key.hashCode();</code><br><code>int index = (hash &amp; 0x7FFFFFFF) % tab.length;</code></td>
-<td>return (h ^ (h &gt;&gt;&gt; 16)) &amp; HASH_BITS;</td>
+<td><code>int h = key.hashCode()</code><br><code>int hash =  (h ^ (h &gt;&gt;&gt; 16)) &amp; HASH_BITS;</code><br><code>int index = (tab.length - 1) &amp; hash;</code></td>
 </tr>
 <tr>
 <td>是否支持NULL</td>
@@ -205,10 +242,19 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
-<h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><ul>
+<h2 id="ConcurrentHashMap-1"><a href="#ConcurrentHashMap-1" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><ul>
 <li><a href="https://blog.csdn.net/fclxyz/article/details/64945960" target="_blank" rel="noopener">JAVA面试题05-ConcurrentHashMap的实现</a></li>
 </ul>
 <h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><h3 id="关于红黑树算法的原理"><a href="#关于红黑树算法的原理" class="headerlink" title="关于红黑树算法的原理"></a>关于红黑树算法的原理</h3><h3 id="如何防止恶意碰撞（hash）"><a href="#如何防止恶意碰撞（hash）" class="headerlink" title="如何防止恶意碰撞（hash）"></a>如何防止恶意碰撞（hash）</h3>
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/java/">java</a>
+                </div>
+            </div>
         </div>
         
         
@@ -230,6 +276,20 @@ var _hmt = _hmt || [];
 
 
 
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/02/18/netty-reactor/">
+                <span class="level-item">Netty中Reactor线程模型详解</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
 
 
 <div class="card">
@@ -238,8 +298,8 @@ var _hmt = _hmt || [];
         
 <script>
     var disqus_config = function () {
-        this.page.url = 'https://shuaijunlan.github.io/todo/hashmap&amp;hashtable.html';
-        this.page.identifier = 'todo/hashmap&amp;hashtable.html';
+        this.page.url = 'https://shuaijunlan.github.io/2019/02/27/java-hashmap-hashtable-concurrenthashmap/';
+        this.page.identifier = '2019/02/27/java-hashmap-hashtable-concurrenthashmap/';
     };
     (function() {
         var d = document, s = d.createElement('script');  
@@ -264,6 +324,109 @@ var _hmt = _hmt || [];
 <div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><ul class="menu-list"><li>
+        <a class="is-flex" href="#HashMap基本属性及其默认值">
+        <span class="has-mr-6">1.1</span>
+        <span>HashMap基本属性及其默认值</span>
+        </a></li><li>
+        <a class="is-flex" href="#HashMap底部数据结构">
+        <span class="has-mr-6">1.2</span>
+        <span>HashMap底部数据结构</span>
+        </a></li><li>
+        <a class="is-flex" href="#get-和put-方法">
+        <span class="has-mr-6">1.3</span>
+        <span>get()和put()方法</span>
+        </a></li><li>
+        <a class="is-flex" href="#resize-方法">
+        <span class="has-mr-6">1.4</span>
+        <span>resize()方法</span>
+        </a></li><li>
+        <a class="is-flex" href="#treeifyBin-方法">
+        <span class="has-mr-6">1.5</span>
+        <span>treeifyBin()方法</span>
+        </a></li><li>
+        <a class="is-flex" href="#tableSizeFor-方法">
+        <span class="has-mr-6">1.6</span>
+        <span>tableSizeFor()方法</span>
+        </a></li><li>
+        <a class="is-flex" href="#红黑树TreeNode在HashMap中的实现">
+        <span class="has-mr-6">1.7</span>
+        <span>红黑树TreeNode在HashMap中的实现</span>
+        </a></li><li>
+        <a class="is-flex" href="#HashMap在jdk1-7和jdk1-8中的区别">
+        <span class="has-mr-6">1.8</span>
+        <span>HashMap在jdk1.7和jdk1.8中的区别</span>
+        </a></li><li>
+        <a class="is-flex" href="#HashMap在并发环境下存在的安全问题">
+        <span class="has-mr-6">1.9</span>
+        <span>HashMap在并发环境下存在的安全问题</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#常见hash算法原理">
+        <span class="has-mr-6">1.9.1</span>
+        <span>常见hash算法原理</span>
+        </a></li><li>
+        <a class="is-flex" href="#hash冲突解决办法">
+        <span class="has-mr-6">1.9.2</span>
+        <span>hash冲突解决办法</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#References">
+        <span class="has-mr-6">1.10</span>
+        <span>References</span>
+        </a></li></ul><li>
+        <a class="is-flex" href="#HashTable">
+        <span class="has-mr-6">2</span>
+        <span>HashTable</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#基本属性及其默认值">
+        <span class="has-mr-6">2.1</span>
+        <span>基本属性及其默认值</span>
+        </a></li><li>
+        <a class="is-flex" href="#get-和put-方法-1">
+        <span class="has-mr-6">2.2</span>
+        <span>get()和put()方法</span>
+        </a></li><li>
+        <a class="is-flex" href="#rehash-方法">
+        <span class="has-mr-6">2.3</span>
+        <span>rehash()方法</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#ConcurrentHashMap">
+        <span class="has-mr-6">3</span>
+        <span>ConcurrentHashMap</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#get-方法没有加锁，如何能保证线程安全">
+        <span class="has-mr-6">3.1</span>
+        <span>get()方法没有加锁，如何能保证线程安全</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#HashMap-amp-HashTable-amp-Concurrent对比分析">
+        <span class="has-mr-6">4</span>
+        <span>HashMap&amp;HashTable&amp;Concurrent对比分析</span>
+        </a></li><li>
+        <a class="is-flex" href="#ConcurrentHashMap-1">
+        <span class="has-mr-6">5</span>
+        <span>ConcurrentHashMap</span>
+        </a></li><li>
+        <a class="is-flex" href="#扩展">
+        <span class="has-mr-6">6</span>
+        <span>扩展</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#关于红黑树算法的原理">
+        <span class="has-mr-6">6.1</span>
+        <span>关于红黑树算法的原理</span>
+        </a></li><li>
+        <a class="is-flex" href="#如何防止恶意碰撞（hash）">
+        <span class="has-mr-6">6.2</span>
+        <span>如何防止恶意碰撞（hash）</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 <div class="card widget">
@@ -300,7 +463,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        56
+                        57
                     </p>
                 </div>
             </div>
@@ -430,6 +593,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/02/27/java-hashmap-hashtable-concurrenthashmap/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/images/natural-4013464_640.jpg" alt="HashMap&amp;HashTable&amp;ConcurrentHashMap (jdk1.8)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-27T10:43:24.000Z">2019-02-27</time></div>
+                    <a href="/2019/02/27/java-hashmap-hashtable-concurrenthashmap/" class="has-link-black-ter is-size-6">HashMap&amp;HashTable&amp;ConcurrentHashMap (jdk1.8)</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/02/18/netty-reactor/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/gallery/images/honey-bee-3930374_640.jpg" alt="Netty中Reactor线程模型详解">
@@ -504,25 +686,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/01/24/netty-server-side-bootstrap-process/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/DxJmW2kX4AUYoY1.jpg" alt="Netty服务端启动流程分析">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-24T02:36:26.000Z">2019-01-24</time></div>
-                    <a href="/2019/01/24/netty-server-side-bootstrap-process/" class="has-link-black-ter is-size-6">Netty服务端启动流程分析</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -541,7 +704,7 @@ var _hmt = _hmt || [];
                     <span class="level-item">February 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -967,7 +1130,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/java/">
                         <span class="tag">java</span>
-                        <span class="tag is-grey">22</span>
+                        <span class="tag is-grey">23</span>
                     </a>
                 </div>
                 
@@ -1045,6 +1208,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/02/27/java-hashmap-hashtable-concurrenthashmap/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/images/natural-4013464_640.jpg" alt="HashMap&amp;HashTable&amp;ConcurrentHashMap (jdk1.8)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-27T10:43:24.000Z">2019-02-27</time></div>
+                    <a href="/2019/02/27/java-hashmap-hashtable-concurrenthashmap/" class="has-link-black-ter is-size-6">HashMap&amp;HashTable&amp;ConcurrentHashMap (jdk1.8)</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/02/18/netty-reactor/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/gallery/images/honey-bee-3930374_640.jpg" alt="Netty中Reactor线程模型详解">
@@ -1119,25 +1301,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/01/24/netty-server-side-bootstrap-process/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/DxJmW2kX4AUYoY1.jpg" alt="Netty服务端启动流程分析">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-24T02:36:26.000Z">2019-01-24</time></div>
-                    <a href="/2019/01/24/netty-server-side-bootstrap-process/" class="has-link-black-ter is-size-6">Netty服务端启动流程分析</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1156,7 +1319,7 @@ var _hmt = _hmt || [];
                     <span class="level-item">February 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1582,7 +1745,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/java/">
                         <span class="tag">java</span>
-                        <span class="tag is-grey">22</span>
+                        <span class="tag is-grey">23</span>
                     </a>
                 </div>
                 
@@ -1652,7 +1815,7 @@ var _hmt = _hmt || [];
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.png" alt="" height="28">
+                    <img src="/images/logo.png" alt="HashMap&amp;HashTable&amp;ConcurrentHashMap (jdk1.8)" height="28">
                 
                 </a>
                 <p class="is-size-7">
