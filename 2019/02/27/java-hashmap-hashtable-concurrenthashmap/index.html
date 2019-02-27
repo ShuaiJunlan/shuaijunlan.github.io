@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="ITechHub">
 <meta property="og:description" content="Java中常用Map数据结构介绍">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-27T11:39:04.857Z">
+<meta property="og:updated_time" content="2019-02-27T13:50:46.087Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap&amp;HashTable&amp;ConcurrentHashMap (jdk1.8)">
 <meta name="twitter:description" content="Java中常用Map数据结构介绍">
@@ -163,7 +163,7 @@ var _hmt = _hmt || [];
                 <span class="level-item has-text-grey">
                     
                     
-                    5 minutes read (About 691 words)
+                    5 minutes read (About 725 words)
                 </span>
                 
                 
@@ -194,6 +194,9 @@ var _hmt = _hmt || [];
 <p>get 操作的高效之处在于整个 get 过程不需要加锁，除非读到的值是空的才会加锁重读，我们知道 HashTable 容器的 get 方法是需要加锁的，那么 ConcurrentHashMap 的 get 操作是如何做到不加锁的呢？原因是它的 get 方法里将要使用的共享变量都定义成 volatile，如用于统计当前 Segement 大小的 count 字段和用于存储值的 HashEntry 的 value。定义成 volatile 的变量，能够在线程之间保持可见性，能够被多线程同时读，并且保证不会读到过期的值，但是只能被单线程写（有一种情况可以被多线程写，就是写入的值不依赖于原值），在 get 操作里只需要读不需要写共享变量 count 和 value，所以可以不用加锁。之所以不会读到过期的值，是根据 java 内存模型的 happen before 原则，对 volatile 字段的写入操作先于读操作，即使两个线程同时修改和获取 volatile 变量，get 操作也能拿到最新的值，这是用 volatile 替换锁的经典应用场景。</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="hljs-keyword">transient</span> <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">int</span> count;</span><br><span class="line">&gt; <span class="hljs-keyword">volatile</span> V value;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
+<h3 id="jdk1-7和jdk1-8中实现有什么区别"><a href="#jdk1-7和jdk1-8中实现有什么区别" class="headerlink" title="jdk1.7和jdk1.8中实现有什么区别"></a>jdk1.7和jdk1.8中实现有什么区别</h3><ul>
+<li><a href="https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/util/concurrent/ConcurrentHashMap.java" target="_blank" rel="noopener">jdk7中ConcurrentHashMap源码</a></li>
+</ul>
 <h2 id="HashMap-amp-HashTable-amp-Concurrent对比分析"><a href="#HashMap-amp-HashTable-amp-Concurrent对比分析" class="headerlink" title="HashMap&amp;HashTable&amp;Concurrent对比分析"></a>HashMap&amp;HashTable&amp;Concurrent对比分析</h2><table>
 <thead>
 <tr>
@@ -413,6 +416,10 @@ var _hmt = _hmt || [];
         <a class="is-flex" href="#get-方法没有加锁，如何能保证线程安全">
         <span class="has-mr-6">3.1</span>
         <span>get()方法没有加锁，如何能保证线程安全</span>
+        </a></li><li>
+        <a class="is-flex" href="#jdk1-7和jdk1-8中实现有什么区别">
+        <span class="has-mr-6">3.2</span>
+        <span>jdk1.7和jdk1.8中实现有什么区别</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#HashMap-amp-HashTable-amp-Concurrent对比分析">
         <span class="has-mr-6">4</span>
