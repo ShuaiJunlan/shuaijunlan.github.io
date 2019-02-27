@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[【LeetCode】Single Number题解]]></title>
+    <url>%2F2019%2F02%2F27%2Fleetcode-single-number%2F</url>
+    <content type="text"><![CDATA[Single Number I https://leetcode.com/problems/single-number/ Single Number II https://leetcode.com/problems/single-number-ii/ LeetCode] Single Number II 单独的数字之二 Single Number III https://leetcode.com/problems/single-number-iii/]]></content>
+      <tags>
+        <tag>LeetCode</tag>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[HashMap&HashTable&ConcurrentHashMap (jdk1.8)]]></title>
     <url>%2F2019%2F02%2F27%2Fjava-hashmap-hashtable-concurrenthashmap%2F</url>
     <content type="text"><![CDATA[Java中常用Map数据结构介绍 HashMapHashMap基本属性及其默认值HashMap底部数据结构get()和put()方法resize()方法treeifyBin()方法tableSizeFor()方法红黑树TreeNode在HashMap中的实现HashMap在jdk1.7和jdk1.8中的区别HashMap在并发环境下存在的安全问题 HashMap在并发下可能出现的问题分析 常见hash算法原理hash冲突解决办法开放地址法、链地址法、再哈希法 References 【java集合】HashMap常见面试题 HashTable基本属性及其默认值get()和put()方法rehash()方法ConcurrentHashMapget()方法没有加锁，如何能保证线程安全 为什么ConcurrentHashMap的读操作不需要加锁？ get 操作的高效之处在于整个 get 过程不需要加锁，除非读到的值是空的才会加锁重读，我们知道 HashTable 容器的 get 方法是需要加锁的，那么 ConcurrentHashMap 的 get 操作是如何做到不加锁的呢？原因是它的 get 方法里将要使用的共享变量都定义成 volatile，如用于统计当前 Segement 大小的 count 字段和用于存储值的 HashEntry 的 value。定义成 volatile 的变量，能够在线程之间保持可见性，能够被多线程同时读，并且保证不会读到过期的值，但是只能被单线程写（有一种情况可以被多线程写，就是写入的值不依赖于原值），在 get 操作里只需要读不需要写共享变量 count 和 value，所以可以不用加锁。之所以不会读到过期的值，是根据 java 内存模型的 happen before 原则，对 volatile 字段的写入操作先于读操作，即使两个线程同时修改和获取 volatile 变量，get 操作也能拿到最新的值，这是用 volatile 替换锁的经典应用场景。 123&gt; transient volatile int count;&gt; volatile V value;&gt; HashMap&amp;HashTable&amp;Concurrent对比分析 HashMap HashTable ConcurrentHashMap 默认DEFAULT_CAPACITY 16 11 16 默认loadFactors 0.75f 0.75f 0.75f 安全性 不安全 使用synchronize同步 线程安全，采用分段锁 扩容 newCap = oldCap &lt;&lt; 1 int newCapacity = (oldCapacity &lt;&lt; 1) + 1; ？？ hash算法 int hash = (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);int index = (tab.length - 1) &amp; hash int hash = key.hashCode();int index = (hash &amp; 0x7FFFFFFF) % tab.length; int h = key.hashCode()int hash = (h ^ (h &gt;&gt;&gt; 16)) &amp; HASH_BITS;int index = (tab.length - 1) &amp; hash; 是否支持NULL key和value都能为null key和value都不能为null key和value都不能为null ConcurrentHashMap JAVA面试题05-ConcurrentHashMap的实现 扩展关于红黑树算法的原理如何防止恶意碰撞（hash）]]></content>
@@ -440,9 +449,9 @@
     <content type="text"><![CDATA[Bridge原理(桥接模式) Bridge方式即虚拟网桥的网络连接方式，使客户机和子网里面的机器能够互相通信。可以使虚拟机成为网络中具有独立IP的主机。桥接网络（也叫物理设备共享）被用作把一个物理设备复制到一台虚拟机。网桥多用作高级设置，特别是主机多个网络接口的情况。 在bridged模式下，虚拟出来的操作系统就像是局域网中的一台独立的主机，它可以访问网内任何一台机器。同时，由于这个虚拟系统是局域网中的一个独立的主机系统，那么就可以手工配置它的TCP/IP配置信息，以实现通过局域网的网关或路由器访问互联网。使用bridged模式的虚拟系统和宿主机器的关系，就像连接在同一个Hub上的两台电脑。想让它们相互通讯，你就需要为虚拟系统配置IP地址和子网掩码，否则就无法通信（参考dhcp服务器是否开启，如果开启，则可以选择dhcp方式自动获取网络地址）。这种方式最简单，直接将虚拟网卡桥接到一个物理网卡上面，和linux下一个网卡绑定两个不同地址类似，实际上是将网卡设置为混杂模式，从而达到侦听多个IP的能力。在此种模式下，虚拟机内部的网卡（例如linux下的eth0)直接连到了物理网卡所在的网络上，可以想象为虚拟机和host机处于对等的地位，在网络关系上是平等的，没有谁在谁后面的问题。使用这种方式很简单，前提是你可以得到1个以上的地址。 如上图，网桥的基本原理就是创建一个桥接接口br0，在物理网卡和虚拟网络接口之间传递数据。 基本步骤 安装完CentOS7.0， 在/etc/sysconfig/network-scripts/目录下面会生成两个默认网络配置文件。（如图） 继续看文件里面的详细信息。 ifcfg-eth0 ifcfg-lo 配置静态IP 在相同目录下面添加一个ifcfg-br0文件，并在文件中添加如下内容 并且修改ifcfg-eth0文件 配置动态IP 在相同目录下面添加一个ifcfg-br0文件，并在文件中添加如下内容 12345DEVICE=br0TYPE=BridgeNM_CONTROLLED=noBOOTPROTO=dhcpONBOOT=yes 并且修改ifcfg-eth0文件 申明 NAT原理(网络地址转换模式) 使用NAT模式，就是让虚拟系统借助NAT(网络地址转换)功能，通过宿主机器所在的网络来访问公网。也就是说，使用NAT模式可以实现在虚拟系统里访问互联网。很显然，如果你只有一个外网地址，此种方式很合适。 virsh net-list 查看当前活跃的网络，可以看到一个default网络，这个就是一个默认的Nat网络了。 virsh net-dumpxml default 查看网络配置 持续更新中…… REFERENCES libvirt kvm 虚拟机上网 – Bridge桥接]]></content>
       <tags>
         <tag>KVM</tag>
+        <tag>Linux</tag>
         <tag>虚拟化</tag>
         <tag>网络配置</tag>
-        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
