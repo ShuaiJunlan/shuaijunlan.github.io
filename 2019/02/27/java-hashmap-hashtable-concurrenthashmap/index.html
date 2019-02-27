@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="ITechHub">
 <meta property="og:description" content="Java中常用Map数据结构介绍">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-27T06:23:58.562Z">
+<meta property="og:updated_time" content="2019-02-27T11:39:04.857Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap&amp;HashTable&amp;ConcurrentHashMap (jdk1.8)">
 <meta name="twitter:description" content="Java中常用Map数据结构介绍">
@@ -163,7 +163,7 @@ var _hmt = _hmt || [];
                 <span class="level-item has-text-grey">
                     
                     
-                    5 minutes read (About 690 words)
+                    5 minutes read (About 691 words)
                 </span>
                 
                 
@@ -182,7 +182,7 @@ var _hmt = _hmt || [];
         </h1>
         <div class="content">
             <p>Java中常用Map数据结构介绍<br><a id="more"></a></p>
-<h3 id="HashMap基本属性及其默认值"><a href="#HashMap基本属性及其默认值" class="headerlink" title="HashMap基本属性及其默认值"></a>HashMap基本属性及其默认值</h3><h3 id="HashMap底部数据结构"><a href="#HashMap底部数据结构" class="headerlink" title="HashMap底部数据结构"></a>HashMap底部数据结构</h3><h3 id="get-和put-方法"><a href="#get-和put-方法" class="headerlink" title="get()和put()方法"></a>get()和put()方法</h3><h3 id="resize-方法"><a href="#resize-方法" class="headerlink" title="resize()方法"></a>resize()方法</h3><h3 id="treeifyBin-方法"><a href="#treeifyBin-方法" class="headerlink" title="treeifyBin()方法"></a>treeifyBin()方法</h3><h3 id="tableSizeFor-方法"><a href="#tableSizeFor-方法" class="headerlink" title="tableSizeFor()方法"></a>tableSizeFor()方法</h3><h3 id="红黑树TreeNode在HashMap中的实现"><a href="#红黑树TreeNode在HashMap中的实现" class="headerlink" title="红黑树TreeNode在HashMap中的实现"></a>红黑树TreeNode在HashMap中的实现</h3><h3 id="HashMap在jdk1-7和jdk1-8中的区别"><a href="#HashMap在jdk1-7和jdk1-8中的区别" class="headerlink" title="HashMap在jdk1.7和jdk1.8中的区别"></a>HashMap在jdk1.7和jdk1.8中的区别</h3><h3 id="HashMap在并发环境下存在的安全问题"><a href="#HashMap在并发环境下存在的安全问题" class="headerlink" title="HashMap在并发环境下存在的安全问题"></a>HashMap在并发环境下存在的安全问题</h3><ul>
+<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><h3 id="HashMap基本属性及其默认值"><a href="#HashMap基本属性及其默认值" class="headerlink" title="HashMap基本属性及其默认值"></a>HashMap基本属性及其默认值</h3><h3 id="HashMap底部数据结构"><a href="#HashMap底部数据结构" class="headerlink" title="HashMap底部数据结构"></a>HashMap底部数据结构</h3><h3 id="get-和put-方法"><a href="#get-和put-方法" class="headerlink" title="get()和put()方法"></a>get()和put()方法</h3><h3 id="resize-方法"><a href="#resize-方法" class="headerlink" title="resize()方法"></a>resize()方法</h3><h3 id="treeifyBin-方法"><a href="#treeifyBin-方法" class="headerlink" title="treeifyBin()方法"></a>treeifyBin()方法</h3><h3 id="tableSizeFor-方法"><a href="#tableSizeFor-方法" class="headerlink" title="tableSizeFor()方法"></a>tableSizeFor()方法</h3><h3 id="红黑树TreeNode在HashMap中的实现"><a href="#红黑树TreeNode在HashMap中的实现" class="headerlink" title="红黑树TreeNode在HashMap中的实现"></a>红黑树TreeNode在HashMap中的实现</h3><h3 id="HashMap在jdk1-7和jdk1-8中的区别"><a href="#HashMap在jdk1-7和jdk1-8中的区别" class="headerlink" title="HashMap在jdk1.7和jdk1.8中的区别"></a>HashMap在jdk1.7和jdk1.8中的区别</h3><h3 id="HashMap在并发环境下存在的安全问题"><a href="#HashMap在并发环境下存在的安全问题" class="headerlink" title="HashMap在并发环境下存在的安全问题"></a>HashMap在并发环境下存在的安全问题</h3><ul>
 <li><a href="https://www.cnblogs.com/binyue/p/3726403.html" target="_blank" rel="noopener">HashMap在并发下可能出现的问题分析</a></li>
 </ul>
 <h4 id="常见hash算法原理"><a href="#常见hash算法原理" class="headerlink" title="常见hash算法原理"></a>常见hash算法原理</h4><h4 id="hash冲突解决办法"><a href="#hash冲突解决办法" class="headerlink" title="hash冲突解决办法"></a>hash冲突解决办法</h4><p>开放地址法、链地址法、再哈希法</p>
@@ -330,7 +330,11 @@ var _hmt = _hmt || [];
             <h3 class="menu-label">
                 Catalogue
             </h3>
-            <ul class="menu-list"><ul class="menu-list"><li>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#HashMap">
+        <span class="has-mr-6">1</span>
+        <span>HashMap</span>
+        </a><ul class="menu-list"><li>
         <a class="is-flex" href="#HashMap基本属性及其默认值">
         <span class="has-mr-6">1.1</span>
         <span>HashMap基本属性及其默认值</span>
@@ -378,7 +382,7 @@ var _hmt = _hmt || [];
         <a class="is-flex" href="#References">
         <span class="has-mr-6">1.10</span>
         <span>References</span>
-        </a></li></ul><li>
+        </a></li></ul></li><li>
         <a class="is-flex" href="#HashTable">
         <span class="has-mr-6">2</span>
         <span>HashTable</span>
