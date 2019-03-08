@@ -143,6 +143,60 @@ var _hmt = _hmt || [];
     <div class="card">
     
     <div class="card-image">
+        <a href="/2019/02/18/netty-channelpipeline/" class="image is-7by1">
+            <img class="thumbnail" src="/gallery/images/cityscape-3995532_640.png" alt="Netty核心组件之ChannelPipeline">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-02-18T06:54:06.000Z">2019-02-18</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    21 minutes read (About 3107 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/02/18/netty-channelpipeline/">Netty核心组件之ChannelPipeline</a>
+            
+        </h1>
+        <div class="content">
+            <p>netty在服务端端口绑定和新连接建立的过程中会建立相应的channel，而与channel的动作密切相关的是pipeline这个概念，pipeline像是可以看作是一条流水线，原始的原料(字节流)进来，经过加工，最后输出，在前面的文章<a href="https://shuaijunlan.github.io/2019/01/24/netty-server-side-bootstrap-process/">《Netty服务端启动流程分析》</a>中已经讲到在创建实例化channel的时候，会初始化它的各种属性，其中就包括<code>pipline</code>，因此这篇文章将从pipline初始化为入口点来分析pipline的运作流程。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/02/18/netty-channelpipeline/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
         <a href="/2019/01/31/netty-client-side-connection/" class="image is-7by1">
             <img class="thumbnail" src="/gallery/thumbnails/0_Yh9Qi3lXcMb7Dwol.jpeg" alt="Netty客户端连接过程源码分析">
         </a>
@@ -357,64 +411,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/01/17/cpu-cache/" class="image is-7by1">
-            <img class="thumbnail" src="/gallery/thumbnails/Dv2c901X4AEtFH3.jpg" alt="Java编程如何高效利用CPU缓存？">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-01-17T05:25:47.000Z">2019-01-17</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    15 minutes read (About 2243 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/01/17/cpu-cache/">Java编程如何高效利用CPU缓存？</a>
-            
-        </h1>
-        <div class="content">
-            <p>首先我们来看一个Java的例子:</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> Shuai Junlan[shuaijunlan@gmail.com].</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@since</span> Created in 1:43 PM 1/17/19.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ArrayTraverse</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span>[][] arrs = <span class="hljs-keyword">new</span> <span class="hljs-keyword">long</span>[<span class="hljs-number">1024</span>*<span class="hljs-number">1024</span>][<span class="hljs-number">8</span>];</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">long</span> temp = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// Vertical traverse</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">8</span>; i ++)&#123;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">1024</span> * <span class="hljs-number">1024</span>; j++)&#123;</span><br><span class="line">                temp = arrs[j][i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="hljs-string">"Vertical traverse spending time: "</span> + (System.currentTimeMillis() - start) + <span class="hljs-string">"ms"</span>);</span><br><span class="line"></span><br><span class="line">        start = System.currentTimeMillis();</span><br><span class="line">        <span class="hljs-comment">// Horizontal traverse</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">1024</span> * <span class="hljs-number">1024</span>; i++)&#123;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">8</span>; j++)&#123;</span><br><span class="line">                temp = arrs[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="hljs-string">"Horizontal traverse spending time: "</span> + (System.currentTimeMillis() - start) + <span class="hljs-string">"ms"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上述代码中定义了一个二维数组，分别从横向遍历和纵向遍历了；两个方面来计算耗时，相信通过上面的代码大家也都能知道两种遍历方式耗时差距很大，结果确实是这样的：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Vertical traverse spending time: 75ms</span><br><span class="line">Horizontal traverse spending time: 13ms</span><br></pre></td></tr></table></figure>
-<p>看上面的输出结果，耗时差距确实很大，但是为什么会有这个大的差距呢？显然跟我们这篇文章的题目有关，那就是横向遍历充分利用了CPU高速缓存机制，使得遍历速度要快于纵向遍历，那么……</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/01/17/cpu-cache/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -485,7 +481,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        58
+                        59
                     </p>
                 </div>
             </div>
@@ -615,6 +611,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/03/01/netty-writeAndFlush/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-writeAndFlush">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-01T11:23:06.000Z">2019-03-01</time></div>
+                    <a href="/2019/03/01/netty-writeAndFlush/" class="has-link-black-ter is-size-6">netty-writeAndFlush</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/02/27/leetcode-single-number/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/gallery/images/LeetCode_Sharing.png" alt="【LeetCode】Single Number题解">
@@ -689,25 +704,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/02/18/netty-channelpipeline/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/images/cityscape-3995532_640.png" alt="Netty核心组件之ChannelPipeline">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T06:54:06.000Z">2019-02-18</time></div>
-                    <a href="/2019/02/18/netty-channelpipeline/" class="has-link-black-ter is-size-6">Netty核心组件之ChannelPipeline</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -719,6 +715,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/02/">
@@ -1244,6 +1251,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/03/01/netty-writeAndFlush/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-writeAndFlush">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-01T11:23:06.000Z">2019-03-01</time></div>
+                    <a href="/2019/03/01/netty-writeAndFlush/" class="has-link-black-ter is-size-6">netty-writeAndFlush</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/02/27/leetcode-single-number/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/gallery/images/LeetCode_Sharing.png" alt="【LeetCode】Single Number题解">
@@ -1318,25 +1344,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/02/18/netty-channelpipeline/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/images/cityscape-3995532_640.png" alt="Netty核心组件之ChannelPipeline">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T06:54:06.000Z">2019-02-18</time></div>
-                    <a href="/2019/02/18/netty-channelpipeline/" class="has-link-black-ter is-size-6">Netty核心组件之ChannelPipeline</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1348,6 +1355,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/02/">

@@ -2,7 +2,7 @@
 <html lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>ITechHub</title>
+<title>Archives: 2019/3 - ITechHub</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
@@ -10,7 +10,7 @@
     <meta name="description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ITechHub">
-<meta property="og:url" content="https://shuaijunlan.github.io/page/7/index.html">
+<meta property="og:url" content="https://shuaijunlan.github.io/archives/2019/03/index.html">
 <meta property="og:site_name" content="ITechHub">
 <meta property="og:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
 <meta property="og:locale" content="en">
@@ -140,303 +140,34 @@ var _hmt = _hmt || [];
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-    <div class="card">
-    
-    <div class="card-content article ">
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="tag is-link">
+        March 2019
+        </h3>
+        <div class="timeline">
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-08-03T10:38:48.000Z">2018-08-03</time>
+            <article class="media">
                 
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    13 minutes read (About 2007 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/08/03/java-spi-introduction/">深入理解Java SPI机制</a>
-            
-        </h1>
-        <div class="content">
-            <p> SPI的全名为Service Provider Interface，在java.util.ServiceLoader的<a href="https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html" target="_blank" rel="noopener">文档:https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html</a>中有比较详细的介绍。究其思想，其实和<code>Callback</code>差不多。<code>Callback</code>的思想是我们在调用API的时候，我们可以写入一段逻辑代码传到API里面，API内部在合适的时候会调用它，从而实现某种程度上的“定制”。</p>
-<p>典型的是<code>Collections.sort(List&lt;T&gt; list,Comparator&lt;? super T&gt; c)</code>这个方法，它的第二个参数是一个实现Comparator接口的实例。我们可以根据自己的排序规则写一个类，实现此接口，传入此方法，那么这个方法就会根据我们的规则对list进行排序。</p>
-<h4 id="Java-SPI的具体约定如下"><a href="#Java-SPI的具体约定如下" class="headerlink" title="Java SPI的具体约定如下"></a>Java SPI的具体约定如下</h4><p>当服务的提供者，提供了服务接口的一种实现之后，在jar包的META-INF/services/目录里同时创建一个以服务接口命名的文件。该文件里就是实现该服务接口的具体实现类。而当外部程序装配这个模块的时候，就能通过该jar包META-INF/services/里的配置文件找到具体的实现类名，并装载实例化，完成模块的注入。 </p>
-<p>基于这样一个约定就能很好的找到服务接口的实现类，而不需要再代码里制定。</p>
-<p>JDK提供服务实现查找的一个工具类：<strong>java.util.ServiceLoader</strong></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/08/03/java-spi-introduction/#more">Read More</a>
+                <div class="media-content">
+                    <div class="content">
+                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-03-01T11:23:06.000Z">2019-03-01</time>
+                        <a href="/2019/03/01/netty-writeAndFlush/" class="has-link-black-ter is-size-6">netty-writeAndFlush</a>
+                        <div class="level article-meta is-mobile">
+                            <div class="level-left">
+                                
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </article>
+        
         </div>
-        
-        
     </div>
 </div>
 
 
 
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-08-02T08:22:08.000Z">2018-08-02</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a minute read (About 161 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/08/02/dubbo-proxy-basing-on-javassist/">Dubbo基于Javassist实现动态代理分析</a>
-            
-        </h1>
-        <div class="content">
-            <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">org.apache.dubbo.common.bytecode.Proxy	//生成代理类</span><br><span class="line">org.apache.dubbo.common.bytecode.ClassGenerator  //基于javassist封装</span><br><span class="line"></span><br><span class="line">org.apache.dubbo.common.utils.ClassHelper;  //工具类</span><br><span class="line">org.apache.dubbo.common.utils.ReflectUtils;	//工具类</span><br></pre></td></tr></table></figure>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// create ProxyInstance class.</span></span><br><span class="line"><span class="hljs-comment">//生成代理类的实例</span></span><br><span class="line">String pcn = pkg + <span class="hljs-string">".proxy"</span> + id;</span><br><span class="line">ccp.setClassName(pcn);</span><br><span class="line">ccp.addField(<span class="hljs-string">"public static java.lang.reflect.Method[] methods;"</span>);</span><br><span class="line">ccp.addField(<span class="hljs-string">"private "</span> + InvocationHandler.class.getName() + <span class="hljs-string">" handler;"</span>);</span><br><span class="line">ccp.addConstructor(Modifier.PUBLIC, <span class="hljs-keyword">new</span> Class&lt;?&gt;[]&#123;InvocationHandler.class&#125;, <span class="hljs-keyword">new</span> Class&lt;?&gt;[<span class="hljs-number">0</span>], <span class="hljs-string">"handler=$1;"</span>);</span><br><span class="line">ccp.addDefaultConstructor();</span><br><span class="line">Class&lt;?&gt; clazz = ccp.toClass();</span><br><span class="line">clazz.getField(<span class="hljs-string">"methods"</span>).set(<span class="hljs-keyword">null</span>, methods.toArray(<span class="hljs-keyword">new</span> Method[<span class="hljs-number">0</span>]));</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// create Proxy class.</span></span><br><span class="line"><span class="hljs-comment">//生成代理类，通过调用newInstance()方法获取实例</span></span><br><span class="line">String fcn = Proxy.class.getName() + id;</span><br><span class="line">ccm = ClassGenerator.newInstance(cl);</span><br><span class="line">ccm.setClassName(fcn);</span><br><span class="line">ccm.addDefaultConstructor();</span><br><span class="line">ccm.setSuperClass(Proxy.class);</span><br><span class="line">ccm.addMethod(<span class="hljs-string">"public Object newInstance("</span> + InvocationHandler.class.getName() + <span class="hljs-string">" h)&#123; return new "</span> + pcn + <span class="hljs-string">"($1); &#125;"</span>);</span><br><span class="line">Class&lt;?&gt; pc = ccm.toClass();</span><br><span class="line">proxy = (Proxy) pc.newInstance();</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-07-25T02:18:35.000Z">2018-07-25</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a few seconds read (About 1 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/07/25/spring-cloud-microservice-demo/">基于Spring Cloud搭建微服务架构完整示例</a>
-            
-        </h1>
-        <div class="content">
-            <p>ddd</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-07-24T07:38:09.000Z">2018-07-24</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 minutes read (About 411 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/07/24/netty-bytebuf-data-container/">Netty数据容器---ByteBuf</a>
-            
-        </h1>
-        <div class="content">
-            <h3 id="ByteBuf工作原理"><a href="#ByteBuf工作原理" class="headerlink" title="ByteBuf工作原理"></a>ByteBuf工作原理</h3><p>ByteBuf维护了两个不同的索引：一个用于读取，一个用于写入。当从ByteBuf读取数据时，它的readerINdex将会递增已被读取的字节数。同样的，当你写入ByteBuf的时候，它的writerIndex也会被递增。</p>
-<p><img src="https://shuaijunlan.github.io/images/Screenshot from 2018-07-24 16-02-04.png" alt=""></p>
-<p>上图中表示的是一个读索引和写索引都设置为0的16字节ByteBuf，若果试图访问超出writerIndex范围的数据将会触发一个IndexOutOfBoundsException异常。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/07/24/netty-bytebuf-data-container/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-07-22T08:19:51.000Z">2018-07-22</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 minutes read (About 437 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/07/22/netty-transport-methods/">Netty内置传输方式</a>
-            
-        </h1>
-        <div class="content">
-            <p>Netty中内置的传输方式主要包括：NIO、Epoll、OIO、Local和Embedded等方式，总结如下：</p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>包名</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>NIO</td>
-<td>io.netty.channel.socket.io</td>
-<td>使用java.nio.channels包作为基础，基于选择器的方式</td>
-</tr>
-<tr>
-<td>Epoll</td>
-<td>io.netty.channel.epoll</td>
-<td>由JNI驱动的epoll()和非阻塞IO，这种传输只有Linux才支持，比NIO传输速度更快，而且是完全非阻塞的</td>
-</tr>
-<tr>
-<td>OIO</td>
-<td>io.netty.channel.socket.oio</td>
-<td>使用java.net包作为基础</td>
-</tr>
-<tr>
-<td>Local</td>
-<td>io.netty.channel.local</td>
-<td>可以在VM内部通过管道进行通信的本地传输</td>
-</tr>
-<tr>
-<td>Embedded</td>
-<td>io.netty.channel.socket.embedded</td>
-<td>Embedded 传输，允许使用 ChannelHandler 而又不需要一个真正的基于网络的传输，测试ChannelHandler实现的时候非常有用</td>
-</tr>
-</tbody>
-</table>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/07/22/netty-transport-methods/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-    
-<div class="card card-transparent">
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/page/6/">Previous</a>
-        </div>
-        <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/page/8/">Next</a>
-        </div>
-        <ul class="pagination-list is-hidden-mobile">
-            
-            <li><a class="pagination-link has-text-black-ter" href="/">1</a></li>
-            
-            <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/page/6/">6</a></li>
-            
-            <li><a class="pagination-link is-current" href="/page/7/">7</a></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/page/8/">8</a></li>
-            
-            <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/page/12/">12</a></li>
-            
-        </ul>
-    </nav>
-</div>
 </div>
                 
 

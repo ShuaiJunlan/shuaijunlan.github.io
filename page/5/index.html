@@ -146,6 +146,56 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-11T01:03:18.000Z">2018-10-11</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    17 minutes read (About 2476 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/11/java-thread-pool/">Java线程池分析</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="基于ThreadPoolExecutor构造线程池"><a href="#基于ThreadPoolExecutor构造线程池" class="headerlink" title="基于ThreadPoolExecutor构造线程池"></a>基于ThreadPoolExecutor构造线程池</h3><p>我们来看一下ThreadPoolExecutor类的构造函数，一共需要传入7个参数，下面的注释中有详细的解释：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ThreadPoolExecutor</span><span class="hljs-params">(<span class="hljs-keyword">int</span> corePoolSize,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">                          <span class="hljs-keyword">int</span> maximumPoolSize,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">                          <span class="hljs-keyword">long</span> keepAliveTime,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">                          TimeUnit unit,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">                          BlockingQueue&lt;Runnable&gt; workQueue,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">                          ThreadFactory threadFactory,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">                          RejectedExecutionHandler handler)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">//先判断参数是否合法</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (corePoolSize &lt; <span class="hljs-number">0</span> ||</span><br><span class="line">        maximumPoolSize &lt;= <span class="hljs-number">0</span> ||</span><br><span class="line">        maximumPoolSize &lt; corePoolSize ||</span><br><span class="line">        keepAliveTime &lt; <span class="hljs-number">0</span>)</span><br><span class="line">        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException();</span><br><span class="line">    <span class="hljs-keyword">if</span> (workQueue == <span class="hljs-keyword">null</span> || threadFactory == <span class="hljs-keyword">null</span> || handler == <span class="hljs-keyword">null</span>)</span><br><span class="line">        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();</span><br><span class="line">    <span class="hljs-keyword">this</span>.acc = System.getSecurityManager() == <span class="hljs-keyword">null</span> ?</span><br><span class="line">        <span class="hljs-keyword">null</span> :</span><br><span class="line">    	AccessController.getContext();</span><br><span class="line">    <span class="hljs-comment">//核心线程数量</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.corePoolSize = corePoolSize;</span><br><span class="line">    <span class="hljs-comment">//最大线程数量</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.maximumPoolSize = maximumPoolSize;</span><br><span class="line">    <span class="hljs-comment">//工作队列</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.workQueue = workQueue;</span><br><span class="line">    <span class="hljs-comment">//保活时间，unit为时间单位，转换为秒</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.keepAliveTime = unit.toNanos(keepAliveTime);、</span><br><span class="line">    <span class="hljs-comment">//线程工厂</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.threadFactory = threadFactory;</span><br><span class="line">    <span class="hljs-comment">//拒绝策略</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.handler = handler;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>工作队列使用的是一种阻塞队列，<strong>关于阻塞队列的实现我将会在另一片文章中详细讲解</strong>。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/10/11/java-thread-pool/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-09-24T02:57:36.000Z">2018-09-24</time>
                 
                 
@@ -333,56 +383,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-09-09T12:24:34.000Z">2018-09-09</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    43 minutes read (About 6489 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/09/09/dubbo-provider-calling-process-source-code-analysis/">Dubbo服务提供者发布及注册过程源码分析</a>
-            
-        </h1>
-        <div class="content">
-            <p>Dubbo服务端在启动服务时会经历怎样的调用过程？在收到消费者发送的请求后会经历怎样的调用过程？这篇文章主要针对以上两个调用过程并结合Dubbo源码进行分析。</p>
-<p>我们采用的是<a href="https://github.com/shuaijunlan/Spring-Learning/tree/master/dubbo" target="_blank" rel="noopener"><strong>Consumer-Provider的Demo</strong></a>提供的示例，并按照<a href="https://shuaijunlan.github.io/2018/08/05/dubbo-consumer-calling-process-source-code-analysis/">《Dubbo消费者调用过程源码分析》</a>中的分析思路，下面将对两种过程进行进一步分析，先来看一张服务发布过程的时序图(图片太大建议在新的窗口打开查看)，对服务发布与注册有个大致的了解：</p>
-<p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/dubbo-provider.png?raw=true" alt=""></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/09/09/dubbo-provider-calling-process-source-code-analysis/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -457,7 +457,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        58
+                        59
                     </p>
                 </div>
             </div>
@@ -587,6 +587,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/03/01/netty-writeAndFlush/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-writeAndFlush">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-01T11:23:06.000Z">2019-03-01</time></div>
+                    <a href="/2019/03/01/netty-writeAndFlush/" class="has-link-black-ter is-size-6">netty-writeAndFlush</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/02/27/leetcode-single-number/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/gallery/images/LeetCode_Sharing.png" alt="【LeetCode】Single Number题解">
@@ -661,25 +680,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/02/18/netty-channelpipeline/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/images/cityscape-3995532_640.png" alt="Netty核心组件之ChannelPipeline">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T06:54:06.000Z">2019-02-18</time></div>
-                    <a href="/2019/02/18/netty-channelpipeline/" class="has-link-black-ter is-size-6">Netty核心组件之ChannelPipeline</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -691,6 +691,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/02/">
@@ -1216,6 +1227,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/03/01/netty-writeAndFlush/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-writeAndFlush">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-01T11:23:06.000Z">2019-03-01</time></div>
+                    <a href="/2019/03/01/netty-writeAndFlush/" class="has-link-black-ter is-size-6">netty-writeAndFlush</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/02/27/leetcode-single-number/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/gallery/images/LeetCode_Sharing.png" alt="【LeetCode】Single Number题解">
@@ -1290,25 +1320,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/02/18/netty-channelpipeline/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/images/cityscape-3995532_640.png" alt="Netty核心组件之ChannelPipeline">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T06:54:06.000Z">2019-02-18</time></div>
-                    <a href="/2019/02/18/netty-channelpipeline/" class="has-link-black-ter is-size-6">Netty核心组件之ChannelPipeline</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1320,6 +1331,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/02/">
