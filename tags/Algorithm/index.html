@@ -168,7 +168,7 @@ var _hmt = _hmt || [];
                 <span class="level-item has-text-grey">
                     
                     
-                    4 minutes read (About 574 words)
+                    4 minutes read (About 590 words)
                 </span>
                 
                 
@@ -204,6 +204,8 @@ var _hmt = _hmt || [];
 </blockquote>
 <p>题目大意：已知一个数组，其中有两个数字在这个数组中只出现一次，其他数字都出现了两次，找出这两个只出现一次的数字，可以通过创建一个HashSet，然后遍历数组，如果HashSet中存在该数字，则从HashSet中删除该数字，最后HashSet会剩下两个数字，这两个数字就是只出现一次的数字：</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] singleNumber(<span class="hljs-keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (nums == <span class="hljs-keyword">null</span>)&#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        HashSet&lt;Integer&gt; hashSet = <span class="hljs-keyword">new</span> HashSet&lt;&gt;(nums.length);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> num : nums) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (!hashSet.add(num)) &#123;</span><br><span class="line">                hashSet.remove(num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">int</span>[] re = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">2</span>];</span><br><span class="line">        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (Integer integer : hashSet) &#123;</span><br><span class="line">            re[i++] = integer;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> re;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度：O(n)</p>
+<p>空间复杂度：O(n)</p>
 
         </div>
         
