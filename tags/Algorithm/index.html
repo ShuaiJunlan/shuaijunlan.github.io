@@ -2,23 +2,21 @@
 <html lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>【LeetCode】Single Number题解 - ITechHub</title>
+<title>Tag: Algorithm - ITechHub</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="Single Number I https://leetcode.com/problems/single-number/  Single Number II https://leetcode.com/problems/single-number-ii/   LeetCode] Single Number II 单独的数字之二  Single Number III https://leetcode.">
-<meta name="keywords" content="Algorithm,LeetCode">
+    <meta name="description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
 <meta property="og:type" content="website">
-<meta property="og:title" content="【LeetCode】Single Number题解">
-<meta property="og:url" content="https://shuaijunlan.github.io/todo/leetcode-single-number.html">
+<meta property="og:title" content="ITechHub">
+<meta property="og:url" content="https://shuaijunlan.github.io/tags/Algorithm/index.html">
 <meta property="og:site_name" content="ITechHub">
-<meta property="og:description" content="Single Number I https://leetcode.com/problems/single-number/  Single Number II https://leetcode.com/problems/single-number-ii/   LeetCode] Single Number II 单独的数字之二  Single Number III https://leetcode.">
+<meta property="og:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-27T12:21:42.297Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【LeetCode】Single Number题解">
-<meta name="twitter:description" content="Single Number I https://leetcode.com/problems/single-number/  Single Number II https://leetcode.com/problems/single-number-ii/   LeetCode] Single Number II 单独的数字之二  Single Number III https://leetcode.">
+<meta name="twitter:title" content="ITechHub">
+<meta name="twitter:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
 <meta name="twitter:creator" content="@https:&#x2F;&#x2F;twitter.com&#x2F;ShuaiJunlan">
 
 
@@ -105,7 +103,7 @@ var _hmt = _hmt || [];
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.png" alt="【LeetCode】Single Number题解" height="28">
+                <img src="/images/logo.png" alt="ITechHub" height="28">
             
             </a>
         </div>
@@ -128,10 +126,6 @@ var _hmt = _hmt || [];
             <div class="navbar-end">
                 
                 
-                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
-                    <i class="fas fa-list-ul"></i>
-                </a>
-                
                 
                 <a class="navbar-item search" title="Search" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -146,56 +140,74 @@ var _hmt = _hmt || [];
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    <div class="card-content">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/tags">Tags</a></li>
+            <li class="is-active"><a href="#" aria-current="page">Algorithm</a></li>
+        </ul>
+        </nav>
+    </div>
+</div>
+
+    <div class="card">
     
     <div class="card-image">
-        <span class="image is-7by1">
+        <a href="/2019/02/27/leetcode-single-number/" class="image is-7by1">
             <img class="thumbnail" src="/gallery/images/LeetCode_Sharing.png" alt="【LeetCode】Single Number题解">
-        </span>
+        </a>
     </div>
     
     <div class="card-content article ">
         
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-02-27T12:09:40.000Z">2019-02-27</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 minutes read (About 574 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                【LeetCode】Single Number题解
+                <a class="has-link-black-ter" href="/2019/02/27/leetcode-single-number/">【LeetCode】Single Number题解</a>
             
         </h1>
         <div class="content">
             <h3 id="Single-Number-I"><a href="#Single-Number-I" class="headerlink" title="Single Number I"></a>Single Number I</h3><blockquote>
-<p><a href="https://leetcode.com/problems/single-number/" target="_blank" rel="noopener">https://leetcode.com/problems/single-number/</a></p>
+<p>原题链接：<a href="https://leetcode.com/problems/single-number/" target="_blank" rel="noopener">https://leetcode.com/problems/single-number/</a></p>
 </blockquote>
+<p>这个题目的大意就是，在一个数组中只有一个数字出现一次，其他数字都出现了两次；</p>
+<p>这题的解题思路比较简单，我们知道如果两个相同的数异或运算之后结果为0，也就是n^n=0，借助这个思路，我们就可以遍历数组，对每个数都进行一次异或运算，最后得到的结果就是那个出现一次的数字，看一下代码：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">singleNumber</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (nums == <span class="hljs-keyword">null</span>)&#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">int</span> sum  = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            sum ^= nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度：O(n)</p>
+<p>空间复杂度：O(1)</p>
 <h3 id="Single-Number-II"><a href="#Single-Number-II" class="headerlink" title="Single Number II"></a>Single Number II</h3><blockquote>
-<p><a href="https://leetcode.com/problems/single-number-ii/" target="_blank" rel="noopener">https://leetcode.com/problems/single-number-ii/</a></p>
+<p>原题链接：<a href="https://leetcode.com/problems/single-number-ii/" target="_blank" rel="noopener">https://leetcode.com/problems/single-number-ii/</a></p>
 </blockquote>
-<ul>
+<p>这题的大意就是，一个数组中只有一个数字出现一次，其他数组出现三次，这题是上一题的加强版，依然可以采用位运算的思路；因为这是一个int数组（long数组同理），我们可以算出每一位1出现的次数，然后对3取余，最后相加得到的结果就是出现一次的那个数字：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">singleNumber</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (nums == <span class="hljs-keyword">null</span>)&#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">int</span> res = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">32</span>; i++)&#123;</span><br><span class="line">            <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; nums.length; j++)&#123;</span><br><span class="line">                sum += (nums[j] &gt;&gt; i) &amp; <span class="hljs-number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            res += ((sum % <span class="hljs-number">3</span>) &lt;&lt; i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度：O(n)</p>
+<p>空间复杂度：O(1)</p>
+<h4 id="References"><a href="#References" class="headerlink" title="References"></a>References</h4><ul>
 <li><a href="https://www.cnblogs.com/grandyang/p/4263927.html" target="_blank" rel="noopener">LeetCode] Single Number II 单独的数字之二</a></li>
 </ul>
 <h3 id="Single-Number-III"><a href="#Single-Number-III" class="headerlink" title="Single Number III"></a>Single Number III</h3><blockquote>
-<p><a href="https://leetcode.com/problems/single-number-iii/" target="_blank" rel="noopener">https://leetcode.com/problems/single-number-iii/</a></p>
+<p>原题链接：<a href="https://leetcode.com/problems/single-number-iii/" target="_blank" rel="noopener">https://leetcode.com/problems/single-number-iii/</a></p>
 </blockquote>
+<p>题目大意：已知一个数组，其中有两个数字在这个数组中只出现一次，其他数字都出现了两次，找出这两个只出现一次的数字，可以通过创建一个HashSet，然后遍历数组，如果HashSet中存在该数字，则从HashSet中删除该数字，最后HashSet会剩下两个数字，这两个数字就是只出现一次的数字：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] singleNumber(<span class="hljs-keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (nums == <span class="hljs-keyword">null</span>)&#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        HashSet&lt;Integer&gt; hashSet = <span class="hljs-keyword">new</span> HashSet&lt;&gt;(nums.length);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> num : nums) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (!hashSet.add(num)) &#123;</span><br><span class="line">                hashSet.remove(num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">int</span>[] re = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">2</span>];</span><br><span class="line">        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (Integer integer : hashSet) &#123;</span><br><span class="line">            re[i++] = integer;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> re;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
         
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/">undefined</a>, <a class="has-link-grey -link" href="/">undefined</a>
-                </div>
-            </div>
-        </div>
         
-        
-        
-        <!-- AddToAny BEGIN -->
-<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
-<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
-<a class="a2a_button_facebook"></a>
-<a class="a2a_button_twitter"></a>
-<a class="a2a_button_google_plus"></a>
-</div>
-<script async src="https://static.addtoany.com/menu/page.js"></script>
-<!-- AddToAny END -->
         
     </div>
 </div>
@@ -206,29 +218,7 @@ var _hmt = _hmt || [];
 
 
 
-<div class="card">
-    <div class="card-content">
-        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
-        
-<script>
-    var disqus_config = function () {
-        this.page.url = 'https://shuaijunlan.github.io/todo/leetcode-single-number.html';
-        this.page.identifier = 'todo/leetcode-single-number.html';
-    };
-    (function() {
-        var d = document, s = d.createElement('script');  
-        s.src = '//' + 'shuaijunlan' + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
 
-<div id="disqus_thread">
-    
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-    </div>
-</div>
 </div>
                 
 
@@ -238,29 +228,6 @@ var _hmt = _hmt || [];
 <div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
     
         
-<div class="card widget" id="toc">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                Catalogue
-            </h3>
-            <ul class="menu-list"><li>
-        <a class="is-flex" href="#Single-Number-I">
-        <span class="has-mr-6">1</span>
-        <span>Single Number I</span>
-        </a></li><li>
-        <a class="is-flex" href="#Single-Number-II">
-        <span class="has-mr-6">2</span>
-        <span>Single Number II</span>
-        </a></li><li>
-        <a class="is-flex" href="#Single-Number-III">
-        <span class="has-mr-6">3</span>
-        <span>Single Number III</span>
-        </a></li></ul>
-        </div>
-    </div>
-</div>
-
     
         
 <div class="card widget">
@@ -297,7 +264,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        57
+                        58
                     </p>
                 </div>
             </div>
@@ -317,7 +284,7 @@ var _hmt = _hmt || [];
                         Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        27
+                        29
                     </p>
                 </div>
             </div>
@@ -410,7 +377,7 @@ var _hmt = _hmt || [];
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/AQS/" style="font-size: 10px;">AQS</a> <a href="/tags/CentOS/" style="font-size: 13.33px;">CentOS</a> <a href="/tags/DirectIO/" style="font-size: 10px;">DirectIO</a> <a href="/tags/KVM/" style="font-size: 13.33px;">KVM</a> <a href="/tags/LRU/" style="font-size: 10px;">LRU</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Micro-Service/" style="font-size: 10px;">Micro Service</a> <a href="/tags/MutliThread/" style="font-size: 13.33px;">MutliThread</a> <a href="/tags/MyBatis3/" style="font-size: 10px;">MyBatis3</a> <a href="/tags/Netty/" style="font-size: 16.67px;">Netty</a> <a href="/tags/SPI/" style="font-size: 10px;">SPI</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a> <a href="/tags/WebSystem/" style="font-size: 10px;">WebSystem</a> <a href="/tags/cache/" style="font-size: 13.33px;">cache</a> <a href="/tags/cpu/" style="font-size: 10px;">cpu</a> <a href="/tags/dubbo/" style="font-size: 16.67px;">dubbo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/javassist/" style="font-size: 10px;">javassist</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/mmap/" style="font-size: 10px;">mmap</a> <a href="/tags/nio/" style="font-size: 13.33px;">nio</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/网络配置/" style="font-size: 10px;">网络配置</a> <a href="/tags/虚拟化/" style="font-size: 10px;">虚拟化</a>
+        <a href="/tags/AQS/" style="font-size: 10px;">AQS</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CentOS/" style="font-size: 13.33px;">CentOS</a> <a href="/tags/DirectIO/" style="font-size: 10px;">DirectIO</a> <a href="/tags/KVM/" style="font-size: 13.33px;">KVM</a> <a href="/tags/LRU/" style="font-size: 10px;">LRU</a> <a href="/tags/LeetCode/" style="font-size: 10px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Micro-Service/" style="font-size: 10px;">Micro Service</a> <a href="/tags/MutliThread/" style="font-size: 13.33px;">MutliThread</a> <a href="/tags/MyBatis3/" style="font-size: 10px;">MyBatis3</a> <a href="/tags/Netty/" style="font-size: 16.67px;">Netty</a> <a href="/tags/SPI/" style="font-size: 10px;">SPI</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a> <a href="/tags/WebSystem/" style="font-size: 10px;">WebSystem</a> <a href="/tags/cache/" style="font-size: 13.33px;">cache</a> <a href="/tags/cpu/" style="font-size: 10px;">cpu</a> <a href="/tags/dubbo/" style="font-size: 16.67px;">dubbo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/javassist/" style="font-size: 10px;">javassist</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/mmap/" style="font-size: 10px;">mmap</a> <a href="/tags/nio/" style="font-size: 13.33px;">nio</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/网络配置/" style="font-size: 10px;">网络配置</a> <a href="/tags/虚拟化/" style="font-size: 10px;">虚拟化</a>
     </div>
 </div>
 
@@ -437,6 +404,25 @@ var _hmt = _hmt || [];
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-01T11:23:06.000Z">2019-03-01</time></div>
                     <a href="/2019/03/01/netty-writeAndFlush/" class="has-link-black-ter is-size-6">netty-writeAndFlush</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/27/leetcode-single-number/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/images/LeetCode_Sharing.png" alt="【LeetCode】Single Number题解">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-27T12:09:40.000Z">2019-02-27</time></div>
+                    <a href="/2019/02/27/leetcode-single-number/" class="has-link-black-ter is-size-6">【LeetCode】Single Number题解</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -501,25 +487,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/01/31/netty-client-side-connection/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/0_Yh9Qi3lXcMb7Dwol.jpeg" alt="Netty客户端连接过程源码分析">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-31T03:41:34.000Z">2019-01-31</time></div>
-                    <a href="/2019/01/31/netty-client-side-connection/" class="has-link-black-ter is-size-6">Netty客户端连接过程源码分析</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -549,7 +516,7 @@ var _hmt = _hmt || [];
                     <span class="level-item">February 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -847,6 +814,13 @@ var _hmt = _hmt || [];
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/Algorithm/">
+                        <span class="tag">Algorithm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">2</span>
@@ -870,6 +844,13 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/LRU/">
                         <span class="tag">LRU</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LeetCode/">
+                        <span class="tag">LeetCode</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1072,6 +1053,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/02/27/leetcode-single-number/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/images/LeetCode_Sharing.png" alt="【LeetCode】Single Number题解">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-27T12:09:40.000Z">2019-02-27</time></div>
+                    <a href="/2019/02/27/leetcode-single-number/" class="has-link-black-ter is-size-6">【LeetCode】Single Number题解</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/02/27/java-hashmap-hashtable-concurrenthashmap/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/gallery/images/natural-4013464_640.jpg" alt="HashMap&amp;HashTable&amp;ConcurrentHashMap (jdk1.8)">
@@ -1127,25 +1127,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/01/31/netty-client-side-connection/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/0_Yh9Qi3lXcMb7Dwol.jpeg" alt="Netty客户端连接过程源码分析">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-31T03:41:34.000Z">2019-01-31</time></div>
-                    <a href="/2019/01/31/netty-client-side-connection/" class="has-link-black-ter is-size-6">Netty客户端连接过程源码分析</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1175,7 +1156,7 @@ var _hmt = _hmt || [];
                     <span class="level-item">February 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1473,6 +1454,13 @@ var _hmt = _hmt || [];
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/Algorithm/">
+                        <span class="tag">Algorithm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">2</span>
@@ -1496,6 +1484,13 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/LRU/">
                         <span class="tag">LRU</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LeetCode/">
+                        <span class="tag">LeetCode</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1671,7 +1666,7 @@ var _hmt = _hmt || [];
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.png" alt="【LeetCode】Single Number题解" height="28">
+                    <img src="/images/logo.png" alt="ITechHub" height="28">
                 
                 </a>
                 <p class="is-size-7">
