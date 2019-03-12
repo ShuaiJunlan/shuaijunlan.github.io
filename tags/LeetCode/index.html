@@ -168,7 +168,7 @@ var _hmt = _hmt || [];
                 <span class="level-item has-text-grey">
                     
                     
-                    4 minutes read (About 590 words)
+                    4 minutes read (About 591 words)
                 </span>
                 
                 
@@ -186,29 +186,16 @@ var _hmt = _hmt || [];
 </blockquote>
 <p>这个题目的大意就是，在一个数组中只有一个数字出现一次，其他数字都出现了两次；</p>
 <p>这题的解题思路比较简单，我们知道如果两个相同的数异或运算之后结果为0，也就是n^n=0，借助这个思路，我们就可以遍历数组，对每个数都进行一次异或运算，最后得到的结果就是那个出现一次的数字，看一下代码：</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">singleNumber</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (nums == <span class="hljs-keyword">null</span>)&#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">int</span> sum  = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            sum ^= nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>时间复杂度：O(n)</p>
-<p>空间复杂度：O(1)</p>
-<h3 id="Single-Number-II"><a href="#Single-Number-II" class="headerlink" title="Single Number II"></a>Single Number II</h3><blockquote>
-<p>原题链接：<a href="https://leetcode.com/problems/single-number-ii/" target="_blank" rel="noopener">https://leetcode.com/problems/single-number-ii/</a></p>
-</blockquote>
-<p>这题的大意就是，一个数组中只有一个数字出现一次，其他数组出现三次，这题是上一题的加强版，依然可以采用位运算的思路；因为这是一个int数组（long数组同理），我们可以算出每一位1出现的次数，然后对3取余，最后相加得到的结果就是出现一次的那个数字：</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">singleNumber</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (nums == <span class="hljs-keyword">null</span>)&#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">int</span> res = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">32</span>; i++)&#123;</span><br><span class="line">            <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; nums.length; j++)&#123;</span><br><span class="line">                sum += (nums[j] &gt;&gt; i) &amp; <span class="hljs-number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            res += ((sum % <span class="hljs-number">3</span>) &lt;&lt; i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>时间复杂度：O(n)</p>
-<p>空间复杂度：O(1)</p>
-<h4 id="References"><a href="#References" class="headerlink" title="References"></a>References</h4><ul>
-<li><a href="https://www.cnblogs.com/grandyang/p/4263927.html" target="_blank" rel="noopener">LeetCode] Single Number II 单独的数字之二</a></li>
-</ul>
-<h3 id="Single-Number-III"><a href="#Single-Number-III" class="headerlink" title="Single Number III"></a>Single Number III</h3><blockquote>
-<p>原题链接：<a href="https://leetcode.com/problems/single-number-iii/" target="_blank" rel="noopener">https://leetcode.com/problems/single-number-iii/</a></p>
-</blockquote>
-<p>题目大意：已知一个数组，其中有两个数字在这个数组中只出现一次，其他数字都出现了两次，找出这两个只出现一次的数字，可以通过创建一个HashSet，然后遍历数组，如果HashSet中存在该数字，则从HashSet中删除该数字，最后HashSet会剩下两个数字，这两个数字就是只出现一次的数字：</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] singleNumber(<span class="hljs-keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (nums == <span class="hljs-keyword">null</span>)&#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        HashSet&lt;Integer&gt; hashSet = <span class="hljs-keyword">new</span> HashSet&lt;&gt;(nums.length);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> num : nums) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (!hashSet.add(num)) &#123;</span><br><span class="line">                hashSet.remove(num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">int</span>[] re = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">2</span>];</span><br><span class="line">        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (Integer integer : hashSet) &#123;</span><br><span class="line">            re[i++] = integer;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> re;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>时间复杂度：O(n)</p>
-<p>空间复杂度：O(n)</p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/02/27/leetcode-single-number/#more">Read More</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
