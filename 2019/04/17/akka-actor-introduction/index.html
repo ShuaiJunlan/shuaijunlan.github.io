@@ -2,26 +2,22 @@
 <html lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Netty中Future与Promise的实现分析 - ITechHub</title>
+<title>akka-actor-introduction - ITechHub</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="从Java 1.5开始，JDK就提供了Callable和Future，通过它们可以在任务异步执行完毕之后获取任务的执行结果。 Netty扩展了JDK中的Future机制，下面我们来看一张Netty中Future和Promise类关系图：">
-<meta name="keywords" content="Netty">
+    <meta name="description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Netty中Future与Promise的实现分析">
-<meta property="og:url" content="https://shuaijunlan.github.io/2018/09/06/netty-future-and-promise/index.html">
+<meta property="og:title" content="akka-actor-introduction">
+<meta property="og:url" content="https://shuaijunlan.github.io/2019/04/17/akka-actor-introduction/index.html">
 <meta property="og:site_name" content="ITechHub">
-<meta property="og:description" content="从Java 1.5开始，JDK就提供了Callable和Future，通过它们可以在任务异步执行完毕之后获取任务的执行结果。 Netty扩展了JDK中的Future机制，下面我们来看一张Netty中Future和Promise类关系图：">
+<meta property="og:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/DefaultPromise.png?raw=true">
-<meta property="og:image" content="http://misc.linkedkeeper.com/misc/img/blog/201612/linkedkeeper0_c93937f4-f0f5-419e-a8b1-e71dc2288003.jpg">
-<meta property="og:updated_time" content="2019-01-17T08:37:16.067Z">
+<meta property="og:updated_time" content="2019-04-17T12:43:26.979Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Netty中Future与Promise的实现分析">
-<meta name="twitter:description" content="从Java 1.5开始，JDK就提供了Callable和Future，通过它们可以在任务异步执行完毕之后获取任务的执行结果。 Netty扩展了JDK中的Future机制，下面我们来看一张Netty中Future和Promise类关系图：">
-<meta name="twitter:image" content="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/DefaultPromise.png?raw=true">
+<meta name="twitter:title" content="akka-actor-introduction">
+<meta name="twitter:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
 <meta name="twitter:creator" content="@https:&#x2F;&#x2F;twitter.com&#x2F;ShuaiJunlan">
 
 
@@ -108,7 +104,7 @@ var _hmt = _hmt || [];
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.png" alt="Netty中Future与Promise的实现分析" height="28">
+                <img src="/images/logo.png" alt="akka-actor-introduction" height="28">
             
             </a>
         </div>
@@ -131,10 +127,6 @@ var _hmt = _hmt || [];
             <div class="navbar-end">
                 
                 
-                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
-                    <i class="fas fa-list-ul"></i>
-                </a>
-                
                 
                 <a class="navbar-item search" title="Search" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -154,13 +146,13 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-09-06T07:53:53.000Z">2018-09-06</time>
+                <time class="level-item has-text-grey" datetime="2019-04-17T12:43:26.000Z">2019-04-17</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    8 minutes read (About 1162 words)
+                    a few seconds read (About 0 words)
                 </span>
                 
                 
@@ -174,35 +166,11 @@ var _hmt = _hmt || [];
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Netty中Future与Promise的实现分析
+                akka-actor-introduction
             
         </h1>
         <div class="content">
-            <p>从Java 1.5开始，JDK就提供了Callable和Future，通过它们可以在任务异步执行完毕之后获取任务的执行结果。</p>
-<p>Netty扩展了JDK中的Future机制，下面我们来看一张Netty中Future和Promise类关系图：</p>
-<p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/DefaultPromise.png?raw=true" alt=""></p>
-<a id="more"></a>
-<p>最上面的Future是JDK提供的Future接口，我们看一下里面有哪些方法：</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> java.util.concurrent;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * A &#123;<span class="hljs-doctag">@code</span> Future&#125; represents the result of an asynchronous</span></span><br><span class="line"><span class="hljs-comment"> * computation.  Methods are provided to check if the computation is</span></span><br><span class="line"><span class="hljs-comment"> * complete, to wait for its completion, and to retrieve the result of</span></span><br><span class="line"><span class="hljs-comment"> * the computation.  The result can only be retrieved using method</span></span><br><span class="line"><span class="hljs-comment"> * &#123;<span class="hljs-doctag">@code</span> get&#125; when the computation has completed, blocking if</span></span><br><span class="line"><span class="hljs-comment"> * necessary until it is ready.  Cancellation is performed by the</span></span><br><span class="line"><span class="hljs-comment"> * &#123;<span class="hljs-doctag">@code</span> cancel&#125; method.  Additional methods are provided to</span></span><br><span class="line"><span class="hljs-comment"> * determine if the task completed normally or was cancelled. Once a</span></span><br><span class="line"><span class="hljs-comment"> * computation has completed, the computation cannot be cancelled.</span></span><br><span class="line"><span class="hljs-comment"> * If you would like to use a &#123;<span class="hljs-doctag">@code</span> Future&#125; for the sake</span></span><br><span class="line"><span class="hljs-comment"> * of cancellability but not provide a usable result, you can</span></span><br><span class="line"><span class="hljs-comment"> * declare types of the form &#123;<span class="hljs-doctag">@code</span> Future&lt;?&gt;&#125; and</span></span><br><span class="line"><span class="hljs-comment"> * return &#123;<span class="hljs-doctag">@code</span> null&#125; as a result of the underlying task.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Future</span>&lt;<span class="hljs-title">V</span>&gt; </span>&#123;</span><br><span class="line">	<span class="hljs-comment">//尝试取消执行的任务</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">cancel</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> mayInterruptIfRunning)</span></span>;</span><br><span class="line">	<span class="hljs-comment">//判断任务是否取消</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">isCancelled</span><span class="hljs-params">()</span></span>;</span><br><span class="line">	<span class="hljs-comment">//判断任务是否执行完成</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">isDone</span><span class="hljs-params">()</span></span>;</span><br><span class="line">	<span class="hljs-comment">//等待直到任务执行完成，并且返回结果</span></span><br><span class="line">    <span class="hljs-function">V <span class="hljs-title">get</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException</span>;</span><br><span class="line">	<span class="hljs-comment">//等待最大超时时间，如果执行完成则返回结果，否则抛出超时异常</span></span><br><span class="line">    <span class="hljs-function">V <span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-keyword">long</span> timeout, TimeUnit unit)</span></span></span><br><span class="line"><span class="hljs-function">        <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException, TimeoutException</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>并发编程中，我们通常会用到一组非阻塞的模型：Promise，Future 和 Callback。其中的 Future 表示一个可能还没有实际完成的异步任务的结果，针对这个结果可以添加 Callback 以便在任务执行成功或失败后做出对应的操作，而Promise交由任务执行者，任务执行者通过 Promise 可以标记任务完成或者失败。 这一套模型是很多异步非阻塞架构的基础。</strong> 因为netty中也有类似<code>调用者和执行部件以异步的方式交互通信结果</code>的需求（要知道eventloop本质上是一个ScheduledExecutorService，ExecutorService是一种“提交-执行”模型实现，也存在线程间异步方式通信和线程安全问题），所以netty自己实现了一套。</p>
-<p>Netty中所有的IO操作都是异步的（比如write(Object)，因为Netty中一个EventLoop要服务于多个SocketChannel，所以通过<code>socketChannel.xx</code>只是提交一个任务，何时返回结果是不确定的），而不像传统的BIO那样阻塞等待操作完成，来获取执行结果。</p>
-<p>事实上，Netty Future的建议操作模式就是赤裸裸的通知，执行部件改变状态时，会执行注册在future上的Listener（变相的观察者模式）。</p>
-<p>scala在语言层面提供对Promise，Future和Callback模型的支持，<code>https://bitbucket.org/qiyi/commons-future.git</code>作者自定义实现了该模型，去除了Netty的Future模型对EventLoop的依赖。</p>
-<h4 id="Netty中的Future"><a href="#Netty中的Future" class="headerlink" title="Netty中的Future"></a>Netty中的Future</h4><p>下面的Netty Future继承jdk提供的Future接口，添加了一些自己的方法：</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * The result of an asynchronous operation.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-meta">@SuppressWarnings</span>(<span class="hljs-string">"ClassNameSameAsAncestorName"</span>)</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Future</span>&lt;<span class="hljs-title">V</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">java</span>.<span class="hljs-title">util</span>.<span class="hljs-title">concurrent</span>.<span class="hljs-title">Future</span>&lt;<span class="hljs-title">V</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">isSuccess</span><span class="hljs-params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">isCancellable</span><span class="hljs-params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">Throwable <span class="hljs-title">cause</span><span class="hljs-params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">Future&lt;V&gt; <span class="hljs-title">addListener</span><span class="hljs-params">(GenericFutureListener&lt;? extends Future&lt;? <span class="hljs-keyword">super</span> V&gt;&gt; listener)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">Future&lt;V&gt; <span class="hljs-title">addListeners</span><span class="hljs-params">(GenericFutureListener&lt;? extends Future&lt;? <span class="hljs-keyword">super</span> V&gt;&gt;... listeners)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">Future&lt;V&gt; <span class="hljs-title">removeListener</span><span class="hljs-params">(GenericFutureListener&lt;? extends Future&lt;? <span class="hljs-keyword">super</span> V&gt;&gt; listener)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">Future&lt;V&gt; <span class="hljs-title">removeListeners</span><span class="hljs-params">(GenericFutureListener&lt;? extends Future&lt;? <span class="hljs-keyword">super</span> V&gt;&gt;... listeners)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">Future&lt;V&gt; <span class="hljs-title">sync</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">Future&lt;V&gt; <span class="hljs-title">syncUninterruptibly</span><span class="hljs-params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">Future&lt;V&gt; <span class="hljs-title">await</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">Future&lt;V&gt; <span class="hljs-title">awaitUninterruptibly</span><span class="hljs-params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">await</span><span class="hljs-params">(<span class="hljs-keyword">long</span> timeout, TimeUnit unit)</span> <span class="hljs-keyword">throws</span> InterruptedException</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">await</span><span class="hljs-params">(<span class="hljs-keyword">long</span> timeoutMillis)</span> <span class="hljs-keyword">throws</span> InterruptedException</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">awaitUninterruptibly</span><span class="hljs-params">(<span class="hljs-keyword">long</span> timeout, TimeUnit unit)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">awaitUninterruptibly</span><span class="hljs-params">(<span class="hljs-keyword">long</span> timeoutMillis)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">V <span class="hljs-title">getNow</span><span class="hljs-params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">cancel</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> mayInterruptIfRunning)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="http://misc.linkedkeeper.com/misc/img/blog/201612/linkedkeeper0_c93937f4-f0f5-419e-a8b1-e71dc2288003.jpg" alt=""></p>
-<p>a future is a read-only placeholder view of a variable, while a promise is a writable。Promise是可写的Future，提供写操作相关的接口，用于设置IO操作的结果。Future，Promise，callback抽象出一套调用者与执行部件间的通信模型（不只是netty中），<strong>Future像是给调用者用的（拿结果），Promise像是给执行部件用的（设置结果），它们简化了调用者和执行部件对其的调用（调用者get，执行部件set），但本身要封装很多事</strong>。比如Future必须是一个线程安全的类（大部分时候，调用者和执行部件身处两个线程），比如执行callback（或者listener）。</p>
-<h4 id="Netty-Promise执行Listener"><a href="#Netty-Promise执行Listener" class="headerlink" title="Netty Promise执行Listener"></a>Netty Promise执行Listener</h4><p>Netty中的Promise通常由EventLoop创建，也就是Promise通常会绑定executor。为何呢？<strong>因为Netty保证Listener的执行，一定是在channel对应的EventLoop中</strong>(????)。</p>
-
-        </div>
-        
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/Netty/">Netty</a>
-                </div>
-            </div>
+            
         </div>
         
         
@@ -227,17 +195,10 @@ var _hmt = _hmt || [];
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/09/09/dubbo-provider-calling-process-source-code-analysis/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Dubbo服务提供者发布及注册过程源码分析</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2018/08/13/dubbo-basing-on-spring-framework-analysis/">
-                <span class="level-item">基于Spring构建Dubbo源码分析</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/03/01/netty-writeAndFlush/">
+                <span class="level-item">netty-writeAndFlush</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -253,8 +214,8 @@ var _hmt = _hmt || [];
         
 <script>
     var disqus_config = function () {
-        this.page.url = 'https://shuaijunlan.github.io/2018/09/06/netty-future-and-promise/';
-        this.page.identifier = '2018/09/06/netty-future-and-promise/';
+        this.page.url = 'https://shuaijunlan.github.io/2019/04/17/akka-actor-introduction/';
+        this.page.identifier = '2019/04/17/akka-actor-introduction/';
     };
     (function() {
         var d = document, s = d.createElement('script');  
@@ -279,25 +240,6 @@ var _hmt = _hmt || [];
 <div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
     
         
-<div class="card widget" id="toc">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                Catalogue
-            </h3>
-            <ul class="menu-list"><li>
-        <a class="is-flex" href="#Netty中的Future">
-        <span class="has-mr-6">1</span>
-        <span>Netty中的Future</span>
-        </a></li><li>
-        <a class="is-flex" href="#Netty-Promise执行Listener">
-        <span class="has-mr-6">2</span>
-        <span>Netty Promise执行Listener</span>
-        </a></li></ul>
-        </div>
-    </div>
-</div>
-
     
         
 <div class="card widget">
@@ -1769,7 +1711,7 @@ var _hmt = _hmt || [];
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.png" alt="Netty中Future与Promise的实现分析" height="28">
+                    <img src="/images/logo.png" alt="akka-actor-introduction" height="28">
                 
                 </a>
                 <p class="is-size-7">

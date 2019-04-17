@@ -146,6 +146,58 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-08-03T10:38:48.000Z">2018-08-03</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    13 minutes read (About 2007 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/08/03/java-spi-introduction/">深入理解Java SPI机制</a>
+            
+        </h1>
+        <div class="content">
+            <p> SPI的全名为Service Provider Interface，在java.util.ServiceLoader的<a href="https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html" target="_blank" rel="noopener">文档:https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html</a>中有比较详细的介绍。究其思想，其实和<code>Callback</code>差不多。<code>Callback</code>的思想是我们在调用API的时候，我们可以写入一段逻辑代码传到API里面，API内部在合适的时候会调用它，从而实现某种程度上的“定制”。</p>
+<p>典型的是<code>Collections.sort(List&lt;T&gt; list,Comparator&lt;? super T&gt; c)</code>这个方法，它的第二个参数是一个实现Comparator接口的实例。我们可以根据自己的排序规则写一个类，实现此接口，传入此方法，那么这个方法就会根据我们的规则对list进行排序。</p>
+<h4 id="Java-SPI的具体约定如下"><a href="#Java-SPI的具体约定如下" class="headerlink" title="Java SPI的具体约定如下"></a>Java SPI的具体约定如下</h4><p>当服务的提供者，提供了服务接口的一种实现之后，在jar包的META-INF/services/目录里同时创建一个以服务接口命名的文件。该文件里就是实现该服务接口的具体实现类。而当外部程序装配这个模块的时候，就能通过该jar包META-INF/services/里的配置文件找到具体的实现类名，并装载实例化，完成模块的注入。 </p>
+<p>基于这样一个约定就能很好的找到服务接口的实现类，而不需要再代码里制定。</p>
+<p>JDK提供服务实现查找的一个工具类：<strong>java.util.ServiceLoader</strong></p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/08/03/java-spi-introduction/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-08-02T08:22:08.000Z">2018-08-02</time>
                 
                 
@@ -356,55 +408,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-07-20T11:48:01.000Z">2018-07-20</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 minutes read (About 609 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/07/20/netty-components-design/">Netty组件介绍</a>
-            
-        </h1>
-        <div class="content">
-            <p>下面将介绍Netty中所包含的各种组件，主要包括：Channel、EventLoop、ChannelFuture、ChannelHandler和ChannelPipeline等。</p>
-<h3 id="Channel、EventLoop和ChannelFuture"><a href="#Channel、EventLoop和ChannelFuture" class="headerlink" title="Channel、EventLoop和ChannelFuture"></a>Channel、EventLoop和ChannelFuture</h3><p><img src="https://shuaijunlan.github.io/images/Screenshot from 2018-07-20 20-39-27.png" alt="Channel-EventLoop-ChannelFuture"></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/07/20/netty-components-design/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -479,7 +482,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        58
+                        59
                     </p>
                 </div>
             </div>
@@ -620,6 +623,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/04/17/akka-actor-introduction/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="akka-actor-introduction">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-17T12:43:26.000Z">2019-04-17</time></div>
+                    <a href="/2019/04/17/akka-actor-introduction/" class="has-link-black-ter is-size-6">akka-actor-introduction</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/03/01/netty-writeAndFlush/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-writeAndFlush">
@@ -694,25 +716,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/02/18/netty-channelpipeline/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/images/cityscape-3995532_640.png" alt="Netty核心组件之ChannelPipeline">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T06:54:06.000Z">2019-02-18</time></div>
-                    <a href="/2019/02/18/netty-channelpipeline/" class="has-link-black-ter is-size-6">Netty核心组件之ChannelPipeline</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -724,6 +727,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">April 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/03/">
@@ -1260,6 +1274,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/04/17/akka-actor-introduction/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="akka-actor-introduction">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-17T12:43:26.000Z">2019-04-17</time></div>
+                    <a href="/2019/04/17/akka-actor-introduction/" class="has-link-black-ter is-size-6">akka-actor-introduction</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/03/01/netty-writeAndFlush/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-writeAndFlush">
@@ -1334,25 +1367,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/02/18/netty-channelpipeline/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/images/cityscape-3995532_640.png" alt="Netty核心组件之ChannelPipeline">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T06:54:06.000Z">2019-02-18</time></div>
-                    <a href="/2019/02/18/netty-channelpipeline/" class="has-link-black-ter is-size-6">Netty核心组件之ChannelPipeline</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1364,6 +1378,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">April 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/03/">
