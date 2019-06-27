@@ -14,10 +14,14 @@
 <meta property="og:site_name" content="ITechHub">
 <meta property="og:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https://shuaijunlan.github.io/images/og_image.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ITechHub">
 <meta name="twitter:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
+<meta name="twitter:image" content="https://shuaijunlan.github.io/images/og_image.png">
 <meta name="twitter:creator" content="@https:&#x2F;&#x2F;twitter.com&#x2F;ShuaiJunlan">
+
+
 
 
 
@@ -140,6 +144,57 @@ var _hmt = _hmt || [];
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-05-26T02:07:15.000Z">2017-05-26</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 minutes read (About 596 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/05/26/java-creating-thread/">Java创建线程的三种方式(Thread/Runnable/Callable)</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="1-继承Thread类"><a href="#1-继承Thread类" class="headerlink" title="1.继承Thread类"></a>1.继承Thread类</h3><blockquote>
+<p>此方式只需要重写Thread类中的run()方法即可，示例如下：</p>
+</blockquote>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> Junlan Shuai[shuaijunlan@gmail.com].</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@date</span> Created on 19:41 2017/4/10.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ExtendThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span></span></span><br><span class="line"><span class="hljs-class"></span>&#123;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ExtendThread</span><span class="hljs-params">(String name)</span></span></span><br><span class="line"><span class="hljs-function">    </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function">    </span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2017/05/26/java-creating-thread/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
     <div class="card">
     
     <div class="card-content article ">
@@ -361,57 +416,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-11-16T02:07:15.000Z">2016-11-16</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    6 minutes read (About 957 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/11/16/libvirt-kvm/">配置KVM虚拟机网络的两种方式（Bridge模式和NAT模式）</a>
-            
-        </h1>
-        <div class="content">
-            <ul>
-<li><p>Bridge原理(桥接模式)</p>
-<ol>
-<li><p>Bridge方式即虚拟网桥的网络连接方式，使客户机和子网里面的机器能够互相通信。可以使虚拟机成为网络中具有独立IP的主机。<br>桥接网络（也叫物理设备共享）被用作把一个物理设备复制到一台虚拟机。网桥多用作高级设置，特别是主机多个网络接口的情况。</p></li></ol></li></ul>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2016/11/16/libvirt-kvm/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -482,7 +486,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        59
+                        60
                     </p>
                 </div>
             </div>
@@ -508,7 +512,7 @@ var _hmt = _hmt || [];
             </div>
         </nav>
         <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/ShuaiJunlan">
+            <a class="level-item button is-link is-rounded" href="https://github.com/ShuaiJunlan" target="_blank">
                 Follow</a>
         </div>
         
@@ -623,6 +627,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/06/04/netty-object-pool/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-object-pool">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-04T00:53:51.000Z">2019-06-04</time></div>
+                    <a href="/2019/06/04/netty-object-pool/" class="has-link-black-ter is-size-6">netty-object-pool</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/04/17/akka-actor-introduction/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="akka-actor-introduction">
@@ -697,25 +720,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/02/18/netty-server-side-accept-connections/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/images/architecture-4012400_640.jpg" alt="Netty服务端接收连接过程分析">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T09:01:12.000Z">2019-02-18</time></div>
-                    <a href="/2019/02/18/netty-server-side-accept-connections/" class="has-link-black-ter is-size-6">Netty服务端接收连接过程分析</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -727,6 +731,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/04/">
@@ -1274,6 +1289,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/06/04/netty-object-pool/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-object-pool">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-04T00:53:51.000Z">2019-06-04</time></div>
+                    <a href="/2019/06/04/netty-object-pool/" class="has-link-black-ter is-size-6">netty-object-pool</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/04/17/akka-actor-introduction/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="akka-actor-introduction">
@@ -1348,25 +1382,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/02/18/netty-server-side-accept-connections/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/images/architecture-4012400_640.jpg" alt="Netty服务端接收连接过程分析">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T09:01:12.000Z">2019-02-18</time></div>
-                    <a href="/2019/02/18/netty-server-side-accept-connections/" class="has-link-black-ter is-size-6">Netty服务端接收连接过程分析</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1378,6 +1393,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/04/">
@@ -1922,7 +1948,7 @@ var _hmt = _hmt || [];
                 </a>
                 <p class="is-size-7">
                 &copy; 2019 Shuai Junlan&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 <br>
                 <span id="busuanzi_container_site_uv">
@@ -1930,11 +1956,6 @@ var _hmt = _hmt || [];
                 </span>
                 
                 </p>
-
-
-                <h3 class="h3-title" id="slide-collect">Since 2019.01.19 </h3>
-                <a href="https://info.flagcounter.com/nDau"><img src="https://s01.flagcounter.com/count/nDau/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
-                <p></p>
             </div>
             <div class="level-end">
             

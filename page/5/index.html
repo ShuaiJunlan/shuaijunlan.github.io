@@ -14,10 +14,14 @@
 <meta property="og:site_name" content="ITechHub">
 <meta property="og:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https://shuaijunlan.github.io/images/og_image.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ITechHub">
 <meta name="twitter:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
+<meta name="twitter:image" content="https://shuaijunlan.github.io/images/og_image.png">
 <meta name="twitter:creator" content="@https:&#x2F;&#x2F;twitter.com&#x2F;ShuaiJunlan">
+
+
 
 
 
@@ -140,6 +144,54 @@ var _hmt = _hmt || [];
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-15T07:24:55.000Z">2018-10-15</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a minute read (About 211 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/15/java-blocking-queue/">深入研究Java阻塞队列实现</a>
+            
+        </h1>
+        <div class="content">
+            <p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/BlockingQueue.png?raw=true" alt=""></p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/10/15/java-blocking-queue/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
     <div class="card">
     
     <div class="card-content article ">
@@ -332,57 +384,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-09-10T12:12:04.000Z">2018-09-10</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    12 minutes read (About 1861 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/09/10/dubbo-loadbalance-strategy/">Dubbo负载均衡策略分析</a>
-            
-        </h1>
-        <div class="content">
-            <p>Dubbo提供了四种负载均衡策略：Random LoadBalance（加权随机负载均衡）、RoundRobin LoadBalance（加权轮询负载均衡）、LeastActive LoadBalance（最少活跃数负载均衡）、ConsistentHash LoadBalance（一致性hash负载均衡），下面将分别分析这四种负载均衡策略的源码。</p>
-<h4 id="Random-LoadBalance"><a href="#Random-LoadBalance" class="headerlink" title="Random LoadBalance"></a>Random LoadBalance</h4><p>先来看一下RandomLoadBalance类的源码：</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RandomLoadBalance</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractLoadBalance</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String NAME = <span class="hljs-string">"random"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-keyword">protected</span> &lt;T&gt; <span class="hljs-function">Invoker&lt;T&gt; <span class="hljs-title">doSelect</span><span class="hljs-params">(List&lt;Invoker&lt;T&gt;&gt; invokers, URL url, Invocation invocation)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> length = invokers.size(); <span class="hljs-comment">// Number of invokers</span></span><br><span class="line">        <span class="hljs-keyword">int</span> totalWeight = <span class="hljs-number">0</span>; <span class="hljs-comment">// The sum of weights</span></span><br><span class="line">        <span class="hljs-keyword">boolean</span> sameWeight = <span class="hljs-keyword">true</span>; <span class="hljs-comment">// Every invoker has the same weight?</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            <span class="hljs-comment">//获取权重</span></span><br><span class="line">            <span class="hljs-keyword">int</span> weight = getWeight(invokers.get(i), invocation);</span><br><span class="line">            <span class="hljs-comment">//权重累积和</span></span><br><span class="line">            totalWeight += weight; <span class="hljs-comment">// Sum</span></span><br><span class="line">        	<span class="hljs-comment">//记录所有的invokers的weight是否是一样的</span></span><br><span class="line">            <span class="hljs-keyword">if</span> (sameWeight &amp;&amp; i &gt; <span class="hljs-number">0</span></span><br><span class="line">                    &amp;&amp; weight != getWeight(invokers.get(i - <span class="hljs-number">1</span>), invocation)) &#123;</span><br><span class="line">                sameWeight = <span class="hljs-keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-comment">//如果不是所有的invoker权重都一样</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (totalWeight &gt; <span class="hljs-number">0</span> &amp;&amp; !sameWeight) &#123;</span><br><span class="line">            <span class="hljs-comment">// If (not every invoker has the same weight &amp; at least one invoker's weight&gt;0), select randomly based on totalWeight.</span></span><br><span class="line">            <span class="hljs-comment">//获取随机数的范围是[0, totalWeight)</span></span><br><span class="line">            <span class="hljs-keyword">int</span> offset = ThreadLocalRandom.current().nextInt(totalWeight);</span><br><span class="line">            <span class="hljs-comment">// Return a invoker based on the random value.</span></span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">                offset -= getWeight(invokers.get(i), invocation);</span><br><span class="line">                <span class="hljs-keyword">if</span> (offset &lt; <span class="hljs-number">0</span>) &#123;</span><br><span class="line">                    <span class="hljs-comment">//返回invoker</span></span><br><span class="line">                    <span class="hljs-keyword">return</span> invokers.get(i);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-comment">//如果所有的invoker都是一样的weight，则直接获取随机数，并返回</span></span><br><span class="line">        <span class="hljs-comment">//这里使用了ThreadLocalRandom做了优化</span></span><br><span class="line">        <span class="hljs-comment">// If all invokers have the same weight value or totalWeight=0, return evenly.</span></span><br><span class="line">        <span class="hljs-keyword">return</span> invokers.get(ThreadLocalRandom.current().nextInt(length));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>随机加权轮询算法还是比较容易理解的，下面继续分析RoundRobin LoadBalance。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/09/10/dubbo-loadbalance-strategy/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -457,7 +458,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        59
+                        60
                     </p>
                 </div>
             </div>
@@ -483,7 +484,7 @@ var _hmt = _hmt || [];
             </div>
         </nav>
         <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/ShuaiJunlan">
+            <a class="level-item button is-link is-rounded" href="https://github.com/ShuaiJunlan" target="_blank">
                 Follow</a>
         </div>
         
@@ -598,6 +599,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/06/04/netty-object-pool/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-object-pool">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-04T00:53:51.000Z">2019-06-04</time></div>
+                    <a href="/2019/06/04/netty-object-pool/" class="has-link-black-ter is-size-6">netty-object-pool</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/04/17/akka-actor-introduction/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="akka-actor-introduction">
@@ -672,25 +692,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/02/18/netty-server-side-accept-connections/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/images/architecture-4012400_640.jpg" alt="Netty服务端接收连接过程分析">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T09:01:12.000Z">2019-02-18</time></div>
-                    <a href="/2019/02/18/netty-server-side-accept-connections/" class="has-link-black-ter is-size-6">Netty服务端接收连接过程分析</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -702,6 +703,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/04/">
@@ -1249,6 +1261,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/06/04/netty-object-pool/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-object-pool">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-04T00:53:51.000Z">2019-06-04</time></div>
+                    <a href="/2019/06/04/netty-object-pool/" class="has-link-black-ter is-size-6">netty-object-pool</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/04/17/akka-actor-introduction/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="akka-actor-introduction">
@@ -1323,25 +1354,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/02/18/netty-server-side-accept-connections/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/images/architecture-4012400_640.jpg" alt="Netty服务端接收连接过程分析">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T09:01:12.000Z">2019-02-18</time></div>
-                    <a href="/2019/02/18/netty-server-side-accept-connections/" class="has-link-black-ter is-size-6">Netty服务端接收连接过程分析</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1353,6 +1365,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/04/">
@@ -1897,7 +1920,7 @@ var _hmt = _hmt || [];
                 </a>
                 <p class="is-size-7">
                 &copy; 2019 Shuai Junlan&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 <br>
                 <span id="busuanzi_container_site_uv">
@@ -1905,11 +1928,6 @@ var _hmt = _hmt || [];
                 </span>
                 
                 </p>
-
-
-                <h3 class="h3-title" id="slide-collect">Since 2019.01.19 </h3>
-                <a href="https://info.flagcounter.com/nDau"><img src="https://s01.flagcounter.com/count/nDau/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
-                <p></p>
             </div>
             <div class="level-end">
             

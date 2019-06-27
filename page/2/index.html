@@ -14,10 +14,14 @@
 <meta property="og:site_name" content="ITechHub">
 <meta property="og:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https://shuaijunlan.github.io/images/og_image.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ITechHub">
 <meta name="twitter:description" content="Research in RPC Middleware DistributedSystem JavaEE SDN">
+<meta name="twitter:image" content="https://shuaijunlan.github.io/images/og_image.png">
 <meta name="twitter:creator" content="@https:&#x2F;&#x2F;twitter.com&#x2F;ShuaiJunlan">
+
+
 
 
 
@@ -140,6 +144,66 @@ var _hmt = _hmt || [];
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+    <div class="card">
+    
+    <div class="card-image">
+        <a href="/2019/02/18/netty-server-side-accept-connections/" class="image is-7by1">
+            <img class="thumbnail" src="/gallery/images/architecture-4012400_640.jpg" alt="Netty服务端接收连接过程分析">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-02-18T09:01:12.000Z">2019-02-18</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 minutes read (About 1343 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/02/18/netty-server-side-accept-connections/">Netty服务端接收连接过程分析</a>
+            
+        </h1>
+        <div class="content">
+            <p>前面<a href="https://shuaijunlan.github.io/2019/01/24/netty-server-side-bootstrap-process/">《Netty服务端启动流程分析》</a>这篇文章主要介绍了Netty服务端的启动过程，那么这里有个问题：<strong>启动服务端之后，有新的连接向服务端发起请求，服务端是如何接收并处理这些连接请求的？</strong>带着这个问题我将结合netty源码分析Netty服务端接收连接的过程。</p>
+<p>这篇文章我将主要讲解一下几个部分：</p>
+<ul>
+<li>1、netty如何接收新的请求</li>
+<li>2、netty如何给新的请求分配reactor线程</li>
+<li>3、netty如何给每个新连接天剑ChannelHandler</li>
+</ul>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/02/18/netty-server-side-accept-connections/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
     <div class="card">
     
     <div class="card-image">
@@ -352,65 +416,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/01/18/java-treemap/" class="image is-7by1">
-            <img class="thumbnail" src="/gallery/thumbnails/plant.jpg" alt="Java TreeMap源码分析">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-01-18T05:22:06.000Z">2019-01-18</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 minutes read (About 1049 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/01/18/java-treemap/">Java TreeMap源码分析</a>
-            
-        </h1>
-        <div class="content">
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><blockquote>
-<p> A <strong>Red-Black tree</strong> based {@link NavigableMap} implementation. <strong>The map is sorted according to the {@linkplain Comparable natural ordering} of its keys</strong>, or by a {@link Comparator} provided at map creation time, depending on which constructor is used.</p>
-<p> This implementation provides guaranteed <strong>log(n) time cost</strong> for the {@code containsKey}, {@code get}, {@code put} and {@code remove} operations.  Algorithms are adaptations of those in Cormen, Leiserson, and Rivest’s <em>Introduction to Algorithms</em>.</p>
-</blockquote>
-<p>上面是一段关于TreeMap的官方Javadoc描述，简单来说就是，TreeMap底层是基于<a href="https://zh.wikipedia.org/wiki/%E7%BA%A2%E9%BB%91%E6%A0%91" target="_blank" rel="noopener">红黑树</a>，保持了key的大小有序性，因此查找等操作的时间复杂度为<code>O(logn)</code>；</p>
-<p>在这篇文章中我主要分析Java中是如何利用红黑树实现TreeMap的，关于红黑树的详细原理介绍可以参考这篇文章《<a href="https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.01.md" target="_blank" rel="noopener">教你透彻了解红黑树</a>》。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/01/18/java-treemap/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -481,7 +486,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        59
+                        60
                     </p>
                 </div>
             </div>
@@ -507,7 +512,7 @@ var _hmt = _hmt || [];
             </div>
         </nav>
         <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/ShuaiJunlan">
+            <a class="level-item button is-link is-rounded" href="https://github.com/ShuaiJunlan" target="_blank">
                 Follow</a>
         </div>
         
@@ -622,6 +627,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/06/04/netty-object-pool/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-object-pool">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-04T00:53:51.000Z">2019-06-04</time></div>
+                    <a href="/2019/06/04/netty-object-pool/" class="has-link-black-ter is-size-6">netty-object-pool</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/04/17/akka-actor-introduction/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="akka-actor-introduction">
@@ -696,25 +720,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/02/18/netty-server-side-accept-connections/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/images/architecture-4012400_640.jpg" alt="Netty服务端接收连接过程分析">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T09:01:12.000Z">2019-02-18</time></div>
-                    <a href="/2019/02/18/netty-server-side-accept-connections/" class="has-link-black-ter is-size-6">Netty服务端接收连接过程分析</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -726,6 +731,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/04/">
@@ -1273,6 +1289,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/06/04/netty-object-pool/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-object-pool">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-04T00:53:51.000Z">2019-06-04</time></div>
+                    <a href="/2019/06/04/netty-object-pool/" class="has-link-black-ter is-size-6">netty-object-pool</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/04/17/akka-actor-introduction/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="akka-actor-introduction">
@@ -1347,25 +1382,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/02/18/netty-server-side-accept-connections/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/images/architecture-4012400_640.jpg" alt="Netty服务端接收连接过程分析">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-18T09:01:12.000Z">2019-02-18</time></div>
-                    <a href="/2019/02/18/netty-server-side-accept-connections/" class="has-link-black-ter is-size-6">Netty服务端接收连接过程分析</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1377,6 +1393,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/04/">
@@ -1921,7 +1948,7 @@ var _hmt = _hmt || [];
                 </a>
                 <p class="is-size-7">
                 &copy; 2019 Shuai Junlan&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 <br>
                 <span id="busuanzi_container_site_uv">
@@ -1929,11 +1956,6 @@ var _hmt = _hmt || [];
                 </span>
                 
                 </p>
-
-
-                <h3 class="h3-title" id="slide-collect">Since 2019.01.19 </h3>
-                <a href="https://info.flagcounter.com/nDau"><img src="https://s01.flagcounter.com/count/nDau/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
-                <p></p>
             </div>
             <div class="level-end">
             
