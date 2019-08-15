@@ -16,12 +16,12 @@
 <meta property="og:description" content="1. B树1. B树的定义B树也称B-树,它是一颗多路平衡查找树。我们描述一颗B树时需要指定它的阶数，阶数表示了一个结点最多有多少个孩子结点，一般用字母m表示阶数。当m取2时，就是我们常见的二叉搜索树。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://shuaijunlan.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-08-15T01:41:56.096Z">
+<meta property="og:updated_time" content="2019-08-15T01:44:30.794Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL索引结构中的B+树">
 <meta name="twitter:description" content="1. B树1. B树的定义B树也称B-树,它是一颗多路平衡查找树。我们描述一颗B树时需要指定它的阶数，阶数表示了一个结点最多有多少个孩子结点，一般用字母m表示阶数。当m取2时，就是我们常见的二叉搜索树。">
 <meta name="twitter:image" content="https://shuaijunlan.github.io/images/og_image.png">
-<meta name="twitter:creator" content="@https:&#x2F;&#x2F;twitter.com&#x2F;ShuaiJunlan">
+<meta name="twitter:site" content="https://twitter.com/ShuaiJunlan">
 
 
 
@@ -29,20 +29,14 @@
 
 
 
-<link rel="icon" href="/favicon.ico">
+<link rel="icon" href="/favicon.svg">
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
 
-
-    
-    
-    
-        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    
 
     
     
@@ -97,6 +91,8 @@ var _hmt = _hmt || [];
     
     
     
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
 
     
 
@@ -109,7 +105,7 @@ var _hmt = _hmt || [];
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.png" alt="MySQL索引结构中的B+树" height="28">
+                <img src="/images/logo.svg" alt="MySQL索引结构中的B+树" height="28">
             
             </a>
         </div>
@@ -161,7 +157,7 @@ var _hmt = _hmt || [];
                 <span class="level-item has-text-grey">
                     
                     
-                    6 minutes read (About 907 words)
+                    6 minutes read (About 929 words)
                 </span>
                 
                 
@@ -199,6 +195,7 @@ var _hmt = _hmt || [];
 <p>5）每个叶子结点都存有相邻叶子结点的指针，叶子结点本身依关键字的大小自小而大顺序链接。</p>
 <h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
 <li><a href="https://www.jianshu.com/p/486a514b0ded" target="_blank" rel="noopener">MYSQL-B+TREE索引原理</a></li>
+<li><a href="https://www.cnblogs.com/nullzx/p/8729425.html" target="_blank" rel="noopener">B树和B+树的插入、删除图文详解</a></li>
 </ul>
 
         </div>
@@ -219,10 +216,13 @@ var _hmt = _hmt || [];
 <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
 <a class="a2a_button_facebook"></a>
 <a class="a2a_button_twitter"></a>
-<a class="a2a_button_google_plus"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_reddit"></a>
 </div>
 <script async src="https://static.addtoany.com/menu/page.js"></script>
 <!-- AddToAny END -->
+
         
     </div>
 </div>
@@ -315,7 +315,7 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <nav class="level">
-            <div class="level-item has-text-centered">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
                 <div>
                     
                         <img class="image is-128x128 has-mb-6" src="/avatar.png" alt="Shuai Junlan">
@@ -496,7 +496,7 @@ var _hmt = _hmt || [];
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T02:07:15.000Z">2019-07-15</time></div>
-                    <a href="/2019/07/15/mysql-b-tree/" class="has-link-black-ter is-size-6">MySQL索引结构中的B+树</a>
+                    <a href="/2019/07/15/mysql-b-tree/" class="title has-link-black-ter is-size-6 has-text-weight-normal">MySQL索引结构中的B+树</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -515,7 +515,7 @@ var _hmt = _hmt || [];
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-04T00:53:51.000Z">2019-06-04</time></div>
-                    <a href="/2019/06/04/netty-object-pool/" class="has-link-black-ter is-size-6">netty-object-pool</a>
+                    <a href="/2019/06/04/netty-object-pool/" class="title has-link-black-ter is-size-6 has-text-weight-normal">netty-object-pool</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -534,7 +534,7 @@ var _hmt = _hmt || [];
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-17T12:43:26.000Z">2019-04-17</time></div>
-                    <a href="/2019/04/17/akka-actor-introduction/" class="has-link-black-ter is-size-6">akka-actor-introduction</a>
+                    <a href="/2019/04/17/akka-actor-introduction/" class="title has-link-black-ter is-size-6 has-text-weight-normal">akka-actor-introduction</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -553,7 +553,7 @@ var _hmt = _hmt || [];
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-01T11:23:06.000Z">2019-03-01</time></div>
-                    <a href="/2019/03/01/netty-writeAndFlush/" class="has-link-black-ter is-size-6">netty-writeAndFlush</a>
+                    <a href="/2019/03/01/netty-writeAndFlush/" class="title has-link-black-ter is-size-6 has-text-weight-normal">netty-writeAndFlush</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -572,7 +572,7 @@ var _hmt = _hmt || [];
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-27T12:09:40.000Z">2019-02-27</time></div>
-                    <a href="/2019/02/27/leetcode-single-number/" class="has-link-black-ter is-size-6">【LeetCode】Single Number题解</a>
+                    <a href="/2019/02/27/leetcode-single-number/" class="title has-link-black-ter is-size-6 has-text-weight-normal">【LeetCode】Single Number题解</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1183,7 +1183,7 @@ var _hmt = _hmt || [];
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T02:07:15.000Z">2019-07-15</time></div>
-                    <a href="/2019/07/15/mysql-b-tree/" class="has-link-black-ter is-size-6">MySQL索引结构中的B+树</a>
+                    <a href="/2019/07/15/mysql-b-tree/" class="title has-link-black-ter is-size-6 has-text-weight-normal">MySQL索引结构中的B+树</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1202,7 +1202,7 @@ var _hmt = _hmt || [];
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-04T00:53:51.000Z">2019-06-04</time></div>
-                    <a href="/2019/06/04/netty-object-pool/" class="has-link-black-ter is-size-6">netty-object-pool</a>
+                    <a href="/2019/06/04/netty-object-pool/" class="title has-link-black-ter is-size-6 has-text-weight-normal">netty-object-pool</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1221,7 +1221,7 @@ var _hmt = _hmt || [];
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-17T12:43:26.000Z">2019-04-17</time></div>
-                    <a href="/2019/04/17/akka-actor-introduction/" class="has-link-black-ter is-size-6">akka-actor-introduction</a>
+                    <a href="/2019/04/17/akka-actor-introduction/" class="title has-link-black-ter is-size-6 has-text-weight-normal">akka-actor-introduction</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1240,7 +1240,7 @@ var _hmt = _hmt || [];
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-01T11:23:06.000Z">2019-03-01</time></div>
-                    <a href="/2019/03/01/netty-writeAndFlush/" class="has-link-black-ter is-size-6">netty-writeAndFlush</a>
+                    <a href="/2019/03/01/netty-writeAndFlush/" class="title has-link-black-ter is-size-6 has-text-weight-normal">netty-writeAndFlush</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1259,7 +1259,7 @@ var _hmt = _hmt || [];
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-27T12:09:40.000Z">2019-02-27</time></div>
-                    <a href="/2019/02/27/leetcode-single-number/" class="has-link-black-ter is-size-6">【LeetCode】Single Number题解</a>
+                    <a href="/2019/02/27/leetcode-single-number/" class="title has-link-black-ter is-size-6 has-text-weight-normal">【LeetCode】Single Number题解</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1853,7 +1853,7 @@ var _hmt = _hmt || [];
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.png" alt="MySQL索引结构中的B+树" height="28">
+                    <img src="/images/logo.svg" alt="MySQL索引结构中的B+树" height="28">
                 
                 </a>
                 <p class="is-size-7">
@@ -1869,6 +1869,7 @@ var _hmt = _hmt || [];
 
                 <h3 class="h3-title" id="slide-collect">Since 2019.01.19 </h3>
                 <a href="https://info.flagcounter.com/nDau"><img src="https://s01.flagcounter.com/count/nDau/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+
             </div>
             <div class="level-end">
             
@@ -1880,10 +1881,21 @@ var _hmt = _hmt || [];
 <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
 <script>moment.locale("en");</script>
 
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
 
-    
-    
-    
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
 
     
     
@@ -1966,9 +1978,6 @@ document.addEventListener('DOMContentLoaded', function () {
     
     
     
-    
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
-    <script src="/js/clipboard.js" defer></script>
     
 
     
