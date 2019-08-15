@@ -150,6 +150,66 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-07-15T02:07:15.000Z">2019-07-15</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 minutes read (About 918 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/07/15/mysql-b-tree/">MySQL索引结构中的B+树</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="1-B树"><a href="#1-B树" class="headerlink" title="1. B树"></a>1. B树</h3><h4 id="1-B树的定义"><a href="#1-B树的定义" class="headerlink" title="1. B树的定义"></a>1. B树的定义</h4><p>B树也称B-树,它是一颗多路平衡查找树。我们描述一颗B树时需要指定它的阶数，阶数表示了一个结点最多有多少个孩子结点，一般用字母m表示阶数。当m取2时，就是我们常见的二叉搜索树。</p>
+<p>一颗m阶的B树定义如下：</p>
+<p>1）每个结点最多有m-1个关键字。</p>
+<p>2）根结点最少可以只有1个关键字。</p>
+<p>3）非根结点至少有Math.ceil(m/2)-1个关键字。</p>
+<p>4）每个结点中的关键字都按照从小到大的顺序排列，每个关键字的左子树中的所有关键字都小于它，而右子树中的所有关键字都大于它。</p>
+<p>5）所有叶子结点都位于同一层，或者说根结点到每个叶子结点的长度都相同。</p>
+<p><a href="https://images2018.cnblogs.com/blog/834468/201804/834468-20180406232632321-1557309284.png" target="_blank" rel="noopener"><img src="https://images2018.cnblogs.com/blog/834468/201804/834468-20180406232634472-395289491.png" alt="clip_image002"></a></p>
+<p>上图是一颗阶数为4的B树。在实际应用中的B树的阶数m都非常大（通常大于100），所以即使存储大量的数据，B树的高度仍然比较小。每个结点中存储了关键字（key）和关键字对应的数据（data），以及孩子结点的指针。<strong>我们将一个key和其对应的data称为一个记录</strong>。<strong>但为了方便描述，除非特别说明，后续文中就用key来代替（key, value）键值对这个整体</strong>。在数据库中我们将B树（和B+树）作为索引结构，可以加快查询速速，此时B树中的key就表示键，而data表示了这个键对应的条目在硬盘上的逻辑地址。</p>
+<h3 id="2-B-树"><a href="#2-B-树" class="headerlink" title="2.B+树"></a>2.B+树</h3><h4 id="2-1-B-树的定义"><a href="#2-1-B-树的定义" class="headerlink" title="2.1 B+树的定义"></a>2.1 B+树的定义</h4><p><a href="https://images2018.cnblogs.com/blog/834468/201804/834468-20180406232853119-1460626460.png" target="_blank" rel="noopener"><img src="https://images2018.cnblogs.com/blog/834468/201804/834468-20180406232854940-1019144331.png" alt="clip_image039"></a></p>
+<p>各种资料上B+树的定义各有不同，一种定义方式是关键字个数和孩子结点个数相同。这里我们采取维基百科上所定义的方式，即关键字个数比孩子结点个数小1，这种方式是和B树基本等价的。上图就是一颗阶数为4的B+树。</p>
+<p>除此之外B+树还有以下的要求。</p>
+<p>1）B+树包含2种类型的结点：内部结点（也称索引结点）和叶子结点。根结点本身即可以是内部结点，也可以是叶子结点。根结点的关键字个数最少可以只有1个。</p>
+<p>2）B+树与B树最大的不同是内部结点不保存数据，只用于索引，所有数据（或者说记录）都保存在叶子结点中。</p>
+<p>3） m阶B+树表示了内部结点最多有m-1个关键字（或者说内部结点最多有m个子树），阶数m同时限制了叶子结点最多存储m-1个记录。</p>
+<p>4）内部结点中的key都按照从小到大的顺序排列，对于内部结点中的一个key，左树中的所有key都<strong>小于</strong>它，右子树中的key都<strong>大于等于</strong>它。叶子结点中的记录也按照key的大小排列。</p>
+<p>5）每个叶子结点都存有相邻叶子结点的指针，叶子结点本身依关键字的大小自小而大顺序链接。</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
+<li><a href="https://www.jianshu.com/p/486a514b0ded" target="_blank" rel="noopener">MYSQL-B+TREE索引原理</a></li>
+</ul>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-06-04T00:53:51.000Z">2019-06-04</time>
                 
                 
@@ -322,60 +382,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/02/27/java-hashmap-hashtable-concurrenthashmap/" class="image is-7by1">
-            <img class="thumbnail" src="/gallery/images/natural-4013464_640.jpg" alt="HashMap&amp;HashTable&amp;ConcurrentHashMap (jdk1.8)">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-02-27T10:43:24.000Z">2019-02-27</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    6 minutes read (About 894 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/02/27/java-hashmap-hashtable-concurrenthashmap/">HashMap&amp;HashTable&amp;ConcurrentHashMap (jdk1.8)</a>
-            
-        </h1>
-        <div class="content">
-            <p>Java中常用Map数据结构介绍<br></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/02/27/java-hashmap-hashtable-concurrenthashmap/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -394,7 +400,7 @@ var _hmt = _hmt || [];
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/12/">12</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/13/">13</a></li>
             
         </ul>
     </nav>
@@ -444,7 +450,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        60
+                        61
                     </p>
                 </div>
             </div>
@@ -464,7 +470,7 @@ var _hmt = _hmt || [];
                         Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        29
+                        31
                     </p>
                 </div>
             </div>
@@ -568,7 +574,7 @@ var _hmt = _hmt || [];
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/AQS/" style="font-size: 10px;">AQS</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CentOS/" style="font-size: 13.33px;">CentOS</a> <a href="/tags/DirectIO/" style="font-size: 10px;">DirectIO</a> <a href="/tags/KVM/" style="font-size: 13.33px;">KVM</a> <a href="/tags/LRU/" style="font-size: 10px;">LRU</a> <a href="/tags/LeetCode/" style="font-size: 10px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Micro-Service/" style="font-size: 10px;">Micro Service</a> <a href="/tags/MutliThread/" style="font-size: 13.33px;">MutliThread</a> <a href="/tags/MyBatis3/" style="font-size: 10px;">MyBatis3</a> <a href="/tags/Netty/" style="font-size: 16.67px;">Netty</a> <a href="/tags/SPI/" style="font-size: 10px;">SPI</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a> <a href="/tags/WebSystem/" style="font-size: 10px;">WebSystem</a> <a href="/tags/cache/" style="font-size: 13.33px;">cache</a> <a href="/tags/cpu/" style="font-size: 10px;">cpu</a> <a href="/tags/dubbo/" style="font-size: 16.67px;">dubbo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/javassist/" style="font-size: 10px;">javassist</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/mmap/" style="font-size: 10px;">mmap</a> <a href="/tags/nio/" style="font-size: 13.33px;">nio</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/网络配置/" style="font-size: 10px;">网络配置</a> <a href="/tags/虚拟化/" style="font-size: 10px;">虚拟化</a>
+        <a href="/tags/AQS/" style="font-size: 10px;">AQS</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/B-Tree/" style="font-size: 10px;">B+Tree</a> <a href="/tags/CentOS/" style="font-size: 13.33px;">CentOS</a> <a href="/tags/DirectIO/" style="font-size: 10px;">DirectIO</a> <a href="/tags/KVM/" style="font-size: 13.33px;">KVM</a> <a href="/tags/LRU/" style="font-size: 10px;">LRU</a> <a href="/tags/LeetCode/" style="font-size: 10px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Micro-Service/" style="font-size: 10px;">Micro Service</a> <a href="/tags/MutliThread/" style="font-size: 13.33px;">MutliThread</a> <a href="/tags/MyBatis3/" style="font-size: 10px;">MyBatis3</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Netty/" style="font-size: 16.67px;">Netty</a> <a href="/tags/SPI/" style="font-size: 10px;">SPI</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a> <a href="/tags/WebSystem/" style="font-size: 10px;">WebSystem</a> <a href="/tags/cache/" style="font-size: 13.33px;">cache</a> <a href="/tags/cpu/" style="font-size: 10px;">cpu</a> <a href="/tags/dubbo/" style="font-size: 16.67px;">dubbo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/javassist/" style="font-size: 10px;">javassist</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/mmap/" style="font-size: 10px;">mmap</a> <a href="/tags/nio/" style="font-size: 13.33px;">nio</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/网络配置/" style="font-size: 10px;">网络配置</a> <a href="/tags/虚拟化/" style="font-size: 10px;">虚拟化</a>
     </div>
 </div>
 
@@ -582,6 +588,25 @@ var _hmt = _hmt || [];
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/07/15/mysql-b-tree/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MySQL索引结构中的B+树">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T02:07:15.000Z">2019-07-15</time></div>
+                    <a href="/2019/07/15/mysql-b-tree/" class="has-link-black-ter is-size-6">MySQL索引结构中的B+树</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -659,25 +684,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/02/27/java-hashmap-hashtable-concurrenthashmap/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/images/natural-4013464_640.jpg" alt="HashMap&amp;HashTable&amp;ConcurrentHashMap (jdk1.8)">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-27T10:43:24.000Z">2019-02-27</time></div>
-                    <a href="/2019/02/27/java-hashmap-hashtable-concurrenthashmap/" class="has-link-black-ter is-size-6">HashMap&amp;HashTable&amp;ConcurrentHashMap (jdk1.8)</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -689,6 +695,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/06/">
@@ -1034,6 +1051,13 @@ var _hmt = _hmt || [];
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/B-Tree/">
+                        <span class="tag">B+Tree</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">2</span>
@@ -1092,6 +1116,13 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MyBatis3/">
                         <span class="tag">MyBatis3</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MySQL/">
+                        <span class="tag">MySQL</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1247,6 +1278,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2019/07/15/mysql-b-tree/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MySQL索引结构中的B+树">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T02:07:15.000Z">2019-07-15</time></div>
+                    <a href="/2019/07/15/mysql-b-tree/" class="has-link-black-ter is-size-6">MySQL索引结构中的B+树</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/06/04/netty-object-pool/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="netty-object-pool">
@@ -1321,25 +1371,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/02/27/java-hashmap-hashtable-concurrenthashmap/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/images/natural-4013464_640.jpg" alt="HashMap&amp;HashTable&amp;ConcurrentHashMap (jdk1.8)">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-27T10:43:24.000Z">2019-02-27</time></div>
-                    <a href="/2019/02/27/java-hashmap-hashtable-concurrenthashmap/" class="has-link-black-ter is-size-6">HashMap&amp;HashTable&amp;ConcurrentHashMap (jdk1.8)</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1351,6 +1382,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/06/">
@@ -1696,6 +1738,13 @@ var _hmt = _hmt || [];
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/B-Tree/">
+                        <span class="tag">B+Tree</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">2</span>
@@ -1754,6 +1803,13 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MyBatis3/">
                         <span class="tag">MyBatis3</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MySQL/">
+                        <span class="tag">MySQL</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
