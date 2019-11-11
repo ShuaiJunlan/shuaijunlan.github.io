@@ -142,6 +142,9 @@ img.thumbnail {
 .widget .menu-list a.level {
   display: flex;
 }
+.widget .has-text-centered figure.image {
+  margin: auto;
+}
 .pagination .pagination-link:not(.is-current),
 .pagination .pagination-previous,
 .pagination .pagination-next {
@@ -409,7 +412,7 @@ figure.highlight {
   margin: 1em 0 1em !important;
 }
 figure.highlight.folded .highlight-body {
-  display: none;
+  height: 0;
 }
 figure.highlight pre,
 figure.highlight table tr:hover {
