@@ -19,7 +19,7 @@
 <meta property="og:description" content="AbstractQueuedSynchronizer(队列同步器)在Java并发工具中经常被用到，比如说我们常用的CountDownLatch、ReentrantLock、ReentrantReadWriteLock和Semaphore等等并发工具类底层都是基于队列同步器的，只有掌握了队列同步器底层的工作原理才能更好的理解其他的并发工具的工作机制，这篇文章将会从源码的角度分析队列同步器的工作原理">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https:&#x2F;&#x2F;shuaijunlan.github.io&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-01-17T08:37:14.971Z">
+<meta property="og:updated_time" content="2019-11-12T02:57:45.168Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;shuaijunlan.github.io&#x2F;images&#x2F;og_image.png">
 <meta name="twitter:site" content="https:&#x2F;&#x2F;twitter.com&#x2F;ShuaiJunlan">
@@ -146,7 +146,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    8 minutes read (About 1181 words)
+                    8 minutes read (About 1187 words)
                 </span>
                 
                 
@@ -245,8 +245,8 @@
 <td>节点所指向的线程</td>
 </tr>
 </tbody></table>
-<h4 id="独占式同步状态获取与释放"><a href="#独占式同步状态获取与释放" class="headerlink" title="独占式同步状态获取与释放"></a>独占式同步状态获取与释放</h4><p>![](<a href="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot" target="_blank" rel="noopener">https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot</a> from 2018-11-23 20-17-54.png?raw=true)</p>
-<h4 id="共享式同步状态获取与释放"><a href="#共享式同步状态获取与释放" class="headerlink" title="共享式同步状态获取与释放"></a>共享式同步状态获取与释放</h4><h4 id="独占式超时获取同步状态"><a href="#独占式超时获取同步状态" class="headerlink" title="独占式超时获取同步状态"></a>独占式超时获取同步状态</h4><p>![](<a href="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot" target="_blank" rel="noopener">https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot</a> from 2018-11-23 20-22-05.png?raw=true)</p>
+<h4 id="独占式同步状态获取与释放"><a href="#独占式同步状态获取与释放" class="headerlink" title="独占式同步状态获取与释放"></a>独占式同步状态获取与释放</h4><p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/java-abstract-queued-synchronizer/image1.png?raw=true" alt></p>
+<h4 id="共享式同步状态获取与释放"><a href="#共享式同步状态获取与释放" class="headerlink" title="共享式同步状态获取与释放"></a>共享式同步状态获取与释放</h4><h4 id="独占式超时获取同步状态"><a href="#独占式超时获取同步状态" class="headerlink" title="独占式超时获取同步状态"></a>独占式超时获取同步状态</h4><p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/java-abstract-queued-synchronizer/image2.png?raw=true" alt></p>
 <h4 id="自定义同步组件"><a href="#自定义同步组件" class="headerlink" title="自定义同步组件"></a>自定义同步组件</h4><h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ul>
 <li>《Java并发编程的艺术》</li>
 </ul>

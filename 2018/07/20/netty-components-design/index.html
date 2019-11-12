@@ -10,16 +10,16 @@
 <title>Netty组件介绍 - ITechHub</title>
 
 
-    <meta name="description" content="下面将介绍Netty中所包含的各种组件，主要包括：Channel、EventLoop、ChannelFuture、ChannelHandler和ChannelPipeline等。 Channel、EventLoop和ChannelFuture![Channel-EventLoop-ChannelFuture](https:&#x2F;&#x2F;shuaijunlan.github.io&#x2F;images&#x2F;Screens">
+    <meta name="description" content="下面将介绍Netty中所包含的各种组件，主要包括：Channel、EventLoop、ChannelFuture、ChannelHandler和ChannelPipeline等。 Channel、EventLoop和ChannelFuture">
 <meta name="keywords" content="Netty">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Netty组件介绍">
 <meta property="og:url" content="https:&#x2F;&#x2F;shuaijunlan.github.io&#x2F;2018&#x2F;07&#x2F;20&#x2F;netty-components-design&#x2F;index.html">
 <meta property="og:site_name" content="ITechHub">
-<meta property="og:description" content="下面将介绍Netty中所包含的各种组件，主要包括：Channel、EventLoop、ChannelFuture、ChannelHandler和ChannelPipeline等。 Channel、EventLoop和ChannelFuture![Channel-EventLoop-ChannelFuture](https:&#x2F;&#x2F;shuaijunlan.github.io&#x2F;images&#x2F;Screens">
+<meta property="og:description" content="下面将介绍Netty中所包含的各种组件，主要包括：Channel、EventLoop、ChannelFuture、ChannelHandler和ChannelPipeline等。 Channel、EventLoop和ChannelFuture">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https:&#x2F;&#x2F;shuaijunlan.github.io&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-01-17T08:37:16.159Z">
+<meta property="og:updated_time" content="2019-11-12T02:50:12.545Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;shuaijunlan.github.io&#x2F;images&#x2F;og_image.png">
 <meta name="twitter:site" content="https:&#x2F;&#x2F;twitter.com&#x2F;ShuaiJunlan">
@@ -146,7 +146,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 minutes read (About 609 words)
+                    4 minutes read (About 615 words)
                 </span>
                 
                 
@@ -165,7 +165,7 @@
         </h1>
         <div class="content">
             <p>下面将介绍Netty中所包含的各种组件，主要包括：Channel、EventLoop、ChannelFuture、ChannelHandler和ChannelPipeline等。</p>
-<h3 id="Channel、EventLoop和ChannelFuture"><a href="#Channel、EventLoop和ChannelFuture" class="headerlink" title="Channel、EventLoop和ChannelFuture"></a>Channel、EventLoop和ChannelFuture</h3><p>![Channel-EventLoop-ChannelFuture](<a href="https://shuaijunlan.github.io/images/Screenshot">https://shuaijunlan.github.io/images/Screenshot</a> from 2018-07-20 20-39-27.png)</p>
+<h3 id="Channel、EventLoop和ChannelFuture"><a href="#Channel、EventLoop和ChannelFuture" class="headerlink" title="Channel、EventLoop和ChannelFuture"></a>Channel、EventLoop和ChannelFuture</h3><p><img src="https://shuaijunlan.github.io/images/netty-components-design/image1.png" alt="Channel-EventLoop-ChannelFuture"></p>
 <a id="more"></a>
 
 <ul>
@@ -176,7 +176,7 @@
 <li>一个EventLoop可能被分配给多个Channel；</li>
 <li>在Netty中所有的I/O操作都是异步的，因此可以通过ChannelFuture来获取响应结果；</li>
 </ul>
-<h3 id="ChannelHandler和ChannelPipeline"><a href="#ChannelHandler和ChannelPipeline" class="headerlink" title="ChannelHandler和ChannelPipeline"></a>ChannelHandler和ChannelPipeline</h3><p>![](<a href="https://shuaijunlan.github.io/images/Screenshot">https://shuaijunlan.github.io/images/Screenshot</a> from 2018-07-20 21-01-11.png)</p>
+<h3 id="ChannelHandler和ChannelPipeline"><a href="#ChannelHandler和ChannelPipeline" class="headerlink" title="ChannelHandler和ChannelPipeline"></a>ChannelHandler和ChannelPipeline</h3><p><img src="https://shuaijunlan.github.io/images/netty-components-design/image2.png" alt></p>
 <ul>
 <li>ChannelPipeline提供了ChannelHandler链的容器，并定义了同于在该链上传播入站的出站的事件流的API；</li>
 <li>一个ChannelIninializer的实现被注册到ServerBootstrap中或这Client的BootStrap中；</li>
@@ -204,7 +204,7 @@
 <td align="center">2（也可以1个）</td>
 </tr>
 </tbody></table>
-<p>![](<a href="https://shuaijunlan.github.io/images/Screenshot">https://shuaijunlan.github.io/images/Screenshot</a> from 2018-07-20 21-52-02.png)</p>
+<p><img src="https://shuaijunlan.github.io/images/netty-components-design/image3.png" alt></p>
 <p>上图中，客户端创建了一个EventLoopGroup，服务器端使用了两个EventLoopGroup，其中一个EventLoopGroup用来接收客户端发来的请求，另一个EventLoop用来处理连接任务。</p>
 <h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p><strong>服务器端</strong></p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">EventLoopGroup bossGroup = <span class="hljs-keyword">new</span> EpollEventLoopGroup(<span class="hljs-number">1</span>);</span><br><span class="line">EventLoopGroup workerGroup = <span class="hljs-keyword">new</span> EpollEventLoopGroup(<span class="hljs-number">4</span>);</span><br><span class="line"><span class="hljs-keyword">try</span> &#123;</span><br><span class="line">    ServerBootstrap b = <span class="hljs-keyword">new</span> ServerBootstrap();</span><br><span class="line">    b.group(bossGroup, workerGroup)</span><br><span class="line">            .channel(EpollServerSocketChannel<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span></span><br><span class="line"><span class="hljs-class">            //保持长连接状态</span></span><br><span class="line"><span class="hljs-class">            .<span class="hljs-title">childOption</span>(<span class="hljs-title">ChannelOption</span>.<span class="hljs-title">SO_KEEPALIVE</span>, <span class="hljs-title">true</span>)</span></span><br><span class="line"><span class="hljs-class">            .<span class="hljs-title">childOption</span>(<span class="hljs-title">ChannelOption</span>.<span class="hljs-title">TCP_NODELAY</span>, <span class="hljs-title">true</span>)</span></span><br><span class="line"><span class="hljs-class">            .<span class="hljs-title">option</span>(<span class="hljs-title">ChannelOption</span>.<span class="hljs-title">ALLOCATOR</span>, <span class="hljs-title">PooledByteBufAllocator</span>.<span class="hljs-title">DEFAULT</span>)</span></span><br><span class="line"><span class="hljs-class">            .<span class="hljs-title">childHandler</span>(<span class="hljs-title">new</span> <span class="hljs-title">HttpSnoopServerInitializer</span>())</span>;</span><br><span class="line"></span><br><span class="line">    ChannelFuture ch = b.bind(PORT).sync();</span><br><span class="line">    <span class="hljs-keyword">if</span> (ch.isSuccess())&#123;</span><br><span class="line">        logger.info(<span class="hljs-string">"Http server start on port :&#123;&#125;"</span>, PORT );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ch.channel().closeFuture().sync();</span><br><span class="line">&#125; <span class="hljs-keyword">finally</span> &#123;</span><br><span class="line">    bossGroup.shutdownGracefully();</span><br><span class="line">    workerGroup.shutdownGracefully();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

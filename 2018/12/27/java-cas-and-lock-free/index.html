@@ -19,7 +19,7 @@
 <meta property="og:description" content="在Java中的原子类中频繁的使用CAS策略来保证数据更新的安全性，它是一种Lock-Free机制，这篇文章将会讲解CAS原理，以及它在Java中的应用。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https:&#x2F;&#x2F;shuaijunlan.github.io&#x2F;gallery&#x2F;thumbnails&#x2F;DsUEr0nX4AARnqC.jpg">
-<meta property="og:updated_time" content="2019-01-18T08:25:30.735Z">
+<meta property="og:updated_time" content="2019-11-12T03:00:40.599Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;shuaijunlan.github.io&#x2F;gallery&#x2F;thumbnails&#x2F;DsUEr0nX4AARnqC.jpg">
 <meta name="twitter:site" content="https:&#x2F;&#x2F;twitter.com&#x2F;ShuaiJunlan">
@@ -152,7 +152,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    10 minutes read (About 1506 words)
+                    10 minutes read (About 1510 words)
                 </span>
                 
                 
@@ -238,7 +238,7 @@
 <li>在Java中所有原子类都采用了CAS机制，并且在jdk1.5之后提供了AtomicStampedReference来解决上述提到的ABA问题；</li>
 <li>AQS，非阻塞数据结构和原子变量类（java.util.concurrent.atomic包中的类），这些concurrent包中的基础类都是使用CAS机制来实现的，而concurrent包中的高层类又是依赖于这些基础类来实现的。从整体来看，concurrent包的实现示意图如下：</li>
 </ul>
-<p>![](<a href="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot" target="_blank" rel="noopener">https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/Screenshot</a> from 2018-12-27 20-39-35.png?raw=true)</p>
+<p><img src="https://github.com/shuaijunlan/shuaijunlan.github.io/blob/master/images/java-cas-and-lock-free/image1.png?raw=true" alt></p>
 
         </div>
         
