@@ -19,7 +19,7 @@
 <meta property="og:description" content="netty在服务端端口绑定和新连接建立的过程中会建立相应的channel，而与channel的动作密切相关的是pipeline这个概念，pipeline像是可以看作是一条流水线，原始的原料(字节流)进来，经过加工，最后输出，在前面的文章《Netty服务端启动流程分析》中已经讲到在创建实例化channel的时候，会初始化它的各种属性，其中就包括pipline，因此这篇文章将从pipline初始化为入">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https:&#x2F;&#x2F;shuaijunlan.github.io&#x2F;gallery&#x2F;images&#x2F;cityscape-3995532_640.png">
-<meta property="og:updated_time" content="2019-11-12T03:30:56.153Z">
+<meta property="og:updated_time" content="2019-11-12T03:45:14.779Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;shuaijunlan.github.io&#x2F;gallery&#x2F;images&#x2F;cityscape-3995532_640.png">
 <meta name="twitter:site" content="https:&#x2F;&#x2F;twitter.com&#x2F;ShuaiJunlan">
@@ -152,7 +152,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    20 minutes read (About 3068 words)
+                    20 minutes read (About 3058 words)
                 </span>
                 
                 
@@ -244,7 +244,7 @@
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isInbound</span><span class="hljs-params">(ChannelHandler handler)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> handler <span class="hljs-keyword">instanceof</span> ChannelInboundHandler;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isOutbound</span><span class="hljs-params">(ChannelHandler handler)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> handler <span class="hljs-keyword">instanceof</span> ChannelOutboundHandler;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>通过<code>instanceof</code>关键字根据接口类型来判断，因此，如果一个Handler实现了两类接口，那么他既是一个inBound类型的Handler，又是一个outBound类型的Handler，比如下面这个类</p>
-<p><img src="https://shuaijunlan.github.io/images/netty-channelpipeline/image2.webp?raw=true" alt="img"></p>
+<p><img src="https://shuaijunlan.github.io/images/netty-channelpipeline/image2.png" alt="img"></p>
 <p>常用的，将decode操作和encode操作合并到一起的codec，一般会继承 <code>MessageToMessageCodec</code>，而<code>MessageToMessageCodec</code>就是继承<code>ChannelDuplexHandler</code></p>
 <blockquote>
 <p>MessageToMessageCodec</p>
@@ -255,9 +255,9 @@
 <h4 id="添加节点"><a href="#添加节点" class="headerlink" title="添加节点"></a>添加节点</h4><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addLast0</span><span class="hljs-params">(AbstractChannelHandlerContext newCtx)</span> </span>&#123;</span><br><span class="line">    AbstractChannelHandlerContext prev = tail.prev;</span><br><span class="line">    newCtx.prev = prev; <span class="hljs-comment">// 1</span></span><br><span class="line">    newCtx.next = tail; <span class="hljs-comment">// 2</span></span><br><span class="line">    prev.next = newCtx; <span class="hljs-comment">// 3</span></span><br><span class="line">    tail.prev = newCtx; <span class="hljs-comment">// 4</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>用下面这幅图可见简单的表示这段过程，说白了，其实就是一个双向链表的插入操作</p>
-<p><img src="https://shuaijunlan.github.io/images/netty-channelpipeline/image3.webp?raw=true" alt="img"></p>
+<p><img src="https://shuaijunlan.github.io/images/netty-channelpipeline/image3.png" alt="img"></p>
 <p>操作完毕，该context就加入到pipeline中</p>
-<p><img src="https://shuaijunlan.github.io/images/netty-channelpipeline/image4.webp?raw=true" alt="img"></p>
+<p><img src="https://shuaijunlan.github.io/images/netty-channelpipeline/image4.png" alt="img"></p>
 <p>到这里，pipeline添加节点的操作就完成了，你可以根据此思路掌握所有的addxxx()系列方法</p>
 <h4 id="回调用户方法"><a href="#回调用户方法" class="headerlink" title="回调用户方法"></a>回调用户方法</h4><blockquote>
 <p>AbstractChannelHandlerContext</p>
@@ -298,9 +298,9 @@
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> AbstractChannelHandlerContext <span class="hljs-title">remove</span><span class="hljs-params">(<span class="hljs-keyword">final</span> AbstractChannelHandlerContext ctx)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">assert</span> ctx != head &amp;&amp; ctx != tail;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">synchronized</span> (<span class="hljs-keyword">this</span>) &#123;</span><br><span class="line">        <span class="hljs-comment">// 2.调整双向链表指针删除</span></span><br><span class="line">        remove0(ctx);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">// 3.回调用户函数</span></span><br><span class="line">    callHandlerRemoved0(ctx);</span><br><span class="line">    <span class="hljs-keyword">return</span> ctx;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">remove0</span><span class="hljs-params">(AbstractChannelHandlerContext ctx)</span> </span>&#123;</span><br><span class="line">    AbstractChannelHandlerContext prev = ctx.prev;</span><br><span class="line">    AbstractChannelHandlerContext next = ctx.next;</span><br><span class="line">    prev.next = next; <span class="hljs-comment">// 1</span></span><br><span class="line">    next.prev = prev; <span class="hljs-comment">// 2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>经历的过程要比添加节点要简单，可以用下面一幅图来表示</p>
-<p><img src="https://shuaijunlan.github.io/images/netty-channelpipeline/image5.webp?raw=true" alt="img"></p>
+<p><img src="https://shuaijunlan.github.io/images/netty-channelpipeline/image5.png" alt="img"></p>
 <p>最后的结果为</p>
-<p><img src="https://shuaijunlan.github.io/images/netty-channelpipeline/image6.webp?raw=true" alt="img"></p>
+<p><img src="https://shuaijunlan.github.io/images/netty-channelpipeline/image6.png" alt="img"></p>
 <p>结合这两幅图，可以很清晰地了解权限验证Handler的工作原理，另外，被删除的节点因为没有对象引用到，果过段时间就会被gc自动回收</p>
 <h4 id="回调用户函数"><a href="#回调用户函数" class="headerlink" title="回调用户函数"></a>回调用户函数</h4><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">callHandlerRemoved0</span><span class="hljs-params">(<span class="hljs-keyword">final</span> AbstractChannelHandlerContext ctx)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">        ctx.handler().handlerRemoved(ctx);</span><br><span class="line">    &#125; <span class="hljs-keyword">finally</span> &#123;</span><br><span class="line">        ctx.setRemoved();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
